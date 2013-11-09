@@ -1,0 +1,1 @@
+PODS_OSX_MANTLE_OTHER_LDFLAGS = -framework Foundation

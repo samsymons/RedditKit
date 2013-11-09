@@ -1,0 +1,115 @@
+{
+    "data": {
+        "can_edit": false, 
+        "created": 1374631182, 
+        "created_utc": 1374602382, 
+        "name": "depthhub", 
+        "path": "/user/Lapper/m/depthhub", 
+        "subreddits": [
+            {
+                "name": "linguistics"
+            }, 
+            {
+                "name": "changemyview"
+            }, 
+            {
+                "name": "NeutralPolitics"
+            }, 
+            {
+                "name": "UniversityofReddit"
+            }, 
+            {
+                "name": "museum"
+            }, 
+            {
+                "name": "culturalstudies"
+            }, 
+            {
+                "name": "DaystromInstitute"
+            }, 
+            {
+                "name": "bestof"
+            }, 
+            {
+                "name": "cogsci"
+            }, 
+            {
+                "name": "trueMusic"
+            }, 
+            {
+                "name": "Ask_Politics"
+            }, 
+            {
+                "name": "moderatepolitics"
+            }, 
+            {
+                "name": "truegaming"
+            }, 
+            {
+                "name": "modded"
+            }, 
+            {
+                "name": "TrueFilm"
+            }, 
+            {
+                "name": "TrueReddit"
+            }, 
+            {
+                "name": "TheoryOfReddit"
+            }, 
+            {
+                "name": "Foodforthought"
+            }, 
+            {
+                "name": "worldevents"
+            }, 
+            {
+                "name": "DepthHub"
+            }, 
+            {
+                "name": "AskHistorians"
+            }, 
+            {
+                "name": "AcademicPhilosophy"
+            }, 
+            {
+                "name": "HistoryofIdeas"
+            }, 
+            {
+                "name": "TrueAskReddit"
+            }, 
+            {
+                "name": "philosophy"
+            }, 
+            {
+                "name": "CredibleDefense"
+            }, 
+            {
+                "name": "Scholar"
+            }, 
+            {
+                "name": "PhilosophyofScience"
+            }, 
+            {
+                "name": "AskSocialScience"
+            }, 
+            {
+                "name": "geopolitics"
+            }, 
+            {
+                "name": "InsightfulQuestions"
+            }, 
+            {
+                "name": "Anthropology"
+            }, 
+            {
+                "name": "AskAnthropology"
+            }, 
+            {
+                "name": "askscience"
+            }
+        ], 
+        "visibility": "public"
+    }, 
+    "kind": "LabeledMulti"
+}
