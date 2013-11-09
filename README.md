@@ -24,8 +24,6 @@ Then run:
 
 RedditKit is structured around the `RKClient` class. This class manages authentication for a single reddit account and performs HTTP requests on that user's behalf. `RKClient` can be used as a singleton with its `sharedClient` class method, or as a standalone object.
 
-The majority of RedditKit requires that you are signed into a reddit account.
-
 ```obj-c
 [[RKClient sharedClient] signInWithUsername:@"name" password:@"password" completion:^(NSError *error) {
     if (!error)
