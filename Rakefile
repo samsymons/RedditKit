@@ -1,5 +1,4 @@
 namespace :test do
-
   desc "Run the RedditKit tests for iOS"
 
   task :ios do
@@ -9,7 +8,6 @@ namespace :test do
   task :osx do
     $osx_success = system("xctool -workspace Tests/Tests.xcworkspace -scheme 'OS X Tests' test -parallelize -sdk macosx")
   end
-
 end
 
 desc "Runs the unit tests"
@@ -23,3 +21,4 @@ task :test => ['test:ios', 'test:osx'] do
     exit(-1)
   end
 end
+
