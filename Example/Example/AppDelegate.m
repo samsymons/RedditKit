@@ -51,7 +51,7 @@
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    UIColor *tintColor = [UIColor colorWithRed:0.14 green:0.27 blue:0.61 alpha:1.0];
+    UIColor *tintColor = [UIColor colorWithRed:0.61 green:0.09 blue:0.09 alpha:1.0];
     NSDictionary *titleTextAttributes = @{ NSForegroundColorAttributeName: [UIColor whiteColor] };
     
     [[UINavigationBar appearance] setBarTintColor:tintColor];

@@ -24,7 +24,7 @@
 
 #define METADATA_FONT_SIZE 13.0
 #define METADATA_TEXT_COLOR [UIColor colorWithRed:0.70 green:0.70 blue:0.70 alpha:1.0]
-#define METADATA_IMAGE_COLOR [UIColor colorWithRed:0.92 green:0.92 blue:0.92 alpha:1.0]
+#define METADATA_IMAGE_COLOR [UIColor colorWithRed:0.87 green:0.87 blue:0.87 alpha:1.0]
 
 #import "LinkTableViewCell.h"
 #import "LinkTitleLabel.h"
