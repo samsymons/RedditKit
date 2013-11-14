@@ -41,7 +41,7 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 	static RKClient *sharedRKClient = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
-        sharedRKClient = [[RKClient alloc] init];
+        sharedRKClient = [[[self class] alloc] init];
     });
     
     return sharedRKClient;
