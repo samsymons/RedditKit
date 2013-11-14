@@ -69,7 +69,7 @@
     NSParameterAssert(state);
     NSParameterAssert(scope);
     NSAssert(_clientId != nil, @"You must first set a clientId");
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/authorize?response_type=code&redirect_uri=%@&client_id=%@&duration=permanent&scope=%@&state=%@", [[self class] APIBaseLoginURL], redirectURI, _clientId, [scope componentsJoinedByString:@","], state]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/authorize?response_type=code&redirect_uri=%@&client_id=%@&duration=permanent&scope=%@&state=%@", [[self class] APIBaseLoginURL], [redirectURI stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding], _clientId, [scope componentsJoinedByString:@","], state]];
 }
 
 - (NSURLSessionDataTask *)signInWithAccessCode:(NSString *)accessCode redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RKCompletionBlock)completion
