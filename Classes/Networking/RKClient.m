@@ -96,7 +96,7 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
     
 	NSDictionary *parameters = @{@"user": username, @"passwd": password, @"api_type": @"json"};
     
-    NSURL *baseURL = [[self class] APIBaseURL];
+    NSURL *baseURL = [[self class] APIBaseHTTPSURL];
     NSString *URLString = [[NSURL URLWithString:@"api/login" relativeToURL:baseURL] absoluteString];
     
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:URLString parameters:parameters];

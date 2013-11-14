@@ -26,62 +26,62 @@
 - (NSString *)stringByUnescapingHTMLEntities
 {
     NSMutableString *escapedString = [NSMutableString string];
-	NSMutableString *unescapedString = [self mutableCopy];
-	NSCharacterSet *characters = [NSCharacterSet characterSetWithCharactersInString:@"&"];
-	
-	while ([unescapedString length] > 0)
+    NSMutableString *unescapedString = [self mutableCopy];
+    NSCharacterSet *characters = [NSCharacterSet characterSetWithCharactersInString:@"&"];
+    
+    while ([unescapedString length] > 0)
     {
-		NSRange r = [unescapedString rangeOfCharacterFromSet:characters];
-		if (r.location == NSNotFound)
+        NSRange r = [unescapedString rangeOfCharacterFromSet:characters];
+        if (r.location == NSNotFound)
         {
-			[escapedString appendString:unescapedString];
-			break;
-		}
+            [escapedString appendString:unescapedString];
+            break;
+        }
+        
+        if (r.location > 0)
+        {
+            [escapedString appendString:[unescapedString substringToIndex:r.location]];
+            [unescapedString deleteCharactersInRange:NSMakeRange(0, r.location)];
+        }
 		
-		if (r.location > 0)
+        if ([unescapedString hasPrefix:@"&lt;"])
         {
-			[escapedString appendString:[unescapedString substringToIndex:r.location]];
-			[unescapedString deleteCharactersInRange:NSMakeRange(0, r.location)];
-		}
-		
-		if ([unescapedString hasPrefix:@"&lt;"])
-        {
-			[escapedString appendString:@"<"];
-			[unescapedString deleteCharactersInRange:NSMakeRange(0, 4)];
-		}
+            [escapedString appendString:@"<"];
+            [unescapedString deleteCharactersInRange:NSMakeRange(0, 4)];
+        }
         else if ([unescapedString hasPrefix:@"&gt;"])
         {
-			[escapedString appendString:@">"];
-			[unescapedString deleteCharactersInRange:NSMakeRange(0, 4)];
-		}
+            [escapedString appendString:@">"];
+            [unescapedString deleteCharactersInRange:NSMakeRange(0, 4)];
+        }
         else if ([unescapedString hasPrefix:@"&quot;"])
         {
-			[escapedString appendString:@"\""];
-			[unescapedString deleteCharactersInRange:NSMakeRange(0, 6)];
-		}
+            [escapedString appendString:@"\""];
+            [unescapedString deleteCharactersInRange:NSMakeRange(0, 6)];
+        }
         else if ([unescapedString hasPrefix:@"&#39;"])
         {
-			[escapedString appendString:@"'"];
-			[unescapedString deleteCharactersInRange:NSMakeRange(0, 5)];
-		}
+            [escapedString appendString:@"'"];
+            [unescapedString deleteCharactersInRange:NSMakeRange(0, 5)];
+        }
         else if ([unescapedString hasPrefix:@"&amp;"])
         {
-			[escapedString appendString:@"&"];
-			[unescapedString deleteCharactersInRange:NSMakeRange(0, 5)];
-		}
+            [escapedString appendString:@"&"];
+            [unescapedString deleteCharactersInRange:NSMakeRange(0, 5)];
+        }
         else if ([unescapedString hasPrefix:@"&hellip;"])
         {
-			[escapedString appendString:@"…"];
-			[unescapedString deleteCharactersInRange:NSMakeRange(0, 8)];
-		}
+            [escapedString appendString:@"…"];
+            [unescapedString deleteCharactersInRange:NSMakeRange(0, 8)];
+        }
         else
         {
-			[escapedString appendString:@"&"];
-			[unescapedString deleteCharactersInRange:NSMakeRange(0, 1)];
-		}
-	}
-	
-	return [escapedString copy];
+            [escapedString appendString:@"&"];
+            [unescapedString deleteCharactersInRange:NSMakeRange(0, 1)];
+        }
+    }
+    
+    return [escapedString copy];
 }
 
 @end
