@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
+#import "RKOAuthClient.h"
 #import "RKCompletionBlocks.h"
 
 typedef NS_ENUM(NSUInteger, RKUserContentCategory)

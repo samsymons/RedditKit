@@ -79,7 +79,7 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
 
 - (NSURLSessionDataTask *)currentUserWithCompletion:(RKObjectCompletionBlock)completion
 {
-	return [self getPath:([self isSignedInViaOauth] ? @"api/v1/me" : @"api/me.json") parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+	return [self getPath:([self isKindOfClass:[RKOAuthClient class]] ? @"api/v1/me" : @"api/me.json") parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
 		if (responseObject)
 		{
 			RKUser *account = [RKObjectBuilder objectFromJSON:responseObject];

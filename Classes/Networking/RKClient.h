@@ -44,15 +44,6 @@ extern NSString * const RKClientErrorDomain;
  */
 @property (nonatomic, strong) NSString *userAgent;
 
-/**
- The current clientId and clientSecret for this app.
- Only required if authenticating via OAuth
- */
-@property (nonatomic, strong) NSString *clientId;
-@property (nonatomic, strong) NSString *clientSecret;
-@property (nonatomic, strong) NSString *accessToken;
-@property (nonatomic, strong) NSString *refreshToken;
-
 + (instancetype)sharedClient;
 
 /**
@@ -66,20 +57,6 @@ extern NSString * const RKClientErrorDomain;
 + (NSURL *)APIBaseHTTPSURL;
 
 /**
- Signs into reddit.
- 
- @param username The user's username.
- @param password The user's password.
- @param completion The block to be executed upon completion of the request.
- */
-- (NSURLSessionDataTask *)signInWithUsername:(NSString *)username password:(NSString *)password completion:(RKCompletionBlock)completion;
-
-/**
- Signs into reddit via OAuth
- */
-- (NSURL *)oauthURLWithRedirectURI:(NSString *)redirectURI state:(NSString *)state scope:(NSArray*)scope;
-- (NSURLSessionDataTask *)signInWithAccessCode:(NSString *)accessCode redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RKCompletionBlock)completion;
-/**
  Updates the current user. This is useful for getting updated karma totals, or checking whether they have unread private messages.
  
  @param completion The block to be executed upon completion of the request.
@@ -92,8 +69,6 @@ extern NSString * const RKClientErrorDomain;
  @note This returns YES if there is an existing modhash value, but cannot guarantee its validity.
  */
 - (BOOL)isSignedIn;
-
-- (BOOL)isSignedInViaOauth;
 
 /**
  Signs the current user out.

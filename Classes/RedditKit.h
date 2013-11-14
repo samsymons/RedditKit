@@ -21,6 +21,7 @@
 // THE SOFTWARE.
 
 #import "RKClient.h"
+#import "RKOAuthClient.h"
 
 #import "RKClient+Apps.h"
 #import "RKClient+Captcha.h"
