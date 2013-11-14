@@ -51,7 +51,7 @@
 
 + (NSValueTransformer *)JSONTransformerForKey:(NSString *)key
 {
-    NSSet *keys = [NSSet setWithObjects:@"hasMail", @"hasModeratorMail", nil];
+    NSSet *keys = [NSSet setWithObjects:@"hasMail", @"hasModeratorMail", @"hasVerifiedEmailAddress", nil];
     if ([keys containsObject:key])
     {
         return [MTLValueTransformer transformerWithBlock:^id(id boolean) {

@@ -86,6 +86,20 @@
     return nil;
 }
 
++ (NSValueTransformer *)accountsActiveJSONTransformer
+{
+    return [MTLValueTransformer transformerWithBlock:^id(id accountsActive) {
+        if (!accountsActive || accountsActive == [NSNull null])
+        {
+            return @(0);
+        }
+        else
+        {
+            return accountsActive;
+        }
+    }];
+}
+
 + (NSValueTransformer *)headerImageSizeJSONTransformer
 {
     return [MTLValueTransformer transformerWithBlock:^(NSArray *size) {
