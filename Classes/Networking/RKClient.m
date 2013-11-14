@@ -82,6 +82,11 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
     return [NSURL URLWithString:@"https://ssl.reddit.com/"];
 }
 
++ (NSString *)meURLPath
+{
+    return @"api/me.json";
+}
+
 #pragma mark - Authentication
 
 - (NSURLSessionDataTask *)signInWithUsername:(NSString *)username password:(NSString *)password completion:(RKCompletionBlock)completion;

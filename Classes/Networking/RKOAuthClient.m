@@ -12,7 +12,6 @@
 
 #import "RKClient+Users.h"
 
-NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 @interface RKOAuthClient ()
 
 @property (nonatomic, strong) RKUser *currentUser;
@@ -31,7 +30,7 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
     return self;
 }
 
-# Overriding API urls
+// Overriding API urls
 
 + (NSURL *)APIBaseURL
 {
@@ -47,6 +46,11 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 + (NSURL *)APIBaseLoginURL
 {
     return [NSURL URLWithString:@"https://ssl.reddit.com/"];
+}
+
++ (NSString *)meURLPath
+{
+    return @"api/v1/me";
 }
 
 - (void)setClientId:(NSString *)clientId clientSecret:(NSString*)clientSecret{

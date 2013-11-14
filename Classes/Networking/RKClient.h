@@ -57,6 +57,11 @@ extern NSString * const RKClientErrorDomain;
 + (NSURL *)APIBaseHTTPSURL;
 
 /**
+ The API endpoint the client connects to to get your profile information.
+ */
++ (NSString *)meURLPath;
+
+/**
  Updates the current user. This is useful for getting updated karma totals, or checking whether they have unread private messages.
  
  @param completion The block to be executed upon completion of the request.
