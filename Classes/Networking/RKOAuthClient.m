@@ -25,6 +25,8 @@
 	{
         self.requestSerializer = [AFHTTPRequestSerializer serializer];
         self.responseSerializer = [RKResponseSerializer serializer];
+        _clientId = clientId;
+        _clientSecret = clientSecret;
 	}
     
     return self;
