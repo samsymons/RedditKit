@@ -104,15 +104,8 @@
             _refreshToken = responseObject[@"refresh_token"];
             [self setBearerAccessToken:_accessToken];
             
-            [weakSelf userInfoWithCompletion:^(id object, NSError *error) {
-                RKUser *account = [RKObjectBuilder objectFromJSON:@{@"kind": kRKObjectTypeAccount, @"data":object}];
-                if (account && !error) {
-                    weakSelf.currentUser = account;
-                    if (completion)
-                    {
-                        completion(nil);
-                    }
-                } else if (completion) {
+            [weakSelf loadUserAccountWithCallback:^(NSError *error) {
+                if (completion) {
                     completion(error);
                 }
             }];
@@ -155,10 +148,68 @@
     return authenticationTask;
 }
 
-- (NSURLSessionDataTask *)refreshAccessTokenWithCompletion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)refreshAccessToken:(NSString*)refreshToken redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RKCompletionBlock)completion
 {
-    //TODO: implement a token refresh
-    return nil;
+    NSParameterAssert(refreshToken);
+    NSParameterAssert(redirectURI);
+    NSParameterAssert(state);
+    
+    [self setOAuthorizationHeader];
+    
+    NSDictionary *parameters = @{@"refresh_token": refreshToken, @"state": state, @"redirect_uri": redirectURI, @"grant_type": @"refresh_token"};
+    
+    NSURL *baseURL = [[self class] APIBaseLoginURL];
+    NSString *URLString = [[NSURL URLWithString:@"api/v1/access_token" relativeToURL:baseURL] absoluteString];
+    
+    NSMutableURLRequest *request = [[self requestSerializer] requestWithMethod:@"POST" URLString:URLString parameters:parameters];
+    
+    __weak __typeof(self)weakSelf = self;
+    NSURLSessionDataTask *authenticationTask = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (error)
+        {
+            if (completion)
+            {
+                completion(error);
+            }
+        }
+        else
+        {
+            _accessToken = responseObject[@"access_token"];
+            _refreshToken = responseObject[@"refresh_token"];
+            [self setBearerAccessToken:_accessToken];
+            if (!self.currentUser) {
+                [weakSelf loadUserAccountWithCallback:^(NSError *error) {
+                    if (completion) {
+                        completion(error);
+                    }
+                }];
+            }
+            else if (completion)
+            {
+                completion(nil);
+            }
+        }
+    }];
+    
+    [authenticationTask resume];
+    
+    return authenticationTask;
+}
+
+- (void)loadUserAccountWithCallback:(RKCompletionBlock)completion
+{
+    [self userInfoWithCompletion:^(id object, NSError *error) {
+        RKUser *account = [RKObjectBuilder objectFromJSON:@{@"kind": kRKObjectTypeAccount, @"data":object}];
+        if (account && !error) {
+            self.currentUser = account;
+            if (completion)
+            {
+                completion(nil);
+            }
+        } else if (completion) {
+            completion(error);
+        }
+    }];
 }
 
 - (BOOL)isSignedIn
