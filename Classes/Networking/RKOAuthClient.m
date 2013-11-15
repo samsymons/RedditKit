@@ -72,6 +72,7 @@
     NSParameterAssert(state);
     NSParameterAssert(scope);
     NSAssert(_clientId != nil, @"You must first set a clientId");
+    
     return [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/authorize?response_type=code&redirect_uri=%@&client_id=%@&duration=permanent&scope=%@&state=%@", [[self class] APIBaseLoginURL], [redirectURI stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding], _clientId, [scope componentsJoinedByString:@","], state]];
 }
 
@@ -81,40 +82,18 @@
     NSParameterAssert(redirectURI);
     NSParameterAssert(state);
     
-    [self setOAuthorizationHeader];
     NSDictionary *parameters = @{@"code": accessCode, @"state": state, @"redirect_uri": redirectURI, @"grant_type": @"authorization_code"};
+    return [self accessTokensWithParams:parameters completion:completion];
+}
+
+- (NSURLSessionDataTask *)refreshAccessToken:(NSString*)refreshToken redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RKCompletionBlock)completion
+{
+    NSParameterAssert(refreshToken);
+    NSParameterAssert(redirectURI);
+    NSParameterAssert(state);
     
-    NSURL *baseURL = [[self class] APIBaseLoginURL];
-    NSString *URLString = [[NSURL URLWithString:@"api/v1/access_token" relativeToURL:baseURL] absoluteString];
-    
-    NSMutableURLRequest *request = [[self requestSerializer] requestWithMethod:@"POST" URLString:URLString parameters:parameters];
-    
-    __weak __typeof(self)weakSelf = self;
-    NSURLSessionDataTask *authenticationTask = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if (error)
-        {
-            if (completion)
-            {
-                completion(error);
-            }
-        }
-        else
-        {
-            _accessToken = responseObject[@"access_token"];
-            _refreshToken = responseObject[@"refresh_token"];
-            [self setBearerAccessToken:_accessToken];
-            
-            [weakSelf loadUserAccountWithCallback:^(NSError *error) {
-                if (completion) {
-                    completion(error);
-                }
-            }];
-        }
-    }];
-    
-    [authenticationTask resume];
-    
-    return authenticationTask;
+    NSDictionary *parameters = @{@"refresh_token": refreshToken, @"state": state, @"redirect_uri": redirectURI, @"grant_type": @"refresh_token"};
+    return [self accessTokensWithParams:parameters completion:completion];
 }
 
 - (NSURLSessionDataTask *)userInfoWithCompletion:(RKObjectCompletionBlock)completion
@@ -125,22 +104,10 @@
     
     NSMutableURLRequest *request = [[self requestSerializer] requestWithMethod:@"GET" URLString:URLString parameters:@{}];
     
-    __weak __typeof(self)weakSelf = self;
     NSURLSessionDataTask *authenticationTask = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if (responseObject)
-		{
-			if (completion)
-			{
-				completion(responseObject, nil);
-			}
-		}
-		else
-		{
-			if (completion)
-			{
-				completion(nil, error);
-			}
-		}
+        if (completion) {
+            completion(responseObject, error);
+        }
     }];
     
     [authenticationTask resume];
@@ -148,16 +115,9 @@
     return authenticationTask;
 }
 
-- (NSURLSessionDataTask *)refreshAccessToken:(NSString*)refreshToken redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)accessTokensWithParams:(NSDictionary*)parameters completion:(RKCompletionBlock)completion
 {
-    NSParameterAssert(refreshToken);
-    NSParameterAssert(redirectURI);
-    NSParameterAssert(state);
-    
     [self setOAuthorizationHeader];
-    
-    NSDictionary *parameters = @{@"refresh_token": refreshToken, @"state": state, @"redirect_uri": redirectURI, @"grant_type": @"refresh_token"};
-    
     NSURL *baseURL = [[self class] APIBaseLoginURL];
     NSString *URLString = [[NSURL URLWithString:@"api/v1/access_token" relativeToURL:baseURL] absoluteString];
     
@@ -165,14 +125,7 @@
     
     __weak __typeof(self)weakSelf = self;
     NSURLSessionDataTask *authenticationTask = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if (error)
-        {
-            if (completion)
-            {
-                completion(error);
-            }
-        }
-        else
+        if (!error)
         {
             _accessToken = responseObject[@"access_token"];
             _refreshToken = responseObject[@"refresh_token"];
@@ -189,6 +142,9 @@
                 completion(nil);
             }
         }
+        else if (completion) {
+            completion(error);
+        }
     }];
     
     [authenticationTask resume];
@@ -198,10 +154,11 @@
 
 - (void)loadUserAccountWithCallback:(RKCompletionBlock)completion
 {
+    __weak __typeof(self)weakSelf = self;
     [self userInfoWithCompletion:^(id object, NSError *error) {
         RKUser *account = [RKObjectBuilder objectFromJSON:@{@"kind": kRKObjectTypeAccount, @"data":object}];
         if (account && !error) {
-            self.currentUser = account;
+            weakSelf.currentUser = account;
             if (completion)
             {
                 completion(nil);
