@@ -62,6 +62,15 @@ extern NSString * const RKClientErrorDomain;
 + (NSString *)meURLPath;
 
 /**
+ Signs into reddit.
+ 
+ @param username The user's username.
+ @param password The user's password.
+ @param completion The block to be executed upon completion of the request.
+ */
+- (NSURLSessionDataTask *)signInWithUsername:(NSString *)username password:(NSString *)password completion:(RKCompletionBlock)completion;
+
+/**
  Updates the current user. This is useful for getting updated karma totals, or checking whether they have unread private messages.
  
  @param completion The block to be executed upon completion of the request.

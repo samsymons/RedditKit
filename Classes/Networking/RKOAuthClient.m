@@ -9,6 +9,7 @@
 #import "RKOAuthClient.h"
 #import "RKUser.h"
 #import "RKResponseSerializer.h"
+#import "RKObjectBuilder.h"
 
 #import "RKClient+Users.h"
 
@@ -86,7 +87,7 @@
     NSURL *baseURL = [[self class] APIBaseLoginURL];
     NSString *URLString = [[NSURL URLWithString:@"api/v1/access_token" relativeToURL:baseURL] absoluteString];
     
-    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:URLString parameters:parameters];
+    NSMutableURLRequest *request = [[self requestSerializer] requestWithMethod:@"POST" URLString:URLString parameters:parameters];
     
     __weak __typeof(self)weakSelf = self;
     NSURLSessionDataTask *authenticationTask = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
@@ -103,12 +104,16 @@
             _refreshToken = responseObject[@"refresh_token"];
             [self setBearerAccessToken:_accessToken];
             
-            [weakSelf currentUserWithCompletion:^(id object, NSError *error) {
-                weakSelf.currentUser = object;
-                
-                if (completion)
-                {
-                    completion(nil);
+            [weakSelf userInfoWithCompletion:^(id object, NSError *error) {
+                RKUser *account = [RKObjectBuilder objectFromJSON:@{@"kind": kRKObjectTypeAccount, @"data":object}];
+                if (account && !error) {
+                    weakSelf.currentUser = account;
+                    if (completion)
+                    {
+                        completion(nil);
+                    }
+                } else if (completion) {
+                    completion(error);
                 }
             }];
         }
@@ -117,6 +122,43 @@
     [authenticationTask resume];
     
     return authenticationTask;
+}
+
+- (NSURLSessionDataTask *)userInfoWithCompletion:(RKObjectCompletionBlock)completion
+{
+    
+    NSURL *baseURL = [[self class] APIBaseLoginURL];
+    NSString *URLString = [[NSURL URLWithString:[[self class] meURLPath] relativeToURL:baseURL] absoluteString];
+    
+    NSMutableURLRequest *request = [[self requestSerializer] requestWithMethod:@"GET" URLString:URLString parameters:@{}];
+    
+    __weak __typeof(self)weakSelf = self;
+    NSURLSessionDataTask *authenticationTask = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (responseObject)
+		{
+			if (completion)
+			{
+				completion(responseObject, nil);
+			}
+		}
+		else
+		{
+			if (completion)
+			{
+				completion(nil, error);
+			}
+		}
+    }];
+    
+    [authenticationTask resume];
+    
+    return authenticationTask;
+}
+
+- (NSURLSessionDataTask *)refreshAccessTokenWithCompletion:(RKCompletionBlock)completion
+{
+    //TODO: implement a token refresh
+    return nil;
 }
 
 - (BOOL)isSignedIn

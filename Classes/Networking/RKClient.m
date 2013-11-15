@@ -89,7 +89,7 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 
 #pragma mark - Authentication
 
-- (NSURLSessionDataTask *)signInWithUsername:(NSString *)username password:(NSString *)password completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)signInWithUsername:(NSString *)username password:(NSString *)password completion:(RKCompletionBlock)completion
 {
     NSParameterAssert(username);
     NSParameterAssert(password);

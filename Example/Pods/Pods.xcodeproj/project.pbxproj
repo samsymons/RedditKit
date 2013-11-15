@@ -136,7 +136,7 @@
 		D6470B7CAD5F4C9BA904690B /* RKClient+Users.h in Headers */ = {isa = PBXBuildFile; fileRef = 3164FEDEC9A14245950F2321 /* RKClient+Users.h */; };
 		D78A93944CA64773AA599060 /* NSDictionary+MTLManipulationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AC89CD28B0B94559AAA02F24 /* NSDictionary+MTLManipulationAdditions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
 		D8F7D9DB18351FF800B36135 /* RKOAuthClient.h in Headers */ = {isa = PBXBuildFile; fileRef = D8F7D9D918351FF800B36135 /* RKOAuthClient.h */; };
-		D8F7D9DC18351FF800B36135 /* RKOAuthClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F7D9DA18351FF800B36135 /* RKOAuthClient.m */; };
+		D8F7D9DC18351FF800B36135 /* RKOAuthClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F7D9DA18351FF800B36135 /* RKOAuthClient.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D92FF09D3C1949329D8F5A69 /* MTLValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BFDF3BEEFD24C908F203DCF /* MTLValueTransformer.h */; };
 		DD2AEA1C24804494AA336184 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D831C04D292E487982CFC752 /* MobileCoreServices.framework */; };
 		DD9AAF07D41F47488A951060 /* Pods-ios-Mantle-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 89020829F7394FEE872B71BC /* Pods-ios-Mantle-dummy.m */; };
@@ -787,11 +787,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F682238EE1246D8A81DD4D4 /* NSString+HTML.h in Headers */,
+				D8F7D9DB18351FF800B36135 /* RKOAuthClient.h in Headers */,
 				5EEBF33DBFFC4F0BA0116281 /* RKClient+Apps.h in Headers */,
 				C92CCD0175C04BE98A5F6FB7 /* RKClient+Captcha.h in Headers */,
 				3DCA08AD4F0E42A4BEEFEC54 /* RKClient+Comments.h in Headers */,
 				885AFC6608A3420F96A0AB9A /* RKClient+Errors.h in Headers */,
-				D8F7D9DB18351FF800B36135 /* RKOAuthClient.h in Headers */,
 				2363F4359D3046C6B748B280 /* RKClient+Flair.h in Headers */,
 				B069851F488940A59EEB5425 /* RKClient+Links.h in Headers */,
 				AFBF5CBB56D24D51B922ADAA /* RKClient+Messages.h in Headers */,
