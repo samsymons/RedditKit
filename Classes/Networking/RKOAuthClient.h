@@ -36,8 +36,8 @@ static NSString * const kOAuthScopeVote = @"vote";
  */
 @property (nonatomic, strong) NSString *clientId;
 @property (nonatomic, strong) NSString *clientSecret;
-@property (nonatomic, readonly, strong) NSString *accessToken;
-@property (nonatomic, readonly, strong) NSString *refreshToken;
+@property (nonatomic, strong) NSString *accessToken;
+@property (nonatomic, strong) NSString *refreshToken;
 
 /**
  Returns a RKClient ready for OAuth
