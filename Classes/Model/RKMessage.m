@@ -79,6 +79,13 @@
     }];
 }
 
++ (NSValueTransformer *)likesJSONTransformer
+{
+    return [MTLValueTransformer transformerWithBlock:^id(id boolean) {
+        return (!boolean || boolean == [NSNull null]) ? @(NO) : boolean;
+    }];
+}
+
 + (NSValueTransformer *)repliesJSONTransformer
 {
     return [MTLValueTransformer transformerWithBlock:^id(id replies) {
