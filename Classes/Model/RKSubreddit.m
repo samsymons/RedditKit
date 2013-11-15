@@ -72,14 +72,7 @@
     if ([keys containsObject:key])
     {
         return [MTLValueTransformer transformerWithBlock:^id(id boolean) {
-            if (!boolean || boolean == [NSNull null])
-            {
-                return @(NO);
-            }
-            else
-            {
-                return boolean;
-            }
+            return (!boolean || boolean == [NSNull null]) ? @(NO) : boolean;
         }];
     }
     

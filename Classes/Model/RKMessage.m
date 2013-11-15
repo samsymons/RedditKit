@@ -79,6 +79,13 @@
     }];
 }
 
++ (NSValueTransformer *)likesJSONTransformer
+{
+    return [MTLValueTransformer transformerWithBlock:^id(id boolean) {
+        return (!boolean || boolean == [NSNull null]) ? @(NO) : boolean;
+    }];
+}
+
 + (NSValueTransformer *)repliesJSONTransformer
 {
     return [MTLValueTransformer transformerWithBlock:^id(id replies) {
@@ -125,7 +132,8 @@
 {
     NSDictionary *keyPaths = @{
         @"linkTitle": @"data.link_title",
-        @"likes": @"data.likes"
+        @"likes": @"data.likes",
+        @"context": @"data.context"
     };
     
     return [[super JSONKeyPathsByPropertyKey] mtl_dictionaryByAddingEntriesFromDictionary:keyPaths];
