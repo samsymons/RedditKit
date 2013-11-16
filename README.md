@@ -84,7 +84,7 @@ pagination.commentSortingMethod = RKCommentSortingMethodTop;
 **Fetch a user's account:**
 
 ```obj-c
-[[RKClient sharedClient] userWithUsername:@"name" completion:^(RKAccount *account, NSError *error) {
+[[RKClient sharedClient] userWithUsername:@"name" completion:^(RKUser *account, NSError *error) {
 	if (account)
 	{
 		NSLog(@"%@", account);
