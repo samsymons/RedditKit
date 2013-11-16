@@ -40,6 +40,11 @@ extern NSString * const RKClientErrorDomain;
 @property (nonatomic, strong) NSString *modhash;
 
 /**
+ The session cookie value for the current user.
+ */
+@property (nonatomic, strong) NSString *sessionIdentifier;
+
+/**
  The user agent for requests sent to reddit.
  */
 @property (nonatomic, strong) NSString *userAgent;

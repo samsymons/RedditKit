@@ -109,8 +109,10 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
         {
             NSDictionary *data = responseObject[@"json"][@"data"];
             NSString *modhash = data[@"modhash"];
+            NSString *sessionIdentifier = data[@"cookie"];
             
             [weakSelf setModhash:modhash];
+            [weakSelf setSessionIdentifier:sessionIdentifier];
             
             [weakSelf currentUserWithCompletion:^(id object, NSError *error) {
                 weakSelf.currentUser = object;
@@ -146,13 +148,14 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 
 - (BOOL)isSignedIn
 {
-	return self.modhash != nil;
+	return self.modhash != nil && self.sessionIdentifier != nil;
 }
 
 - (void)signOut
 {
 	self.currentUser = nil;
 	self.modhash = nil;
+    self.sessionIdentifier = nil;
     
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     NSArray *cookies = [storage cookies];
@@ -171,6 +174,14 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 {
     _modhash = [modhash copy];
     [[self requestSerializer] setValue:_modhash forHTTPHeaderField:@"X-Modhash"];
+}
+
+- (void)setSessionIdentifier:(NSString *)sessionIdentifier {
+    
+    _sessionIdentifier = [sessionIdentifier copy];
+    
+    NSString *cookieValue = _sessionIdentifier ? [NSString stringWithFormat:@"reddit_session=%@", [_sessionIdentifier stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] : nil;
+    [[self requestSerializer] setValue:cookieValue forHTTPHeaderField:@"Cookie"];
 }
 
 - (void)setUserAgent:(NSString *)userAgent
