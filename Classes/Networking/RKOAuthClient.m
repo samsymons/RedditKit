@@ -16,6 +16,7 @@
 @interface RKOAuthClient ()
 
 @property (nonatomic, strong) RKUser *currentUser;
+@property (nonatomic, strong) NSTimer *tokenRefreshTimer;
 
 @end
 @implementation RKOAuthClient
@@ -86,7 +87,13 @@
     return [self accessTokensWithParams:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)refreshAccessToken:(NSString*)refreshToken redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)refreshAccessTokenWithTimer:(NSTimer *)timer
+{
+    NSDictionary *parameters = timer.userInfo;
+    return [self refreshAccessToken:_refreshToken redirectURI:parameters[@"redirect_uri"] state:parameters[@"state"] completion:nil];
+}
+
+- (NSURLSessionDataTask *)refreshAccessToken:(NSString *)refreshToken redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RKCompletionBlock)completion
 {
     NSParameterAssert(refreshToken);
     NSParameterAssert(redirectURI);
@@ -129,6 +136,15 @@
         {
             _accessToken = responseObject[@"access_token"];
             _refreshToken = responseObject[@"refresh_token"];
+            //if our token expires, we should refresh it
+            if (responseObject[@"expires_in"]) {
+                //if we have an existing timer, invalidate it so it doesn't fire twice
+                if (_tokenRefreshTimer) {
+                    [_tokenRefreshTimer invalidate];
+                }
+                int seconds = [responseObject[@"expires_in"] intValue] - 10; //be a little aggressive and refresh 10 seconds before our token expires
+                _tokenRefreshTimer = [NSTimer scheduledTimerWithTimeInterval:seconds target:self selector:@selector(refreshAccessTokenWithTimer:) userInfo:parameters repeats:NO];
+            }
             [self setBearerAccessToken:_accessToken];
             if (!self.currentUser) {
                 [weakSelf loadUserAccountWithCallback:^(NSError *error) {
