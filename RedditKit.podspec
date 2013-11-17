@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage     = "http://redditkit.com/"
   s.license      = 'MIT'
   s.authors      = { "Sam Symons" => "sam@samsymons.com", "Joe Pintozzi" => "joseph@pintozzi.com" }
-  s.source       = { :git => "https://github.com/pyro2927/RedditKit.git", :branch => "master" }
+  s.source       = { :git => "https://github.com/pyro2927/RedditKit.git", :branch => "comment_subreddit" }
   s.requires_arc = true
 
   s.ios.deployment_target = '7.0'
