@@ -4,8 +4,8 @@ Pod::Spec.new do |s|
   s.summary      = "An Objective-C wrapper for the reddit API."
   s.homepage     = "http://redditkit.com/"
   s.license      = 'MIT'
-  s.author       = { "Sam Symons" => "sam@samsymons.com" }
-  s.source       = { :git => "https://github.com/samsymons/RedditKit.git", :tag => s.version.to_s }
+  s.authors      = { "Sam Symons" => "sam@samsymons.com", "Joe Pintozzi" => "joseph@pintozzi.com" }
+  s.source       = { :git => "https://github.com/pyro2927/RedditKit.git", :branch => "master" }
   s.requires_arc = true
 
   s.ios.deployment_target = '7.0'
