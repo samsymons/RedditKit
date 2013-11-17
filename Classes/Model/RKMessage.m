@@ -133,7 +133,8 @@
     NSDictionary *keyPaths = @{
         @"linkTitle": @"data.link_title",
         @"likes": @"data.likes",
-        @"context": @"data.context"
+        @"context": @"data.context",
+        @"subreddit": @"data.subreddit"
     };
     
     return [[super JSONKeyPathsByPropertyKey] mtl_dictionaryByAddingEntriesFromDictionary:keyPaths];
