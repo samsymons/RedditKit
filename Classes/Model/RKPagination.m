@@ -24,96 +24,96 @@
 
 NSString * NSStringFromCommentSortingMethod(RKCommentSortingMethod sortingMethod)
 {
-	switch (sortingMethod)
-	{
-		case RKCommentSortingMethodTop:
-			return @"top";
-		case RKCommentSortingMethodBest:
-			return @"best";
-		case RKCommentSortingMethodNew:
-			return @"new";
-		case RKCommentSortingMethodHot:
-			return @"hot";
-		case RKCommentSortingMethodControversial:
-			return @"controversial";
-		case RKCommentSortingMethodOld:
-			return @"old";
-		default:
-			return nil;
-	}
+    switch (sortingMethod)
+    {
+        case RKCommentSortingMethodTop:
+            return @"top";
+        case RKCommentSortingMethodBest:
+            return @"best";
+        case RKCommentSortingMethodNew:
+            return @"new";
+        case RKCommentSortingMethodHot:
+            return @"hot";
+        case RKCommentSortingMethodControversial:
+            return @"controversial";
+        case RKCommentSortingMethodOld:
+            return @"old";
+        default:
+            return nil;
+    }
 }
 
 NSString * NSStringFromTimeSortingMethod(RKTimeSortingMethod sortingMethod)
 {
-	switch (sortingMethod)
-	{
-		case RKTimeSortingMethodThisHour:
-			return @"hour";
-		case RKTimeSortingMethodToday:
-			return @"day";
-		case RKTimeSortingMethodThisWeek:
-			return @"week";
-		case RKTimeSortingMethodThisMonth:
-			return @"month";
-		case RKTimeSortingMethodThisYear:
-			return @"year";
-		case RKTimeSortingMethodAllTime:
-			return @"all";
-		default:
-			return nil;
+    switch (sortingMethod)
+    {
+        case RKTimeSortingMethodThisHour:
+            return @"hour";
+        case RKTimeSortingMethodToday:
+            return @"day";
+        case RKTimeSortingMethodThisWeek:
+            return @"week";
+        case RKTimeSortingMethodThisMonth:
+            return @"month";
+        case RKTimeSortingMethodThisYear:
+            return @"year";
+        case RKTimeSortingMethodAllTime:
+            return @"all";
+        default:
+            return nil;
 	}
 }
 
 NSString * NSStringFromUserContentSortingMethod(RKUserContentSortingMethod sortingMethod)
 {
-	switch (sortingMethod)
-	{
-		case RKUserContentSortingMethodNew:
-			return @"new";
-		case RKUserContentSortingMethodHot:
-			return @"hot";
-		case RKUserContentSortingMethodTop:
-			return @"top";
-		case RKUserContentSortingMethodControversial:
-			return @"controversial";
-		default:
-			return nil;
-	}
+    switch (sortingMethod)
+    {
+        case RKUserContentSortingMethodNew:
+            return @"new";
+        case RKUserContentSortingMethodHot:
+            return @"hot";
+        case RKUserContentSortingMethodTop:
+            return @"top";
+        case RKUserContentSortingMethodControversial:
+            return @"controversial";
+        default:
+            return nil;
+    }
 }
 
 @implementation RKPagination
 
 + (RKPagination *)paginationFromListingResponse:(NSDictionary *)listingResponse
 {
-	RKPagination *pagination = [[RKPagination alloc] init];
-	
-	id before = [listingResponse valueForKeyPath:@"data.before"];
-	id after = [listingResponse valueForKeyPath:@"data.after"];
-	
-	if (before == [NSNull null] && after == [NSNull null])
-	{
-		return nil;
-	}
-	
-	if (before != [NSNull null])
-	{
-		pagination.before = before;
-	}
-	
-	if (after != [NSNull null])
-	{
-		pagination.after = after;
-	}
-	
-	return pagination;
+    RKPagination *pagination = [[RKPagination alloc] init];
+    
+    id before = [listingResponse valueForKeyPath:@"data.before"];
+    id after = [listingResponse valueForKeyPath:@"data.after"];
+    
+    if (before == [NSNull null] && after == [NSNull null])
+    {
+        return nil;
+    }
+    
+    if (before != [NSNull null])
+    {
+        pagination.before = before;
+    }
+    
+    if (after != [NSNull null])
+    {
+        pagination.after = after;
+    }
+    
+    return pagination;
 }
 
 + (RKPagination *)paginationWithLimit:(NSUInteger)limit
 {
-	RKPagination *pagination = [[RKPagination alloc] init];
-	pagination.limit = limit;
-	
-	return pagination;
+    RKPagination *pagination = [[RKPagination alloc] init];
+    pagination.limit = limit;
+    
+    return pagination;
 }
 
 - (instancetype)init
@@ -140,45 +140,45 @@ NSString * NSStringFromUserContentSortingMethod(RKUserContentSortingMethod sorti
 
 - (NSString *)description
 {
-	NSString *className = NSStringFromClass([self class]);
+    NSString *className = NSStringFromClass([self class]);
     return [NSString stringWithFormat:@"<%@: %p, before: %@, after: %@>", className, self, self.before, self.after];
 }
 
 - (NSDictionary *)dictionaryValue
 {
-	NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithCapacity:4];
-	
-	if (self.limit)
-	{
-		[parameters setObject:[NSString stringWithFormat:@"%lu", (unsigned long)self.limit] forKey:@"limit"];
-	}
-	
-	if (self.before)
-	{
-		[parameters setObject:self.before forKey:@"before"];
-	}
-	
-	if (self.after)
-	{
-		[parameters setObject:self.after forKey:@"after"];
-	}
-	
-	if (self.timeMethod)
-	{
-		[parameters setObject:NSStringFromTimeSortingMethod(self.timeMethod) forKey:@"t"];
-	}
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithCapacity:4];
+    
+    if (self.limit)
+    {
+        [parameters setObject:[NSString stringWithFormat:@"%lu", (unsigned long)self.limit] forKey:@"limit"];
+    }
+    
+    if (self.before)
+    {
+        [parameters setObject:self.before forKey:@"before"];
+    }
+    
+    if (self.after)
+    {
+        [parameters setObject:self.after forKey:@"after"];
+    }
+    
+    if (self.timeMethod)
+    {
+        [parameters setObject:NSStringFromTimeSortingMethod(self.timeMethod) forKey:@"t"];
+    }
     
     if (self.userContentSortingMethod)
     {
         [parameters setObject:NSStringFromUserContentSortingMethod(self.userContentSortingMethod) forKey:@"sort"];
     }
-	
-	if ([parameters count] == 0)
-	{
-		return nil;
-	}
-	
-	return [parameters copy];
+    
+    if ([parameters count] == 0)
+    {
+        return nil;
+    }
+    
+    return [parameters copy];
 }
 
 @end

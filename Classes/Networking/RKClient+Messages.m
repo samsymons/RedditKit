@@ -28,33 +28,33 @@
 
 NSString * NSStringFromMessageCategory(RKMessageCategory messageCategory)
 {
-	switch (messageCategory)
-	{
-		case RKMessageCategoryAll:
-			return @"inbox";
-			break;
-		case RKMessageCategoryUnread:
-			return @"unread";
-			break;
+    switch (messageCategory)
+    {
+        case RKMessageCategoryAll:
+            return @"inbox";
+            break;
+        case RKMessageCategoryUnread:
+            return @"unread";
+            break;
         case RKMessageCategoryMessages:
-			return @"messages";
-			break;
+            return @"messages";
+            break;
         case RKMessageCategorySent:
-			return @"sent";
-			break;
+            return @"sent";
+            break;
         case RKMessageCategoryModerator:
-			return @"moderator";
-			break;
+            return @"moderator";
+            break;
         case RKMessageCategoryCommentReplies:
-			return @"comments";
-			break;
+            return @"comments";
+            break;
         case RKMessageCategoryPostReplies:
-			return @"selfreply";
-			break;
+            return @"selfreply";
+            break;
         case RKMessageCategoryUsernameMentions:
-			return @"mentions";
-			break;
-		default:
+            return @"mentions";
+            break;
+        default:
             return @"inbox";
             break;
 	}
@@ -71,12 +71,12 @@ NSString * NSStringFromMessageCategory(RKMessageCategory messageCategory)
 
 - (NSURLSessionDataTask *)unreadMessagesWithPagination:(RKPagination *)pagination markRead:(BOOL)read completion:(RKListingCompletionBlock)completion
 {
-	return [self messagesInCategory:RKMessageCategoryUnread pagination:pagination markRead:read completion:completion];
+    return [self messagesInCategory:RKMessageCategoryUnread pagination:pagination markRead:read completion:completion];
 }
 
 - (NSURLSessionDataTask *)sentMessagesWithPagination:(RKPagination *)pagination markRead:(BOOL)read completion:(RKListingCompletionBlock)completion
 {
-	return [self messagesInCategory:RKMessageCategorySent pagination:pagination markRead:read completion:completion];
+    return [self messagesInCategory:RKMessageCategorySent pagination:pagination markRead:read completion:completion];
 }
 
 - (NSURLSessionDataTask *)messagesInCategory:(RKMessageCategory)category pagination:(RKPagination *)pagination markRead:(BOOL)read completion:(RKListingCompletionBlock)completion
@@ -96,9 +96,9 @@ NSString * NSStringFromMessageCategory(RKMessageCategory messageCategory)
 - (NSURLSessionDataTask *)markMessageWithFullNameAsRead:(NSString *)fullName completion:(RKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
-	
-	NSDictionary *parameters = @{@"id": fullName};
-	return [self basicPostTaskWithPath:@"api/read_message" parameters:parameters completion:completion];
+    
+    NSDictionary *parameters = @{@"id": fullName};
+    return [self basicPostTaskWithPath:@"api/read_message" parameters:parameters completion:completion];
 }
 
 - (NSURLSessionDataTask *)markMessageAsUnread:(RKMessage *)message completion:(RKCompletionBlock)completion
@@ -109,9 +109,9 @@ NSString * NSStringFromMessageCategory(RKMessageCategory messageCategory)
 - (NSURLSessionDataTask *)markMessageWithFullNameAsUnread:(NSString *)fullName completion:(RKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
-	
-	NSDictionary *parameters = @{@"id": fullName};
-	return [self basicPostTaskWithPath:@"api/unread_message" parameters:parameters completion:completion];
+    
+    NSDictionary *parameters = @{@"id": fullName};
+    return [self basicPostTaskWithPath:@"api/unread_message" parameters:parameters completion:completion];
 }
 
 #pragma mark - Sending Messages
@@ -151,9 +151,9 @@ NSString * NSStringFromMessageCategory(RKMessageCategory messageCategory)
 - (NSURLSessionDataTask *)blockAuthorOfMessageWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
-	
-	NSDictionary *parameters = @{@"id": fullName};
-	
+    
+    NSDictionary *parameters = @{@"id": fullName};
+    
     return [self basicPostTaskWithPath:@"api/block" parameters:parameters completion:completion];
 }
 

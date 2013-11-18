@@ -29,12 +29,12 @@
 
 - (NSURLSessionDataTask *)search:(NSString *)query pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
 {
-	return [self search:query subreddit:nil restrictSubreddit:NO pagination:pagination completion:completion];
+    return [self search:query subreddit:nil restrictSubreddit:NO pagination:pagination completion:completion];
 }
 
 - (NSURLSessionDataTask *)search:(NSString *)query subreddit:(RKSubreddit *)subreddit restrictSubreddit:(BOOL)restrictSubreddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
 {	
-	return [self search:query subredditName:subreddit.name restrictSubreddit:restrictSubreddit pagination:pagination completion:completion];
+    return [self search:query subredditName:subreddit.name restrictSubreddit:restrictSubreddit pagination:pagination completion:completion];
 }
 
 - (NSURLSessionDataTask *)search:(NSString *)query subredditName:(NSString *)subredditName restrictSubreddit:(BOOL)restrictSubreddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
@@ -42,9 +42,9 @@
     NSParameterAssert(query);
     
     NSString *path = subredditName ? [NSString stringWithFormat:@"r/%@/search.json", subredditName] : @"search.json";
-	NSDictionary *parameters = @{@"q": query, @"restrict_sr": restrictSubreddit ? @"true" : @"false"};
-	
-	return [self listingTaskWithPath:path parameters:parameters pagination:pagination completion:completion];
+    NSDictionary *parameters = @{@"q": query, @"restrict_sr": restrictSubreddit ? @"true" : @"false"};
+    
+    return [self listingTaskWithPath:path parameters:parameters pagination:pagination completion:completion];
 }
 
 @end

@@ -68,14 +68,14 @@
     return [MTLValueTransformer transformerWithBlock:^(NSString *author) {
         NSString *currentUsername = [[[RKClient sharedClient] currentUser] username];
         
-		if ([author isEqualToString:currentUsername])
-		{
-			return @(RKMessageTypeSent);
-		}
-		else
-		{
+        if ([author isEqualToString:currentUsername])
+        {
+            return @(RKMessageTypeSent);
+        }
+        else
+        {
             return @(RKMessageTypeReceived);
-		}
+        }
     }];
 }
 
@@ -133,7 +133,8 @@
     NSDictionary *keyPaths = @{
         @"linkTitle": @"data.link_title",
         @"likes": @"data.likes",
-        @"context": @"data.context"
+        @"context": @"data.context",
+        @"subreddit": @"data.subreddit"
     };
     
     return [[super JSONKeyPathsByPropertyKey] mtl_dictionaryByAddingEntriesFromDictionary:keyPaths];

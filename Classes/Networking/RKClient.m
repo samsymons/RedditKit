@@ -38,7 +38,7 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 
 + (instancetype)sharedClient
 {
-	static RKClient *sharedRKClient = nil;
+    static RKClient *sharedRKClient = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         sharedRKClient = [[[self class] alloc] init];
@@ -50,10 +50,10 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 - (id)init
 {
     if (self = [super initWithBaseURL:[[self class] APIBaseURL]])
-	{
+    {
         self.requestSerializer = [AFHTTPRequestSerializer serializer];
         self.responseSerializer = [RKResponseSerializer serializer];
-	}
+    }
     
     return self;
 }
@@ -94,7 +94,7 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
     NSParameterAssert(username);
     NSParameterAssert(password);
     
-	NSDictionary *parameters = @{@"user": username, @"passwd": password, @"api_type": @"json"};
+    NSDictionary *parameters = @{@"user": username, @"passwd": password, @"api_type": @"json"};
     
     NSURL *baseURL = [[self class] APIBaseHTTPSURL];
     NSString *URLString = [[NSURL URLWithString:@"api/login" relativeToURL:baseURL] absoluteString];
@@ -153,13 +153,13 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 
 - (BOOL)isSignedIn
 {
-	return self.modhash != nil && self.sessionIdentifier != nil;
+    return self.modhash != nil && self.sessionIdentifier != nil;
 }
 
 - (void)signOut
 {
-	self.currentUser = nil;
-	self.modhash = nil;
+    self.currentUser = nil;
+    self.modhash = nil;
     self.sessionIdentifier = nil;
     
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
