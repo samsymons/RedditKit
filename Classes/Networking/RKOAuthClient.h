@@ -1,10 +1,24 @@
+// RKOAuthClient.h
 //
-//  RKOAuthClient.h
-//  Pods
+// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
-//  Created by Joseph Pintozzi on 11/14/13.
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
 //
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
 #import "RKClient.h"
 
@@ -13,43 +27,65 @@
  Explainations found here: http://www.reddit.com/dev/api
  */
 
-static NSString * const kOAuthScopeEdit = @"edit";
-static NSString * const kOAuthScopeHistory = @"history";
-static NSString * const kOAuthScopeIdentity = @"identity";
-static NSString * const kOAuthScopeModConfig = @"modconfig";
-static NSString * const kOAuthScopeModFlair = @"modflair";
-static NSString * const kOAuthScopeModLog = @"modlog";
-static NSString * const kOAuthScopeModPosts = @"modposts";
-static NSString * const kOAuthScopeMySubreddits = @"mysubreddits";
-static NSString * const kOAuthScopePrivateMessages = @"privatemessages";
-static NSString * const kOAuthScopeRead = @"read";
-static NSString * const kOAuthScopeSave = @"save";
-static NSString * const kOAuthScopeSubmit = @"submit";
-static NSString * const kOAuthScopeSubscribe = @"subscribe";
-static NSString * const kOAuthScopeVote = @"vote";
+typedef NS_ENUM(NSUInteger, RDKOAuthScope) {
+    RDKOAuthScopeNone                   = 0,
+    RDKOAuthScopeEdit                   = (1 << 0), // Edit or delete a user's comments and links.
+    RDKOAuthScopeHistory                = (1 << 1), // Read a user's content, such as comments, links, or saved items.
+    RDKOAuthScopeIdentity               = (1 << 2), // Access information about the current user.
+    RDKAuthScopeModeratorConfiguration  = (1 << 3), // Modify a subreddit's settings, including stylesheet and header image.
+    RDKAuthScopeModeratorFlair          = (1 << 4), // Modify a subredddit's flair.
+    RDKAuthScopeModeratorLog            = (1 << 5), // Read a subreddit's moderation log.
+    RDKAuthScopeModeratorPosts          = (1 << 6), // Modify links in a subreddit, such as removing them or marking them as NSFW.
+    RDKAuthScopeMySubreddits            = (1 << 7), // Read the subreddits a user subscribes to.
+    RDKAuthScopePrivateMessages         = (1 << 8), // Read a user's private messages.
+    RDKAuthScopeRead                    = (1 << 9), // Access a user's multireddits and contents of subreddits.
+    RDKAuthScopeSave                    = (1 << 10), // Save or unsave content.
+    RDKAuthScopeSubmit                  = (1 << 11), // Submit links or comments.
+    RDKAuthScopeSubscribe               = (1 << 12), // Subscribe to a subreddit, or interact with multireddits.
+    RDKAuthScopeVote                    = (1 << 13), // Vote on links or comments.
+};
 
 @interface RKOAuthClient : RKClient
 
 /**
- The current clientId and clientSecret for this app.
- Only required if authenticating via OAuth
+ The client's OAuth identifier.
  */
-@property (nonatomic, strong) NSString *clientId;
-@property (nonatomic, strong) NSString *clientSecret;
+@property (nonatomic, copy) NSString *clientIdentifier;
+
+/**
+ The client's OAuth secret.
+ */
+@property (nonatomic, copy) NSString *clientSecret;
+
+/**
+ The client's OAuth access token.
+ */
 @property (nonatomic, strong) NSString *accessToken;
+
+/**
+ The client's OAuth refresh token.
+ */
 @property (nonatomic, strong) NSString *refreshToken;
 
 /**
- Returns a RKClient ready for OAuth
- Get a client ID and secret here: https://ssl.reddit.com/prefs/apps
+ Returns a RKClient ready for OAuth.
+ 
+ @see https://github.com/reddit/reddit/wiki/OAuth2
  */
-- (id)initWithClientId:(NSString *)clientId clientSecret:(NSString *)clientSecret;
+- (id)initWithClientIdentifier:(NSString *)clientIdentifier clientSecret:(NSString *)clientSecret;
 
 /**
- Signs into reddit via OAuth
+ Returns the scope string for given OAuth scopes.
  */
-- (NSURL *)oauthURLWithRedirectURI:(NSString *)redirectURI state:(NSString *)state scope:(NSArray*)scope;
++ (NSString *)scopeStringForAuthScopes:(RDKOAuthScope)scopes;
+
+/**
+ Signs into reddit via OAuth.
+ */
+- (NSURL *)oauthURLWithRedirectURI:(NSString *)redirectURI state:(NSString *)state scope:(RDKOAuthScope)scope;
+
 - (NSURLSessionDataTask *)signInWithAccessCode:(NSString *)accessCode redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RKCompletionBlock)completion;
+
 - (NSURLSessionDataTask *)refreshAccessToken:(NSString*)refreshToken redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RKCompletionBlock)completion;
 
 @end
