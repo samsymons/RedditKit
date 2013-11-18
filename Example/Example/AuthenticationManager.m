@@ -109,10 +109,12 @@
     }
     else if (buttonIndex == 1)
     {
-        NSAssert([kOAuthClientID length], @"Make sure you've entered a value for kOAuthClientID in Example-Prefix.pch");
-        NSAssert([kOAuthClientSecret length], @"Make sure you've entered a value for kOAuthClientSecret in Example-Prefix.pch");
+        NSAssert([kOAuthClientID length], @"Make sure you've entered a value for kOAuthClientID in Example-Prefix.pch.");
+        NSAssert([kOAuthClientSecret length], @"Make sure you've entered a value for kOAuthClientSecret in Example-Prefix.pch.");
+        
         OAuthViewController *oauthViewController = [[OAuthViewController alloc] init];
         UINavigationController *navigationController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
+        
         [navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:oauthViewController] animated:YES completion:^{
             [[RKOAuthClient sharedClient] setClientId:kOAuthClientID];
             [[RKOAuthClient sharedClient] setClientSecret:kOAuthClientSecret];

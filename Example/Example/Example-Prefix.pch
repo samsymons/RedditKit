@@ -6,9 +6,9 @@
     #import <RedditKit/RedditKit.h>
 #endif
 
+// Your client identifier and client secret can be obtained at https://ssl.reddit.com/prefs/apps/
 
 #define kOAuthRedirectURI   @"http://example.com/redditauth"
 #define kOAuthState         @"1234567890"
-//ClientID and ClientSecret can be obtained on https://ssl.reddit.com/prefs/apps/
-#define kOAuthClientID      @""
-#define kOAuthClientSecret  @""
+#define kOAuthClientID      @"yzHHPqSEX9gf8Q"
+#define kOAuthClientSecret  @"iqheUDW7NRmCVxOip5uG4Re0nnk"

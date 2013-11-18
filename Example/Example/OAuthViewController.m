@@ -18,24 +18,29 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    if ([request.URL.absoluteString hasPrefix:kOAuthRedirectURI]) {
+    if ([request.URL.absoluteString hasPrefix:kOAuthRedirectURI])
+    {
         NSString *paramString = [request.URL.absoluteString componentsSeparatedByString:@"?"][1];
         NSArray *params = [paramString componentsSeparatedByString:@"&"];
         NSMutableDictionary *paramDict = [NSMutableDictionary dictionary];
-        for (NSString *string in params) {
+        
+        for (NSString *string in params)
+        {
             NSArray *components = [string componentsSeparatedByString:@"="];
             [paramDict setValue:components[1] forKey:components[0]];
         }
-        if (paramDict[@"code"]) {
+        
+        if (paramDict[@"code"])
+        {
+            __weak __typeof(self)weakSelf = self;
             [[RKOAuthClient sharedClient] signInWithAccessCode:paramDict[@"code"] redirectURI:kOAuthRedirectURI state:kOAuthState completion:^(NSError *error) {
-                UINavigationController *navigationController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
-                [navigationController dismissViewControllerAnimated:YES completion:^{
-                    
-                }];
+                [weakSelf dismissViewControllerAnimated:YES completion:nil];
             }];
+            
             return NO;
         }
     }
+    
     return YES;
 }
 
