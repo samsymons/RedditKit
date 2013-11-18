@@ -21,6 +21,8 @@
 // THE SOFTWARE.
 
 #import "AuthenticationManager.h"
+#import "OAuthViewController.h"
+#import "RKOAuthClient.h"
 
 @interface AuthenticationManager ()
 
@@ -36,10 +38,20 @@
 {
     self.authenticationSuccessBlock = completion;
     
-    [[self signInAlertView] show];
+    [[self authenticationMethodActionSheet] showInView:[[[[UIApplication sharedApplication] keyWindow] rootViewController] view]];
 }
 
 #pragma mark - Private
+
+- (UIActionSheet *)authenticationMethodActionSheet
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"How would you like to authenticate?"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Username/Password", @"OAuth", nil];
+    return actionSheet;
+}
 
 - (UIAlertView *)signInAlertView
 {   
@@ -83,6 +95,29 @@
                     dispatch_async(dispatch_get_main_queue(), self.authenticationSuccessBlock);
                 }
             }
+        }];
+    }
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        [[self signInAlertView] show];
+    }
+    else if (buttonIndex == 1)
+    {
+        NSAssert([kOAuthClientID length], @"Make sure you've entered a value for kOAuthClientID in Example-Prefix.pch");
+        NSAssert([kOAuthClientSecret length], @"Make sure you've entered a value for kOAuthClientSecret in Example-Prefix.pch");
+        OAuthViewController *oauthViewController = [[OAuthViewController alloc] init];
+        UINavigationController *navigationController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
+        [navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:oauthViewController] animated:YES completion:^{
+            [[RKOAuthClient sharedClient] setClientId:kOAuthClientID];
+            [[RKOAuthClient sharedClient] setClientSecret:kOAuthClientSecret];
+            NSURL *authUrl = [[RKOAuthClient sharedClient] oauthURLWithRedirectURI:kOAuthRedirectURI state:kOAuthState scope:@[kOAuthScopeIdentity, kOAuthScopeVote]];
+            [oauthViewController.webView loadRequest:[NSURLRequest requestWithURL:authUrl]];
         }];
     }
 }

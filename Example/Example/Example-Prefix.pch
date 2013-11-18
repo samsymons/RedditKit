@@ -5,3 +5,10 @@
 	#import <Foundation/Foundation.h>
     #import <RedditKit/RedditKit.h>
 #endif
+
+
+#define kOAuthRedirectURI   @"http://example.com/redditauth"
+#define kOAuthState         @"1234567890"
+//ClientID and ClientSecret can be obtained on https://ssl.reddit.com/prefs/apps/
+#define kOAuthClientID      @""
+#define kOAuthClientSecret  @""
