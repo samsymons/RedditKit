@@ -25,10 +25,10 @@
 #import "RKClient+Users.h"
 
 typedef NS_ENUM(NSUInteger, RKMessageCategory) {
-	RKMessageCategoryAll,
-	RKMessageCategoryUnread,
+    RKMessageCategoryAll,
+    RKMessageCategoryUnread,
     RKMessageCategoryMessages,
-	RKMessageCategorySent,
+    RKMessageCategorySent,
     RKMessageCategoryModerator,
     RKMessageCategoryCommentReplies,
     RKMessageCategoryPostReplies,

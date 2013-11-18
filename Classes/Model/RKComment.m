@@ -55,7 +55,7 @@
 
 - (BOOL)isDeleted
 {
-	return [[self author] isEqualToString:@"[deleted]"] && [[self body] isEqualToString:@"[deleted]"];
+    return [[self author] isEqualToString:@"[deleted]"] && [[self body] isEqualToString:@"[deleted]"];
 }
 
 #pragma mark - MTLModel

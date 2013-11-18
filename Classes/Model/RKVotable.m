@@ -53,12 +53,12 @@
 
 - (BOOL)upvoted
 {
-	return (self.voteStatus == RKVoteStatusUpvoted);
+    return (self.voteStatus == RKVoteStatusUpvoted);
 }
 
 - (BOOL)downvoted
 {
-	return (self.voteStatus == RKVoteStatusDownvoted);
+    return (self.voteStatus == RKVoteStatusDownvoted);
 }
 
 - (BOOL)voted
@@ -78,7 +78,7 @@
         else
         {   
             BOOL likes = [forward boolValue];
-			return likes ? @(RKVoteStatusUpvoted) : @(RKVoteStatusDownvoted);
+            return likes ? @(RKVoteStatusUpvoted) : @(RKVoteStatusDownvoted);
         }
     }];
 }

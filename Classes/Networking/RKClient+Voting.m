@@ -28,21 +28,21 @@
 
 NSString * NSStringFromVoteDirection(RKVoteDirection voteDirection)
 {
-	switch (voteDirection)
-	{
-		case RKVoteDirectionUpvote:
-			return @"1";
-			break;
-		case RKVoteDirectionDownvote:
-			return @"-1";
-			break;
-		case RKVoteDirectionNone:
-			return @"0";
-			break;
-		default:
-			return @"0";
-			break;
-	}
+    switch (voteDirection)
+    {
+        case RKVoteDirectionUpvote:
+            return @"1";
+            break;
+        case RKVoteDirectionDownvote:
+            return @"-1";
+            break;
+        case RKVoteDirectionNone:
+            return @"0";
+            break;
+        default:
+            return @"0";
+            break;
+    }
 }
 
 @implementation RKClient (Voting)
@@ -64,12 +64,12 @@ NSString * NSStringFromVoteDirection(RKVoteDirection voteDirection)
 
 - (NSURLSessionDataTask *)voteOnThingWithFullName:(NSString *)fullName direction:(RKVoteDirection)direction completion:(RKCompletionBlock)completion;
 {
-	NSParameterAssert(fullName);
-	NSParameterAssert(direction);
-	
-	NSDictionary *parameters = @{@"id": fullName, @"dir": NSStringFromVoteDirection(direction)};
+    NSParameterAssert(fullName);
+    NSParameterAssert(direction);
     
-	return [self basicPostTaskWithPath:@"api/vote" parameters:parameters completion:completion];
+    NSDictionary *parameters = @{@"id": fullName, @"dir": NSStringFromVoteDirection(direction)};
+    
+    return [self basicPostTaskWithPath:@"api/vote" parameters:parameters completion:completion];
 }
 
 @end

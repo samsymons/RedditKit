@@ -23,28 +23,28 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, RKCommentSortingMethod) {
-	RKCommentSortingMethodTop = 1,
-	RKCommentSortingMethodBest,
-	RKCommentSortingMethodNew,
-	RKCommentSortingMethodHot,
-	RKCommentSortingMethodControversial,
-	RKCommentSortingMethodOld
+    RKCommentSortingMethodTop = 1,
+    RKCommentSortingMethodBest,
+    RKCommentSortingMethodNew,
+    RKCommentSortingMethodHot,
+    RKCommentSortingMethodControversial,
+    RKCommentSortingMethodOld
 };
 
 typedef NS_ENUM(NSUInteger, RKUserContentSortingMethod) {
-	RKUserContentSortingMethodNew = 1,
-	RKUserContentSortingMethodHot,
-	RKUserContentSortingMethodTop,
-	RKUserContentSortingMethodControversial
+    RKUserContentSortingMethodNew = 1,
+    RKUserContentSortingMethodHot,
+    RKUserContentSortingMethodTop,
+    RKUserContentSortingMethodControversial
 };
 
 typedef NS_ENUM(NSUInteger, RKTimeSortingMethod) {
-	RKTimeSortingMethodThisHour = 1,
-	RKTimeSortingMethodToday,
-	RKTimeSortingMethodThisWeek,
-	RKTimeSortingMethodThisMonth,
-	RKTimeSortingMethodThisYear,
-	RKTimeSortingMethodAllTime
+    RKTimeSortingMethodThisHour = 1,
+    RKTimeSortingMethodToday,
+    RKTimeSortingMethodThisWeek,
+    RKTimeSortingMethodThisMonth,
+    RKTimeSortingMethodThisYear,
+    RKTimeSortingMethodAllTime
 };
 
 // extern NSString * NSStringFromCommentSortingMethod(RKCommentSortingMethod sortingMethod);

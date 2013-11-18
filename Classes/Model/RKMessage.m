@@ -68,14 +68,14 @@
     return [MTLValueTransformer transformerWithBlock:^(NSString *author) {
         NSString *currentUsername = [[[RKClient sharedClient] currentUser] username];
         
-		if ([author isEqualToString:currentUsername])
-		{
-			return @(RKMessageTypeSent);
-		}
-		else
-		{
+        if ([author isEqualToString:currentUsername])
+        {
+            return @(RKMessageTypeSent);
+        }
+        else
+        {
             return @(RKMessageTypeReceived);
-		}
+        }
     }];
 }
 

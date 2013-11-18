@@ -92,85 +92,85 @@ const NSInteger RKClientErrorTimedOut = 504;
 + (NSError *)authenticationRequiredError
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Authentication required" failureReason:@"This method requires you to be signed in."];
-	return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorAuthenticationFailed userInfo:userInfo];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorAuthenticationFailed userInfo:userInfo];
 }
 
 + (NSError *)invalidCaptchaError
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Invalid CAPTCHA" failureReason:@"The CAPTCHA value or identifier you provided was invalid."];
-	return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorInvalidCaptcha userInfo:userInfo];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorInvalidCaptcha userInfo:userInfo];
 }
 
 + (NSError *)invalidCSSClassNameError
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Invalid CSS class name" failureReason:@"A CSS name you provided contained invalid characters."];
-	return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorInvalidCSSClassName userInfo:userInfo];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorInvalidCSSClassName userInfo:userInfo];
 }
 
 + (NSError *)invalidCredentialsError
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Invalid credentials" failureReason:@"Your username or password were incorrect."];
-	return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorInvalidCredentials userInfo:userInfo];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorInvalidCredentials userInfo:userInfo];
 }
 
 + (NSError *)rateLimitedError
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Rate limited" failureReason:@"You have exceeded reddit's rate limit."];
-	return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorRateLimited userInfo:userInfo];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorRateLimited userInfo:userInfo];
 }
 
 + (NSError *)tooManyFlairClassNamesError
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Too many flair class names" failureReason:@"You have passed in too many flair class names"];
-	return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorTooManyFlairClassNames userInfo:userInfo];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorTooManyFlairClassNames userInfo:userInfo];
 }
 
 + (NSError *)archivedError
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"This object has been archived" failureReason:@"The object you tried to interact with has been archived."];
-	return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorArchived userInfo:userInfo];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorArchived userInfo:userInfo];
 }
 
 + (NSError *)invalidMultiredditNameError
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Invalid multireddit name" failureReason:@"The name provided for the multireddit was invalid."];
-	return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorInvalidMultiredditName userInfo:userInfo];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorInvalidMultiredditName userInfo:userInfo];
 }
 
 + (NSError *)permissionDeniedError
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Permission denied" failureReason:@"You don't have permission to access this resource."];
-	return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorPermissionDenied userInfo:userInfo];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorPermissionDenied userInfo:userInfo];
 }
 
 + (NSError *)conflictError
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Conflict" failureReason:@"Your attempt to create a resource caused a conflict."];
-	return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorConflict userInfo:userInfo];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorConflict userInfo:userInfo];
 }
 
 + (NSError *)internalServerError
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Internal server error" failureReason:@"The reddit servers suffered an internal server error."];
-	return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorInternalServerError userInfo:userInfo];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorInternalServerError userInfo:userInfo];
 }
 
 + (NSError *)badGatewayError
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Bad gateway" failureReason:@"Bad gateway."];
-	return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorBadGateway userInfo:userInfo];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorBadGateway userInfo:userInfo];
 }
 
 + (NSError *)serviceUnavailableError
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Service unavailable" failureReason:@"The reddit servers are unavailable."];
-	return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorServiceUnavailable userInfo:userInfo];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorServiceUnavailable userInfo:userInfo];
 }
 
 + (NSError *)timedOutError
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Timed out" failureReason:@"The reddit servers timed out."];
-	return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorTimedOut userInfo:userInfo];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorTimedOut userInfo:userInfo];
 }
 
 #pragma mark - Private

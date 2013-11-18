@@ -43,7 +43,7 @@
             [escapedString appendString:[unescapedString substringToIndex:r.location]];
             [unescapedString deleteCharactersInRange:NSMakeRange(0, r.location)];
         }
-		
+        
         if ([unescapedString hasPrefix:@"&lt;"])
         {
             [escapedString appendString:@"<"];
