@@ -41,7 +41,7 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 	static RKClient *sharedRKClient = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
-        sharedRKClient = [[RKClient alloc] init];
+        sharedRKClient = [[[self class] alloc] init];
     });
     
     return sharedRKClient;
@@ -82,9 +82,14 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
     return [NSURL URLWithString:@"https://ssl.reddit.com/"];
 }
 
++ (NSString *)meURLPath
+{
+    return @"api/me.json";
+}
+
 #pragma mark - Authentication
 
-- (NSURLSessionDataTask *)signInWithUsername:(NSString *)username password:(NSString *)password completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)signInWithUsername:(NSString *)username password:(NSString *)password completion:(RKCompletionBlock)completion
 {
     NSParameterAssert(username);
     NSParameterAssert(password);

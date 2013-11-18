@@ -62,6 +62,11 @@ extern NSString * const RKClientErrorDomain;
 + (NSURL *)APIBaseHTTPSURL;
 
 /**
+ The API endpoint the client connects to to get your profile information.
+ */
++ (NSString *)meURLPath;
+
+/**
  Signs into reddit.
  
  @param username The user's username.

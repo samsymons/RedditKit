@@ -192,7 +192,7 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
     self.loadingNewLinks = YES;
     
     __weak __typeof(self)weakSelf = self;
-    [[RKClient sharedClient] frontPageLinksWithPagination:self.currentPagination completion:^(NSArray *collection, RKPagination *pagination, NSError *error) {
+    [[RKOAuthClient sharedClient] frontPageLinksWithPagination:self.currentPagination completion:^(NSArray *collection, RKPagination *pagination, NSError *error) {
         if (!error)
         {
             [[weakSelf tableView] beginUpdates];
