@@ -1,10 +1,24 @@
+// RKOAuthClient.m
 //
-//  RKOAuthClient.m
-//  Pods
+// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
-//  Created by Joseph Pintozzi on 11/14/13.
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
 //
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
 #import "RKOAuthClient.h"
 #import "RKUser.h"
@@ -19,26 +33,25 @@
 @property (nonatomic, strong) NSTimer *tokenRefreshTimer;
 
 @end
+
 @implementation RKOAuthClient
 
-- (id)initWithClientId:(NSString *)clientId clientSecret:(NSString *)clientSecret
+- (id)initWithClientIdentifier:(NSString *)clientIdentifier clientSecret:(NSString *)clientSecret
 {
     if (self = [super initWithBaseURL:[[self class] APIBaseURL]])
 	{
         self.requestSerializer = [AFHTTPRequestSerializer serializer];
         self.responseSerializer = [RKResponseSerializer serializer];
-        _clientId = clientId;
+        
+        _clientIdentifier = clientIdentifier;
         _clientSecret = clientSecret;
 	}
     
     return self;
 }
 
-// Overriding API urls
-
 + (NSURL *)APIBaseURL
 {
-    //OAuth requires HTTPS
     return [[self class] APIBaseHTTPSURL];
 }
 
@@ -57,24 +70,59 @@
     return @"api/v1/me";
 }
 
-- (void)setClientId:(NSString *)clientId clientSecret:(NSString*)clientSecret{
-    _clientId = [clientId copy];
-    _clientSecret = [clientSecret copy];
-}
-
-- (void)setOAuthorizationHeader{
-    NSAssert(_clientId != nil, @"You must first set a clientId");
-    NSAssert(_clientSecret != nil, @"You must first set a clientSecret");
-    [[self requestSerializer] setAuthorizationHeaderFieldWithUsername:_clientId password:_clientSecret];
-}
-
-- (NSURL *)oauthURLWithRedirectURI:(NSString *)redirectURI state:(NSString *)state scope:(NSArray*)scope {
-    NSParameterAssert(redirectURI);
-    NSParameterAssert(state);
-    NSParameterAssert(scope);
-    NSAssert(_clientId != nil, @"You must first set a clientId");
++ (NSString *)scopeStringForAuthScopes:(RDKOAuthScope)scopes
+{
+    if (scopes == RDKOAuthScopeNone) return nil;
     
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/authorize?response_type=code&redirect_uri=%@&client_id=%@&duration=permanent&scope=%@&state=%@", [[self class] APIBaseLoginURL], [redirectURI stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding], _clientId, [scope componentsJoinedByString:@","], state]];
+    NSMutableArray *scopeValues = [[NSMutableArray alloc] initWithCapacity:13];
+    
+    if ((scopes & RDKOAuthScopeEdit) == RDKOAuthScopeEdit) [scopeValues addObject:@"edit"];
+    if ((scopes & RDKOAuthScopeHistory) == RDKOAuthScopeHistory) [scopeValues addObject:@"history"];
+    if ((scopes & RDKOAuthScopeIdentity) == RDKOAuthScopeIdentity) [scopeValues addObject:@"identity"];
+    if ((scopes & RDKAuthScopeModeratorConfiguration) == RDKAuthScopeModeratorConfiguration) [scopeValues addObject:@"modconfig"];
+    if ((scopes & RDKAuthScopeModeratorFlair) == RDKAuthScopeModeratorFlair) [scopeValues addObject:@"modflair"];
+    if ((scopes & RDKAuthScopeModeratorLog) == RDKAuthScopeModeratorLog) [scopeValues addObject:@"modlog"];
+    if ((scopes & RDKAuthScopeModeratorPosts) == RDKAuthScopeModeratorPosts) [scopeValues addObject:@"modposts"];
+    if ((scopes & RDKAuthScopeMySubreddits) == RDKAuthScopeMySubreddits) [scopeValues addObject:@"mysubreddits"];
+    if ((scopes & RDKAuthScopePrivateMessages) == RDKAuthScopePrivateMessages) [scopeValues addObject:@"privatemessages"];
+    if ((scopes & RDKAuthScopeRead) == RDKAuthScopeRead) [scopeValues addObject:@"read"];
+    if ((scopes & RDKAuthScopeSave) == RDKAuthScopeSave) [scopeValues addObject:@"save"];
+    if ((scopes & RDKAuthScopeSubmit) == RDKAuthScopeSubmit) [scopeValues addObject:@"submit"];
+    if ((scopes & RDKAuthScopeSubscribe) == RDKAuthScopeSubscribe) [scopeValues addObject:@"subscribe"];
+    if ((scopes & RDKAuthScopeVote) == RDKAuthScopeVote) [scopeValues addObject:@"vote"];
+    
+    return [scopeValues componentsJoinedByString:@","];
+}
+
+- (void)setOAuthorizationHeader
+{
+    NSAssert(_clientIdentifier != nil, @"You must first set a clientId");
+    NSAssert(_clientSecret != nil, @"You must first set a clientSecret");
+    
+    [[self requestSerializer] setAuthorizationHeaderFieldWithUsername:_clientIdentifier password:_clientSecret];
+}
+
+- (NSURL *)oauthURLWithRedirectURI:(NSString *)redirectURI state:(NSString *)state scope:(RDKOAuthScope)scope
+{
+    NSParameterAssert(redirectURI);
+    NSParameterAssert(scope);
+    
+    NSAssert(_clientIdentifier != nil, @"You must first set a clientIdentifier");
+    
+    NSURL *signInURL = [[self class] APIBaseLoginURL];
+    NSString *escapedRedirectURI = [redirectURI stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *scopeString = [RKOAuthClient scopeStringForAuthScopes:scope];
+    
+    NSLog(@"Escaped: %@", escapedRedirectURI);
+    
+    NSMutableString *URLString = [NSMutableString stringWithFormat:@"%@api/v1/authorize?response_type=code&duration=permanent&redirect_uri=%@&client_id=%@&scope=%@", signInURL, escapedRedirectURI, _clientIdentifier, scopeString];
+    
+    if (state)
+    {
+        [URLString appendFormat:@"&state=%@", state];
+    }
+
+    return [NSURL URLWithString:URLString];
 }
 
 - (NSURLSessionDataTask *)signInWithAccessCode:(NSString *)accessCode redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RKCompletionBlock)completion
@@ -105,7 +153,6 @@
 
 - (NSURLSessionDataTask *)userInfoWithCompletion:(RKObjectCompletionBlock)completion
 {
-    
     NSURL *baseURL = [[self class] APIBaseLoginURL];
     NSString *URLString = [[NSURL URLWithString:[[self class] meURLPath] relativeToURL:baseURL] absoluteString];
     
@@ -146,9 +193,12 @@
                 _tokenRefreshTimer = [NSTimer scheduledTimerWithTimeInterval:seconds target:self selector:@selector(refreshAccessTokenWithTimer:) userInfo:parameters repeats:NO];
             }
             [self setBearerAccessToken:_accessToken];
-            if (!self.currentUser) {
-                [weakSelf loadUserAccountWithCallback:^(NSError *error) {
-                    if (completion) {
+            
+            if (!self.currentUser)
+            {
+                [weakSelf loadUserAccountWithCompletion:^(NSError *error) {
+                    if (completion)
+                    {
                         completion(error);
                     }
                 }];
@@ -158,7 +208,8 @@
                 completion(nil);
             }
         }
-        else if (completion) {
+        else if (completion)
+        {
             completion(error);
         }
     }];
@@ -168,18 +219,22 @@
     return authenticationTask;
 }
 
-- (void)loadUserAccountWithCallback:(RKCompletionBlock)completion
+- (void)loadUserAccountWithCompletion:(RKCompletionBlock)completion
 {
     __weak __typeof(self)weakSelf = self;
     [self userInfoWithCompletion:^(id object, NSError *error) {
         RKUser *account = [RKObjectBuilder objectFromJSON:@{@"kind": kRKObjectTypeAccount, @"data":object}];
-        if (account && !error) {
+        if (account && !error)
+        {
             weakSelf.currentUser = account;
+            
             if (completion)
             {
                 completion(nil);
             }
-        } else if (completion) {
+        }
+        else if (completion)
+        {
             completion(error);
         }
     }];
@@ -191,9 +246,9 @@
 }
 
 
-- (void)setBearerAccessToken:(NSString*)accessToken
+- (void)setBearerAccessToken:(NSString *)accessToken
 {
-    [[self requestSerializer] setValue:[@"bearer " stringByAppendingString: accessToken] forHTTPHeaderField:@"Authorization"];
+    [[self requestSerializer] setValue:[@"bearer " stringByAppendingString:accessToken] forHTTPHeaderField:@"Authorization"];
 }
 
 @end
