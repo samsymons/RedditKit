@@ -32,17 +32,17 @@ typedef NS_ENUM(NSUInteger, RDKOAuthScope) {
     RDKOAuthScopeEdit                   = (1 << 0), // Edit or delete a user's comments and links.
     RDKOAuthScopeHistory                = (1 << 1), // Read a user's content, such as comments, links, or saved items.
     RDKOAuthScopeIdentity               = (1 << 2), // Access information about the current user.
-    RDKAuthScopeModeratorConfiguration  = (1 << 3), // Modify a subreddit's settings, including stylesheet and header image.
-    RDKAuthScopeModeratorFlair          = (1 << 4), // Modify a subredddit's flair.
-    RDKAuthScopeModeratorLog            = (1 << 5), // Read a subreddit's moderation log.
-    RDKAuthScopeModeratorPosts          = (1 << 6), // Modify links in a subreddit, such as removing them or marking them as NSFW.
-    RDKAuthScopeMySubreddits            = (1 << 7), // Read the subreddits a user subscribes to.
-    RDKAuthScopePrivateMessages         = (1 << 8), // Read a user's private messages.
-    RDKAuthScopeRead                    = (1 << 9), // Access a user's multireddits and contents of subreddits.
-    RDKAuthScopeSave                    = (1 << 10), // Save or unsave content.
-    RDKAuthScopeSubmit                  = (1 << 11), // Submit links or comments.
-    RDKAuthScopeSubscribe               = (1 << 12), // Subscribe to a subreddit, or interact with multireddits.
-    RDKAuthScopeVote                    = (1 << 13), // Vote on links or comments.
+    RDKOAuthScopeModeratorConfiguration  = (1 << 3), // Modify a subreddit's settings, including stylesheet and header image.
+    RDKOAuthScopeModeratorFlair          = (1 << 4), // Modify a subredddit's flair.
+    RDKOAuthScopeModeratorLog            = (1 << 5), // Read a subreddit's moderation log.
+    RDKOAuthScopeModeratorPosts          = (1 << 6), // Modify links in a subreddit, such as removing them or marking them as NSFW.
+    RDKOAuthScopeMySubreddits            = (1 << 7), // Read the subreddits a user subscribes to.
+    RDKOAuthScopePrivateMessages         = (1 << 8), // Read a user's private messages.
+    RDKOAuthScopeRead                    = (1 << 9), // Access a user's multireddits and contents of subreddits.
+    RDKOAuthScopeSave                    = (1 << 10), // Save or unsave content.
+    RDKOAuthScopeSubmit                  = (1 << 11), // Submit links or comments.
+    RDKOAuthScopeSubscribe               = (1 << 12), // Subscribe to a subreddit, or interact with multireddits.
+    RDKOAuthScopeVote                    = (1 << 13), // Vote on links or comments.
 };
 
 @interface RKOAuthClient : RKClient

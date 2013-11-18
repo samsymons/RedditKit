@@ -116,10 +116,14 @@
         UINavigationController *navigationController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
         
         [navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:oauthViewController] animated:YES completion:^{
-            [[RKOAuthClient sharedClient] setClientId:kOAuthClientID];
+            [[RKOAuthClient sharedClient] setClientIdentifier:kOAuthClientID];
             [[RKOAuthClient sharedClient] setClientSecret:kOAuthClientSecret];
-            NSURL *authUrl = [[RKOAuthClient sharedClient] oauthURLWithRedirectURI:kOAuthRedirectURI state:kOAuthState scope:@[kOAuthScopeIdentity, kOAuthScopeVote]];
-            [oauthViewController.webView loadRequest:[NSURLRequest requestWithURL:authUrl]];
+            
+            RDKOAuthScope scope = RDKOAuthScopeIdentity|RDKOAuthScopeVote;
+            NSURL *authenticationURL = [[RKOAuthClient sharedClient] oauthURLWithRedirectURI:kOAuthRedirectURI state:kOAuthState scope:scope];
+            NSURLRequest *authenticationRequest = [NSURLRequest requestWithURL:authenticationURL];
+            
+            [[oauthViewController webView] loadRequest:authenticationRequest];
         }];
     }
 }
