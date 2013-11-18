@@ -105,4 +105,9 @@ typedef NS_ENUM(NSUInteger, RKMessageType) {
  */
 @property (nonatomic, copy, readonly) NSString *context;
 
+/**
+ The subreddit the reply was sent in.
+ */
+@property (nonatomic, copy, readonly) NSString *subreddit;
+
 @end
