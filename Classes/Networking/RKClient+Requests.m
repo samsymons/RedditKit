@@ -22,6 +22,7 @@
 
 #import "RKClient+Requests.h"
 #import "RKClient+Errors.h"
+#import "RKOAuthClient.h"
 #import "RKPagination.h"
 #import "RKObjectBuilder.h"
 
@@ -181,7 +182,16 @@
     NSMutableDictionary *alteredParameters = [parameters mutableCopy];
     [alteredParameters setObject:@"json" forKey:@"api_type"];
     
-    NSString *URLString = [[NSURL URLWithString:path relativeToURL:self.baseURL] absoluteString];
+    NSURL *baseURL = [[self class] APIBaseURL];
+    
+    if ([self isKindOfClass:[RKOAuthClient class]] && [self isSignedIn])
+    {
+        baseURL = [[self class] APIBaseHTTPSURL];
+    }
+    
+    NSLog(@"Building request with base URL: %@", baseURL);
+    
+    NSString *URLString = [[NSURL URLWithString:path relativeToURL:baseURL] absoluteString];
     NSURLRequest *request = [[self requestSerializer] requestWithMethod:method URLString:URLString parameters:[alteredParameters copy]];
     
     NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {

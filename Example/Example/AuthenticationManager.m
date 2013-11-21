@@ -109,8 +109,8 @@
     }
     else if (buttonIndex == 1)
     {
-        NSAssert([kOAuthClientID length], @"Make sure you've entered a value for kOAuthClientID in Example-Prefix.pch.");
-        NSAssert([kOAuthClientSecret length], @"Make sure you've entered a value for kOAuthClientSecret in Example-Prefix.pch.");
+        NSAssert([kOAuthClientID length], @"Ensure you have entered a value for kOAuthClientID in Example-Prefix.pch.");
+        NSAssert([kOAuthClientSecret length], @"Ensure you have entered a value for kOAuthClientSecret in Example-Prefix.pch.");
         
         OAuthViewController *oauthViewController = [[OAuthViewController alloc] init];
         UINavigationController *navigationController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
@@ -119,7 +119,7 @@
             [[RKOAuthClient sharedClient] setClientIdentifier:kOAuthClientID];
             [[RKOAuthClient sharedClient] setClientSecret:kOAuthClientSecret];
             
-            RDKOAuthScope scope = RDKOAuthScopeIdentity|RDKOAuthScopeVote;
+            RDKOAuthScope scope = RDKOAuthScopeIdentity | RDKOAuthScopeVote;
             NSURL *authenticationURL = [[RKOAuthClient sharedClient] oauthURLWithRedirectURI:kOAuthRedirectURI state:kOAuthState scope:scope];
             NSURLRequest *authenticationRequest = [NSURLRequest requestWithURL:authenticationURL];
             

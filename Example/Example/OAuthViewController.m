@@ -20,11 +20,11 @@
 {
     if ([request.URL.absoluteString hasPrefix:kOAuthRedirectURI])
     {
-        NSString *paramString = [request.URL.absoluteString componentsSeparatedByString:@"?"][1];
-        NSArray *params = [paramString componentsSeparatedByString:@"&"];
+        NSString *parameterString = [request.URL.absoluteString componentsSeparatedByString:@"?"][1];
+        NSArray *parameters = [parameterString componentsSeparatedByString:@"&"];
         NSMutableDictionary *paramDict = [NSMutableDictionary dictionary];
         
-        for (NSString *string in params)
+        for (NSString *string in parameters)
         {
             NSArray *components = [string componentsSeparatedByString:@"="];
             [paramDict setValue:components[1] forKey:components[0]];
@@ -33,7 +33,13 @@
         if (paramDict[@"code"])
         {
             __weak __typeof(self)weakSelf = self;
+            
             [[RKOAuthClient sharedClient] signInWithAccessCode:paramDict[@"code"] redirectURI:kOAuthRedirectURI state:kOAuthState completion:^(NSError *error) {
+                if (error)
+                {
+                    NSLog(@"Failed to authenticate with OAuth: %@", error);
+                }
+                
                 [weakSelf dismissViewControllerAnimated:YES completion:nil];
             }];
             

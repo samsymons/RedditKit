@@ -22,10 +22,10 @@ Then run:
 
 ## Getting Started
 
-RedditKit is structured around the `RKClient` class. This class manages authentication for a single reddit account and performs HTTP requests on that user's behalf. `RKClient` can be used as a singleton with its `sharedClient` class method, or as a standalone object.
+RedditKit is structured around the `RDKClient` class. This class manages authentication for a single reddit account and performs HTTP requests on that user's behalf. `RDKClient` can be used as a singleton with its `sharedClient` class method, or as a standalone object.
 
 ```obj-c
-[[RKClient sharedClient] signInWithUsername:@"name" password:@"password" completion:^(NSError *error) {
+[[RDKClient sharedClient] signInWithUsername:@"name" password:@"password" completion:^(NSError *error) {
     if (!error)
     {
         NSLog(@"Successfully signed in!");
@@ -33,10 +33,10 @@ RedditKit is structured around the `RKClient` class. This class manages authenti
 }];
 ```
 
-Once you're signed in, `RKClient` will keep track of any necessary authentication state. You can then call methods which require authentication, such as getting the subreddits you are subscribed to.
+Once you're signed in, `RDKClient` will keep track of any necessary authentication state. You can then call methods which require authentication, such as getting the subreddits you are subscribed to.
 
 ```obj-c
-[[RKClient sharedClient] subscribedSubredditsWithCompletion:^(NSArray *subreddits, NSError *error) {
+[[RDKClient sharedClient] subscribedSubredditsWithCompletion:^(NSArray *subreddits, NSError *error) {
     NSLog(@"Subreddits: %@", subreddits);
 }];
 ```
@@ -44,9 +44,9 @@ Once you're signed in, `RKClient` will keep track of any necessary authenticatio
 Retrieving the current top links in a subreddit is simple.
 
 ```obj-c
-RKSubreddit *subreddit = [[self subreddits] firstObject];
+RDKSubreddit *subreddit = [[self subreddits] firstObject];
 
-[[RKClient sharedClient] linksInSubreddit:subreddit pagination:nil completion:^(NSArray *links, RKPagination *pagination, NSError *error) {
+[[RDKClient sharedClient] linksInSubreddit:subreddit pagination:nil completion:^(NSArray *links, RDKPagination *pagination, NSError *error) {
     NSLog(@"Links: %@", links);
 }];
 ```
@@ -54,9 +54,9 @@ RKSubreddit *subreddit = [[self subreddits] firstObject];
 You can then upvote a link.
 
 ```obj-c
-RKLink *link = [[self links] firstObject];
+RDKLink *link = [[self links] firstObject];
 
-[[RKClient sharedClient] upvote:link completion:^(NSError *error) {
+[[RDKClient sharedClient] upvote:link completion:^(NSError *error) {
     NSLog(@"Upvoted the link!");
 }];
 ```
@@ -65,28 +65,28 @@ RKLink *link = [[self links] firstObject];
 
 ## OAuth
 
-RedditKit's OAuth support is contained in the `RKOAuthClient` class, a subclass of `RKClient`.
-
-### Redirection URLs
+RedditKit's OAuth support is contained in the `RDKOAuthClient` class, a subclass of `RDKClient`.
 
 When [creating an app on reddit](https://ssl.reddit.com/prefs/apps/), you will need to enter a redirection URL in order for reddit to hand you an OAuth access code. Unfortunately, reddit only allows redirection URLs which have HTTP or HTTPS protocols, meaning you cannot use a custom URL scheme, such as `redditkit://`.
 
 This problem is solved by implementing the `webView:shouldStartLoadWithRequest:navigationType:` delegate method from `UIWebView`.
 
+Here's how to implement OAuth in your app:
+
 1. Create your app on reddit at https://ssl.reddit.com/prefs/apps/.
-2. Give your app a redirect URL beginning with `http://`, such as `http://myapp/oauth`. Its value is arbitrary; you're going to intercept the request made with that URL anyway, so it will never actually be executed.
+2. Give your app a redirect URL beginning with `http://` or `https://`, such as `http://myapp.com/oauth`. Its value is arbitrary; you're going to intercept the request made with that URL anyway, so it will never actually be executed.
 
 ## More Examples
 
 **Get the top comments for a link:**
 
 ```obj-c
-RKLink *link = [[self links] firstObject];
+RDKLink *link = [[self links] firstObject];
 
-RKPagination *pagination = [RKPagination paginationWithLimit:100];
-pagination.commentSortingMethod = RKCommentSortingMethodTop;
+RDKPagination *pagination = [RDKPagination paginationWithLimit:100];
+pagination.commentSortingMethod = RDKCommentSortingMethodTop;
 
-[[RKClient sharedClient] commentsForLink:link pagination:pagination completion:^(NSArray *comments, NSError *error) {
+[[RDKClient sharedClient] commentsForLink:link pagination:pagination completion:^(NSArray *comments, NSError *error) {
 	if (comments)
 	{
 		NSLog(@"Comments: %@", comments);
@@ -97,7 +97,7 @@ pagination.commentSortingMethod = RKCommentSortingMethodTop;
 **Fetch a user's account:**
 
 ```obj-c
-[[RKClient sharedClient] userWithUsername:@"name" completion:^(RKUser *account, NSError *error) {
+[[RDKClient sharedClient] userWithUsername:@"name" completion:^(RDKUser *account, NSError *error) {
 	if (account)
 	{
 		NSLog(@"%@", account);
@@ -108,7 +108,7 @@ pagination.commentSortingMethod = RKCommentSortingMethodTop;
 **Send private messages:**
 
 ```obj-c
-[[RKClient sharedClient] sendMessage:@"Hello!" subject:nil recipient:@"samsymons" completion:nil];
+[[RDKClient sharedClient] sendMessage:@"Hello!" subject:nil recipient:@"samsymons" completion:nil];
 ```
 
 **Canceling a request:**
@@ -116,15 +116,15 @@ pagination.commentSortingMethod = RKCommentSortingMethodTop;
 Each of RedditKit's methods return a `NSURLSessionDataTask`, which can be used to cancel a request before it has completed.
 
 ```obj-c
-NSURLSessionDataTask *task = [[RKClient sharedClient] frontPageLinksWithCompletion:nil];
+NSURLSessionDataTask *task = [[RDKClient sharedClient] frontPageLinksWithCompletion:nil];
 [task cancel];
 ```
 
 ## Pagination
 
-Methods which are paginated can accept `RKPagination` objects.
+Methods which are paginated can accept `RDKPagination` objects.
 
-`RKPagination` lets you change the sorting of returned objects. For example, when fetching the top 25 links in a subreddit, setting the `subredditCategory` property changes whether you get the top 25 links right now or the top links overall.
+`RDKPagination` lets you change the sorting of returned objects. For example, when fetching the top 25 links in a subreddit, setting the `subredditCategory` property changes whether you get the top 25 links right now or the top links overall.
 
 In addition to letting you change the pagination of your requests, RedditKit also gives you pagination information for any requests made. A request for links in a subreddit has a pagination object as an argument in its completion block.
 
@@ -132,29 +132,29 @@ In addition to letting you change the pagination of your requests, RedditKit als
 
 ## Multiple Accounts
 
-`RKClient` manages a single reddit account. When supporting multiple accounts, all you need to do is switch from using the `sharedClient` method to using one `RKClient` instance per account.
+`RDKClient` manages a single reddit account. When supporting multiple accounts, all you need to do is switch from using the `sharedClient` method to using one `RDKClient` instance per account.
 
 For example, this code:
 
 ```obj-c
-[[RKClient sharedClient] signInWithUsername:@"username" password:@"password" completion:nil];
-[[RKClient sharedClient] upvote:someLink completion:nil];
+[[RDKClient sharedClient] signInWithUsername:@"username" password:@"password" completion:nil];
+[[RDKClient sharedClient] upvote:someLink completion:nil];
 ```
 
 Becomes this:
 
 ```obj-c
-RKClient *client = [[RKClient alloc] init];
+RDKClient *client = [[RDKClient alloc] init];
 
 [client signInWithUsername:@"username" password:@"password" completion:nil];
 [client upvote:someLink completion:nil];
 ```
 
-How you manage the various `RKClient` instances is up to you. Probably with an `NSDictionary`, using reddit usernames as keys.
+How you manage the various `RDKClient` instances is up to you. Probably with an `NSDictionary`, using reddit usernames as keys.
 
 ## Configuration
 
-You can configure various aspects of RedditKit's operation, including its default API endpoint and user agent. Check out the `RKClient` header file for more.
+You can configure various aspects of RedditKit's operation, including its default API endpoint and user agent. Check out the `RDKClient` header file for more.
 
 **You should set your user agent to the name and version of your app, along with your reddit username. That way, if you ever have a buggy version of your app in the wild, the reddit admins will know who to contact.**
 

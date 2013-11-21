@@ -39,38 +39,40 @@
 - (id)initWithClientIdentifier:(NSString *)clientIdentifier clientSecret:(NSString *)clientSecret
 {
     if (self = [super initWithBaseURL:[[self class] APIBaseURL]])
-	{
+    {
         self.requestSerializer = [AFHTTPRequestSerializer serializer];
         self.responseSerializer = [RKResponseSerializer serializer];
         
         _clientIdentifier = clientIdentifier;
         _clientSecret = clientSecret;
-	}
+    }
     
     return self;
 }
 
+/*
 + (NSURL *)APIBaseURL
 {
     return [[self class] APIBaseHTTPSURL];
 }
+ */
 
 + (NSURL *)APIBaseHTTPSURL
 {
     return [NSURL URLWithString:@"https://oauth.reddit.com/"];
 }
 
-+ (NSURL *)APIBaseLoginURL
++ (NSURL *)APIBaseAuthenticationURL
 {
     return [NSURL URLWithString:@"https://ssl.reddit.com/"];
 }
 
-+ (NSString *)meURLPath
++ (NSString *)userInformationURLPath
 {
     return @"api/v1/me";
 }
 
-+ (NSString *)scopeStringForAuthScopes:(RDKOAuthScope)scopes
++ (NSString *)scopeStringForOAuthScopes:(RDKOAuthScope)scopes
 {
     if (scopes == RDKOAuthScopeNone) return nil;
     
@@ -79,27 +81,27 @@
     if ((scopes & RDKOAuthScopeEdit) == RDKOAuthScopeEdit) [scopeValues addObject:@"edit"];
     if ((scopes & RDKOAuthScopeHistory) == RDKOAuthScopeHistory) [scopeValues addObject:@"history"];
     if ((scopes & RDKOAuthScopeIdentity) == RDKOAuthScopeIdentity) [scopeValues addObject:@"identity"];
-    if ((scopes & RDKAuthScopeModeratorConfiguration) == RDKAuthScopeModeratorConfiguration) [scopeValues addObject:@"modconfig"];
-    if ((scopes & RDKAuthScopeModeratorFlair) == RDKAuthScopeModeratorFlair) [scopeValues addObject:@"modflair"];
-    if ((scopes & RDKAuthScopeModeratorLog) == RDKAuthScopeModeratorLog) [scopeValues addObject:@"modlog"];
-    if ((scopes & RDKAuthScopeModeratorPosts) == RDKAuthScopeModeratorPosts) [scopeValues addObject:@"modposts"];
-    if ((scopes & RDKAuthScopeMySubreddits) == RDKAuthScopeMySubreddits) [scopeValues addObject:@"mysubreddits"];
-    if ((scopes & RDKAuthScopePrivateMessages) == RDKAuthScopePrivateMessages) [scopeValues addObject:@"privatemessages"];
-    if ((scopes & RDKAuthScopeRead) == RDKAuthScopeRead) [scopeValues addObject:@"read"];
-    if ((scopes & RDKAuthScopeSave) == RDKAuthScopeSave) [scopeValues addObject:@"save"];
-    if ((scopes & RDKAuthScopeSubmit) == RDKAuthScopeSubmit) [scopeValues addObject:@"submit"];
-    if ((scopes & RDKAuthScopeSubscribe) == RDKAuthScopeSubscribe) [scopeValues addObject:@"subscribe"];
-    if ((scopes & RDKAuthScopeVote) == RDKAuthScopeVote) [scopeValues addObject:@"vote"];
+    if ((scopes & RDKOAuthScopeModeratorConfiguration) == RDKOAuthScopeModeratorConfiguration) [scopeValues addObject:@"modconfig"];
+    if ((scopes & RDKOAuthScopeModeratorFlair) == RDKOAuthScopeModeratorFlair) [scopeValues addObject:@"modflair"];
+    if ((scopes & RDKOAuthScopeModeratorLog) == RDKOAuthScopeModeratorLog) [scopeValues addObject:@"modlog"];
+    if ((scopes & RDKOAuthScopeModeratorPosts) == RDKOAuthScopeModeratorPosts) [scopeValues addObject:@"modposts"];
+    if ((scopes & RDKOAuthScopeMySubreddits) == RDKOAuthScopeMySubreddits) [scopeValues addObject:@"mysubreddits"];
+    if ((scopes & RDKOAuthScopePrivateMessages) == RDKOAuthScopePrivateMessages) [scopeValues addObject:@"privatemessages"];
+    if ((scopes & RDKOAuthScopeRead) == RDKOAuthScopeRead) [scopeValues addObject:@"read"];
+    if ((scopes & RDKOAuthScopeSave) == RDKOAuthScopeSave) [scopeValues addObject:@"save"];
+    if ((scopes & RDKOAuthScopeSubmit) == RDKOAuthScopeSubmit) [scopeValues addObject:@"submit"];
+    if ((scopes & RDKOAuthScopeSubscribe) == RDKOAuthScopeSubscribe) [scopeValues addObject:@"subscribe"];
+    if ((scopes & RDKOAuthScopeVote) == RDKOAuthScopeVote) [scopeValues addObject:@"vote"];
     
     return [scopeValues componentsJoinedByString:@","];
 }
 
 - (void)setOAuthorizationHeader
 {
-    NSAssert(_clientIdentifier != nil, @"You must first set a clientId");
-    NSAssert(_clientSecret != nil, @"You must first set a clientSecret");
+    NSAssert(self.clientIdentifier != nil, @"You must first set a clientIdentifier.");
+    NSAssert(self.clientSecret != nil, @"You must first set a clientSecret.");
     
-    [[self requestSerializer] setAuthorizationHeaderFieldWithUsername:_clientIdentifier password:_clientSecret];
+    [[self requestSerializer] setAuthorizationHeaderFieldWithUsername:self.clientIdentifier password:self.clientSecret];
 }
 
 - (NSURL *)oauthURLWithRedirectURI:(NSString *)redirectURI state:(NSString *)state scope:(RDKOAuthScope)scope
@@ -109,11 +111,9 @@
     
     NSAssert(_clientIdentifier != nil, @"You must first set a clientIdentifier");
     
-    NSURL *signInURL = [[self class] APIBaseLoginURL];
+    NSURL *signInURL = [[self class] APIBaseAuthenticationURL];
     NSString *escapedRedirectURI = [redirectURI stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *scopeString = [RKOAuthClient scopeStringForAuthScopes:scope];
-    
-    NSLog(@"Escaped: %@", escapedRedirectURI);
+    NSString *scopeString = [RKOAuthClient scopeStringForOAuthScopes:scope];
     
     NSMutableString *URLString = [NSMutableString stringWithFormat:@"%@api/v1/authorize?response_type=code&duration=permanent&redirect_uri=%@&client_id=%@&scope=%@", signInURL, escapedRedirectURI, _clientIdentifier, scopeString];
     
@@ -153,8 +153,8 @@
 
 - (NSURLSessionDataTask *)userInfoWithCompletion:(RKObjectCompletionBlock)completion
 {
-    NSURL *baseURL = [[self class] APIBaseLoginURL];
-    NSString *URLString = [[NSURL URLWithString:[[self class] meURLPath] relativeToURL:baseURL] absoluteString];
+    NSURL *baseURL = [[self class] APIBaseAuthenticationURL];
+    NSString *URLString = [[NSURL URLWithString:[[self class] userInformationURLPath] relativeToURL:baseURL] absoluteString];
     
     NSMutableURLRequest *request = [[self requestSerializer] requestWithMethod:@"GET" URLString:URLString parameters:@{}];
     
@@ -172,7 +172,7 @@
 - (NSURLSessionDataTask *)accessTokensWithParams:(NSDictionary*)parameters completion:(RKCompletionBlock)completion
 {
     [self setOAuthorizationHeader];
-    NSURL *baseURL = [[self class] APIBaseLoginURL];
+    NSURL *baseURL = [[self class] APIBaseAuthenticationURL];
     NSString *URLString = [[NSURL URLWithString:@"api/v1/access_token" relativeToURL:baseURL] absoluteString];
     
     NSMutableURLRequest *request = [[self requestSerializer] requestWithMethod:@"POST" URLString:URLString parameters:parameters];

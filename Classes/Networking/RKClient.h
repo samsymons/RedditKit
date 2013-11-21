@@ -64,7 +64,7 @@ extern NSString * const RKClientErrorDomain;
 /**
  The API endpoint the client connects to to get your profile information.
  */
-+ (NSString *)meURLPath;
++ (NSString *)userInformationURLPath;
 
 /**
  Signs into reddit.

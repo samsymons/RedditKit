@@ -79,27 +79,7 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
 
 - (NSURLSessionDataTask *)currentUserWithCompletion:(RKObjectCompletionBlock)completion
 {
-<<<<<<< HEAD
-	return [self getPath:[[self class] meURLPath] parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
-		if (responseObject)
-		{
-			RKUser *account = [RKObjectBuilder objectFromJSON:responseObject];
-			
-			if (completion)
-			{
-				completion(account, nil);
-			}
-		}
-		else
-		{
-			if (completion)
-			{
-				completion(nil, error);
-			}
-		}
-	}];
-=======
-    return [self getPath:@"api/me.json" parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+    return [self getPath:[[self class] userInformationURLPath] parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         if (responseObject)
         {
             RKUser *account = [RKObjectBuilder objectFromJSON:responseObject];
@@ -117,7 +97,6 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
             }
         }
     }];
->>>>>>> master
 }
 
 - (NSURLSessionDataTask *)user:(RKUser *)user completion:(RKObjectCompletionBlock)completion

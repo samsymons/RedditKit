@@ -82,7 +82,7 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
     return [NSURL URLWithString:@"https://ssl.reddit.com/"];
 }
 
-+ (NSString *)meURLPath
++ (NSString *)userInformationURLPath
 {
     return @"api/me.json";
 }
