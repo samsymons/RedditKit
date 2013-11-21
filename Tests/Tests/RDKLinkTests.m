@@ -1,21 +1,21 @@
 //
-//  RKLinkTests.m
+//  RDKLinkTests.m
 //  Tests
 //
 //  Created by Sam Symons on 9/06/13.
 //
 //
 
-#import "RKTestCase.h"
+#import "RDKTestCase.h"
 
-@interface RKLinkTests : RKTestCase
+@interface RDKLinkTests : RDKTestCase
 
-@property (nonatomic, strong) RKLink *nonImageLink;
-@property (nonatomic, strong) RKLink *imageLink;
+@property (nonatomic, strong) RDKLink *nonImageLink;
+@property (nonatomic, strong) RDKLink *imageLink;
 
 @end
 
-@implementation RKLinkTests
+@implementation RDKLinkTests
 
 - (void)setUp
 {
@@ -25,10 +25,10 @@
     data[@"url"] = @"http://example.com/test.png";
     imageLinkJSON[@"data"] = [data copy];
     
-    self.imageLink = [MTLJSONAdapter modelOfClass:[RKLink class] fromJSONDictionary:imageLinkJSON error:nil];
+    self.imageLink = [MTLJSONAdapter modelOfClass:[RDKLink class] fromJSONDictionary:imageLinkJSON error:nil];
     
     NSDictionary *nonImageLinkJSON = [self JSONFromLocalFileWithName:@"link"];
-    self.nonImageLink = [MTLJSONAdapter modelOfClass:[RKLink class] fromJSONDictionary:nonImageLinkJSON error:nil];
+    self.nonImageLink = [MTLJSONAdapter modelOfClass:[RDKLink class] fromJSONDictionary:nonImageLinkJSON error:nil];
 }
 
 - (void)testIsImageLink

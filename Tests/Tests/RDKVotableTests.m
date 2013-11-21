@@ -1,33 +1,33 @@
 //
-//  RKVotableTests.m
+//  RDKVotableTests.m
 //  Tests
 //
 //  Created by Sam Symons on 11/5/2013.
 //
 //
 
-#import "RKTestCase.h"
+#import "RDKTestCase.h"
 
-@interface RKVotableTests : RKTestCase
+@interface RDKVotableTests : RDKTestCase
 
-@property (nonatomic, strong) RKVotable *upvotedObject;
-@property (nonatomic, strong) RKVotable *downvotedObject;
-@property (nonatomic, strong) RKVotable *nonVotedObject;
+@property (nonatomic, strong) RDKVotable *upvotedObject;
+@property (nonatomic, strong) RDKVotable *downvotedObject;
+@property (nonatomic, strong) RDKVotable *nonVotedObject;
 
 @end
 
-@implementation RKVotableTests
+@implementation RDKVotableTests
 
 - (void)setUp
 {
 	NSDictionary *upvotedJSON = [self votableDataWithLikes:@(YES)];
-    self.upvotedObject = [MTLJSONAdapter modelOfClass:[RKVotable class] fromJSONDictionary:upvotedJSON error:nil];
+    self.upvotedObject = [MTLJSONAdapter modelOfClass:[RDKVotable class] fromJSONDictionary:upvotedJSON error:nil];
     
     NSDictionary *downvotedJSON = [self votableDataWithLikes:@(NO)];
-    self.downvotedObject = [MTLJSONAdapter modelOfClass:[RKVotable class] fromJSONDictionary:downvotedJSON error:nil];
+    self.downvotedObject = [MTLJSONAdapter modelOfClass:[RDKVotable class] fromJSONDictionary:downvotedJSON error:nil];
     
     NSDictionary *nonVotedJSON = [self votableDataWithLikes:[NSNull null]];
-    self.nonVotedObject = [MTLJSONAdapter modelOfClass:[RKVotable class] fromJSONDictionary:nonVotedJSON error:nil];
+    self.nonVotedObject = [MTLJSONAdapter modelOfClass:[RDKVotable class] fromJSONDictionary:nonVotedJSON error:nil];
 }
 
 - (void)testUpvotedObjects

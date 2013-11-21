@@ -62,7 +62,7 @@ extern NSString * const RDKClientErrorDomain;
 + (NSURL *)APIBaseHTTPSURL;
 
 /**
- The API endpoint the client connects to to get your profile information.
+ The API endpoint the client connects to in order to get your profile information.
  */
 + (NSString *)userInformationURLPath;
 
@@ -76,7 +76,7 @@ extern NSString * const RDKClientErrorDomain;
 - (NSURLSessionDataTask *)signInWithUsername:(NSString *)username password:(NSString *)password completion:(RDKCompletionBlock)completion;
 
 /**
- Updates the current user. This is useful for getting updated karma totals, or checking whether they have unread private messages.
+ Updates the current user. This is useful for getting updated karma totals or checking whether they have unread private messages.
  
  @param completion The block to be executed upon completion of the request.
  */

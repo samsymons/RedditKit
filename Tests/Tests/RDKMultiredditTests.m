@@ -1,25 +1,25 @@
 //
-//  RKMultiredditTests.m
+//  RDKMultiredditTests.m
 //  Tests
 //
 //  Created by Sam Symons on 2013-10-12.
 //
 //
 
-#import "RKTestCase.h"
+#import "RDKTestCase.h"
 
-@interface RKMultiredditTests : RKTestCase
+@interface RDKMultiredditTests : RDKTestCase
 
-@property (nonatomic, strong) RKMultireddit *multireddit;
+@property (nonatomic, strong) RDKMultireddit *multireddit;
 
 @end
 
-@implementation RKMultiredditTests
+@implementation RDKMultiredditTests
 
 - (void)setUp
 {
     NSDictionary *multiredditJSON = [self JSONFromLocalFileWithName:@"multireddit"];
-    self.multireddit = [MTLJSONAdapter modelOfClass:[RKMultireddit class] fromJSONDictionary:multiredditJSON error:nil];
+    self.multireddit = [MTLJSONAdapter modelOfClass:[RDKMultireddit class] fromJSONDictionary:multiredditJSON error:nil];
 }
 
 - (void)testGettingTheMultiredditUsername

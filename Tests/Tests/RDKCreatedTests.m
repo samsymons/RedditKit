@@ -1,27 +1,27 @@
 //
-//  RKCreatedTests.m
+//  RDKCreatedTests.m
 //  Tests
 //
 //  Created by Sam Symons on 11/5/2013.
 //
 //
 
-#import "RKTestCase.h"
+#import "RDKTestCase.h"
 
-@interface RKCreatedTests : RKTestCase
+@interface RDKCreatedTests : RDKTestCase
 
-@property (nonatomic, strong) RKCreated *createdObject;
+@property (nonatomic, strong) RDKCreated *createdObject;
 
 @end
 
-@implementation RKCreatedTests
+@implementation RDKCreatedTests
 
 - (void)setUp
 {
     NSDictionary *data = @{@"id": @"12345", @"created_utc": @(1141150769)};
 	NSDictionary *JSON = @{@"data": data, @"kind": @"t1"};
     
-    self.createdObject = [MTLJSONAdapter modelOfClass:[RKCreated class] fromJSONDictionary:JSON error:nil];
+    self.createdObject = [MTLJSONAdapter modelOfClass:[RDKCreated class] fromJSONDictionary:JSON error:nil];
 }
 
 - (void)testGettingTheCreationDate

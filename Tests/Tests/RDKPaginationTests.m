@@ -1,25 +1,25 @@
 //
-//  RKPaginationTests.m
+//  RDKPaginationTests.m
 //  Tests
 //
 //  Created by Sam Symons on 11/5/2013.
 //
 //
 
-#import "RKTestCase.h"
+#import "RDKTestCase.h"
 
-@interface RKPaginationTests : RKTestCase
+@interface RDKPaginationTests : RDKTestCase
 
 @end
 
-@implementation RKPaginationTests
+@implementation RDKPaginationTests
 
 - (void)testGettingAPaginationObjectFromAListingResponse
 {
     NSDictionary *listingJSON = [self JSONFromLocalFileWithName:@"listing"];
     NSString *after = [listingJSON valueForKeyPath:@"data.after"];
     
-    RKPagination *pagination = [RKPagination paginationFromListingResponse:listingJSON];
+    RDKPagination *pagination = [RDKPagination paginationFromListingResponse:listingJSON];
     
     XCTAssertNil(pagination.before, @"The pagination object's before value should be nil.");
     XCTAssertEqualObjects(after, pagination.after, @"The pagination object should have the correct after value.");
@@ -27,21 +27,21 @@
 
 - (void)testCreatingAPaginationObjectWithALimit
 {
-    RKPagination *pagination = [RKPagination paginationWithLimit:75];
+    RDKPagination *pagination = [RDKPagination paginationWithLimit:75];
     XCTAssertTrue(pagination.limit == 75, @"The pagination object should have a limit of 75.");
 }
 
 - (void)testSettingTheLimitToOverOneHundred
 {
-    RKPagination *pagination = [RKPagination paginationWithLimit:200];
+    RDKPagination *pagination = [RDKPagination paginationWithLimit:200];
     XCTAssertTrue(pagination.limit == 100, @"The pagination object should have a limit of 100.");
 }
 
 - (void)testReturningTheDictionaryValue
 {
-    RKPagination *pagination = [RKPagination paginationWithLimit:50];
+    RDKPagination *pagination = [RDKPagination paginationWithLimit:50];
     pagination.before = @"12345";
-    pagination.timeMethod = RKTimeSortingMethodThisHour;
+    pagination.timeMethod = RDKTimeSortingMethodThisHour;
     
     // Test the first dictionary value:
     

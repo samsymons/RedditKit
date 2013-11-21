@@ -1,24 +1,24 @@
 //
-//  RKClientCaptchaTests.m
+//  RDKClientCaptchaTests.m
 //  Tests
 //
 //  Created by Sam Symons on 11/5/2013.
 //
 //
 
-#import "RKTestCase.h"
+#import "RDKTestCase.h"
 
-@interface RKClientCaptchaTests : RKTestCase
+@interface RDKClientCaptchaTests : RDKTestCase
 
-@property (nonatomic, strong) RKClient *client;
+@property (nonatomic, strong) RDKClient *client;
 
 @end
 
-@implementation RKClientCaptchaTests
+@implementation RDKClientCaptchaTests
 
 - (void)setUp
 {
-    self.client = [[RKClient alloc] init];
+    self.client = [[RDKClient alloc] init];
 }
 
 - (void)testCaptchaURLs

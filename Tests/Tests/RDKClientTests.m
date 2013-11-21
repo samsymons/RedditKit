@@ -1,25 +1,26 @@
 //
-//  RKClientTests.m
+//  RDKClientTests.m
 //  Tests
 //
 //  Created by Sam Symons on 11/5/2013.
 //
 //
 
-#import "RKTestCase.h"
+#import "RDKTestCase.h"
 
-@interface RKClientTests : RKTestCase
+@interface RDKClientTests : RDKTestCase
 
-@property (nonatomic, strong) RKClient *client;
+@property (nonatomic, strong) RDKClient *client;
 
 @end
 
-@implementation RKClientTests
+@implementation RDKClientTests
 
 - (void)setUp
 {
-    self.client = [[RKClient alloc] init];
+    self.client = [[RDKClient alloc] init];
     self.client.modhash = @"12345";
+    self.client.sessionIdentifier = @"12345";
 }
 
 - (void)testSignedInClients

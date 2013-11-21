@@ -1,14 +1,14 @@
 //
-//  RKTestCase.m
+//  RDKTestCase.m
 //  Tests
 //
 //  Created by Sam Symons on 11/5/2013.
 //
 //
 
-#import "RKTestCase.h"
+#import "RDKTestCase.h"
 
-@implementation RKTestCase
+@implementation RDKTestCase
 
 - (id)JSONFromLocalFileWithName:(NSString *)name
 {
