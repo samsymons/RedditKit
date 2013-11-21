@@ -1,4 +1,4 @@
-// RKClient+Comments.m
+// RDKClient+Comments.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,26 +20,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient+Comments.h"
-#import "RKClient+Requests.h"
-#import "RKLink.h"
-#import "RKComment.h"
+#import "RDKClient+Comments.h"
+#import "RDKClient+Requests.h"
+#import "RDKLink.h"
+#import "RDKComment.h"
 
-@implementation RKClient (Comments)
+@implementation RDKClient (Comments)
 
 #pragma mark - Submitting Comments
 
-- (NSURLSessionDataTask *)submitComment:(NSString *)commentText onLink:(RKLink *)link completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)submitComment:(NSString *)commentText onLink:(RDKLink *)link completion:(RDKCompletionBlock)completion
 {
     return [self submitComment:commentText onThingWithFullName:[link fullName] completion:completion];
 }
 
-- (NSURLSessionDataTask *)submitComment:(NSString *)commentText asReplyToComment:(RKComment *)comment completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)submitComment:(NSString *)commentText asReplyToComment:(RDKComment *)comment completion:(RDKCompletionBlock)completion
 {
     return [self submitComment:commentText onThingWithFullName:[comment fullName] completion:completion];
 }
 
-- (NSURLSessionDataTask *)submitComment:(NSString *)commentText onThingWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)submitComment:(NSString *)commentText onThingWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(commentText);
     NSParameterAssert(fullName);
@@ -51,12 +51,12 @@
 
 #pragma mark - Getting Comments
 
-- (NSURLSessionDataTask *)commentsForLink:(RKLink *)link completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)commentsForLink:(RDKLink *)link completion:(RDKListingCompletionBlock)completion
 {
     return [self commentsForLinkWithIdentifier:link.identifier completion:completion];
 }
 
-- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier completion:(RDKListingCompletionBlock)completion
 {
     NSParameterAssert(linkIdentifier);
     

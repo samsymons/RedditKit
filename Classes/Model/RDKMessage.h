@@ -1,4 +1,4 @@
-// RKMessage.h
+// RDKMessage.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,14 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKCreated.h"
+#import "RDKCreated.h"
 
-typedef NS_ENUM(NSUInteger, RKMessageType) {
-	RKMessageTypeSent,
-	RKMessageTypeReceived
+typedef NS_ENUM(NSUInteger, RDKMessageType) {
+	RDKMessageTypeSent,
+	RDKMessageTypeReceived
 };
 
-@interface RKMessage : RKCreated
+@interface RDKMessage : RDKCreated
 
 /**
  Whether the message is unread.
@@ -67,7 +67,7 @@ typedef NS_ENUM(NSUInteger, RKMessageType) {
 /**
  The type of the message, 
  */
-@property (nonatomic, assign, readonly) RKMessageType type;
+@property (nonatomic, assign, readonly) RDKMessageType type;
 
 /**
  The first message.
@@ -88,7 +88,7 @@ typedef NS_ENUM(NSUInteger, RKMessageType) {
 
 #pragma mark -
 
-@interface RKCommentReplyMessage : RKMessage
+@interface RDKCommentReplyMessage : RDKMessage
 
 /**
  The title of the link this comment reply was posted on.

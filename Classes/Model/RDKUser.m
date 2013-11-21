@@ -1,4 +1,4 @@
-// RKUser.m
+// RDKUser.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,9 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKUser.h"
+#import "RDKUser.h"
 
-@implementation RKUser
+@implementation RDKUser
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {

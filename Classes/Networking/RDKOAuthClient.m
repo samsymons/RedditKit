@@ -1,4 +1,4 @@
-// RKOAuthClient.m
+// RDKOAuthClient.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,28 +20,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKOAuthClient.h"
-#import "RKUser.h"
-#import "RKResponseSerializer.h"
-#import "RKObjectBuilder.h"
+#import "RDKOAuthClient.h"
+#import "RDKUser.h"
+#import "RDKResponseSerializer.h"
+#import "RDKObjectBuilder.h"
 
-#import "RKClient+Users.h"
+#import "RDKClient+Users.h"
 
-@interface RKOAuthClient ()
+@interface RDKOAuthClient ()
 
-@property (nonatomic, strong) RKUser *currentUser;
+@property (nonatomic, strong) RDKUser *currentUser;
 @property (nonatomic, strong) NSTimer *tokenRefreshTimer;
 
 @end
 
-@implementation RKOAuthClient
+@implementation RDKOAuthClient
 
 - (id)initWithClientIdentifier:(NSString *)clientIdentifier clientSecret:(NSString *)clientSecret
 {
     if (self = [super initWithBaseURL:[[self class] APIBaseURL]])
     {
         self.requestSerializer = [AFHTTPRequestSerializer serializer];
-        self.responseSerializer = [RKResponseSerializer serializer];
+        self.responseSerializer = [RDKResponseSerializer serializer];
         
         _clientIdentifier = clientIdentifier;
         _clientSecret = clientSecret;
@@ -113,7 +113,7 @@
     
     NSURL *signInURL = [[self class] APIBaseAuthenticationURL];
     NSString *escapedRedirectURI = [redirectURI stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *scopeString = [RKOAuthClient scopeStringForOAuthScopes:scope];
+    NSString *scopeString = [RDKOAuthClient scopeStringForOAuthScopes:scope];
     
     NSMutableString *URLString = [NSMutableString stringWithFormat:@"%@api/v1/authorize?response_type=code&duration=permanent&redirect_uri=%@&client_id=%@&scope=%@", signInURL, escapedRedirectURI, _clientIdentifier, scopeString];
     
@@ -125,7 +125,7 @@
     return [NSURL URLWithString:URLString];
 }
 
-- (NSURLSessionDataTask *)signInWithAccessCode:(NSString *)accessCode redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)signInWithAccessCode:(NSString *)accessCode redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(accessCode);
     NSParameterAssert(redirectURI);
@@ -141,7 +141,7 @@
     return [self refreshAccessToken:_refreshToken redirectURI:parameters[@"redirect_uri"] state:parameters[@"state"] completion:nil];
 }
 
-- (NSURLSessionDataTask *)refreshAccessToken:(NSString *)refreshToken redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)refreshAccessToken:(NSString *)refreshToken redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(refreshToken);
     NSParameterAssert(redirectURI);
@@ -151,7 +151,7 @@
     return [self accessTokensWithParams:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)userInfoWithCompletion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)userInfoWithCompletion:(RDKObjectCompletionBlock)completion
 {
     NSURL *baseURL = [[self class] APIBaseAuthenticationURL];
     NSString *URLString = [[NSURL URLWithString:[[self class] userInformationURLPath] relativeToURL:baseURL] absoluteString];
@@ -169,7 +169,7 @@
     return authenticationTask;
 }
 
-- (NSURLSessionDataTask *)accessTokensWithParams:(NSDictionary*)parameters completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)accessTokensWithParams:(NSDictionary*)parameters completion:(RDKCompletionBlock)completion
 {
     [self setOAuthorizationHeader];
     NSURL *baseURL = [[self class] APIBaseAuthenticationURL];
@@ -219,11 +219,11 @@
     return authenticationTask;
 }
 
-- (void)loadUserAccountWithCompletion:(RKCompletionBlock)completion
+- (void)loadUserAccountWithCompletion:(RDKCompletionBlock)completion
 {
     __weak __typeof(self)weakSelf = self;
     [self userInfoWithCompletion:^(id object, NSError *error) {
-        RKUser *account = [RKObjectBuilder objectFromJSON:@{@"kind": kRKObjectTypeAccount, @"data":object}];
+        RDKUser *account = [RDKObjectBuilder objectFromJSON:@{@"kind": kRKObjectTypeAccount, @"data":object}];
         if (account && !error)
         {
             weakSelf.currentUser = account;

@@ -1,4 +1,4 @@
-// RKMultireddit.h
+// RDKMultireddit.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -23,12 +23,12 @@
 #import <Foundation/Foundation.h>
 #import <Mantle/Mantle.h>
 
-typedef NS_ENUM(NSUInteger, RKMultiredditVisibility) {
-    RKMultiredditVisibilityPublic,
-    RKMultiredditVisibilityPrivate
+typedef NS_ENUM(NSUInteger, RDKMultiredditVisibility) {
+    RDKMultiredditVisibilityPublic,
+    RDKMultiredditVisibilityPrivate
 };
 
-@interface RKMultireddit : MTLModel <MTLJSONSerializing>
+@interface RDKMultireddit : MTLModel <MTLJSONSerializing>
 
 /**
  The multireddit's name.
@@ -53,7 +53,7 @@ typedef NS_ENUM(NSUInteger, RKMultiredditVisibility) {
 /**
  Whether the subreddit is private or public.
  */
-@property (nonatomic, assign, readonly) RKMultiredditVisibility visibility;
+@property (nonatomic, assign, readonly) RDKMultiredditVisibility visibility;
 
 /**
  The multireddit's creation date, in UTC.

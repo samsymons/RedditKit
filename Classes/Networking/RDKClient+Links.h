@@ -1,4 +1,4 @@
-// RKClient+Links.h
+// RDKClient+Links.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,20 +20,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
-#import "RKCompletionBlocks.h"
+#import "RDKClient.h"
+#import "RDKCompletionBlocks.h"
 
-typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
-	RKSubredditCategoryHot = 1,
-	RKSubredditCategoryNew,
-	RKSubredditCategoryRising,
-	RKSubredditCategoryControversial,
-	RKSubredditCategoryTop
+typedef NS_ENUM(NSUInteger, RDKSubredditCategory) {
+	RDKSubredditCategoryHot = 1,
+	RDKSubredditCategoryNew,
+	RDKSubredditCategoryRising,
+	RDKSubredditCategoryControversial,
+	RDKSubredditCategoryTop
 };
 
-@class RKLink, RKSubreddit;
+@class RDKLink, RDKSubreddit;
 
-@interface RKClient (Links)
+@interface RDKClient (Links)
 
 #pragma mark - Getting Links
 
@@ -42,99 +42,99 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  If no user is currently signed in, the default front page links will be fetched.
  
  @param pagination The pagination object to be sent with the request.
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RDKLinks, an RDKPagination object, and any error that occurred.
  */
-- (NSURLSessionDataTask *)frontPageLinksWithPagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)frontPageLinksWithPagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Fetches the links from the front page of the current user.
  If no user is currently signed in, the default front page links will be fetched.
  
- @param category The category from which to fetch links. Defaults to RKSubredditCategoryHot.
+ @param category The category from which to fetch links. Defaults to RDKSubredditCategoryHot.
  @param pagination The pagination object to be sent with the request.
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RDKLinks, an RDKPagination object, and any error that occurred.
  */
-- (NSURLSessionDataTask *)frontPageLinksWithCategory:(RKSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)frontPageLinksWithCategory:(RDKSubredditCategory)category pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Fetches links aggregated from all the subreddits on reddit.
  
  @param pagination The pagination object to be sent with the request.
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RDKLinks, an RDKPagination object, and any error that occurred.
  */
-- (NSURLSessionDataTask *)linksInAllSubredditsWithPagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)linksInAllSubredditsWithPagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Fetches links aggregated from all the subreddits on reddit.
  
- @param category The category from which to fetch links. Defaults to RKSubredditCategoryHot.
+ @param category The category from which to fetch links. Defaults to RDKSubredditCategoryHot.
  @param pagination The pagination object to be sent with the request.
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RDKLinks, an RDKPagination object, and any error that occurred.
  */
-- (NSURLSessionDataTask *)linksInAllSubredditsWithCategory:(RKSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)linksInAllSubredditsWithCategory:(RDKSubredditCategory)category pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Fetches links from subreddits moderated by the current user.
  
  @param pagination The pagination object to be sent with the request.
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RDKLinks, an RDKPagination object, and any error that occurred.
  */
-- (NSURLSessionDataTask *)linksInModeratedSubredditsWithPagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)linksInModeratedSubredditsWithPagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Fetches links from subreddits moderated by the current user.
  
- @param category The category from which to fetch links. Defaults to RKSubredditCategoryHot.
+ @param category The category from which to fetch links. Defaults to RDKSubredditCategoryHot.
  @param pagination The pagination object to be sent with the request.
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RDKLinks, an RDKPagination object, and any error that occurred.
  */
-- (NSURLSessionDataTask *)linksInModeratedSubredditsWithCategory:(RKSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)linksInModeratedSubredditsWithCategory:(RDKSubredditCategory)category pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Fetches links from subreddits moderated by the current user.
  
  @param subreddit The subreddit from which to fetch links.
  @param pagination The pagination object to be sent with the request.
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RDKLinks, an RDKPagination object, and any error that occurred.
  */
-- (NSURLSessionDataTask *)linksInSubreddit:(RKSubreddit *)subreddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)linksInSubreddit:(RDKSubreddit *)subreddit pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Fetches links from subreddits moderated by the current user.
  
  @param subreddit The subreddit from which to fetch links.
- @param category The category from which to fetch links. Defaults to RKSubredditCategoryHot.
+ @param category The category from which to fetch links. Defaults to RDKSubredditCategoryHot.
  @param pagination The pagination object to be sent with the request.
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RDKLinks, an RDKPagination object, and any error that occurred.
  */
-- (NSURLSessionDataTask *)linksInSubreddit:(RKSubreddit *)subreddit category:(RKSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)linksInSubreddit:(RDKSubreddit *)subreddit category:(RDKSubredditCategory)category pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Fetches links from subreddits moderated by the current user.
  
  @param subredditName The name of the subreddit from which to fetch links.
  @param pagination The pagination object to be sent with the request.
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RDKLinks, an RDKPagination object, and any error that occurred.
  */
-- (NSURLSessionDataTask *)linksInSubredditWithName:(NSString *)subredditName pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)linksInSubredditWithName:(NSString *)subredditName pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Fetches links from subreddits moderated by the current user.
  
  @param subredditName The name of the subreddit from which to fetch links.
- @param category The category from which to fetch links. Defaults to RKSubredditCategoryHot.
+ @param category The category from which to fetch links. Defaults to RDKSubredditCategoryHot.
  @param pagination The pagination object to be sent with the request.
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RDKLinks, an RDKPagination object, and any error that occurred.
  */
-- (NSURLSessionDataTask *)linksInSubredditWithName:(NSString *)subredditName category:(RKSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)linksInSubredditWithName:(NSString *)subredditName category:(RDKSubredditCategory)category pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Fetches a link object.
  
  @param fullName The link's full name.
- @param completion An optional block to be executed upon request completion. It takes two arguments: the RKLink object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes two arguments: the RDKLink object, and any error that occurred.
  */
-- (NSURLSessionDataTask *)linkWithFullName:(NSString *)fullName completion:(RKObjectCompletionBlock)completion;
+- (NSURLSessionDataTask *)linkWithFullName:(NSString *)fullName completion:(RDKObjectCompletionBlock)completion;
 
 #pragma mark - Submitting
 
@@ -148,7 +148,7 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  @param captchaValue The optional value of the CAPTCHA you are submitting with this post.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)submitLinkPostWithTitle:(NSString *)title subreddit:(RKSubreddit *)subreddit URL:(NSURL *)URL captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)submitLinkPostWithTitle:(NSString *)title subreddit:(RDKSubreddit *)subreddit URL:(NSURL *)URL captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RDKCompletionBlock)completion;
 
 /**
  Submits a link post.
@@ -160,7 +160,7 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  @param captchaValue The optional value of the CAPTCHA you are submitting with this post.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)submitLinkPostWithTitle:(NSString *)title subredditName:(NSString *)subredditName URL:(NSURL *)URL captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)submitLinkPostWithTitle:(NSString *)title subredditName:(NSString *)subredditName URL:(NSURL *)URL captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RDKCompletionBlock)completion;
 
 /**
  Submits a self post.
@@ -172,7 +172,7 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  @param captchaValue The optional value of the CAPTCHA you are submitting with this post.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)submitSelfPostWithTitle:(NSString *)title subreddit:(RKSubreddit *)subreddit text:(NSString *)text captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)submitSelfPostWithTitle:(NSString *)title subreddit:(RDKSubreddit *)subreddit text:(NSString *)text captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RDKCompletionBlock)completion;
 
 /**
  Submits a self post.
@@ -184,7 +184,7 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  @param captchaValue The optional value of the CAPTCHA you are submitting with this post.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)submitSelfPostWithTitle:(NSString *)title subredditName:(NSString *)subredditName text:(NSString *)text captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)submitSelfPostWithTitle:(NSString *)title subredditName:(NSString *)subredditName text:(NSString *)text captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Marking NSFW
 
@@ -194,7 +194,7 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  @param link The link to mark as not safe for work.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)markNSFW:(RKLink *)link completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)markNSFW:(RDKLink *)link completion:(RDKCompletionBlock)completion;
 
 /**
  Marks a link as not safe for work.
@@ -202,7 +202,7 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  @param fullName The full name of the link to mark as not safe for work.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)markNSFWWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)markNSFWWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 /**
  Marks a link as safe for work.
@@ -210,7 +210,7 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  @param link The link to mark as safe for work.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)unmarkNSFW:(RKLink *)link completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)unmarkNSFW:(RDKLink *)link completion:(RDKCompletionBlock)completion;
 
 /**
  Marks a link as safe for work.
@@ -218,7 +218,7 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  @param fullName The full name of the link to mark as safe for work.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)unmarkNSFWWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)unmarkNSFWWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Hiding
 
@@ -228,7 +228,7 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  @param link The link to hide.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)hideLink:(RKLink *)link completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)hideLink:(RDKLink *)link completion:(RDKCompletionBlock)completion;
 
 /**
  Hides a link.
@@ -236,7 +236,7 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  @param fullName The full name of the link to hide.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)hideLinkWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)hideLinkWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 /**
  Unhides a link.
@@ -244,7 +244,7 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  @param link The link to unhide.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)unhideLink:(RKLink *)link completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)unhideLink:(RDKLink *)link completion:(RDKCompletionBlock)completion;
 
 /**
  Unhides a link.
@@ -252,6 +252,6 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  @param fullName The full name of the link to unhide.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)unhideLinkWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)unhideLinkWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 @end

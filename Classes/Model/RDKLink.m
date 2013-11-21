@@ -1,4 +1,4 @@
-// RKLink.m
+// RDKLink.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,10 +20,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKLink.h"
+#import "RDKLink.h"
 #import "NSString+HTML.h"
 
-@implementation RKLink
+@implementation RDKLink
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {

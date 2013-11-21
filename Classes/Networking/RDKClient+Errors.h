@@ -1,4 +1,4 @@
-// RKClient+Errors.h
+// RDKClient+Errors.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,27 +20,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
+#import "RDKClient.h"
 
-@interface RKClient (Errors)
+@interface RDKClient (Errors)
 
-extern const NSInteger RKClientErrorAuthenticationFailed;
+extern const NSInteger RDKClientErrorAuthenticationFailed;
 
-extern const NSInteger RKClientErrorInvalidCaptcha;
-extern const NSInteger RKClientErrorInvalidCSSClassName;
-extern const NSInteger RKClientErrorInvalidCredentials;
-extern const NSInteger RKClientErrorRateLimited;
-extern const NSInteger RKClientErrorTooManyFlairClassNames;
-extern const NSInteger RKClientErrorArchived;
+extern const NSInteger RDKClientErrorInvalidCaptcha;
+extern const NSInteger RDKClientErrorInvalidCSSClassName;
+extern const NSInteger RDKClientErrorInvalidCredentials;
+extern const NSInteger RDKClientErrorRateLimited;
+extern const NSInteger RDKClientErrorTooManyFlairClassNames;
+extern const NSInteger RDKClientErrorArchived;
 
-extern const NSInteger RKClientErrorInvalidMultiredditName;
-extern const NSInteger RKClientErrorPermissionDenied;
-extern const NSInteger RKClientErrorConflict;
+extern const NSInteger RDKClientErrorInvalidMultiredditName;
+extern const NSInteger RDKClientErrorPermissionDenied;
+extern const NSInteger RDKClientErrorConflict;
 
-extern const NSInteger RKClientErrorInternalServerError;
-extern const NSInteger RKClientErroBadGateway;
-extern const NSInteger RKClientErrorServiceUnavailable;
-extern const NSInteger RKClientErrorTimedOut;
+extern const NSInteger RDKClientErrorInternalServerError;
+extern const NSInteger RDKClientErroBadGateway;
+extern const NSInteger RDKClientErrorServiceUnavailable;
+extern const NSInteger RDKClientErrorTimedOut;
 
 /**
  Returns any errors found in a response.

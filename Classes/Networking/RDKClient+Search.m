@@ -1,4 +1,4 @@
-// RKClient+Search.m
+// RDKClient+Search.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,24 +20,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient+Search.h"
-#import "RKPagination.h"
-#import "RKSubreddit.h"
-#import "RKLink.h"
+#import "RDKClient+Search.h"
+#import "RDKPagination.h"
+#import "RDKSubreddit.h"
+#import "RDKLink.h"
 
-@implementation RKClient (Search)
+@implementation RDKClient (Search)
 
-- (NSURLSessionDataTask *)search:(NSString *)query pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)search:(NSString *)query pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     return [self search:query subreddit:nil restrictSubreddit:NO pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)search:(NSString *)query subreddit:(RKSubreddit *)subreddit restrictSubreddit:(BOOL)restrictSubreddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)search:(NSString *)query subreddit:(RDKSubreddit *)subreddit restrictSubreddit:(BOOL)restrictSubreddit pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {	
     return [self search:query subredditName:subreddit.name restrictSubreddit:restrictSubreddit pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)search:(NSString *)query subredditName:(NSString *)subredditName restrictSubreddit:(BOOL)restrictSubreddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)search:(NSString *)query subredditName:(NSString *)subredditName restrictSubreddit:(BOOL)restrictSubreddit pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     NSParameterAssert(query);
     

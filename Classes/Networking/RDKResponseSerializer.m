@@ -1,4 +1,4 @@
-// RKResponseSerializer.m
+// RDKResponseSerializer.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,12 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKResponseSerializer.h"
+#import "RDKResponseSerializer.h"
 
-#import "RKClient.h"
-#import "RKClient+Errors.h"
+#import "RDKClient.h"
+#import "RDKClient+Errors.h"
 
-@implementation RKResponseSerializer
+@implementation RDKResponseSerializer
 
 - (instancetype)init
 {
@@ -45,7 +45,7 @@
     
     // Check for errors:
     
-    NSError *responseError = [RKClient errorFromResponse:(NSHTTPURLResponse *)response responseString:responseString];
+    NSError *responseError = [RDKClient errorFromResponse:(NSHTTPURLResponse *)response responseString:responseString];
     
     if (responseError && error != NULL)
     {

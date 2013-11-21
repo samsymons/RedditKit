@@ -1,4 +1,4 @@
-// RKClient+Flair.m
+// RDKClient+Flair.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,20 +20,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient+Flair.h"
-#import "RKClient+Requests.h"
-#import "RKSubreddit.h"
-#import "RKUser.h"
-#import "RKLink.h"
+#import "RDKClient+Flair.h"
+#import "RDKClient+Requests.h"
+#import "RDKSubreddit.h"
+#import "RDKUser.h"
+#import "RDKLink.h"
 
-NSString * NSStringFromFlairType(RKFlairTemplateType templateType)
+NSString * NSStringFromFlairType(RDKFlairTemplateType templateType)
 {
     switch (templateType)
     {
-        case RKFlairTemplateTypeLink:
+        case RDKFlairTemplateTypeLink:
             return @"LINK_FLAIR";
             break;
-        case RKFlairTemplateTypeUser:
+        case RDKFlairTemplateTypeUser:
             return @"USER_FLAIR";
             break;
         default:
@@ -41,14 +41,14 @@ NSString * NSStringFromFlairType(RKFlairTemplateType templateType)
     }
 }
 
-NSString * NSStringFromUserFlairPosition(RKUserFlairPosition userFlairPosition)
+NSString * NSStringFromUserFlairPosition(RDKUserFlairPosition userFlairPosition)
 {
     switch (userFlairPosition)
     {
-        case RKUserFlairPositionLeft:
+        case RDKUserFlairPositionLeft:
             return @"left";
             break;
-        case RKUserFlairPositionRight:
+        case RDKUserFlairPositionRight:
             return @"right";
             break;
         default:
@@ -57,17 +57,17 @@ NSString * NSStringFromUserFlairPosition(RKUserFlairPosition userFlairPosition)
     }
 }
 
-NSString * NSStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
+NSString * NSStringFromLinkFlairPosition(RDKLinkFlairPosition linkFlairPosition)
 {
     switch (linkFlairPosition)
     {
-        case RKLinkFlairPositionLeft:
+        case RDKLinkFlairPositionLeft:
             return @"left";
             break;
-        case RKLinkFlairPositionRight:
+        case RDKLinkFlairPositionRight:
             return @"right";
             break;
-        case RKLinkFlairPositionNone:
+        case RDKLinkFlairPositionNone:
             return @"";
             break;
         default:
@@ -76,14 +76,14 @@ NSString * NSStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
     }
 }
 
-@implementation RKClient (Flair)
+@implementation RDKClient (Flair)
 
-- (NSURLSessionDataTask *)setFlairOptionsForSubreddit:(RKSubreddit *)subreddit flairEnabled:(BOOL)flairEnabled userFlairPosition:(RKUserFlairPosition)userFlairPosition allowSelfAssignedUserFlair:(BOOL)userFlair linkFlairPosition:(RKLinkFlairPosition)linkFlairPosition allowSelfAssignedLinkFlair:(BOOL)linkFlair completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)setFlairOptionsForSubreddit:(RDKSubreddit *)subreddit flairEnabled:(BOOL)flairEnabled userFlairPosition:(RDKUserFlairPosition)userFlairPosition allowSelfAssignedUserFlair:(BOOL)userFlair linkFlairPosition:(RDKLinkFlairPosition)linkFlairPosition allowSelfAssignedLinkFlair:(BOOL)linkFlair completion:(RDKCompletionBlock)completion
 {
     return [self setFlairOptionsForSubredditWithName:subreddit.name flairEnabled:flairEnabled userFlairPosition:userFlairPosition allowSelfAssignedUserFlair:userFlair linkFlairPosition:linkFlairPosition allowSelfAssignedLinkFlair:linkFlair completion:completion];
 }
 
-- (NSURLSessionDataTask *)setFlairOptionsForSubredditWithName:(NSString *)subredditName flairEnabled:(BOOL)flairEnabled userFlairPosition:(RKUserFlairPosition)userFlairPosition allowSelfAssignedUserFlair:(BOOL)userFlair linkFlairPosition:(RKLinkFlairPosition)linkFlairPosition allowSelfAssignedLinkFlair:(BOOL)linkFlair completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)setFlairOptionsForSubredditWithName:(NSString *)subredditName flairEnabled:(BOOL)flairEnabled userFlairPosition:(RDKUserFlairPosition)userFlairPosition allowSelfAssignedUserFlair:(BOOL)userFlair linkFlairPosition:(RDKLinkFlairPosition)linkFlairPosition allowSelfAssignedLinkFlair:(BOOL)linkFlair completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(subredditName);
     NSParameterAssert(userFlairPosition);
@@ -107,12 +107,12 @@ NSString * NSStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
     return [self basicPostTaskWithPath:@"api/flairconfig" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)flairListForSubreddit:(RKSubreddit *)subreddit completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)flairListForSubreddit:(RDKSubreddit *)subreddit completion:(RDKArrayCompletionBlock)completion
 {
     return [self flairListForSubredditWithName:subreddit.name completion:completion];
 }
 
-- (NSURLSessionDataTask *)flairListForSubredditWithName:(NSString *)subredditName completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)flairListForSubredditWithName:(NSString *)subredditName completion:(RDKArrayCompletionBlock)completion
 {
     NSParameterAssert(subredditName);
     
@@ -136,12 +136,12 @@ NSString * NSStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
     }];
 }
 
-- (NSURLSessionDataTask *)allowFlair:(BOOL)flairAllowed inSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)allowFlair:(BOOL)flairAllowed inSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self allowFlair:flairAllowed inSubredditWithName:subreddit.title completion:completion];
 }
 
-- (NSURLSessionDataTask *)allowFlair:(BOOL)flairAllowed inSubredditWithName:(NSString *)subredditName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)allowFlair:(BOOL)flairAllowed inSubredditWithName:(NSString *)subredditName completion:(RDKCompletionBlock)completion;
 {
     NSParameterAssert(subredditName);
     
@@ -153,12 +153,12 @@ NSString * NSStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
 
 #pragma mark - Creating Flair
 
-- (NSURLSessionDataTask *)createFlairTemplateOfType:(RKFlairTemplateType)type subreddit:(RKSubreddit *)subreddit text:(NSString *)text flairClass:(NSString *)flairClass completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)createFlairTemplateOfType:(RDKFlairTemplateType)type subreddit:(RDKSubreddit *)subreddit text:(NSString *)text flairClass:(NSString *)flairClass completion:(RDKCompletionBlock)completion
 {
     return [self createFlairTemplateOfType:type subredditName:subreddit.title text:text flairClass:flairClass completion:completion];
 }
 
-- (NSURLSessionDataTask *)createFlairTemplateOfType:(RKFlairTemplateType)type subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)createFlairTemplateOfType:(RDKFlairTemplateType)type subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(type);
     NSParameterAssert(subredditName);
@@ -176,12 +176,12 @@ NSString * NSStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
 
 #pragma mark - Setting Flair
 
-- (NSURLSessionDataTask *)setFlairForUser:(RKUser *)user subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)setFlairForUser:(RDKUser *)user subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RDKCompletionBlock)completion
 {
     return [self setFlairForUserWithUsername:user.username subredditName:subredditName text:text flairClass:flairClass completion:completion];
 }
 
-- (NSURLSessionDataTask *)setFlairForUserWithUsername:(NSString *)username subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)setFlairForUserWithUsername:(NSString *)username subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(username);
     NSParameterAssert(subredditName);
@@ -192,12 +192,12 @@ NSString * NSStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
     return [self basicPostTaskWithPath:@"api/flair" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)setFlairForLink:(RKLink *)link subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)setFlairForLink:(RDKLink *)link subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RDKCompletionBlock)completion
 {
     return [self setFlairForLinkWithFullName:[link fullName] subredditName:subredditName text:text flairClass:flairClass completion:completion];
 }
 
-- (NSURLSessionDataTask *)setFlairForLinkWithFullName:(NSString *)fullName subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)setFlairForLinkWithFullName:(NSString *)fullName subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
     NSParameterAssert(subredditName);
@@ -208,12 +208,12 @@ NSString * NSStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
     return [self basicPostTaskWithPath:@"api/flair" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)setFlairWithCSV:(NSString *)flairCSV subreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)setFlairWithCSV:(NSString *)flairCSV subreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self setFlairWithCSV:flairCSV subredditName:subreddit.title completion:completion];
 }
 
-- (NSURLSessionDataTask *)setFlairWithCSV:(NSString *)flairCSV subredditName:(NSString *)subredditName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)setFlairWithCSV:(NSString *)flairCSV subredditName:(NSString *)subredditName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(flairCSV);
     NSParameterAssert(subredditName);
@@ -225,12 +225,12 @@ NSString * NSStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
 
 #pragma mark - Deleting Flair
 
-- (NSURLSessionDataTask *)clearFlairTemplatesOfType:(RKFlairTemplateType)type subreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)clearFlairTemplatesOfType:(RDKFlairTemplateType)type subreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self clearFlairTemplatesOfType:type subredditName:subreddit.title completion:completion];
 }
 
-- (NSURLSessionDataTask *)clearFlairTemplatesOfType:(RKFlairTemplateType)type subredditName:(NSString *)subredditName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)clearFlairTemplatesOfType:(RDKFlairTemplateType)type subredditName:(NSString *)subredditName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(type);
     NSParameterAssert(subredditName);
@@ -239,12 +239,12 @@ NSString * NSStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
     return [self basicPostTaskWithPath:@"api/clearflairtemplates" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)deleteFlairTemplateWithIdentifier:(NSString *)identifier subreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)deleteFlairTemplateWithIdentifier:(NSString *)identifier subreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self deleteFlairTemplateWithIdentifier:identifier subredditName:subreddit.name completion:completion];
 }
 
-- (NSURLSessionDataTask *)deleteFlairTemplateWithIdentifier:(NSString *)identifier subredditName:(NSString *)subredditName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)deleteFlairTemplateWithIdentifier:(NSString *)identifier subredditName:(NSString *)subredditName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(identifier);
     NSParameterAssert(subredditName);
@@ -253,12 +253,12 @@ NSString * NSStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
     return [self basicPostTaskWithPath:@"api/deleteflairtemplate" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)deleteFlairForUser:(RKUser *)user subreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)deleteFlairForUser:(RDKUser *)user subreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self deleteFlairForUserWithUsername:user.username subredditName:subreddit.title completion:completion];
 }
 
-- (NSURLSessionDataTask *)deleteFlairForUserWithUsername:(NSString *)username subredditName:(NSString *)subredditName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)deleteFlairForUserWithUsername:(NSString *)username subredditName:(NSString *)subredditName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(username);
     NSParameterAssert(subredditName);

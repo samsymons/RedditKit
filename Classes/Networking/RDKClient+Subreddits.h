@@ -1,4 +1,4 @@
-// RKClient+Subreddits.h
+// RDKClient+Subreddits.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,14 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
-#import "RKCompletionBlocks.h"
-#import "RKPagination.h"
+#import "RDKClient.h"
+#import "RDKCompletionBlocks.h"
+#import "RDKPagination.h"
 
 @class AFJSONRequestOperation;
-@class RKSubreddit;
+@class RDKSubreddit;
 
-@interface RKClient (Subreddits)
+@interface RDKClient (Subreddits)
 
 #pragma mark - Getting Subreddits
 
@@ -35,34 +35,34 @@
  Gets a subreddit with a given name.
  
  @param subredditName The name of the subreddit to get.
- @param completion An optional block to be executed on the completion of a request. Its object parameter is an RKSubreddit object.
+ @param completion An optional block to be executed on the completion of a request. Its object parameter is an RDKSubreddit object.
  */
-- (NSURLSessionDataTask *)subredditWithName:(NSString *)subredditName completion:(RKObjectCompletionBlock)completion;
+- (NSURLSessionDataTask *)subredditWithName:(NSString *)subredditName completion:(RDKObjectCompletionBlock)completion;
 
 /**
  Gets a list of the most popular subreddits.
  
  @param pagination The pagination object to be sent with the request.
- @param completion An optional block to be executed on the completion of a request. Its collection parameter contains RKSubreddit objects.
+ @param completion An optional block to be executed on the completion of a request. Its collection parameter contains RDKSubreddit objects.
  */
-- (NSURLSessionDataTask *)popularSubredditsWithPagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)popularSubredditsWithPagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Gets a list of the newest subreddits.
  
  @param pagination The pagination object to be sent with the request.
- @param completion An optional block to be executed on the completion of a request. Its collection parameter contains RKSubreddit objects.
+ @param completion An optional block to be executed on the completion of a request. Its collection parameter contains RDKSubreddit objects.
  */
-- (NSURLSessionDataTask *)newSubredditsWithPagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)newSubredditsWithPagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Searches for subreddits with a given name.
  
  @param name The name to search for.
  @param pagination The pagination object to be sent with the request.
- @param completion An optional block to be executed on the completion of a request. Its collection parameter contains RKSubreddit objects.
+ @param completion An optional block to be executed on the completion of a request. Its collection parameter contains RDKSubreddit objects.
  */
-- (NSURLSessionDataTask *)searchForSubredditsByName:(NSString *)name pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)searchForSubredditsByName:(NSString *)name pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Gets a list of subreddits with a certain topic.
@@ -70,7 +70,7 @@
  @param topic The topic to search for.
  @param completion An optional block to be executed on the completion of a request. Its collection parameter contains NSString objects representing subreddit names.
  */
-- (NSURLSessionDataTask *)subredditsByTopic:(NSString *)topic completion:(RKArrayCompletionBlock)completion;
+- (NSURLSessionDataTask *)subredditsByTopic:(NSString *)topic completion:(RDKArrayCompletionBlock)completion;
 
 /**
  Gets a list of recommended subreddits from an array of subreddit names.
@@ -78,7 +78,7 @@
  @param subreddits An array of NSStrings, each representing the name of a subreddit.
  @param completion An optional block to be executed on the completion of a request. Its collection parameter contains NSString objects representing subreddit names.
  */
-- (NSURLSessionDataTask *)recommendedSubredditsForSubreddits:(NSArray *)subreddits completion:(RKArrayCompletionBlock)completion;
+- (NSURLSessionDataTask *)recommendedSubredditsForSubreddits:(NSArray *)subreddits completion:(RDKArrayCompletionBlock)completion;
 
 #pragma mark - Subscribing
 
@@ -88,7 +88,7 @@
  @param subreddit The subreddit to subscribe to.
  @param completion An optional block to be executed on the completion of a request.
  */
-- (NSURLSessionDataTask *)subscribeToSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)subscribeToSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Subscribes the current user to a subreddit.
@@ -96,7 +96,7 @@
  @param fullName The full name of the subreddit to subscribe to.
  @param completion An optional block to be executed on the completion of a request.
  */
-- (NSURLSessionDataTask *)subscribeToSubredditWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)subscribeToSubredditWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 /**
  Unsubscribes the current user from a subreddit.
@@ -104,7 +104,7 @@
  @param subreddit The subreddit from which to unsubscribe.
  @param completion An optional block to be executed on the completion of a request.
  */
-- (NSURLSessionDataTask *)unsubscribeFromSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)unsubscribeFromSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Unsubscribes the current user from a subreddit.
@@ -112,6 +112,6 @@
  @param fullName The full name of the subreddit from which to unsubscribe.
  @param completion An optional block to be executed on the completion of a request.
  */
-- (NSURLSessionDataTask *)unsubscribeFromSubredditWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)unsubscribeFromSubredditWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 @end

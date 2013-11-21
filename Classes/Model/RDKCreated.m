@@ -1,4 +1,4 @@
-// RKCreated.m
+// RDKCreated.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,9 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKCreated.h"
+#import "RDKCreated.h"
 
-@implementation RKCreated
+@implementation RDKCreated
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {

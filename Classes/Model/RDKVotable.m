@@ -1,4 +1,4 @@
-// RKVotable.m
+// RDKVotable.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,15 +20,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKVotable.h"
+#import "RDKVotable.h"
 
-@interface RKVotable ()
+@interface RDKVotable ()
 
 @property (nonatomic, assign) NSInteger score;
 
 @end
 
-@implementation RKVotable
+@implementation RDKVotable
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
@@ -53,17 +53,17 @@
 
 - (BOOL)upvoted
 {
-    return (self.voteStatus == RKVoteStatusUpvoted);
+    return (self.voteStatus == RDKVoteStatusUpvoted);
 }
 
 - (BOOL)downvoted
 {
-    return (self.voteStatus == RKVoteStatusDownvoted);
+    return (self.voteStatus == RDKVoteStatusDownvoted);
 }
 
 - (BOOL)voted
 {
-    return (self.voteStatus == RKVoteStatusNone);
+    return (self.voteStatus == RDKVoteStatusNone);
 }
 
 #pragma mark - MTLModel
@@ -73,12 +73,12 @@
     return [MTLValueTransformer transformerWithBlock:^(id forward) {
         if (forward == [NSNull null])
         {
-            return @(RKVoteStatusNone);
+            return @(RDKVoteStatusNone);
         }
         else
         {   
             BOOL likes = [forward boolValue];
-            return likes ? @(RKVoteStatusUpvoted) : @(RKVoteStatusDownvoted);
+            return likes ? @(RDKVoteStatusUpvoted) : @(RDKVoteStatusDownvoted);
         }
     }];
 }

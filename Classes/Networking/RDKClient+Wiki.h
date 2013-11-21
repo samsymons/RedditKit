@@ -1,4 +1,4 @@
-// RKClient+Wiki.h
+// RDKClient+Wiki.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,11 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
+#import "RDKClient.h"
 
-@class RKSubreddit, RKUser;
+@class RDKSubreddit, RDKUser;
 
-@interface RKClient (Wiki)
+@interface RDKClient (Wiki)
 
 /**
  Add an editor to a specific page in a wiki.
@@ -34,7 +34,7 @@
  @param subreddit The subreddit containing the wiki.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)addEditor:(RKUser *)editor toWikiPage:(NSString *)pageName inSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)addEditor:(RDKUser *)editor toWikiPage:(NSString *)pageName inSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Add an editor to a specific page in a wiki.
@@ -44,7 +44,7 @@
  @param subredditName The name of the subreddit containing the wiki.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)addEditorWithUsername:(NSString *)username toWikiPage:(NSString *)pageName inSubredditWithName:(NSString *)subredditName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)addEditorWithUsername:(NSString *)username toWikiPage:(NSString *)pageName inSubredditWithName:(NSString *)subredditName completion:(RDKCompletionBlock)completion;
 
 /**
  Remove an editor from a specific page in a wiki.
@@ -54,7 +54,7 @@
  @param subreddit The subreddit containing the wiki.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)removeEditor:(RKUser *)editor fromWikiPage:(NSString *)pageName inSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)removeEditor:(RDKUser *)editor fromWikiPage:(NSString *)pageName inSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Remove an editor from a specific page in a wiki.
@@ -64,7 +64,7 @@
  @param subredditName The name of the subreddit containing the wiki.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)removeEditorWithUsername:(NSString *)username fromWikiPage:(NSString *)pageName inSubredditWithName:(NSString *)subredditName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)removeEditorWithUsername:(NSString *)username fromWikiPage:(NSString *)pageName inSubredditWithName:(NSString *)subredditName completion:(RDKCompletionBlock)completion;
 
 /**
  Edit a page in a wiki.
@@ -76,7 +76,7 @@
  @param revisionIdentifier An option revision identifier for which to base this edit on.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)editWikiPage:(NSString *)pageName subreddit:(RKSubreddit *)subreddit content:(NSString *)content editReason:(NSString *)reason previousRevisionIdentifier:(NSString *)revisionIdentifier completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)editWikiPage:(NSString *)pageName subreddit:(RDKSubreddit *)subreddit content:(NSString *)content editReason:(NSString *)reason previousRevisionIdentifier:(NSString *)revisionIdentifier completion:(RDKCompletionBlock)completion;
 
 /**
  Edit a page in a wiki.
@@ -88,7 +88,7 @@
  @param revisionIdentifier An option revision identifier for which to base this edit on.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)editWikiPage:(NSString *)pageName subredditName:(NSString *)subredditName content:(NSString *)content editReason:(NSString *)reason previousRevisionIdentifier:(NSString *)revisionIdentifier completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)editWikiPage:(NSString *)pageName subredditName:(NSString *)subredditName content:(NSString *)content editReason:(NSString *)reason previousRevisionIdentifier:(NSString *)revisionIdentifier completion:(RDKCompletionBlock)completion;
 
 /**
  Hides a revision of a wiki page.
@@ -98,7 +98,7 @@
  @param subreddit The subreddit containing the wiki.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)hideWikiRevision:(NSString *)revisionIdentifier page:(NSString *)pageName subreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)hideWikiRevision:(NSString *)revisionIdentifier page:(NSString *)pageName subreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Hides a revision of a wiki page.
@@ -108,7 +108,7 @@
  @param subredditName The name of the subreddit containing the wiki.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)hideWikiRevision:(NSString *)revisionIdentifier page:(NSString *)pageName subredditName:(NSString *)subredditName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)hideWikiRevision:(NSString *)revisionIdentifier page:(NSString *)pageName subredditName:(NSString *)subredditName completion:(RDKCompletionBlock)completion;
 
 /**
  Reverts a page in a wiki back to a specific revision.
@@ -118,7 +118,7 @@
  @param subreddit The subreddit containing the wiki.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)revertToRevision:(NSString *)revisionIdentifier page:(NSString *)pageName subreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)revertToRevision:(NSString *)revisionIdentifier page:(NSString *)pageName subreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Reverts a page in a wiki back to a specific revision.
@@ -128,6 +128,6 @@
  @param subredditName The name of the subreddit containing the wiki.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)revertToRevision:(NSString *)revisionIdentifier page:(NSString *)pageName subredditName:(NSString *)subredditName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)revertToRevision:(NSString *)revisionIdentifier page:(NSString *)pageName subredditName:(NSString *)subredditName completion:(RDKCompletionBlock)completion;
 
 @end

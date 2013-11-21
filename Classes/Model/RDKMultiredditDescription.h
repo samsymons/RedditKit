@@ -1,4 +1,4 @@
-// RKMultiredditDescription.h
+// RDKMultiredditDescription.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -23,7 +23,7 @@
 #import <Foundation/Foundation.h>
 #import <Mantle/Mantle.h>
 
-@interface RKMultiredditDescription : MTLModel <MTLJSONSerializing>
+@interface RDKMultiredditDescription : MTLModel <MTLJSONSerializing>
 
 /**
  The description of the multireddit, as HTML.

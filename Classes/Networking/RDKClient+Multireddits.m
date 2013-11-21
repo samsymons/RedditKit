@@ -1,4 +1,4 @@
-// RKClient+Multireddits.m
+// RDKClient+Multireddits.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,18 +20,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient+Multireddits.h"
-#import "RKClient+Requests.h"
-#import "RKObjectBuilder.h"
-#import "RKUser.h"
-#import "RKSubreddit.h"
-#import "RKMultiredditDescription.h"
+#import "RDKClient+Multireddits.h"
+#import "RDKClient+Requests.h"
+#import "RDKObjectBuilder.h"
+#import "RDKUser.h"
+#import "RDKSubreddit.h"
+#import "RDKMultiredditDescription.h"
 
-@implementation RKClient (Multireddits)
+@implementation RDKClient (Multireddits)
 
 #pragma mark - Getting Multireddit Information
 
-- (NSURLSessionDataTask *)multiredditsWithCompletion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)multiredditsWithCompletion:(RDKArrayCompletionBlock)completion
 {
 	return [self getPath:@"api/multi/mine.json" parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
 		if (!completion)
@@ -45,7 +45,7 @@
             
             for (NSDictionary *multireddit in responseObject)
             {
-                [multireddits addObject:[RKObjectBuilder objectFromJSON:multireddit]];
+                [multireddits addObject:[RDKObjectBuilder objectFromJSON:multireddit]];
             }
             
 			completion(multireddits, nil);
@@ -57,12 +57,12 @@
 	}];
 }
 
-- (NSURLSessionDataTask *)multiredditWithName:(NSString *)multiredditName user:(RKUser *)user completion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)multiredditWithName:(NSString *)multiredditName user:(RDKUser *)user completion:(RDKObjectCompletionBlock)completion
 {
     return [self multiredditWithName:multiredditName userWithUsername:user.username completion:completion];
 }
 
-- (NSURLSessionDataTask *)multiredditWithName:(NSString *)multiredditName userWithUsername:(NSString *)username completion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)multiredditWithName:(NSString *)multiredditName userWithUsername:(NSString *)username completion:(RDKObjectCompletionBlock)completion
 {
     NSParameterAssert(multiredditName);
     NSParameterAssert(username);
@@ -78,7 +78,7 @@
         
         if (responseObject)
         {
-            RKMultireddit *multireddit = [RKObjectBuilder objectFromJSON:responseObject];
+            RDKMultireddit *multireddit = [RDKObjectBuilder objectFromJSON:responseObject];
             completion(multireddit, nil);
         }
         else
@@ -88,12 +88,12 @@
     }];
 }
 
-- (NSURLSessionDataTask *)descriptionForMultireddit:(RKMultireddit *)multireddit completion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)descriptionForMultireddit:(RDKMultireddit *)multireddit completion:(RDKObjectCompletionBlock)completion
 {
     return [self descriptionForMultiredditWithName:multireddit.name userWithUsername:multireddit.username completion:completion];
 }
 
-- (NSURLSessionDataTask *)descriptionForMultiredditWithName:(NSString *)multiredditName userWithUsername:(NSString *)username completion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)descriptionForMultiredditWithName:(NSString *)multiredditName userWithUsername:(NSString *)username completion:(RDKObjectCompletionBlock)completion
 {
     NSParameterAssert(multiredditName);
     NSParameterAssert(username);
@@ -109,7 +109,7 @@
         
         if (responseObject)
         {
-            RKMultiredditDescription *multiredditDescription = [RKObjectBuilder objectFromJSON:responseObject];
+            RDKMultiredditDescription *multiredditDescription = [RDKObjectBuilder objectFromJSON:responseObject];
             completion(multiredditDescription, nil);
         }
         else
@@ -119,12 +119,12 @@
     }];
 }
 
-- (NSURLSessionDataTask *)setDescription:(NSString *)description forMultireddit:(RKMultireddit *)multireddit completion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)setDescription:(NSString *)description forMultireddit:(RDKMultireddit *)multireddit completion:(RDKObjectCompletionBlock)completion
 {
     return [self setDescription:description forMultiredditWithName:multireddit.name completion:completion];
 }
 
-- (NSURLSessionDataTask *)setDescription:(NSString *)description forMultiredditWithName:(NSString *)multiredditName completion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)setDescription:(NSString *)description forMultiredditWithName:(NSString *)multiredditName completion:(RDKObjectCompletionBlock)completion
 {
     NSParameterAssert(description);
     NSParameterAssert(multiredditName);
@@ -146,7 +146,7 @@
         
         if (responseObject)
         {
-            RKMultireddit *multireddit = [RKObjectBuilder objectFromJSON:responseObject];
+            RDKMultireddit *multireddit = [RDKObjectBuilder objectFromJSON:responseObject];
             completion(multireddit, nil);
         }
         else
@@ -158,22 +158,22 @@
 
 #pragma mark - Creating, Modifying & Deleting Multireddits
 
-- (NSURLSessionDataTask *)createMultiredditWithName:(NSString *)name subreddits:(NSArray *)subreddits visibility:(RKMultiredditVisibility)visibility completion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)createMultiredditWithName:(NSString *)name subreddits:(NSArray *)subreddits visibility:(RDKMultiredditVisibility)visibility completion:(RDKObjectCompletionBlock)completion
 {
     return [self multiredditTaskWithMethod:@"POST" name:name subreddits:subreddits visibility:visibility completion:completion];
 }
 
-- (NSURLSessionDataTask *)updateMultiredditWithName:(NSString *)name subreddits:(NSArray *)subreddits visibility:(RKMultiredditVisibility)visibility completion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)updateMultiredditWithName:(NSString *)name subreddits:(NSArray *)subreddits visibility:(RDKMultiredditVisibility)visibility completion:(RDKObjectCompletionBlock)completion
 {
     return [self multiredditTaskWithMethod:@"PUT" name:name subreddits:subreddits visibility:visibility completion:completion];
 }
 
-- (NSURLSessionDataTask *)renameMultireddit:(RKMultireddit *)multireddit to:(NSString *)newMultiredditName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)renameMultireddit:(RDKMultireddit *)multireddit to:(NSString *)newMultiredditName completion:(RDKCompletionBlock)completion
 {
     return [self renameMultiredditWithName:multireddit.name to:newMultiredditName completion:completion];
 }
 
-- (NSURLSessionDataTask *)renameMultiredditWithName:(NSString *)multiredditName to:(NSString *)newMultiredditName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)renameMultiredditWithName:(NSString *)multiredditName to:(NSString *)newMultiredditName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(multiredditName);
     NSParameterAssert(newMultiredditName);
@@ -186,12 +186,12 @@
     return [self basicPostTaskWithPath:@"api/multi/rename" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)copyMultireddit:(RKMultireddit *)multireddit fromUser:(RKUser *)user newName:(NSString *)name completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)copyMultireddit:(RDKMultireddit *)multireddit fromUser:(RDKUser *)user newName:(NSString *)name completion:(RDKCompletionBlock)completion
 {
     return [self copyMultiredditWithName:multireddit.name fromUserWithUsername:user.username newName:name completion:completion];
 }
 
-- (NSURLSessionDataTask *)copyMultiredditWithName:(NSString *)multiredditName fromUserWithUsername:(NSString *)username newName:(NSString *)name completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)copyMultiredditWithName:(NSString *)multiredditName fromUserWithUsername:(NSString *)username newName:(NSString *)name completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(multiredditName);
     NSParameterAssert(username);
@@ -205,12 +205,12 @@
     return [self basicPostTaskWithPath:@"api/multi/copy" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)deleteMultireddit:(RKMultireddit *)multireddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)deleteMultireddit:(RDKMultireddit *)multireddit completion:(RDKCompletionBlock)completion
 {
     return [self deleteMultiredditWithName:multireddit.name completion:completion];
 }
 
-- (NSURLSessionDataTask *)deleteMultiredditWithName:(NSString *)multiredditName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)deleteMultiredditWithName:(NSString *)multiredditName completion:(RDKCompletionBlock)completion
 {
     NSString *multiredditPath = [self pathForMultiredditWithName:multiredditName ownerName:self.currentUser.username];
     NSString *path = [NSString stringWithFormat:@"api/multi%@", multiredditPath];
@@ -228,12 +228,12 @@
 
 #pragma mark - Managing Multireddit Subreddits
 
-- (NSURLSessionDataTask *)addSubreddit:(RKSubreddit *)subreddit toMultireddit:(RKMultireddit *)multireddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)addSubreddit:(RDKSubreddit *)subreddit toMultireddit:(RDKMultireddit *)multireddit completion:(RDKCompletionBlock)completion
 {
     return [self addSubredditWithName:subreddit.name toMultiredditWithName:multireddit.name completion:completion];
 }
 
-- (NSURLSessionDataTask *)addSubredditWithName:(NSString *)subredditName toMultiredditWithName:(NSString *)multiredditName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)addSubredditWithName:(NSString *)subredditName toMultiredditWithName:(NSString *)multiredditName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(subredditName);
     NSParameterAssert(multiredditName);
@@ -257,12 +257,12 @@
     }];
 }
 
-- (NSURLSessionDataTask *)removeSubreddit:(RKSubreddit *)subreddit fromMultireddit:(RKMultireddit *)multireddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)removeSubreddit:(RDKSubreddit *)subreddit fromMultireddit:(RDKMultireddit *)multireddit completion:(RDKCompletionBlock)completion
 {
     return [self removeSubredditWithName:subreddit.name fromMultiredditWithName:multireddit.name completion:completion];
 }
 
-- (NSURLSessionDataTask *)removeSubredditWithName:(NSString *)subredditName fromMultiredditWithName:(NSString *)multiredditName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)removeSubredditWithName:(NSString *)subredditName fromMultiredditWithName:(NSString *)multiredditName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(subredditName);
     NSParameterAssert(multiredditName);
@@ -282,14 +282,14 @@
 
 #pragma mark - Private
 
-- (NSURLSessionDataTask *)multiredditTaskWithMethod:(NSString *)method name:(NSString *)name subreddits:(NSArray *)subreddits visibility:(RKMultiredditVisibility)visibility completion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)multiredditTaskWithMethod:(NSString *)method name:(NSString *)name subreddits:(NSArray *)subreddits visibility:(RDKMultiredditVisibility)visibility completion:(RDKObjectCompletionBlock)completion
 {
     NSParameterAssert(name);
     NSParameterAssert(subreddits);
     
     // Set up the initial request parameters:
     
-    NSString *multiredditVisibility = (visibility == RKMultiredditVisibilityPublic) ? @"public" : @"private";
+    NSString *multiredditVisibility = (visibility == RDKMultiredditVisibilityPublic) ? @"public" : @"private";
     NSString *multiredditPath = [self pathForMultiredditWithName:name ownerName:self.currentUser.username];
     NSMutableArray *multiredditSubreddits = [[NSMutableArray alloc] initWithCapacity:subreddits.count];
     
@@ -320,7 +320,7 @@
         
         if (responseObject)
         {
-            RKMultireddit *multireddit = [RKObjectBuilder objectFromJSON:responseObject];
+            RDKMultireddit *multireddit = [RDKObjectBuilder objectFromJSON:responseObject];
             completion(multireddit, nil);
         }
         else

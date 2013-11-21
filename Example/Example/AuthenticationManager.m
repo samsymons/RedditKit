@@ -22,7 +22,7 @@
 
 #import "AuthenticationManager.h"
 #import "OAuthViewController.h"
-#import "RKOAuthClient.h"
+#import "RDKOAuthClient.h"
 
 @interface AuthenticationManager ()
 
@@ -80,7 +80,7 @@
         }
         
         __weak __typeof(self)weakSelf = self;
-        [[RKClient sharedClient] signInWithUsername:username password:password completion:^(NSError *error) {
+        [[RDKClient sharedClient] signInWithUsername:username password:password completion:^(NSError *error) {
             if (error)
             {
                 UIAlertView *errorAlertView = [weakSelf signInAlertView];
@@ -116,11 +116,11 @@
         UINavigationController *navigationController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
         
         [navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:oauthViewController] animated:YES completion:^{
-            [[RKOAuthClient sharedClient] setClientIdentifier:kOAuthClientID];
-            [[RKOAuthClient sharedClient] setClientSecret:kOAuthClientSecret];
+            [[RDKOAuthClient sharedClient] setClientIdentifier:kOAuthClientID];
+            [[RDKOAuthClient sharedClient] setClientSecret:kOAuthClientSecret];
             
             RDKOAuthScope scope = RDKOAuthScopeIdentity | RDKOAuthScopeVote;
-            NSURL *authenticationURL = [[RKOAuthClient sharedClient] oauthURLWithRedirectURI:kOAuthRedirectURI state:kOAuthState scope:scope];
+            NSURL *authenticationURL = [[RDKOAuthClient sharedClient] oauthURLWithRedirectURI:kOAuthRedirectURI state:kOAuthState scope:scope];
             NSURLRequest *authenticationRequest = [NSURLRequest requestWithURL:authenticationURL];
             
             [[oauthViewController webView] loadRequest:authenticationRequest];

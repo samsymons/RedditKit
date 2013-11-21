@@ -1,4 +1,4 @@
-// RKClient+Voting.h
+// RDKClient+Voting.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,17 +20,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
+#import "RDKClient.h"
 
-typedef NS_ENUM(NSInteger, RKVoteDirection) {
-	RKVoteDirectionUpvote = 1,
-	RKVoteDirectionDownvote = 2,
-	RKVoteDirectionNone = 3
+typedef NS_ENUM(NSInteger, RDKVoteDirection) {
+	RDKVoteDirectionUpvote = 1,
+	RDKVoteDirectionDownvote = 2,
+	RDKVoteDirectionNone = 3
 };
 
-@class RKVotable;
+@class RDKVotable;
 
-@interface RKClient (Voting)
+@interface RDKClient (Voting)
 
 /**
  Upvotes a link or comment.
@@ -38,7 +38,7 @@ typedef NS_ENUM(NSInteger, RKVoteDirection) {
  @param object The object to upvote.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)upvote:(RKVotable *)object completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)upvote:(RDKVotable *)object completion:(RDKCompletionBlock)completion;
 
 /**
  Downvotes a link or comment.
@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger, RKVoteDirection) {
  @param object The object to downvote.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)downvote:(RKVotable *)object completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)downvote:(RDKVotable *)object completion:(RDKCompletionBlock)completion;
 
 /**
  Revokes any upvote or downvote on a link or comment.
@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger, RKVoteDirection) {
  @param object The object for which the vote should be revoked.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)revokeVote:(RKVotable *)object completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)revokeVote:(RDKVotable *)object completion:(RDKCompletionBlock)completion;
 
 /**
  Votes on a thing with a given full name.
@@ -63,6 +63,6 @@ typedef NS_ENUM(NSInteger, RKVoteDirection) {
  @param direction The direction of which to vote.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)voteOnThingWithFullName:(NSString *)fullName direction:(RKVoteDirection)direction completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)voteOnThingWithFullName:(NSString *)fullName direction:(RDKVoteDirection)direction completion:(RDKCompletionBlock)completion;
 
 @end

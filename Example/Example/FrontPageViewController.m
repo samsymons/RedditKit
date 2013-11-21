@@ -30,7 +30,7 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 @interface FrontPageViewController ()
 
 @property (nonatomic, strong) NSArray *links;
-@property (nonatomic, strong) RKPagination *currentPagination;
+@property (nonatomic, strong) RDKPagination *currentPagination;
 
 @property (nonatomic, strong) LinkTableViewCell *autoLayoutCell;
 @property (nonatomic, strong) NSMutableDictionary *cellHeights;
@@ -43,8 +43,8 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 - (UIBarButtonItem *)signInBarButtonItem;
 - (UIBarButtonItem *)signOutBarButtonItem;
 
-- (void)updateCell:(LinkTableViewCell *)cell withLink:(RKLink *)link;
-- (CGFloat)estimatedHeightForLink:(RKLink *)link;
+- (void)updateCell:(LinkTableViewCell *)cell withLink:(RDKLink *)link;
+- (CGFloat)estimatedHeightForLink:(RDKLink *)link;
 - (NSArray *)indexPathsForArrayToAppend:(NSArray *)array;
 
 - (void)signOut;
@@ -129,7 +129,7 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
     }];
 }
 
-- (void)updateCell:(LinkTableViewCell *)cell withLink:(RKLink *)link
+- (void)updateCell:(LinkTableViewCell *)cell withLink:(RDKLink *)link
 {
     cell.titleLabel.text = link.title;
 	cell.karmaLabel.text = [NSString stringWithFormat:@"%li", (long)link.score];
@@ -137,7 +137,7 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 	cell.subredditLabel.text = link.subreddit;
 }
 
-- (CGFloat)estimatedHeightForLink:(RKLink *)link
+- (CGFloat)estimatedHeightForLink:(RDKLink *)link
 {
     NSDictionary *bodyTextAttributes = @{ NSFontAttributeName : self.autoLayoutCell.titleLabel.font };
     
@@ -168,7 +168,7 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 
 - (void)signOut
 {
-    [[RKClient sharedClient] signOut];
+    [[RDKClient sharedClient] signOut];
     
     self.accountButton = [self signInBarButtonItem];
     self.navigationItem.leftBarButtonItem = self.accountButton;
@@ -191,7 +191,7 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
     self.loadingNewLinks = YES;
     
     __weak __typeof(self)weakSelf = self;
-    [[RKOAuthClient sharedClient] frontPageLinksWithPagination:self.currentPagination completion:^(NSArray *collection, RKPagination *pagination, NSError *error) {
+    [[RDKOAuthClient sharedClient] frontPageLinksWithPagination:self.currentPagination completion:^(NSArray *collection, RDKPagination *pagination, NSError *error) {
         if (!error)
         {
             [[weakSelf tableView] beginUpdates];
@@ -224,7 +224,7 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 {
 	LinkTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kLinkCellReuseIdentifier forIndexPath:indexPath];
     
-	RKLink *link = self.links[indexPath.row];
+	RDKLink *link = self.links[indexPath.row];
 	[self updateCell:cell withLink:link];
 	
     return cell;
@@ -242,7 +242,7 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
         return [height floatValue];
     }
     
-    RKLink *link = self.links[indexPath.row];
+    RDKLink *link = self.links[indexPath.row];
     CGFloat estimatedHeight = [self estimatedHeightForLink:link] + 25;
     
     self.cellHeights[key] = @(estimatedHeight);
@@ -252,7 +252,7 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	RKLink *link = self.links[indexPath.row];
+	RDKLink *link = self.links[indexPath.row];
     LinkTableViewCell *layoutCell = self.autoLayoutCell;
     
     [self updateCell:layoutCell withLink:link];
@@ -267,7 +267,7 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RKLink *link = self.links[indexPath.row];
+    RDKLink *link = self.links[indexPath.row];
     BrowserViewController *browserViewController = [[BrowserViewController alloc] initWithLink:link];
     
     [[self navigationController] pushViewController:browserViewController animated:YES];

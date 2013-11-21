@@ -1,4 +1,4 @@
-// RKVotable.h
+// RDKVotable.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,15 +20,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKCreated.h"
+#import "RDKCreated.h"
 
-typedef NS_ENUM(NSUInteger, RKVoteStatus) {
-	RKVoteStatusUpvoted,
-	RKVoteStatusDownvoted,
-	RKVoteStatusNone
+typedef NS_ENUM(NSUInteger, RDKVoteStatus) {
+	RDKVoteStatusUpvoted,
+	RDKVoteStatusDownvoted,
+	RDKVoteStatusNone
 };
 
-@interface RKVotable : RKCreated
+@interface RDKVotable : RDKCreated
 
 /**
  The total number of upvotes.
@@ -48,7 +48,7 @@ typedef NS_ENUM(NSUInteger, RKVoteStatus) {
 /**
  The current user's vote status for this object.
  */
-@property (nonatomic, assign, readonly) RKVoteStatus voteStatus;
+@property (nonatomic, assign, readonly) RDKVoteStatus voteStatus;
 
 /**
  Whether the current user has upvoted this object.

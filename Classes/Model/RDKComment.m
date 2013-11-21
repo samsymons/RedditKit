@@ -1,4 +1,4 @@
-// RKComment.m
+// RDKComment.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,11 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKComment.h"
-#import "RKObjectBuilder.h"
-#import "RKClient.h"
+#import "RDKComment.h"
+#import "RDKObjectBuilder.h"
+#import "RDKClient.h"
 
-@implementation RKComment
+@implementation RDKComment
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
@@ -80,7 +80,7 @@
             }
             
             NSError *error = nil;
-            id model = [MTLJSONAdapter modelOfClass:[RKComment class] fromJSONDictionary:commentJSON error:&error];
+            id model = [MTLJSONAdapter modelOfClass:[RDKComment class] fromJSONDictionary:commentJSON error:&error];
             
             if (!error)
             {

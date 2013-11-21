@@ -1,4 +1,4 @@
-// RKClient+Moderation.h
+// RDKClient+Moderation.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,13 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
-#import "RKComment.h"
-#import "RKCompletionBlocks.h"
+#import "RDKClient.h"
+#import "RDKComment.h"
+#import "RDKCompletionBlocks.h"
 
-@class RKComment, RKLink, RKPagination, RKSubreddit, RKUser;
+@class RDKComment, RDKLink, RDKPagination, RDKSubreddit, RDKUser;
 
-@interface RKClient (Moderation)
+@interface RDKClient (Moderation)
 
 /**
  Sets a link as the sticky post in its parent subreddit.
@@ -35,7 +35,7 @@
  @param sticky Whether to set the post as sticky.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)setLink:(RKLink *)link asSticky:(BOOL)sticky completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)setLink:(RDKLink *)link asSticky:(BOOL)sticky completion:(RDKCompletionBlock)completion;
 
 /**
  Sets a link as the sticky post in its parent subreddit.
@@ -44,7 +44,7 @@
  @param sticky Whether to set the post as sticky.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)setLinkWithFullName:(NSString *)fullName asSticky:(BOOL)sticky completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)setLinkWithFullName:(NSString *)fullName asSticky:(BOOL)sticky completion:(RDKCompletionBlock)completion;
 
 /**
  Enables or disables contest mode for a link.
@@ -53,7 +53,7 @@
  @param link The link for which contest mode should be enabled or disabled.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)setContestMode:(BOOL)contestMode forLink:(RKLink *)link completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)setContestMode:(BOOL)contestMode forLink:(RDKLink *)link completion:(RDKCompletionBlock)completion;
 
 /**
  Enables or disables contest mode for a link.
@@ -62,7 +62,7 @@
  @param fullName The full name of the link for which contest mode should be enabled or disabled.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)setContestMode:(BOOL)contestMode forLinkWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)setContestMode:(BOOL)contestMode forLinkWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Moderator & Contributor Lists
 
@@ -72,7 +72,7 @@
  @param subreddit The subreddit from which to get the list of contributors.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)contributorsToSubreddit:(RKSubreddit *)subreddit completion:(RKArrayCompletionBlock)completion;
+- (NSURLSessionDataTask *)contributorsToSubreddit:(RDKSubreddit *)subreddit completion:(RDKArrayCompletionBlock)completion;
 
 /**
  Gets the list of contributors to a subreddit.
@@ -80,7 +80,7 @@
  @param name The name of the subreddit from which to get the list of contributors.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)contributorsToSubredditWithName:(NSString *)name completion:(RKArrayCompletionBlock)completion;
+- (NSURLSessionDataTask *)contributorsToSubredditWithName:(NSString *)name completion:(RDKArrayCompletionBlock)completion;
 
 /**
  Gets the list of moderators of a subreddit.
@@ -88,7 +88,7 @@
  @param subreddit The subreddit from which to get the list of moderators.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)moderatorsOfSubreddit:(RKSubreddit *)subreddit completion:(RKArrayCompletionBlock)completion;
+- (NSURLSessionDataTask *)moderatorsOfSubreddit:(RDKSubreddit *)subreddit completion:(RDKArrayCompletionBlock)completion;
 
 /**
  Gets the list of moderators of a subreddit.
@@ -96,7 +96,7 @@
  @param name The name of the subreddit from which to get the list of moderators.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)moderatorsOfSubredditWithName:(NSString *)name completion:(RKArrayCompletionBlock)completion;
+- (NSURLSessionDataTask *)moderatorsOfSubredditWithName:(NSString *)name completion:(RDKArrayCompletionBlock)completion;
 
 #pragma mark - Contributor Status
 
@@ -107,7 +107,7 @@
  @param subreddit The subreddit to which to add the contributor.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)addContributor:(RKUser *)contributor toSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)addContributor:(RDKUser *)contributor toSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Adds a contributor to a subreddit.
@@ -117,7 +117,7 @@
  @param fullName The full name of the subreddit.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)addContributorWithUsername:(NSString *)username toSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)addContributorWithUsername:(NSString *)username toSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 /**
  Removes a contributor from a subreddit.
@@ -126,7 +126,7 @@
  @param subreddit The subreddit from which to remove the contributor.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)removeContributor:(RKUser *)contributor fromSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)removeContributor:(RDKUser *)contributor fromSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Removes a contributor from a subreddit.
@@ -136,7 +136,7 @@
  @param fullName The full name of the subreddit.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)removeContributorWithUsername:(NSString *)username fromSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)removeContributorWithUsername:(NSString *)username fromSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Moderator Status
 
@@ -146,7 +146,7 @@
  @param subreddit The subreddit for which to accept the invitation.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)acceptModeratorInvitationForSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)acceptModeratorInvitationForSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Accepts an invitation to become a moderator of a subreddit.
@@ -154,7 +154,7 @@
  @param subredditName The name of the subreddit for which to accept the invitation.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)acceptModeratorInvitationForSubredditWithName:(NSString *)subredditName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)acceptModeratorInvitationForSubredditWithName:(NSString *)subredditName completion:(RDKCompletionBlock)completion;
 
 /**
  Invites a user to become a moderator of a subreddit.
@@ -163,7 +163,7 @@
  @param subreddit The subreddit to which to add the moderator.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)inviteUser:(RKUser *)user toModerateSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)inviteUser:(RDKUser *)user toModerateSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Invites a user to become a moderator of a subreddit.
@@ -173,7 +173,7 @@
  @param fullName The full name of the subreddit.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)inviteUserWithUsername:(NSString *)username toModerateSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)inviteUserWithUsername:(NSString *)username toModerateSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 /**
  Revokes an invitiation to a user to become a moderator.
@@ -182,7 +182,7 @@
  @param subreddit The subreddit which they were invited to moderate.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)revokeModeratorInvitationToUser:(RKUser *)user forSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)revokeModeratorInvitationToUser:(RDKUser *)user forSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Revokes an invitiation to a user to become a moderator.
@@ -192,7 +192,7 @@
  @param fullName The full name of the subreddit.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)revokeModeratorInvitationToUserWithUsername:(NSString *)username forSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)revokeModeratorInvitationToUserWithUsername:(NSString *)username forSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 /**
  Removes a user from being a moderator of a subreddit.
@@ -201,7 +201,7 @@
  @param subreddit The subreddit from which to remove the moderator.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)removeModerator:(RKUser *)moderator fromSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)removeModerator:(RDKUser *)moderator fromSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Removes a user from being a moderator of a subreddit.
@@ -211,7 +211,7 @@
  @param fullName The full name of the subreddit.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)removeModeratorWithUsername:(NSString *)username fromSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)removeModeratorWithUsername:(NSString *)username fromSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Moderation Tasks
 
@@ -222,7 +222,7 @@
  @param distinguishedStatus The status of the link or comment.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)distinguishThingWithFullName:(NSString *)fullName status:(RKDistinguishedStatus)distinguishedStatus completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)distinguishThingWithFullName:(NSString *)fullName status:(RDKDistinguishedStatus)distinguishedStatus completion:(RDKCompletionBlock)completion;
 
 /**
  Gets the moderation log for a subreddit, listing moderation related events which have happened.
@@ -231,7 +231,7 @@
  @param pagination The pagination object to be sent with the request.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)moderationLogForSubreddit:(RKSubreddit *)subreddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)moderationLogForSubreddit:(RDKSubreddit *)subreddit pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Gets the moderation log for a subreddit, listing moderation related events which have happened.
@@ -240,7 +240,7 @@
  @param pagination The pagination object to be sent with the request.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)moderationLogForSubredditWithName:(NSString *)subredditName pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)moderationLogForSubredditWithName:(NSString *)subredditName pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Gets the moderation queue for a subreddit, listing links and comments which have been either reported or marked as spam.
@@ -249,7 +249,7 @@
  @param pagination The pagination object to be sent with the request.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)moderationQueueForSubreddit:(RKSubreddit *)subreddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)moderationQueueForSubreddit:(RDKSubreddit *)subreddit pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Gets the moderation queue for a subreddit, listing links and comments which have been either reported or marked as spam.
@@ -258,7 +258,7 @@
  @param pagination The pagination object to be sent with the request.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)moderationQueueForSubredditWithName:(NSString *)subredditName pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)moderationQueueForSubredditWithName:(NSString *)subredditName pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Gets links and comments which have been reported by users.
@@ -267,7 +267,7 @@
  @param pagination The pagination object to be sent with the request.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)reportedContentInSubreddit:(RKSubreddit *)subreddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)reportedContentInSubreddit:(RDKSubreddit *)subreddit pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Gets links and comments which have been reported by users.
@@ -276,7 +276,7 @@
  @param pagination The pagination object to be sent with the request.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)reportedContentInSubredditWithName:(NSString *)subredditName pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)reportedContentInSubredditWithName:(NSString *)subredditName pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Gets links and comments which have been reported as spam by users.
@@ -285,7 +285,7 @@
  @param pagination The pagination object to be sent with the request.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)spamContentInSubreddit:(RKSubreddit *)subreddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)spamContentInSubreddit:(RDKSubreddit *)subreddit pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Gets links and comments which have been reported as spam by users.
@@ -294,7 +294,7 @@
  @param pagination The pagination object to be sent with the request.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)spamContentInSubredditWithName:(NSString *)subredditName pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)spamContentInSubredditWithName:(NSString *)subredditName pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 #pragma mark - Approval & Removal
 
@@ -304,7 +304,7 @@
  @param link The link to approve.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)approveLink:(RKLink *)link completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)approveLink:(RDKLink *)link completion:(RDKCompletionBlock)completion;
 
 /**
  Approves a comment.
@@ -312,7 +312,7 @@
  @param comment The comment to approve.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)approveComment:(RKComment *)comment completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)approveComment:(RDKComment *)comment completion:(RDKCompletionBlock)completion;
 
 /**
  Approves a link or comment.
@@ -320,7 +320,7 @@
  @param fullName The full name of the link or comment to approve.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)approveThingWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)approveThingWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 /**
  Removes a link.
@@ -328,7 +328,7 @@
  @param link The link to remove.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)removeLink:(RKLink *)link completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)removeLink:(RDKLink *)link completion:(RDKCompletionBlock)completion;
 
 /**
  Removes a comment.
@@ -336,7 +336,7 @@
  @param comment The comment to remove.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)removeComment:(RKComment *)comment completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)removeComment:(RDKComment *)comment completion:(RDKCompletionBlock)completion;
 
 /**
  Removes a link or comment.
@@ -344,7 +344,7 @@
  @param fullName The full name of the link or comment to remove.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)removeThingWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)removeThingWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Reports
 
@@ -354,7 +354,7 @@
  @param link The link for which to ignore reports.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)ignoreReportsForLink:(RKLink *)link completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)ignoreReportsForLink:(RDKLink *)link completion:(RDKCompletionBlock)completion;
 
 /**
  Ignores reports for a comment, preventing any future report notifications.
@@ -362,7 +362,7 @@
  @param comment The comment for which to ignore reports.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)ignoreReportsForComment:(RKComment *)comment completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)ignoreReportsForComment:(RDKComment *)comment completion:(RDKCompletionBlock)completion;
 
 /**
  Ignores reports for a link or comment, preventing any future report notifications.
@@ -370,7 +370,7 @@
  @param fullName The full name of the link or comment for which to ignore reports.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)ignoreReportsForThingWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)ignoreReportsForThingWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 /**
  Unignores reports for a link, allowing future report notifications.
@@ -378,7 +378,7 @@
  @param link The link for which to unignore reports.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)unignoreReportsForLink:(RKLink *)link completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)unignoreReportsForLink:(RDKLink *)link completion:(RDKCompletionBlock)completion;
 
 /**
  Unignores reports for a comment, allowing future report notifications.
@@ -386,7 +386,7 @@
  @param comment The comment for which to unignore reports.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)unignoreReportsForComment:(RKComment *)comment completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)unignoreReportsForComment:(RDKComment *)comment completion:(RDKCompletionBlock)completion;
 
 /**
  Unignores reports for a link or comment, allowing future report notifications.
@@ -394,7 +394,7 @@
  @param fullName The full name of the link or comment for which to unignore reports.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)unignoreReportsForThingWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)unignoreReportsForThingWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Banning
 
@@ -404,7 +404,7 @@
  @param subreddit The subreddit for which to get the list of banned users.
  @param completion The block to be executed upon completion of the request. It takes two arguments: the response array and any error that occurred. The response array contains NSDictionary objects, each representing a friend of the current user. Each dictionary contains three key-value pairs: the friend's full name (the `id` key), their name, and any note attached to them.
  */
-- (NSURLSessionDataTask *)bannedUsersInSubreddit:(RKSubreddit *)subreddit completion:(RKArrayCompletionBlock)completion;
+- (NSURLSessionDataTask *)bannedUsersInSubreddit:(RDKSubreddit *)subreddit completion:(RDKArrayCompletionBlock)completion;
 
 /**
  Gets a list of banned users for a subreddit.
@@ -412,7 +412,7 @@
  @param subredditName The name of the subreddit for which to get the list of banned users.
  @param completion The block to be executed upon completion of the request. It takes two arguments: the response array and any error that occurred. The response array contains NSDictionary objects, each representing a friend of the current user. Each dictionary contains three key-value pairs: the friend's full name (the `id` key), their name, and any note attached to them.
  */
-- (NSURLSessionDataTask *)bannedUsersInSubredditWithName:(NSString *)subredditName completion:(RKArrayCompletionBlock)completion;
+- (NSURLSessionDataTask *)bannedUsersInSubredditWithName:(NSString *)subredditName completion:(RDKArrayCompletionBlock)completion;
 
 /**
  Bans a user from a subreddit.
@@ -421,7 +421,7 @@
  @param subreddit The subreddit from which to ban the user.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)banUser:(RKUser *)user fromSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)banUser:(RDKUser *)user fromSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Bans a user from a subreddit. Requires both the subreddit's name and full name.
@@ -431,7 +431,7 @@
  @param fullName The full name of the subreddit from which to ban the user.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)banUserWithUsername:(NSString *)username fromSubredditWithName:(NSString *)name fullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)banUserWithUsername:(NSString *)username fromSubredditWithName:(NSString *)name fullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 /**
  Removes a user's ban from a subreddit.
@@ -440,7 +440,7 @@
  @param subreddit The subreddit from which to remove the ban.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)unbanUser:(RKUser *)user fromSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)unbanUser:(RDKUser *)user fromSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Removes a user's ban from a subreddit. Requires both the subreddit's name and full name.
@@ -449,7 +449,7 @@
  @param name The subreddit from which to remove the ban.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)unbanUserWithUsername:(NSString *)username fromSubredditWithName:(NSString *)name fullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)unbanUserWithUsername:(NSString *)username fromSubredditWithName:(NSString *)name fullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Resignation
 
@@ -459,7 +459,7 @@
  @param subreddit The subreddit from which to resign as a contributor.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)resignAsContributorToSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)resignAsContributorToSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Resigns as a contributor to a subreddit.
@@ -467,7 +467,7 @@
  @param fullName The full name of the subreddit from which to resign as a contributor.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)resignAsContributorToSubredditWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)resignAsContributorToSubredditWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 /**
  Resigns as a moderator of a subreddit.
@@ -475,7 +475,7 @@
  @param subreddit The subreddit from which to resign as a moderator.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)resignAsModeratorOfSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)resignAsModeratorOfSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Resigns as a moderator of a subreddit.
@@ -483,7 +483,7 @@
  @param fullName The full name of the subreddit from which to resign as a moderator.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)resignAsModeratorOfSubredditWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)resignAsModeratorOfSubredditWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Subreddit Styling
 
@@ -493,7 +493,7 @@
  @param subreddit The subreddit for which to get the stylesheet URL.
  @param completion The block to be executed upon completion of the request. Its object parameter is an NSURL with the subreddit's stylesheet address.
  */
-- (NSURLSessionDataTask *)stylesheetForSubreddit:(RKSubreddit *)subreddit completion:(RKObjectCompletionBlock)completion;
+- (NSURLSessionDataTask *)stylesheetForSubreddit:(RDKSubreddit *)subreddit completion:(RDKObjectCompletionBlock)completion;
 
 /**
  Gets the URL for the subreddit's stylesheet.
@@ -501,7 +501,7 @@
  @param subredditName The name of the subreddit for which to get the stylesheet URL.
  @param completion The block to be executed upon completion of the request. Its object parameter is an NSURL with the subreddit's stylesheet address.
  */
-- (NSURLSessionDataTask *)stylesheetForSubredditWithName:(NSString *)subredditName completion:(RKObjectCompletionBlock)completion;
+- (NSURLSessionDataTask *)stylesheetForSubredditWithName:(NSString *)subredditName completion:(RDKObjectCompletionBlock)completion;
 
 /**
  Sets the subreddit's stylesheet.
@@ -510,7 +510,7 @@
  @param subreddit The subreddit for which to set the stylesheet.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)setStylesheet:(NSString *)stylesheet forSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)setStylesheet:(NSString *)stylesheet forSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Sets the subreddit's stylesheet.
@@ -519,6 +519,6 @@
  @param subredditName The name of the subreddit for which to set the stylesheet.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)setStylesheet:(NSString *)stylesheet forSubredditWithName:(NSString *)subredditName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)setStylesheet:(NSString *)stylesheet forSubredditWithName:(NSString *)subredditName completion:(RDKCompletionBlock)completion;
 
 @end

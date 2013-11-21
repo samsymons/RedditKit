@@ -1,4 +1,4 @@
-// RKThing.m
+// RDKThing.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,15 +20,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKThing.h"
+#import "RDKThing.h"
 
-@interface RKThing ()
+@interface RDKThing ()
 
 @property (nonatomic, copy) NSString *fullName;
 
 @end
 
-@implementation RKThing
+@implementation RDKThing
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
@@ -50,12 +50,12 @@
 
 - (BOOL)isEqual:(id)object
 {
-    if (![object isKindOfClass:[RKThing class]])
+    if (![object isKindOfClass:[RDKThing class]])
     {
         return NO;
     }
           
-    NSString *comparedFullName = [(RKThing *)object fullName];
+    NSString *comparedFullName = [(RDKThing *)object fullName];
     return [[self fullName] isEqualToString:comparedFullName];
 }
 

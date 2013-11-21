@@ -1,4 +1,4 @@
-// RKMultiredditDescription.m
+// RDKMultiredditDescription.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,9 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKMultiredditDescription.h"
+#import "RDKMultiredditDescription.h"
 
-@implementation RKMultiredditDescription
+@implementation RDKMultiredditDescription
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {

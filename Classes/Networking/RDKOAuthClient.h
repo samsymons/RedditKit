@@ -1,4 +1,4 @@
-// RKOAuthClient.h
+// RDKOAuthClient.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
+#import "RDKClient.h"
 
 typedef NS_ENUM(NSUInteger, RDKOAuthScope) {
     RDKOAuthScopeNone                   = 0,
@@ -40,7 +40,7 @@ typedef NS_ENUM(NSUInteger, RDKOAuthScope) {
     RDKOAuthScopeVote                   = (1 << 13), // Vote on links or comments.
 };
 
-@interface RKOAuthClient : RKClient
+@interface RDKOAuthClient : RDKClient
 
 /**
  The client's OAuth identifier.
@@ -63,7 +63,7 @@ typedef NS_ENUM(NSUInteger, RDKOAuthScope) {
 @property (nonatomic, strong) NSString *refreshToken;
 
 /**
- Returns a RKClient ready for OAuth.
+ Returns a RDKClient ready for OAuth.
  
  @see https://github.com/reddit/reddit/wiki/OAuth2
  */
@@ -85,8 +85,8 @@ typedef NS_ENUM(NSUInteger, RDKOAuthScope) {
  */
 - (NSURL *)oauthURLWithRedirectURI:(NSString *)redirectURI state:(NSString *)state scope:(RDKOAuthScope)scope;
 
-- (NSURLSessionDataTask *)signInWithAccessCode:(NSString *)accessCode redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)signInWithAccessCode:(NSString *)accessCode redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RDKCompletionBlock)completion;
 
-- (NSURLSessionDataTask *)refreshAccessToken:(NSString *)refreshToken redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)refreshAccessToken:(NSString *)refreshToken redirectURI:(NSString *)redirectURI state:(NSString *)state completion:(RDKCompletionBlock)completion;
 
 @end

@@ -1,4 +1,4 @@
-// RKComment.h
+// RDKComment.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,16 +20,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKVotable.h"
+#import "RDKVotable.h"
 
-typedef NS_ENUM(NSUInteger, RKDistinguishedStatus) {
-	RKDistinguishedStatusYes,
-	RKDistinguishedStatusNo,
-	RKDistinguishedStatusAdmin,
-	RKDistinguishedStatusSpecial
+typedef NS_ENUM(NSUInteger, RDKDistinguishedStatus) {
+	RDKDistinguishedStatusYes,
+	RDKDistinguishedStatusNo,
+	RDKDistinguishedStatusAdmin,
+	RDKDistinguishedStatusSpecial
 };
 
-@interface RKComment : RKVotable
+@interface RDKComment : RDKVotable
 
 /**
  The username of the moderator who approved this comment.
@@ -105,10 +105,10 @@ typedef NS_ENUM(NSUInteger, RKDistinguishedStatus) {
 /**
  The comment's distinguished status.
  */
-@property (nonatomic, assign, readonly) RKDistinguishedStatus distinguishedStatus;
+@property (nonatomic, assign, readonly) RDKDistinguishedStatus distinguishedStatus;
 
 /**
- Any replies to the comment. This array contains other RKComment objects.
+ Any replies to the comment. This array contains other RDKComment objects.
  */
 @property (nonatomic, strong, readonly) NSArray *replies;
 

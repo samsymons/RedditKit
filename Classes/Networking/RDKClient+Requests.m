@@ -1,4 +1,4 @@
-// RKClient+Requests.m
+// RDKClient+Requests.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,15 +20,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient+Requests.h"
-#import "RKClient+Errors.h"
-#import "RKOAuthClient.h"
-#import "RKPagination.h"
-#import "RKObjectBuilder.h"
+#import "RDKClient+Requests.h"
+#import "RDKClient+Errors.h"
+#import "RDKOAuthClient.h"
+#import "RDKPagination.h"
+#import "RDKObjectBuilder.h"
 
-@implementation RKClient (Requests)
+@implementation RDKClient (Requests)
 
-- (NSURLSessionDataTask *)basicPostTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)basicPostTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(path);
     
@@ -36,7 +36,7 @@
     {
         if (completion)
         {
-            completion([RKClient authenticationRequiredError]);
+            completion([RDKClient authenticationRequiredError]);
         }
         
         return nil;
@@ -50,7 +50,7 @@
     }];
 }
 
-- (NSURLSessionDataTask *)listingTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)listingTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     NSParameterAssert(path);
     
@@ -74,7 +74,7 @@
                 }
                 
                 NSArray *links = [self objectsFromListingResponse:response];
-                RKPagination *pagination = [RKPagination paginationFromListingResponse:response];
+                RDKPagination *pagination = [RDKPagination paginationFromListingResponse:response];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     completion(links, pagination, nil);
@@ -88,7 +88,7 @@
     }];
 }
 
-- (NSURLSessionDataTask *)friendTaskWithContainer:(NSString *)container subredditName:(NSString *)subredditName name:(NSString *)name type:(NSString *)type completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)friendTaskWithContainer:(NSString *)container subredditName:(NSString *)subredditName name:(NSString *)name type:(NSString *)type completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(container);
     NSParameterAssert(name);
@@ -106,7 +106,7 @@
     return [self basicPostTaskWithPath:@"api/friend" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)unfriendTaskWithContainer:(NSString *)container subredditName:(NSString *)subredditName name:(NSString *)name type:(NSString *)type completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)unfriendTaskWithContainer:(NSString *)container subredditName:(NSString *)subredditName name:(NSString *)name type:(NSString *)type completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(container);
     NSParameterAssert(name);
@@ -141,7 +141,7 @@
     
     for (NSDictionary *objectJSON in objectsAsJSON)
     {
-        id object = [RKObjectBuilder objectFromJSON:objectJSON];
+        id object = [RDKObjectBuilder objectFromJSON:objectJSON];
         
         if (object)
         {
@@ -154,27 +154,27 @@
 
 #pragma mark - Request Helpers
 
-- (NSURLSessionDataTask *)getPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKRequestCompletionBlock)completion
+- (NSURLSessionDataTask *)getPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RDKRequestCompletionBlock)completion
 {
     return [self taskWithMethod:@"GET" path:path parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)postPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKRequestCompletionBlock)completion
+- (NSURLSessionDataTask *)postPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RDKRequestCompletionBlock)completion
 {
     return [self taskWithMethod:@"POST" path:path parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)putPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKRequestCompletionBlock)completion
+- (NSURLSessionDataTask *)putPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RDKRequestCompletionBlock)completion
 {
     return [self taskWithMethod:@"PUT" path:path parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)deletePath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKRequestCompletionBlock)completion
+- (NSURLSessionDataTask *)deletePath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RDKRequestCompletionBlock)completion
 {
     return [self taskWithMethod:@"DELETE" path:path parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)taskWithMethod:(NSString *)method path:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKRequestCompletionBlock)completion
+- (NSURLSessionDataTask *)taskWithMethod:(NSString *)method path:(NSString *)path parameters:(NSDictionary *)parameters completion:(RDKRequestCompletionBlock)completion
 {
     NSParameterAssert(method);
     NSParameterAssert(path);
@@ -184,7 +184,7 @@
     
     NSURL *baseURL = [[self class] APIBaseURL];
     
-    if ([self isKindOfClass:[RKOAuthClient class]] && [self isSignedIn])
+    if ([self isKindOfClass:[RDKOAuthClient class]] && [self isSignedIn])
     {
         baseURL = [[self class] APIBaseHTTPSURL];
     }

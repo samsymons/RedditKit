@@ -1,4 +1,4 @@
-// RKCompletionBlocks.h
+// RDKCompletionBlocks.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,29 +20,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-@class RKPagination;
+@class RDKPagination;
 
 /**
  A standard completion block, which either fails or doesn't.
  */
-typedef void (^RKCompletionBlock)(NSError *error);
+typedef void (^RDKCompletionBlock)(NSError *error);
 
 /**
  A completion block for boolean responses, such as determining whether a user is required to complete a CAPTCHA or not.
  */
-typedef void (^RKBooleanCompletionBlock)(BOOL result, NSError *error);
+typedef void (^RDKBooleanCompletionBlock)(BOOL result, NSError *error);
 
 /**
  An object completion block, when retrieving resources that return a single object.
  */
-typedef void (^RKObjectCompletionBlock)(id object, NSError *error);
+typedef void (^RDKObjectCompletionBlock)(id object, NSError *error);
 
 /**
  An array completion block, when retrieving collections of objects.
  */
-typedef void (^RKArrayCompletionBlock)(NSArray *collection, NSError *error);
+typedef void (^RDKArrayCompletionBlock)(NSArray *collection, NSError *error);
 
 /**
  A listing completion block, when retrieving collections which implement pagination.
  */
-typedef void (^RKListingCompletionBlock)(NSArray *collection, RKPagination *pagination, NSError *error);
+typedef void (^RDKListingCompletionBlock)(NSArray *collection, RDKPagination *pagination, NSError *error);

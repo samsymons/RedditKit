@@ -1,4 +1,4 @@
-// RKMultireddit.m
+// RDKMultireddit.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,15 +20,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKMultireddit.h"
+#import "RDKMultireddit.h"
 
-@interface RKMultireddit ()
+@interface RDKMultireddit ()
 
 @property (nonatomic, copy) NSString *ownerUsername;
 
 @end
 
-@implementation RKMultireddit
+@implementation RDKMultireddit
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
@@ -86,8 +86,8 @@
 + (NSValueTransformer *)visibilityJSONTransformer
 {
     NSDictionary *visibilityTypes = @{
-        @"public": @(RKMultiredditVisibilityPublic),
-        @"private": @(RKMultiredditVisibilityPrivate)
+        @"public": @(RDKMultiredditVisibilityPublic),
+        @"private": @(RDKMultiredditVisibilityPrivate)
     };
     
     return [MTLValueTransformer transformerWithBlock:^(NSString *visibility) {

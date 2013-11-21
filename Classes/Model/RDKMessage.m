@@ -1,4 +1,4 @@
-// RKMessage.m
+// RDKMessage.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,22 +20,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKMessage.h"
-#import "RKObjectBuilder.h"
-#import "RKClient.h"
-#import "RKUser.h"
+#import "RDKMessage.h"
+#import "RDKObjectBuilder.h"
+#import "RDKClient.h"
+#import "RDKUser.h"
 
-@implementation RKMessage
+@implementation RDKMessage
 
 + (Class)classForParsingJSONDictionary:(NSDictionary *)JSONDictionary
 {
     if ([[JSONDictionary valueForKeyPath:@"data.was_comment"] boolValue])
     {
-        return [RKCommentReplyMessage class];
+        return [RDKCommentReplyMessage class];
     }
     else
     {
-        return [RKMessage class];
+        return [RDKMessage class];
     }
 }
 
@@ -66,15 +66,15 @@
 + (NSValueTransformer *)typeJSONTransformer
 {
     return [MTLValueTransformer transformerWithBlock:^(NSString *author) {
-        NSString *currentUsername = [[[RKClient sharedClient] currentUser] username];
+        NSString *currentUsername = [[[RDKClient sharedClient] currentUser] username];
         
         if ([author isEqualToString:currentUsername])
         {
-            return @(RKMessageTypeSent);
+            return @(RDKMessageTypeSent);
         }
         else
         {
-            return @(RKMessageTypeReceived);
+            return @(RDKMessageTypeReceived);
         }
     }];
 }
@@ -106,7 +106,7 @@
             }
             
             NSError *error = nil;
-            id model = [MTLJSONAdapter modelOfClass:[RKMessage class] fromJSONDictionary:commentJSON error:&error];
+            id model = [MTLJSONAdapter modelOfClass:[RDKMessage class] fromJSONDictionary:commentJSON error:&error];
             
             if (!error)
             {
@@ -126,7 +126,7 @@
 
 #pragma mark -
 
-@implementation RKCommentReplyMessage
+@implementation RDKCommentReplyMessage
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {

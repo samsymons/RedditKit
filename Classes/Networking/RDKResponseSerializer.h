@@ -1,4 +1,4 @@
-// RKResponseSerializer.h
+// RDKResponseSerializer.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -22,6 +22,6 @@
 
 #import "AFURLResponseSerialization.h"
 
-@interface RKResponseSerializer : AFHTTPResponseSerializer
+@interface RDKResponseSerializer : AFHTTPResponseSerializer
 
 @end

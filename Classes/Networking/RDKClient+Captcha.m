@@ -1,4 +1,4 @@
-// RKClient+Captcha.m
+// RDKClient+Captcha.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,12 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient+Captcha.h"
-#import "RKClient+Requests.h"
+#import "RDKClient+Captcha.h"
+#import "RDKClient+Requests.h"
 
-@implementation RKClient (Captcha)
+@implementation RDKClient (Captcha)
 
-- (NSURLSessionTask *)needsCaptchaWithCompletion:(RKBooleanCompletionBlock)completion
+- (NSURLSessionTask *)needsCaptchaWithCompletion:(RDKBooleanCompletionBlock)completion
 {
     return [self getPath:@"api/needs_captcha.json" parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         if (completion)
@@ -35,7 +35,7 @@
     }];
 }
 
-- (NSURLSessionDataTask *)newCaptchaIdentifierWithCompletion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)newCaptchaIdentifierWithCompletion:(RDKObjectCompletionBlock)completion
 {
     return [self postPath:@"api/new_captcha" parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         if (responseObject)
@@ -69,7 +69,7 @@
     return [NSURL URLWithString:path];
 }
 
-- (NSURLSessionDataTask *)imageForCaptchaIdentifier:(NSString *)identifier completion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)imageForCaptchaIdentifier:(NSString *)identifier completion:(RDKObjectCompletionBlock)completion
 {
     NSParameterAssert(identifier);
     

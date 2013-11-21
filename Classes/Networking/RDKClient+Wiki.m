@@ -1,4 +1,4 @@
-// RKClient+Wiki.m
+// RDKClient+Wiki.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,19 +20,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient+Wiki.h"
-#import "RKClient+Requests.h"
-#import "RKUser.h"
-#import "RKSubreddit.h"
+#import "RDKClient+Wiki.h"
+#import "RDKClient+Requests.h"
+#import "RDKUser.h"
+#import "RDKSubreddit.h"
 
-@implementation RKClient (Wiki)
+@implementation RDKClient (Wiki)
 
-- (NSURLSessionDataTask *)addEditor:(RKUser *)editor toWikiPage:(NSString *)pageName inSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)addEditor:(RDKUser *)editor toWikiPage:(NSString *)pageName inSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self addEditorWithUsername:editor.username toWikiPage:pageName inSubredditWithName:subreddit.name completion:completion];
 }
 
-- (NSURLSessionDataTask *)addEditorWithUsername:(NSString *)username toWikiPage:(NSString *)pageName inSubredditWithName:(NSString *)subredditName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)addEditorWithUsername:(NSString *)username toWikiPage:(NSString *)pageName inSubredditWithName:(NSString *)subredditName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(username);
     NSParameterAssert(pageName);
@@ -44,12 +44,12 @@
     return [self basicPostTaskWithPath:path parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)removeEditor:(RKUser *)editor fromWikiPage:(NSString *)pageName inSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)removeEditor:(RDKUser *)editor fromWikiPage:(NSString *)pageName inSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self removeEditorWithUsername:editor.username fromWikiPage:pageName inSubredditWithName:subreddit.name completion:completion];
 }
 
-- (NSURLSessionDataTask *)removeEditorWithUsername:(NSString *)username fromWikiPage:(NSString *)pageName inSubredditWithName:(NSString *)subredditName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)removeEditorWithUsername:(NSString *)username fromWikiPage:(NSString *)pageName inSubredditWithName:(NSString *)subredditName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(username);
     NSParameterAssert(pageName);
@@ -61,12 +61,12 @@
     return [self basicPostTaskWithPath:path parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)editWikiPage:(NSString *)pageName subreddit:(RKSubreddit *)subreddit content:(NSString *)content editReason:(NSString *)reason previousRevisionIdentifier:(NSString *)revisionIdentifier completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)editWikiPage:(NSString *)pageName subreddit:(RDKSubreddit *)subreddit content:(NSString *)content editReason:(NSString *)reason previousRevisionIdentifier:(NSString *)revisionIdentifier completion:(RDKCompletionBlock)completion
 {
     return [self editWikiPage:pageName subredditName:subreddit.name content:content editReason:reason previousRevisionIdentifier:revisionIdentifier completion:completion];
 }
 
-- (NSURLSessionDataTask *)editWikiPage:(NSString *)pageName subredditName:(NSString *)subredditName content:(NSString *)content editReason:(NSString *)reason previousRevisionIdentifier:(NSString *)revisionIdentifier completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)editWikiPage:(NSString *)pageName subredditName:(NSString *)subredditName content:(NSString *)content editReason:(NSString *)reason previousRevisionIdentifier:(NSString *)revisionIdentifier completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(pageName);
     NSParameterAssert(subredditName);
@@ -78,12 +78,12 @@
     return [self basicPostTaskWithPath:path parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)hideWikiRevision:(NSString *)revisionIdentifier page:(NSString *)pageName subreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)hideWikiRevision:(NSString *)revisionIdentifier page:(NSString *)pageName subreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self hideWikiRevision:revisionIdentifier page:pageName subredditName:subreddit.name completion:completion];
 }
 
-- (NSURLSessionDataTask *)hideWikiRevision:(NSString *)revisionIdentifier page:(NSString *)pageName subredditName:(NSString *)subredditName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)hideWikiRevision:(NSString *)revisionIdentifier page:(NSString *)pageName subredditName:(NSString *)subredditName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(revisionIdentifier);
     NSParameterAssert(pageName);
@@ -95,12 +95,12 @@
     return [self basicPostTaskWithPath:path parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)revertToRevision:(NSString *)revisionIdentifier page:(NSString *)pageName subreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)revertToRevision:(NSString *)revisionIdentifier page:(NSString *)pageName subreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self revertToRevision:revisionIdentifier page:pageName subredditName:subreddit.name completion:completion];
 }
 
-- (NSURLSessionDataTask *)revertToRevision:(NSString *)revisionIdentifier page:(NSString *)pageName subredditName:(NSString *)subredditName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)revertToRevision:(NSString *)revisionIdentifier page:(NSString *)pageName subredditName:(NSString *)subredditName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(revisionIdentifier);
     NSParameterAssert(pageName);

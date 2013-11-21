@@ -7,7 +7,7 @@
 //
 
 #import "OAuthViewController.h"
-#import "RKOAuthClient.h"
+#import "RDKOAuthClient.h"
 
 @implementation OAuthViewController
 
@@ -34,7 +34,7 @@
         {
             __weak __typeof(self)weakSelf = self;
             
-            [[RKOAuthClient sharedClient] signInWithAccessCode:paramDict[@"code"] redirectURI:kOAuthRedirectURI state:kOAuthState completion:^(NSError *error) {
+            [[RDKOAuthClient sharedClient] signInWithAccessCode:paramDict[@"code"] redirectURI:kOAuthRedirectURI state:kOAuthState completion:^(NSError *error) {
                 if (error)
                 {
                     NSLog(@"Failed to authenticate with OAuth: %@", error);

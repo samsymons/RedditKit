@@ -1,4 +1,4 @@
-// RKClient+Captcha.h
+// RDKClient+Captcha.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,13 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
-#import "RKCompletionBlocks.h"
+#import "RDKClient.h"
+#import "RDKCompletionBlocks.h"
 
 @class AFJSONRequestOperation;
 @class AFImageRequestOperation;
 
-@interface RKClient (Captcha)
+@interface RDKClient (Captcha)
 
 /**
  Whether the current user will need to fill out a CAPTCHA for certain methods.
@@ -34,7 +34,7 @@
  @param completion An optional block to be executed upon request completion. It takes two arguments: a boolean indicating whether the user is required to complete a CAPTCHA, and any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionTask *)needsCaptchaWithCompletion:(RKBooleanCompletionBlock)completion;
+- (NSURLSessionTask *)needsCaptchaWithCompletion:(RDKBooleanCompletionBlock)completion;
 
 /**
  Gets a new CAPTCHA identifier from reddit.
@@ -42,7 +42,7 @@
  @param completion An optional block to be executed upon request completion. It takes two arguments: the CAPTCHA's identifier (an NSString), and any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)newCaptchaIdentifierWithCompletion:(RKObjectCompletionBlock)completion;
+- (NSURLSessionDataTask *)newCaptchaIdentifierWithCompletion:(RDKObjectCompletionBlock)completion;
 
 /**
  Returns the URL for a CAPTCHA with a specific identifier.
@@ -60,6 +60,6 @@
  @param completion An optional block to be executed upon request completion. It takes two arguments: the CAPTCHA image (UIImage or NSImage), and any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)imageForCaptchaIdentifier:(NSString *)identifier completion:(RKObjectCompletionBlock)completion;
+- (NSURLSessionDataTask *)imageForCaptchaIdentifier:(NSString *)identifier completion:(RDKObjectCompletionBlock)completion;
 
 @end

@@ -1,4 +1,4 @@
-// RKSubreddit.h
+// RDKSubreddit.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,30 +20,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKThing.h"
+#import "RDKThing.h"
 
-typedef NS_ENUM(NSUInteger, RKSubmissionType) {
-    RKSubmissionTypeAny = 1,
-    RKSubmissionTypeLink,
-    RKSubmissionTypeSelf
+typedef NS_ENUM(NSUInteger, RDKSubmissionType) {
+    RDKSubmissionTypeAny = 1,
+    RDKSubmissionTypeLink,
+    RDKSubmissionTypeSelf
 };
 
-typedef NS_ENUM(NSUInteger, RKSubredditType) {
-    RKSubredditTypePublic = 1,
-    RKSubredditTypePrivate,
-    RKSubredditTypeRestricted,
-    RKSubredditTypeGoldRestricted,
-    RKSubredditTypeArchived
+typedef NS_ENUM(NSUInteger, RDKSubredditType) {
+    RDKSubredditTypePublic = 1,
+    RDKSubredditTypePrivate,
+    RDKSubredditTypeRestricted,
+    RDKSubredditTypeGoldRestricted,
+    RDKSubredditTypeArchived
 };
 
-typedef NS_ENUM(NSUInteger, RKSpamFilterStrength) {
-    RKSpamFilterStrengthLow = 1,
-    RKSpamFilterStrengthHigh,
-    RKSpamFilterStrengthAll,
-    RKSpamFilterStrengthNoStrength
+typedef NS_ENUM(NSUInteger, RDKSpamFilterStrength) {
+    RDKSpamFilterStrengthLow = 1,
+    RDKSpamFilterStrengthHigh,
+    RDKSpamFilterStrengthAll,
+    RDKSpamFilterStrengthNoStrength
 };
 
-@interface RKSubreddit : RKThing
+@interface RDKSubreddit : RDKThing
 
 /**
  The numbers of accounts active in the last 15 minutes.
@@ -136,27 +136,27 @@ typedef NS_ENUM(NSUInteger, RKSpamFilterStrength) {
 /**
  The type of submissions accepted by the subreddit.
  */
-@property (nonatomic, assign, readonly) RKSubmissionType acceptedSubmissionsType;
+@property (nonatomic, assign, readonly) RDKSubmissionType acceptedSubmissionsType;
 
 /**
  The type of the subreddit.
  */
-@property (nonatomic, assign, readonly) RKSubredditType subredditType;
+@property (nonatomic, assign, readonly) RDKSubredditType subredditType;
 
 /**
  The spam filter strength for submitted comments.
  */
-@property (nonatomic, assign, readonly) RKSpamFilterStrength commentSpamFilterStrength;
+@property (nonatomic, assign, readonly) RDKSpamFilterStrength commentSpamFilterStrength;
 
 /**
  The spam filter strength for submitted links.
  */
-@property (nonatomic, assign, readonly) RKSpamFilterStrength linkSpamFilterStrength;
+@property (nonatomic, assign, readonly) RDKSpamFilterStrength linkSpamFilterStrength;
 
 /**
  The spam filter strength for submitted self posts.
  */
-@property (nonatomic, assign, readonly) RKSpamFilterStrength selfPostSpamFilterStrength;
+@property (nonatomic, assign, readonly) RDKSpamFilterStrength selfPostSpamFilterStrength;
 
 /**
  The label for the submit link post button, if a custom one has been specified.

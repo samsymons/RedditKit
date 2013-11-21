@@ -1,4 +1,4 @@
-// RKClient+Requests.h
+// RDKClient+Requests.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,12 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
+#import "RDKClient.h"
 #import "AFHTTPSessionManager.h"
 
-typedef void(^RKRequestCompletionBlock)(NSHTTPURLResponse *response, id responseObject, NSError *error);
+typedef void(^RDKRequestCompletionBlock)(NSHTTPURLResponse *response, id responseObject, NSError *error);
 
-@interface RKClient (Requests)
+@interface RDKClient (Requests)
 
 /**
  Many of reddit's API methods require a set of parameters and simply return an error if they fail, and nothing (of value, at least) when they succeed.
@@ -35,7 +35,7 @@ typedef void(^RKRequestCompletionBlock)(NSHTTPURLResponse *response, id response
  @param parameters The parameters to pass with the request.
  @param completion A block to execute at the end of the request.
  */
-- (NSURLSessionDataTask *)basicPostTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)basicPostTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RDKCompletionBlock)completion;
 
 /**
  This method makes a request for a listing and converts the response into objects.
@@ -45,7 +45,7 @@ typedef void(^RKRequestCompletionBlock)(NSHTTPURLResponse *response, id response
  @param pagination The optional pagination object.
  @param completion A block to execute at the end of the request.
  */
-- (NSURLSessionDataTask *)listingTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)listingTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  This method wraps around the 'api/friend' API, as many different methods are based on this endpoint.
@@ -56,7 +56,7 @@ typedef void(^RKRequestCompletionBlock)(NSHTTPURLResponse *response, id response
  @param type The 'type' parameter.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)friendTaskWithContainer:(NSString *)container subredditName:(NSString *)subredditName name:(NSString *)name type:(NSString *)type completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)friendTaskWithContainer:(NSString *)container subredditName:(NSString *)subredditName name:(NSString *)name type:(NSString *)type completion:(RDKCompletionBlock)completion;
 
 /**
  This method wraps around the 'api/unfriend' API, as many different methods are based on this endpoint.
@@ -67,21 +67,21 @@ typedef void(^RKRequestCompletionBlock)(NSHTTPURLResponse *response, id response
  @param type The 'type' parameter.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)unfriendTaskWithContainer:(NSString *)container subredditName:(NSString *)subredditName name:(NSString *)name type:(NSString *)type completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)unfriendTaskWithContainer:(NSString *)container subredditName:(NSString *)subredditName name:(NSString *)name type:(NSString *)type completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Response Helpers
 
 /**
- Extracts RKThing subclasses from a listing response.
+ Extracts RDKThing subclasses from a listing response.
  */
 - (NSArray *)objectsFromListingResponse:(NSDictionary *)listingResponse;
 
 #pragma mark - Request Helpers
 
-- (NSURLSessionDataTask *)getPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKRequestCompletionBlock)completion;
-- (NSURLSessionDataTask *)postPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKRequestCompletionBlock)completion;
-- (NSURLSessionDataTask *)putPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKRequestCompletionBlock)completion;
-- (NSURLSessionDataTask *)deletePath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKRequestCompletionBlock)completion;
+- (NSURLSessionDataTask *)getPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RDKRequestCompletionBlock)completion;
+- (NSURLSessionDataTask *)postPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RDKRequestCompletionBlock)completion;
+- (NSURLSessionDataTask *)putPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RDKRequestCompletionBlock)completion;
+- (NSURLSessionDataTask *)deletePath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RDKRequestCompletionBlock)completion;
 
 /**
  A base request method for use throughout the library.
@@ -92,6 +92,6 @@ typedef void(^RKRequestCompletionBlock)(NSHTTPURLResponse *response, id response
  @param completion A block to execute at the end of the request.
  @return The newly created NSURLSessionDataTask.
  */
-- (NSURLSessionDataTask *)taskWithMethod:(NSString *)method path:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKRequestCompletionBlock)completion;
+- (NSURLSessionDataTask *)taskWithMethod:(NSString *)method path:(NSString *)path parameters:(NSDictionary *)parameters completion:(RDKRequestCompletionBlock)completion;
 
 @end

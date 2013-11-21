@@ -1,4 +1,4 @@
-// RKClient+Miscellaneous.h
+// RDKClient+Miscellaneous.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,12 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
-#import "RKCompletionBlocks.h"
+#import "RDKClient.h"
+#import "RDKCompletionBlocks.h"
 
-@class RKLink, RKComment;
+@class RDKLink, RDKComment;
 
-@interface RKClient (Miscellaneous)
+@interface RDKClient (Miscellaneous)
 
 #pragma mark - Editing
 
@@ -36,7 +36,7 @@
  @param text The text to be set as the self post's body. This will replace the old text.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)editSelfPost:(RKLink *)link newText:(NSString *)text completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)editSelfPost:(RDKLink *)link newText:(NSString *)text completion:(RDKCompletionBlock)completion;
 
 /**
  Edits a comment created by the current user.
@@ -45,7 +45,7 @@
  @param text The text to be set as the comment's body. This will replace the old text.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)editComment:(RKComment *)comment newText:(NSString *)text completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)editComment:(RDKComment *)comment newText:(NSString *)text completion:(RDKCompletionBlock)completion;
 
 /**
  Edits a self post or a comment created by the current user.
@@ -54,7 +54,7 @@
  @param text The text to be set as the body. This will replace the old text.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)editSelfPostOrCommentWithFullName:(NSString *)fullName newText:(NSString *)text completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)editSelfPostOrCommentWithFullName:(NSString *)fullName newText:(NSString *)text completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Saving
 
@@ -64,7 +64,7 @@
  @param link The link to save.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)saveLink:(RKLink *)link completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)saveLink:(RDKLink *)link completion:(RDKCompletionBlock)completion;
 
 /**
  Saves a comment.
@@ -72,7 +72,7 @@
  @param comment The comment to save.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)saveComment:(RKComment *)comment completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)saveComment:(RDKComment *)comment completion:(RDKCompletionBlock)completion;
 
 /**
  Saves a link or comment.
@@ -80,7 +80,7 @@
  @param fullName The full name of the link or comment to save.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)saveLinkOrCommentWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)saveLinkOrCommentWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 /**
  Unsaves a link.
@@ -88,7 +88,7 @@
  @param link The link to unsave.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)unsaveLink:(RKLink *)link completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)unsaveLink:(RDKLink *)link completion:(RDKCompletionBlock)completion;
 
 /**
  Unsaves a comment.
@@ -96,7 +96,7 @@
  @param comment The comment to unsave.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)unsaveComment:(RKComment *)comment completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)unsaveComment:(RDKComment *)comment completion:(RDKCompletionBlock)completion;
 
 /**
  Unsaves a link or comment.
@@ -104,7 +104,7 @@
  @param fullName The full name of the link or comment to unsave.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)unsaveLinkOrCommentWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)unsaveLinkOrCommentWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Reporting
 
@@ -114,7 +114,7 @@
  @param link The link to report.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)reportLink:(RKLink *)link completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)reportLink:(RDKLink *)link completion:(RDKCompletionBlock)completion;
 
 /**
  Reports a comment.
@@ -122,7 +122,7 @@
  @param comment The comment to report.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)reportComment:(RKComment *)comment completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)reportComment:(RDKComment *)comment completion:(RDKCompletionBlock)completion;
 
 /**
  Reports a link or comment.
@@ -130,7 +130,7 @@
  @param fullName The full name of the link or comment to report.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)reportLinkOrCommentWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)reportLinkOrCommentWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Deleting
 
@@ -140,7 +140,7 @@
  @param link The link to delete.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)deleteLink:(RKLink *)link completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)deleteLink:(RDKLink *)link completion:(RDKCompletionBlock)completion;
 
 /**
  Deletes a comment.
@@ -148,7 +148,7 @@
  @param comment The comment to delete.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)deleteComment:(RKComment *)comment completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)deleteComment:(RDKComment *)comment completion:(RDKCompletionBlock)completion;
 
 /**
  Deletes a link or comment.
@@ -156,6 +156,6 @@
  @param fullName The full name of the link or comment to delete.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)deleteLinkOrCommentWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)deleteLinkOrCommentWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 @end

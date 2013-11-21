@@ -25,7 +25,7 @@
 
 @interface BrowserViewController ()
 
-@property (nonatomic, strong) RKLink *link;
+@property (nonatomic, strong) RDKLink *link;
 @property (nonatomic, strong) NSURL *currentURL;
 @property (nonatomic, strong) UIWebView *webView;
 
@@ -48,7 +48,7 @@
 
 @implementation BrowserViewController
 
-- (instancetype)initWithLink:(RKLink *)link
+- (instancetype)initWithLink:(RDKLink *)link
 {
     if (self = [super initWithNibName:nil bundle:nil])
     {
@@ -117,7 +117,7 @@
 
 - (void)tappedActionButton:(id)sender
 {
-    if (![[RKClient sharedClient] isSignedIn])
+    if (![[RDKClient sharedClient] isSignedIn])
     {
         self.authenticationManager = [[AuthenticationManager alloc] init];
         [[self authenticationManager] showSignInAlertViewWithCompletion:nil];
@@ -151,7 +151,7 @@
 - (void)upvoteLink
 {
     __weak __typeof(self)weakSelf = self;
-    [[RKClient sharedClient] upvote:self.link completion:^(NSError *error) {
+    [[RDKClient sharedClient] upvote:self.link completion:^(NSError *error) {
         if (!error)
         {
             weakSelf.upvoteItem.enabled = NO;
@@ -163,7 +163,7 @@
 - (void)downvoteLink
 {
     __weak __typeof(self)weakSelf = self;
-    [[RKClient sharedClient] downvote:self.link completion:^(NSError *error) {
+    [[RDKClient sharedClient] downvote:self.link completion:^(NSError *error) {
         if (!error)
         {
             weakSelf.downvoteItem.enabled = NO;
@@ -175,7 +175,7 @@
 - (void)saveLink
 {
     __weak __typeof(self)weakSelf = self;
-    [[RKClient sharedClient] saveLink:self.link completion:^(NSError *error) {
+    [[RDKClient sharedClient] saveLink:self.link completion:^(NSError *error) {
         if (!error)
         {
             weakSelf.saveItem.enabled = NO;
@@ -186,7 +186,7 @@
 - (void)hideLink
 {
     __weak __typeof(self)weakSelf = self;
-    [[RKClient sharedClient] hideLink:self.link completion:^(NSError *error) {
+    [[RDKClient sharedClient] hideLink:self.link completion:^(NSError *error) {
         if (!error)
         {
             weakSelf.hideItem.enabled = NO;

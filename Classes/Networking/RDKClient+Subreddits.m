@@ -1,4 +1,4 @@
-// RKClient+Subreddits.m
+// RDKClient+Subreddits.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,17 +20,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient+Subreddits.h"
-#import "RKClient+Requests.h"
-#import "RKSubreddit.h"
-#import "RKPagination.h"
-#import "RKLink.h"
+#import "RDKClient+Subreddits.h"
+#import "RDKClient+Requests.h"
+#import "RDKSubreddit.h"
+#import "RDKPagination.h"
+#import "RDKLink.h"
 
-@implementation RKClient (Subreddits)
+@implementation RDKClient (Subreddits)
 
 #pragma mark - Getting Subreddits
 
-- (NSURLSessionDataTask *)subredditWithName:(NSString *)subredditName completion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)subredditWithName:(NSString *)subredditName completion:(RDKObjectCompletionBlock)completion
 {
     NSParameterAssert(subredditName);
     
@@ -42,7 +42,7 @@
         if (responseObject)
         {
             NSError *mantleError = nil;
-            RKSubreddit *subreddit = [MTLJSONAdapter modelOfClass:[RKSubreddit class] fromJSONDictionary:responseObject error:&mantleError];
+            RDKSubreddit *subreddit = [MTLJSONAdapter modelOfClass:[RDKSubreddit class] fromJSONDictionary:responseObject error:&mantleError];
             
             completion(subreddit, mantleError);
         }
@@ -53,24 +53,24 @@
     }];
 }
 
-- (NSURLSessionDataTask *)popularSubredditsWithPagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)popularSubredditsWithPagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     return [self listingTaskWithPath:@"subreddits/popular.json" parameters:nil pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)newSubredditsWithPagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)newSubredditsWithPagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     return [self listingTaskWithPath:@"subreddits/new.json" parameters:nil pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)searchForSubredditsByName:(NSString *)name pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)searchForSubredditsByName:(NSString *)name pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     NSDictionary *parameters = @{@"q": name};
     
     return [self listingTaskWithPath:@"subreddits/search.json" parameters:parameters pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)subredditsByTopic:(NSString *)topic completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)subredditsByTopic:(NSString *)topic completion:(RDKArrayCompletionBlock)completion
 {
     NSParameterAssert(topic);
     
@@ -94,7 +94,7 @@
     }];
 }
 
-- (NSURLSessionDataTask *)recommendedSubredditsForSubreddits:(NSArray *)subreddits completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)recommendedSubredditsForSubreddits:(NSArray *)subreddits completion:(RDKArrayCompletionBlock)completion
 {
     NSParameterAssert(subreddits);
     
@@ -121,12 +121,12 @@
 
 #pragma mark - Subscribing
 
-- (NSURLSessionDataTask *)subscribeToSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)subscribeToSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self subscribeToSubredditWithFullName:[subreddit fullName] completion:completion];
 }
 
-- (NSURLSessionDataTask *)subscribeToSubredditWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)subscribeToSubredditWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
     
@@ -134,12 +134,12 @@
     return [self basicPostTaskWithPath:@"api/subscribe" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)unsubscribeFromSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)unsubscribeFromSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self unsubscribeFromSubredditWithFullName:[subreddit fullName] completion:completion];
 }
 
-- (NSURLSessionDataTask *)unsubscribeFromSubredditWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)unsubscribeFromSubredditWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
     

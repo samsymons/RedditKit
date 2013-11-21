@@ -1,4 +1,4 @@
-// RKClient+Apps.m
+// RDKClient+Apps.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,25 +20,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient+Apps.h"
-#import "RKClient+Requests.h"
-#import "RKUser.h"
+#import "RDKClient+Apps.h"
+#import "RDKClient+Requests.h"
+#import "RDKUser.h"
 
-@implementation RKClient (Apps)
+@implementation RDKClient (Apps)
 
-- (NSURLSessionDataTask *)createAppWithName:(NSString *)name description:(NSString *)description aboutURL:(NSString *)aboutURL redirectURL:(NSString *)redirectURL completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)createAppWithName:(NSString *)name description:(NSString *)description aboutURL:(NSString *)aboutURL redirectURL:(NSString *)redirectURL completion:(RDKCompletionBlock)completion
 {
     return [self createOrUpdateAppWithIdentifier:nil name:name description:description aboutURL:aboutURL redirectURL:redirectURL completion:completion];
 }
 
-- (NSURLSessionDataTask *)updateAppWithIdentifier:(NSString *)identifier name:(NSString *)name description:(NSString *)description aboutURL:(NSString *)aboutURL redirectURL:(NSString *)redirectURL completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)updateAppWithIdentifier:(NSString *)identifier name:(NSString *)name description:(NSString *)description aboutURL:(NSString *)aboutURL redirectURL:(NSString *)redirectURL completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(identifier);
     
     return [self createOrUpdateAppWithIdentifier:identifier name:name description:description aboutURL:aboutURL redirectURL:redirectURL completion:completion];
 }
 
-- (NSURLSessionDataTask *)deleteAppWithIdentifier:(NSString *)identifier completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)deleteAppWithIdentifier:(NSString *)identifier completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(identifier);
     
@@ -46,7 +46,7 @@
     return [self basicPostTaskWithPath:@"api/deleteapp" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)revokeAppWithIdentifier:(NSString *)identifier completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)revokeAppWithIdentifier:(NSString *)identifier completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(identifier);
     
@@ -54,12 +54,12 @@
     return [self basicPostTaskWithPath:@"api/revokeapp" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)addDeveloper:(RKUser *)developer toAppWithIdentifier:(NSString *)identifier completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)addDeveloper:(RDKUser *)developer toAppWithIdentifier:(NSString *)identifier completion:(RDKCompletionBlock)completion
 {
     return [self addDeveloperWithUsername:developer.username toAppWithIdentifier:identifier completion:completion];
 }
 
-- (NSURLSessionDataTask *)addDeveloperWithUsername:(NSString *)username toAppWithIdentifier:(NSString *)identifier completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)addDeveloperWithUsername:(NSString *)username toAppWithIdentifier:(NSString *)identifier completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(username);
     NSParameterAssert(identifier);
@@ -68,12 +68,12 @@
     return [self basicPostTaskWithPath:@"api/adddeveloper" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)removeDeveloper:(RKUser *)developer fromAppWithIdentifier:(NSString *)identifier completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)removeDeveloper:(RDKUser *)developer fromAppWithIdentifier:(NSString *)identifier completion:(RDKCompletionBlock)completion
 {
     return [self removeDeveloperWithUsername:developer.username fromAppWithIdentifier:identifier completion:completion];
 }
 
-- (NSURLSessionDataTask *)removeDeveloperWithUsername:(NSString *)username fromAppWithIdentifier:(NSString *)identifier completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)removeDeveloperWithUsername:(NSString *)username fromAppWithIdentifier:(NSString *)identifier completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(username);
     NSParameterAssert(identifier);
@@ -84,7 +84,7 @@
 
 #pragma mark - Private
 
-- (NSURLSessionDataTask *)createOrUpdateAppWithIdentifier:(NSString *)identifier name:(NSString *)name description:(NSString *)description aboutURL:(NSString *)aboutURL redirectURL:(NSString *)redirectURL completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)createOrUpdateAppWithIdentifier:(NSString *)identifier name:(NSString *)name description:(NSString *)description aboutURL:(NSString *)aboutURL redirectURL:(NSString *)redirectURL completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(name);
     

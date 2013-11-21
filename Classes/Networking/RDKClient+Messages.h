@@ -1,4 +1,4 @@
-// RKClient+Messages.h
+// RDKClient+Messages.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,26 +20,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
-#import "RKCompletionBlocks.h"
-#import "RKClient+Users.h"
+#import "RDKClient.h"
+#import "RDKCompletionBlocks.h"
+#import "RDKClient+Users.h"
 
-typedef NS_ENUM(NSUInteger, RKMessageCategory) {
-    RKMessageCategoryAll,
-    RKMessageCategoryUnread,
-    RKMessageCategoryMessages,
-    RKMessageCategorySent,
-    RKMessageCategoryModerator,
-    RKMessageCategoryCommentReplies,
-    RKMessageCategoryPostReplies,
-    RKMessageCategoryUsernameMentions
+typedef NS_ENUM(NSUInteger, RDKMessageCategory) {
+    RDKMessageCategoryAll,
+    RDKMessageCategoryUnread,
+    RDKMessageCategoryMessages,
+    RDKMessageCategorySent,
+    RDKMessageCategoryModerator,
+    RDKMessageCategoryCommentReplies,
+    RDKMessageCategoryPostReplies,
+    RDKMessageCategoryUsernameMentions
 };
 
-@class RKUser;
-@class RKMessage;
-@class RKPagination;
+@class RDKUser;
+@class RDKMessage;
+@class RDKPagination;
 
-@interface RKClient (Messages)
+@interface RDKClient (Messages)
 
 #pragma mark - Fetching Messages
 
@@ -50,7 +50,7 @@ typedef NS_ENUM(NSUInteger, RKMessageCategory) {
  @param read Mark the messages as read on reddit.
  @param completion An optional block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)messageInboxWithPagination:(RKPagination *)pagination markRead:(BOOL)read completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)messageInboxWithPagination:(RDKPagination *)pagination markRead:(BOOL)read completion:(RDKListingCompletionBlock)completion;
 
 /**
  Returns unread messages from the current user's inbox.
@@ -58,7 +58,7 @@ typedef NS_ENUM(NSUInteger, RKMessageCategory) {
  @param pagination Pagination information for the request. Uses default information if nil.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)unreadMessagesWithPagination:(RKPagination *)pagination markRead:(BOOL)read completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)unreadMessagesWithPagination:(RDKPagination *)pagination markRead:(BOOL)read completion:(RDKListingCompletionBlock)completion;
 
 /**
  Returns the current user's sent messages.
@@ -66,7 +66,7 @@ typedef NS_ENUM(NSUInteger, RKMessageCategory) {
  @param pagination Pagination information for the request. Uses default information if nil.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)sentMessagesWithPagination:(RKPagination *)pagination markRead:(BOOL)read completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)sentMessagesWithPagination:(RDKPagination *)pagination markRead:(BOOL)read completion:(RDKListingCompletionBlock)completion;
 
 /**
  Returns messages from a specific category.
@@ -75,7 +75,7 @@ typedef NS_ENUM(NSUInteger, RKMessageCategory) {
  @param pagination Pagination information for the request. Uses default information if nil.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)messagesInCategory:(RKMessageCategory)category pagination:(RKPagination *)pagination markRead:(BOOL)read completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)messagesInCategory:(RDKMessageCategory)category pagination:(RDKPagination *)pagination markRead:(BOOL)read completion:(RDKListingCompletionBlock)completion;
 
 #pragma mark - Marking As Read/Unread
 
@@ -85,7 +85,7 @@ typedef NS_ENUM(NSUInteger, RKMessageCategory) {
  @param message The message to be marked as read.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)markMessageAsRead:(RKMessage *)message completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)markMessageAsRead:(RDKMessage *)message completion:(RDKCompletionBlock)completion;
 
 /**
  Marks a message as read.
@@ -93,7 +93,7 @@ typedef NS_ENUM(NSUInteger, RKMessageCategory) {
  @param fullName The full name of the message to be marked as read.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)markMessageWithFullNameAsRead:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)markMessageWithFullNameAsRead:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 /**
  Marks a message as unread.
@@ -101,7 +101,7 @@ typedef NS_ENUM(NSUInteger, RKMessageCategory) {
  @param message The message to be marked as unread.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)markMessageAsUnread:(RKMessage *)message completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)markMessageAsUnread:(RDKMessage *)message completion:(RDKCompletionBlock)completion;
 
 /**
  Marks a message as unread.
@@ -109,7 +109,7 @@ typedef NS_ENUM(NSUInteger, RKMessageCategory) {
  @param fullName The full name of the message to be marked as unread.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)markMessageWithFullNameAsUnread:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)markMessageWithFullNameAsUnread:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Sending Messages
 
@@ -121,7 +121,7 @@ typedef NS_ENUM(NSUInteger, RKMessageCategory) {
  @param recipient The username of the message's recipient.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)sendMessage:(NSString *)message subject:(NSString *)subject recipient:(NSString *)recipient completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)sendMessage:(NSString *)message subject:(NSString *)subject recipient:(NSString *)recipient completion:(RDKCompletionBlock)completion;
 
 /**
  Sends a message to another reddit user.
@@ -133,7 +133,7 @@ typedef NS_ENUM(NSUInteger, RKMessageCategory) {
  @param captchaValue The value of the captcha as determined by the user.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)sendMessage:(NSString *)message subject:(NSString *)subject recipient:(NSString *)recipient captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)sendMessage:(NSString *)message subject:(NSString *)subject recipient:(NSString *)recipient captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Blocking Users
 
@@ -144,7 +144,7 @@ typedef NS_ENUM(NSUInteger, RKMessageCategory) {
  @param message The message whose author should be blocked.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)blockAuthorOfMessage:(RKMessage *)message completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)blockAuthorOfMessage:(RDKMessage *)message completion:(RDKCompletionBlock)completion;
 
 /**
  Blocks the author of a private message from being able to send private messages to the current user.
@@ -153,7 +153,7 @@ typedef NS_ENUM(NSUInteger, RKMessageCategory) {
  @param fullName The full name of the message whose author should be blocked.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)blockAuthorOfMessageWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)blockAuthorOfMessageWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 /**
  Unblocks a user, allowing them to send private messages to you once more.
@@ -161,7 +161,7 @@ typedef NS_ENUM(NSUInteger, RKMessageCategory) {
  @param user The user to unblock.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)unblockUser:(RKUser *)user completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)unblockUser:(RDKUser *)user completion:(RDKCompletionBlock)completion;
 
 /**
  Unblocks a user, allowing them to send private messages to you once more.
@@ -169,6 +169,6 @@ typedef NS_ENUM(NSUInteger, RKMessageCategory) {
  @param username The username of the user to unblock.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)unblockUserWithUsername:(NSString *)username completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)unblockUserWithUsername:(NSString *)username completion:(RDKCompletionBlock)completion;
 
 @end

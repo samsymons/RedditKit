@@ -1,4 +1,4 @@
-// RKClient+Voting.m
+// RDKClient+Voting.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,23 +20,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient+Voting.h"
-#import "RKClient+Errors.h"
-#import "RKClient+Requests.h"
+#import "RDKClient+Voting.h"
+#import "RDKClient+Errors.h"
+#import "RDKClient+Requests.h"
 
-#import "RKVotable.h"
+#import "RDKVotable.h"
 
-NSString * NSStringFromVoteDirection(RKVoteDirection voteDirection)
+NSString * NSStringFromVoteDirection(RDKVoteDirection voteDirection)
 {
     switch (voteDirection)
     {
-        case RKVoteDirectionUpvote:
+        case RDKVoteDirectionUpvote:
             return @"1";
             break;
-        case RKVoteDirectionDownvote:
+        case RDKVoteDirectionDownvote:
             return @"-1";
             break;
-        case RKVoteDirectionNone:
+        case RDKVoteDirectionNone:
             return @"0";
             break;
         default:
@@ -45,24 +45,24 @@ NSString * NSStringFromVoteDirection(RKVoteDirection voteDirection)
     }
 }
 
-@implementation RKClient (Voting)
+@implementation RDKClient (Voting)
 
-- (NSURLSessionDataTask *)upvote:(RKVotable *)object completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)upvote:(RDKVotable *)object completion:(RDKCompletionBlock)completion
 {
-    return [self voteOnThingWithFullName:object.fullName direction:RKVoteDirectionUpvote completion:completion];
+    return [self voteOnThingWithFullName:object.fullName direction:RDKVoteDirectionUpvote completion:completion];
 }
 
-- (NSURLSessionDataTask *)downvote:(RKVotable *)object completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)downvote:(RDKVotable *)object completion:(RDKCompletionBlock)completion
 {
-    return [self voteOnThingWithFullName:object.fullName direction:RKVoteDirectionDownvote completion:completion];
+    return [self voteOnThingWithFullName:object.fullName direction:RDKVoteDirectionDownvote completion:completion];
 }
 
-- (NSURLSessionDataTask *)revokeVote:(RKVotable *)object completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)revokeVote:(RDKVotable *)object completion:(RDKCompletionBlock)completion
 {
-    return [self voteOnThingWithFullName:object.fullName direction:RKVoteDirectionNone completion:completion];
+    return [self voteOnThingWithFullName:object.fullName direction:RDKVoteDirectionNone completion:completion];
 }
 
-- (NSURLSessionDataTask *)voteOnThingWithFullName:(NSString *)fullName direction:(RKVoteDirection)direction completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)voteOnThingWithFullName:(NSString *)fullName direction:(RDKVoteDirection)direction completion:(RDKCompletionBlock)completion;
 {
     NSParameterAssert(fullName);
     NSParameterAssert(direction);

@@ -1,4 +1,4 @@
-// RKClient+Comments.h
+// RDKClient+Comments.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,11 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
+#import "RDKClient.h"
 
-@class RKLink, RKComment, RKMessage;
+@class RDKLink, RDKComment, RDKMessage;
 
-@interface RKClient (Comments)
+@interface RDKClient (Comments)
 
 #pragma mark - Submitting Comments
 
@@ -36,7 +36,7 @@
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)submitComment:(NSString *)commentText onLink:(RKLink *)link completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)submitComment:(NSString *)commentText onLink:(RDKLink *)link completion:(RDKCompletionBlock)completion;
 
 /**
  Submit a comment as a reply to another comment.
@@ -46,7 +46,7 @@
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)submitComment:(NSString *)commentText asReplyToComment:(RKComment *)comment completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)submitComment:(NSString *)commentText asReplyToComment:(RDKComment *)comment completion:(RDKCompletionBlock)completion;
 
 /**
  Submit a comment on a link or ocmment.
@@ -56,7 +56,7 @@
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)submitComment:(NSString *)commentText onThingWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)submitComment:(NSString *)commentText onThingWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Getting Comments
 
@@ -64,18 +64,18 @@
  Gets any comments on a link.
  
  @param link The link.
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKComments, an RKPagination object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RDKComments, an RDKPagination object, and any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)commentsForLink:(RKLink *)link completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)commentsForLink:(RDKLink *)link completion:(RDKListingCompletionBlock)completion;
 
 /**
  Submit a comment on a link or ocmment.
  
  @param linkIdentifier The identifier of the link.
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKComments, an RKPagination object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RDKComments, an RDKPagination object, and any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier completion:(RDKListingCompletionBlock)completion;
 
 @end

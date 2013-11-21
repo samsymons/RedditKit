@@ -1,4 +1,4 @@
-// RKClient+Flair.h
+// RDKClient+Flair.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,30 +20,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
-#import "RKCompletionBlocks.h"
+#import "RDKClient.h"
+#import "RDKCompletionBlocks.h"
 
-typedef NS_ENUM(NSUInteger, RKFlairTemplateType) {
-	RKFlairTemplateTypeUser = 1,
-	RKFlairTemplateTypeLink
+typedef NS_ENUM(NSUInteger, RDKFlairTemplateType) {
+	RDKFlairTemplateTypeUser = 1,
+	RDKFlairTemplateTypeLink
 };
 
-typedef NS_ENUM(NSUInteger, RKUserFlairPosition) {
-	RKUserFlairPositionLeft = 1,
-	RKUserFlairPositionRight
+typedef NS_ENUM(NSUInteger, RDKUserFlairPosition) {
+	RDKUserFlairPositionLeft = 1,
+	RDKUserFlairPositionRight
 };
 
-typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
-	RKLinkFlairPositionNone = 1,
-	RKLinkFlairPositionLeft,
-	RKLinkFlairPositionRight
+typedef NS_ENUM(NSUInteger, RDKLinkFlairPosition) {
+	RDKLinkFlairPositionNone = 1,
+	RDKLinkFlairPositionLeft,
+	RDKLinkFlairPositionRight
 };
 
-@class RKUser;
-@class RKLink;
-@class RKSubreddit;
+@class RDKUser;
+@class RDKLink;
+@class RDKSubreddit;
 
-@interface RKClient (Flair)
+@interface RDKClient (Flair)
 
 /**
  Set flair options for a subreddit. Requires that the current user be a moderator of the subreddit specified.
@@ -57,7 +57,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)setFlairOptionsForSubreddit:(RKSubreddit *)subreddit flairEnabled:(BOOL)flairEnabled userFlairPosition:(RKUserFlairPosition)userFlairPosition allowSelfAssignedUserFlair:(BOOL)userFlair linkFlairPosition:(RKLinkFlairPosition)linkFlairPosition allowSelfAssignedLinkFlair:(BOOL)linkFlair completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)setFlairOptionsForSubreddit:(RDKSubreddit *)subreddit flairEnabled:(BOOL)flairEnabled userFlairPosition:(RDKUserFlairPosition)userFlairPosition allowSelfAssignedUserFlair:(BOOL)userFlair linkFlairPosition:(RDKLinkFlairPosition)linkFlairPosition allowSelfAssignedLinkFlair:(BOOL)linkFlair completion:(RDKCompletionBlock)completion;
 
 /**
  Set flair options for a subreddit. Requires that the current user be a moderator of the subreddit specified.
@@ -71,7 +71,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)setFlairOptionsForSubredditWithName:(NSString *)subredditName flairEnabled:(BOOL)flairEnabled userFlairPosition:(RKUserFlairPosition)userFlairPosition allowSelfAssignedUserFlair:(BOOL)userFlair linkFlairPosition:(RKLinkFlairPosition)linkFlairPosition allowSelfAssignedLinkFlair:(BOOL)linkFlair completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)setFlairOptionsForSubredditWithName:(NSString *)subredditName flairEnabled:(BOOL)flairEnabled userFlairPosition:(RDKUserFlairPosition)userFlairPosition allowSelfAssignedUserFlair:(BOOL)userFlair linkFlairPosition:(RDKLinkFlairPosition)linkFlairPosition allowSelfAssignedLinkFlair:(BOOL)linkFlair completion:(RDKCompletionBlock)completion;
 
 /**
  Gets a list of users and their flair for a given subreddit.
@@ -80,7 +80,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. It takes two arguments: an NSArray, and any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)flairListForSubreddit:(RKSubreddit *)subreddit completion:(RKArrayCompletionBlock)completion;
+- (NSURLSessionDataTask *)flairListForSubreddit:(RDKSubreddit *)subreddit completion:(RDKArrayCompletionBlock)completion;
 
 /**
  Gets a list of users and their flair for a given subreddit.
@@ -89,7 +89,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. It takes two arguments: an NSArray, and any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)flairListForSubredditWithName:(NSString *)subredditName completion:(RKArrayCompletionBlock)completion;
+- (NSURLSessionDataTask *)flairListForSubredditWithName:(NSString *)subredditName completion:(RDKArrayCompletionBlock)completion;
 
 /**
  Allows or disallows flair in a subreddit.
@@ -99,7 +99,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)allowFlair:(BOOL)flairAllowed inSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)allowFlair:(BOOL)flairAllowed inSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Allows or disallows flair in a subreddit.
@@ -109,7 +109,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)allowFlair:(BOOL)flairAllowed inSubredditWithName:(NSString *)subredditName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)allowFlair:(BOOL)flairAllowed inSubredditWithName:(NSString *)subredditName completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Creating Flair
 
@@ -123,7 +123,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)createFlairTemplateOfType:(RKFlairTemplateType)type subreddit:(RKSubreddit *)subreddit text:(NSString *)text flairClass:(NSString *)flairClass completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)createFlairTemplateOfType:(RDKFlairTemplateType)type subreddit:(RDKSubreddit *)subreddit text:(NSString *)text flairClass:(NSString *)flairClass completion:(RDKCompletionBlock)completion;
 
 /**
  Creates a flair template.
@@ -135,7 +135,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)createFlairTemplateOfType:(RKFlairTemplateType)type subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)createFlairTemplateOfType:(RDKFlairTemplateType)type subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Setting Flair
 
@@ -149,7 +149,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)setFlairForUser:(RKUser *)user subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)setFlairForUser:(RDKUser *)user subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RDKCompletionBlock)completion;
 
 /**
  Sets flair for a user.
@@ -161,7 +161,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)setFlairForUserWithUsername:(NSString *)username subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)setFlairForUserWithUsername:(NSString *)username subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RDKCompletionBlock)completion;
 
 /**
  Sets flair for a link.
@@ -173,7 +173,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)setFlairForLink:(RKLink *)link subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)setFlairForLink:(RDKLink *)link subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RDKCompletionBlock)completion;
 
 /**
  Sets flair for a link.
@@ -185,7 +185,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)setFlairForLinkWithFullName:(NSString *)fullName subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)setFlairForLinkWithFullName:(NSString *)fullName subredditName:(NSString *)subredditName text:(NSString *)text flairClass:(NSString *)flairClass completion:(RDKCompletionBlock)completion;
 
 /**
  Creates flair templates from a CSV string.
@@ -196,7 +196,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @return The NSURLSessionDataTask for the request.
  @note Each line has a CSV format of 'user,flair-text,css_class', and is limited to 100 lines.
  */
-- (NSURLSessionDataTask *)setFlairWithCSV:(NSString *)flairCSV subreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)setFlairWithCSV:(NSString *)flairCSV subreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Creates flair templates from a CSV string.
@@ -207,7 +207,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)setFlairWithCSV:(NSString *)flairCSV subredditName:(NSString *)subredditName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)setFlairWithCSV:(NSString *)flairCSV subredditName:(NSString *)subredditName completion:(RDKCompletionBlock)completion;
 
 #pragma mark - Deleting Flair
 
@@ -219,7 +219,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)clearFlairTemplatesOfType:(RKFlairTemplateType)type subreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)clearFlairTemplatesOfType:(RDKFlairTemplateType)type subreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Clear flair templates of a certain type.
@@ -229,7 +229,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)clearFlairTemplatesOfType:(RKFlairTemplateType)type subredditName:(NSString *)subredditName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)clearFlairTemplatesOfType:(RDKFlairTemplateType)type subredditName:(NSString *)subredditName completion:(RDKCompletionBlock)completion;
 
 /**
  Deletes a flair template.
@@ -239,7 +239,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)deleteFlairTemplateWithIdentifier:(NSString *)identifier subreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)deleteFlairTemplateWithIdentifier:(NSString *)identifier subreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Deletes a flair template.
@@ -249,7 +249,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)deleteFlairTemplateWithIdentifier:(NSString *)identifier subredditName:(NSString *)subredditName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)deleteFlairTemplateWithIdentifier:(NSString *)identifier subredditName:(NSString *)subredditName completion:(RDKCompletionBlock)completion;
 
 /**
  Removes flair that is assigned to a user.
@@ -259,7 +259,7 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)deleteFlairForUser:(RKUser *)user subreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)deleteFlairForUser:(RDKUser *)user subreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion;
 
 /**
  Removes flair that is assigned to a user.
@@ -269,6 +269,6 @@ typedef NS_ENUM(NSUInteger, RKLinkFlairPosition) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)deleteFlairForUserWithUsername:(NSString *)username subredditName:(NSString *)subredditName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)deleteFlairForUserWithUsername:(NSString *)username subredditName:(NSString *)subredditName completion:(RDKCompletionBlock)completion;
 
 @end

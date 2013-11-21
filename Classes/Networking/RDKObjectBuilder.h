@@ -1,4 +1,4 @@
-// RKObjectBuilder.h
+// RDKObjectBuilder.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -32,7 +32,7 @@ extern NSString * const kRKObjectTypeMultiredditDescription;
 extern NSString * const kRKObjectTypeModeratorAction;
 extern NSString * const kRKObjectTypeMore;
 
-@interface RKObjectBuilder : NSObject
+@interface RDKObjectBuilder : NSObject
 
 + (instancetype)objectBuilder;
 

@@ -1,4 +1,4 @@
-// RKClient+Users.m
+// RDKClient+Users.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,34 +20,34 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient+Users.h"
-#import "RKObjectBuilder.h"
-#import "RKClient+Requests.h"
-#import "RKClient+Errors.h"
-#import "RKUser.h"
-#import "RKSubreddit.h"
-#import "RKPagination.h"
+#import "RDKClient+Users.h"
+#import "RDKObjectBuilder.h"
+#import "RDKClient+Requests.h"
+#import "RDKClient+Errors.h"
+#import "RDKUser.h"
+#import "RDKSubreddit.h"
+#import "RDKPagination.h"
 
-NSString * NSStringFromUserContentCategory(RKUserContentCategory category)
+NSString * NSStringFromUserContentCategory(RDKUserContentCategory category)
 {
     switch (category)
     {
-        case RKUserContentCategoryOverview:
+        case RDKUserContentCategoryOverview:
             return @"overview";
             break;
-        case RKUserContentCategoryComments:
+        case RDKUserContentCategoryComments:
             return @"comments";
             break;
-        case RKUserContentCategorySubmissions:
+        case RDKUserContentCategorySubmissions:
             return @"submitted";
             break;
-        case RKUserContentCategoryGilded:
+        case RDKUserContentCategoryGilded:
             return @"gilded";
             break;
-        case RKUserContentCategoryLiked:
+        case RDKUserContentCategoryLiked:
             return @"liked";
             break;
-        case RKUserContentCategoryDisliked:
+        case RDKUserContentCategoryDisliked:
             return @"disliked";
             break;
         default:
@@ -56,17 +56,17 @@ NSString * NSStringFromUserContentCategory(RKUserContentCategory category)
     }
 }
 
-NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory category)
+NSString * NSStringFromSubscribedSubredditCategory(RDKSubscribedSubredditCategory category)
 {
     switch (category)
     {
-        case RKSubscribedSubredditCategorySubscriber:
+        case RDKSubscribedSubredditCategorySubscriber:
             return @"subscriber";
             break;
-        case RKSubscribedSubredditCategoryContributor:
+        case RDKSubscribedSubredditCategoryContributor:
             return @"contributor";
             break;
-        case RKSubscribedSubredditCategoryModerator:
+        case RDKSubscribedSubredditCategoryModerator:
             return @"moderator";
             break;
         default:
@@ -75,14 +75,14 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
     }
 }
 
-@implementation RKClient (Users)
+@implementation RDKClient (Users)
 
-- (NSURLSessionDataTask *)currentUserWithCompletion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)currentUserWithCompletion:(RDKObjectCompletionBlock)completion
 {
     return [self getPath:[[self class] userInformationURLPath] parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         if (responseObject)
         {
-            RKUser *account = [RKObjectBuilder objectFromJSON:responseObject];
+            RDKUser *account = [RDKObjectBuilder objectFromJSON:responseObject];
             
             if (completion)
             {
@@ -99,12 +99,12 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
     }];
 }
 
-- (NSURLSessionDataTask *)user:(RKUser *)user completion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)user:(RDKUser *)user completion:(RDKObjectCompletionBlock)completion
 {
     return [self userWithUsername:user.username completion:completion];
 }
 
-- (NSURLSessionDataTask *)userWithUsername:(NSString *)username completion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)userWithUsername:(NSString *)username completion:(RDKObjectCompletionBlock)completion
 {
     NSParameterAssert(username);
     
@@ -118,7 +118,7 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
         
         if (responseObject)
         {
-            RKUser *account = [RKObjectBuilder objectFromJSON:responseObject];
+            RDKUser *account = [RDKObjectBuilder objectFromJSON:responseObject];
             completion(account, nil);
         }
         else
@@ -128,12 +128,12 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
     }];
 }
 
-- (NSURLSessionDataTask *)subscribedSubredditsWithCompletion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)subscribedSubredditsWithCompletion:(RDKArrayCompletionBlock)completion
 {
-    return [self subscribedSubredditsInCategory:RKSubscribedSubredditCategorySubscriber completion:completion];
+    return [self subscribedSubredditsInCategory:RDKSubscribedSubredditCategorySubscriber completion:completion];
 }
 
-- (NSURLSessionDataTask *)subscribedSubredditsInCategory:(RKSubscribedSubredditCategory)category completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)subscribedSubredditsInCategory:(RDKSubscribedSubredditCategory)category completion:(RDKArrayCompletionBlock)completion
 {
     NSDictionary *parameters = @{@"un": @"samsymons"};
     NSString *path = [NSString stringWithFormat:@"subreddits/mine/%@.json", NSStringFromSubscribedSubredditCategory(category)];
@@ -150,7 +150,7 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
             
             if (range.location != NSNotFound)
             {
-                completion(nil, [RKClient authenticationRequiredError]);
+                completion(nil, [RDKClient authenticationRequiredError]);
                 return;
             }
             
@@ -162,7 +162,7 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
             for (NSDictionary *subredditJSON in subredditsJSON)
             {
                 NSError *mantleError = nil;
-                RKSubreddit *subreddit = [MTLJSONAdapter modelOfClass:[RKSubreddit class] fromJSONDictionary:subredditJSON error:&mantleError];
+                RDKSubreddit *subreddit = [MTLJSONAdapter modelOfClass:[RDKSubreddit class] fromJSONDictionary:subredditJSON error:&mantleError];
                 
                 if (!mantleError)
                 {
@@ -179,7 +179,7 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
     }];
 }
 
-- (NSURLSessionDataTask *)deleteCurrentUserWithReason:(NSString *)reason currentPassword:(NSString *)currentPassword completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)deleteCurrentUserWithReason:(NSString *)reason currentPassword:(NSString *)currentPassword completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(currentPassword);
     
@@ -201,42 +201,42 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
 
 #pragma mark - User Content
 
-- (NSURLSessionDataTask *)overviewOfUser:(RKUser *)user pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)overviewOfUser:(RDKUser *)user pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     return [self overviewOfUserWithUsername:user.username pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)overviewOfUserWithUsername:(NSString *)username pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)overviewOfUserWithUsername:(NSString *)username pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
-    return [self contentForUserWithUsername:username category:RKUserContentCategoryOverview pagination:pagination completion:completion];
+    return [self contentForUserWithUsername:username category:RDKUserContentCategoryOverview pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)commentsByUser:(RKUser *)user pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)commentsByUser:(RDKUser *)user pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     return [self commentsByUserWithUsername:user.username pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)commentsByUserWithUsername:(NSString *)username pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)commentsByUserWithUsername:(NSString *)username pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
-    return [self contentForUserWithUsername:username category:RKUserContentCategoryComments pagination:pagination completion:completion];
+    return [self contentForUserWithUsername:username category:RDKUserContentCategoryComments pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)submissionsByUser:(RKUser *)user pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)submissionsByUser:(RDKUser *)user pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     return [self submissionsByUserWithUsername:user.username pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)submissionsByUserWithUsername:(NSString *)username pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)submissionsByUserWithUsername:(NSString *)username pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
-    return [self contentForUserWithUsername:username category:RKUserContentCategorySubmissions pagination:pagination completion:completion];
+    return [self contentForUserWithUsername:username category:RDKUserContentCategorySubmissions pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)contentForUser:(RKUser *)user category:(RKUserContentCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)contentForUser:(RDKUser *)user category:(RDKUserContentCategory)category pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     return [self contentForUserWithUsername:user.username category:category pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)contentForUserWithUsername:(NSString *)username category:(RKUserContentCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)contentForUserWithUsername:(NSString *)username category:(RDKUserContentCategory)category pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     NSParameterAssert(username);
     
@@ -247,7 +247,7 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
 
 #pragma mark - Friends
 
-- (NSURLSessionDataTask *)friendsWithCompletion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)friendsWithCompletion:(RDKArrayCompletionBlock)completion
 {
     return [self getPath:@"prefs/friends.json" parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         if (!completion)
@@ -263,7 +263,7 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
         {
             if (![responseObject isKindOfClass:[NSArray class]])
             {
-                completion(nil, [RKClient authenticationRequiredError]);
+                completion(nil, [RDKClient authenticationRequiredError]);
                 return;
             }
             
@@ -275,29 +275,29 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
     }];
 }
 
-- (NSURLSessionDataTask *)submissionsByFriendsWithCompletion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)submissionsByFriendsWithCompletion:(RDKListingCompletionBlock)completion
 {
     return [self listingTaskWithPath:@"r/friends.json" parameters:nil pagination:nil completion:completion];
 }
 
-- (NSURLSessionDataTask *)addFriend:(RKUser *)user completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)addFriend:(RDKUser *)user completion:(RDKCompletionBlock)completion
 {
     return [self addFriendWithUsername:user.username completion:completion];
 }
 
-- (NSURLSessionDataTask *)addFriendWithUsername:(NSString *)username completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)addFriendWithUsername:(NSString *)username completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(username);
     
     return [self friendTaskWithContainer:self.currentUser.fullName subredditName:nil name:username type:@"friend" completion:completion];
 }
 
-- (NSURLSessionDataTask *)removeFriend:(RKUser *)account completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)removeFriend:(RDKUser *)account completion:(RDKCompletionBlock)completion
 {
     return [self removeFriendWithUsername:account.username completion:completion];
 }
 
-- (NSURLSessionDataTask *)removeFriendWithUsername:(NSString *)username completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)removeFriendWithUsername:(NSString *)username completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(username);
     
@@ -306,7 +306,7 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
 
 #pragma mark - Registration
 
-- (NSURLSessionDataTask *)checkAvailabilityOfUsername:(NSString *)username completion:(RKBooleanCompletionBlock)completion
+- (NSURLSessionDataTask *)checkAvailabilityOfUsername:(NSString *)username completion:(RDKBooleanCompletionBlock)completion
 {
     NSDictionary *parameters = @{@"user": username};
     

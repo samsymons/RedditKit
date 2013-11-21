@@ -1,4 +1,4 @@
-// RKPagination.h
+// RDKPagination.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -22,36 +22,36 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSUInteger, RKCommentSortingMethod) {
-    RKCommentSortingMethodTop = 1,
-    RKCommentSortingMethodBest,
-    RKCommentSortingMethodNew,
-    RKCommentSortingMethodHot,
-    RKCommentSortingMethodControversial,
-    RKCommentSortingMethodOld
+typedef NS_ENUM(NSUInteger, RDKCommentSortingMethod) {
+    RDKCommentSortingMethodTop = 1,
+    RDKCommentSortingMethodBest,
+    RDKCommentSortingMethodNew,
+    RDKCommentSortingMethodHot,
+    RDKCommentSortingMethodControversial,
+    RDKCommentSortingMethodOld
 };
 
-typedef NS_ENUM(NSUInteger, RKUserContentSortingMethod) {
-    RKUserContentSortingMethodNew = 1,
-    RKUserContentSortingMethodHot,
-    RKUserContentSortingMethodTop,
-    RKUserContentSortingMethodControversial
+typedef NS_ENUM(NSUInteger, RDKUserContentSortingMethod) {
+    RDKUserContentSortingMethodNew = 1,
+    RDKUserContentSortingMethodHot,
+    RDKUserContentSortingMethodTop,
+    RDKUserContentSortingMethodControversial
 };
 
-typedef NS_ENUM(NSUInteger, RKTimeSortingMethod) {
-    RKTimeSortingMethodThisHour = 1,
-    RKTimeSortingMethodToday,
-    RKTimeSortingMethodThisWeek,
-    RKTimeSortingMethodThisMonth,
-    RKTimeSortingMethodThisYear,
-    RKTimeSortingMethodAllTime
+typedef NS_ENUM(NSUInteger, RDKTimeSortingMethod) {
+    RDKTimeSortingMethodThisHour = 1,
+    RDKTimeSortingMethodToday,
+    RDKTimeSortingMethodThisWeek,
+    RDKTimeSortingMethodThisMonth,
+    RDKTimeSortingMethodThisYear,
+    RDKTimeSortingMethodAllTime
 };
 
-// extern NSString * NSStringFromCommentSortingMethod(RKCommentSortingMethod sortingMethod);
-// extern NSString * NSStringFromTimeSortingMethod(RKTimeSortingMethod sortingMethod);
-// extern NSString * NSStringFromUserContentSortingMethod(RKUserContentSortingMethod sortingMethod);
+// extern NSString * NSStringFromCommentSortingMethod(RDKCommentSortingMethod sortingMethod);
+// extern NSString * NSStringFromTimeSortingMethod(RDKTimeSortingMethod sortingMethod);
+// extern NSString * NSStringFromUserContentSortingMethod(RDKUserContentSortingMethod sortingMethod);
 
-@interface RKPagination : NSObject
+@interface RDKPagination : NSObject
 
 /*
  The total number of things to return. This is 25 by default, and limited to 100.
@@ -73,29 +73,29 @@ typedef NS_ENUM(NSUInteger, RKTimeSortingMethod) {
 /**
  The sorting method for comments. This affects the order in which comments are returned.
  */
-@property (nonatomic, assign) RKCommentSortingMethod commentSortingMethod;
+@property (nonatomic, assign) RDKCommentSortingMethod commentSortingMethod;
 
 /**
  The sorting method for user content. This affects the order in which user content is returned.
  
- @note Only the RKUserContentSortingMethodTop and RKUserContentSortingMethodControversial sorting methods are affected by the timeMethod property.
+ @note Only the RDKUserContentSortingMethodTop and RDKUserContentSortingMethodControversial sorting methods are affected by the timeMethod property.
  */
-@property (nonatomic, assign) RKUserContentSortingMethod userContentSortingMethod;
+@property (nonatomic, assign) RDKUserContentSortingMethod userContentSortingMethod;
 
 /**
- The timeframe to sort by. Only used if the subredditCategory is set to RKSubredditSortingMethodControversial or RKSubredditSortingMethodTop.
+ The timeframe to sort by. Only used if the subredditCategory is set to RDKSubredditSortingMethodControversial or RDKSubredditSortingMethodTop.
  */
-@property (nonatomic, assign) RKTimeSortingMethod timeMethod;
+@property (nonatomic, assign) RDKTimeSortingMethod timeMethod;
 
 /**
  Extracts a pagination object from a listing response.
  */
-+ (RKPagination *)paginationFromListingResponse:(NSDictionary *)listingResponse;
++ (RDKPagination *)paginationFromListingResponse:(NSDictionary *)listingResponse;
 
 /**
  Creates and returns a pagination object with default values, and a specied limit of objects to return.
  */
-+ (RKPagination *)paginationWithLimit:(NSUInteger)limit;
++ (RDKPagination *)paginationWithLimit:(NSUInteger)limit;
 
 /**
  Returns the pagination object as an NSDictionary.

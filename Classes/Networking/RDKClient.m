@@ -1,4 +1,4 @@
-// RKClient.m
+// RDKClient.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,25 +20,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
-#import "RKUser.h"
-#import "RKResponseSerializer.h"
+#import "RDKClient.h"
+#import "RDKUser.h"
+#import "RDKResponseSerializer.h"
 
-#import "RKClient+Users.h"
+#import "RDKClient+Users.h"
 
-NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
+NSString * const RDKClientErrorDomain = @"RDKClientErrorDomain";
 
-@interface RKClient ()
+@interface RDKClient ()
 
-@property (nonatomic, strong) RKUser *currentUser;
+@property (nonatomic, strong) RDKUser *currentUser;
 
 @end
 
-@implementation RKClient
+@implementation RDKClient
 
 + (instancetype)sharedClient
 {
-    static RKClient *sharedRKClient = nil;
+    static RDKClient *sharedRKClient = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         sharedRKClient = [[[self class] alloc] init];
@@ -52,7 +52,7 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
     if (self = [super initWithBaseURL:[[self class] APIBaseURL]])
     {
         self.requestSerializer = [AFHTTPRequestSerializer serializer];
-        self.responseSerializer = [RKResponseSerializer serializer];
+        self.responseSerializer = [RDKResponseSerializer serializer];
     }
     
     return self;
@@ -89,7 +89,7 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 
 #pragma mark - Authentication
 
-- (NSURLSessionDataTask *)signInWithUsername:(NSString *)username password:(NSString *)password completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)signInWithUsername:(NSString *)username password:(NSString *)password completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(username);
     NSParameterAssert(password);
@@ -135,10 +135,10 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
     return authenticationTask;
 }
 
-- (void)updateCurrentUserWithCompletion:(RKCompletionBlock)completion
+- (void)updateCurrentUserWithCompletion:(RDKCompletionBlock)completion
 {
     __weak __typeof(self)weakSelf = self;
-    [self user:self.currentUser completion:^(RKUser *user, NSError *error) {
+    [self user:self.currentUser completion:^(RDKUser *user, NSError *error) {
         if (user)
         {
             weakSelf.currentUser = user;

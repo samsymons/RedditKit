@@ -1,4 +1,4 @@
-// RKLink.h
+// RDKLink.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,14 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKVotable.h"
+#import "RDKVotable.h"
 
-@interface RKLink : RKVotable
+@interface RDKLink : RDKVotable
 
 /**
  The title of the link.
  
- @note RKLink automatically unescapes HTML entities.
+ @note RDKLink automatically unescapes HTML entities.
  */
 @property (nonatomic, copy, readonly) NSString *title;
 

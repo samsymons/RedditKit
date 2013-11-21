@@ -1,4 +1,4 @@
-// RKClient+Moderation.m
+// RDKClient+Moderation.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,28 +20,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient+Moderation.h"
-#import "RKClient+Requests.h"
+#import "RDKClient+Moderation.h"
+#import "RDKClient+Requests.h"
 
-#import "RKUser.h"
-#import "RKComment.h"
-#import "RKLink.h"
-#import "RKSubreddit.h"
+#import "RDKUser.h"
+#import "RDKComment.h"
+#import "RDKLink.h"
+#import "RDKSubreddit.h"
 
-NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
+NSString * NSStringFromDistinguishedStatus(RDKDistinguishedStatus status)
 {
     switch (status)
     {
-        case RKDistinguishedStatusYes:
+        case RDKDistinguishedStatusYes:
             return @"yes";
             break;
-        case RKDistinguishedStatusNo:
+        case RDKDistinguishedStatusNo:
             return @"no";
             break;
-        case RKDistinguishedStatusAdmin:
+        case RDKDistinguishedStatusAdmin:
             return @"admin";
             break;
-        case RKDistinguishedStatusSpecial:
+        case RDKDistinguishedStatusSpecial:
             return @"special";
             break;
         default:
@@ -50,14 +50,14 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
     }
 }
 
-@implementation RKClient (Moderation)
+@implementation RDKClient (Moderation)
 
-- (NSURLSessionDataTask *)setLink:(RKLink *)link asSticky:(BOOL)sticky completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)setLink:(RDKLink *)link asSticky:(BOOL)sticky completion:(RDKCompletionBlock)completion
 {
     return [self setLinkWithFullName:link.fullName asSticky:sticky completion:completion];
 }
 
-- (NSURLSessionDataTask *)setLinkWithFullName:(NSString *)fullName asSticky:(BOOL)sticky completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)setLinkWithFullName:(NSString *)fullName asSticky:(BOOL)sticky completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
     
@@ -67,12 +67,12 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
     return [self basicPostTaskWithPath:@"api/set_subreddit_sticky" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)setContestMode:(BOOL)contestMode forLink:(RKLink *)link completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)setContestMode:(BOOL)contestMode forLink:(RDKLink *)link completion:(RDKCompletionBlock)completion
 {
     return [self setContestMode:contestMode forLinkWithFullName:link.fullName completion:completion];
 }
 
-- (NSURLSessionDataTask *)setContestMode:(BOOL)contestMode forLinkWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)setContestMode:(BOOL)contestMode forLinkWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
     
@@ -84,12 +84,12 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
 
 #pragma mark - Moderator & Contributor Lists
 
-- (NSURLSessionDataTask *)contributorsToSubreddit:(RKSubreddit *)subreddit completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)contributorsToSubreddit:(RDKSubreddit *)subreddit completion:(RDKArrayCompletionBlock)completion
 {
     return [self contributorsToSubredditWithName:subreddit.name completion:completion];
 }
 
-- (NSURLSessionDataTask *)contributorsToSubredditWithName:(NSString *)name completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)contributorsToSubredditWithName:(NSString *)name completion:(RDKArrayCompletionBlock)completion
 {
     NSParameterAssert(name);
     
@@ -113,12 +113,12 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
     }];
 }
 
-- (NSURLSessionDataTask *)moderatorsOfSubreddit:(RKSubreddit *)subreddit completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)moderatorsOfSubreddit:(RDKSubreddit *)subreddit completion:(RDKArrayCompletionBlock)completion
 {
     return [self moderatorsOfSubredditWithName:subreddit.name completion:completion];
 }
 
-- (NSURLSessionDataTask *)moderatorsOfSubredditWithName:(NSString *)name completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)moderatorsOfSubredditWithName:(NSString *)name completion:(RDKArrayCompletionBlock)completion
 {
     NSParameterAssert(name);
     
@@ -137,97 +137,97 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
 
 #pragma mark - Contributor Status
 
-- (NSURLSessionDataTask *)addContributor:(RKUser *)contributor toSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)addContributor:(RDKUser *)contributor toSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self addContributorWithUsername:contributor.username toSubredditWithName:subreddit.name fullName:subreddit.fullName completion:completion];
 }
 
-- (NSURLSessionDataTask *)addContributorWithUsername:(NSString *)username toSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)addContributorWithUsername:(NSString *)username toSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     return [self friendTaskWithContainer:fullName subredditName:subredditName name:username type:@"contributor" completion:completion];
 }
 
-- (NSURLSessionDataTask *)removeContributor:(RKUser *)contributor fromSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)removeContributor:(RDKUser *)contributor fromSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self removeContributorWithUsername:contributor.username fromSubredditWithName:subreddit.name fullName:subreddit.fullName completion:completion];
 }
 
-- (NSURLSessionDataTask *)removeContributorWithUsername:(NSString *)username fromSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)removeContributorWithUsername:(NSString *)username fromSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     return [self unfriendTaskWithContainer:fullName subredditName:subredditName name:username type:@"contributor" completion:completion];
 }
 
 #pragma mark - Moderator Status
 
-- (NSURLSessionDataTask *)acceptModeratorInvitationForSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)acceptModeratorInvitationForSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self acceptModeratorInvitationForSubredditWithName:subreddit.name completion:completion];
 }
 
-- (NSURLSessionDataTask *)acceptModeratorInvitationForSubredditWithName:(NSString *)subredditName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)acceptModeratorInvitationForSubredditWithName:(NSString *)subredditName completion:(RDKCompletionBlock)completion
 {
     NSString *path = [NSString stringWithFormat:@"r/%@/api/accept_moderator_invite", subredditName];
     
     return [self basicPostTaskWithPath:path parameters:nil completion:completion];
 }
 
-- (NSURLSessionDataTask *)inviteUser:(RKUser *)user toModerateSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)inviteUser:(RDKUser *)user toModerateSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self inviteUserWithUsername:user.username toModerateSubredditWithName:subreddit.name fullName:subreddit.fullName completion:completion];
 }
 
-- (NSURLSessionDataTask *)inviteUserWithUsername:(NSString *)username toModerateSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)inviteUserWithUsername:(NSString *)username toModerateSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     return [self friendTaskWithContainer:fullName subredditName:subredditName name:username type:@"moderator" completion:completion];
 }
 
-- (NSURLSessionDataTask *)revokeModeratorInvitationToUser:(RKUser *)user forSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)revokeModeratorInvitationToUser:(RDKUser *)user forSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self revokeModeratorInvitationToUserWithUsername:user.username forSubredditWithName:subreddit.name fullName:subreddit.fullName completion:completion];
 }
 
-- (NSURLSessionDataTask *)revokeModeratorInvitationToUserWithUsername:(NSString *)username forSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)revokeModeratorInvitationToUserWithUsername:(NSString *)username forSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     return [self unfriendTaskWithContainer:fullName subredditName:subredditName name:username type:@"moderator_invite" completion:completion];
 }
 
-- (NSURLSessionDataTask *)removeModerator:(RKUser *)moderator fromSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)removeModerator:(RDKUser *)moderator fromSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self removeModeratorWithUsername:moderator.username fromSubredditWithName:subreddit.name fullName:subreddit.fullName completion:completion];
 }
 
-- (NSURLSessionDataTask *)removeModeratorWithUsername:(NSString *)username fromSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)removeModeratorWithUsername:(NSString *)username fromSubredditWithName:(NSString *)subredditName fullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     return [self unfriendTaskWithContainer:fullName subredditName:subredditName name:username type:@"moderator" completion:completion];
 }
 
 #pragma mark - Moderation Tasks
 
-- (NSURLSessionDataTask *)distinguishThingWithFullName:(NSString *)fullName status:(RKDistinguishedStatus)status completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)distinguishThingWithFullName:(NSString *)fullName status:(RDKDistinguishedStatus)status completion:(RDKCompletionBlock)completion
 {
     NSDictionary *parameters = @{@"how": NSStringFromDistinguishedStatus(status), @"id": fullName};
     
     return [self basicPostTaskWithPath:@"api/distinguish" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)moderationLogForSubreddit:(RKSubreddit *)subreddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)moderationLogForSubreddit:(RDKSubreddit *)subreddit pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     return [self moderationLogForSubredditWithName:subreddit.name pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)moderationLogForSubredditWithName:(NSString *)subredditName pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)moderationLogForSubredditWithName:(NSString *)subredditName pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     NSString *path = [NSString stringWithFormat:@"r/%@/about/log.json", subredditName];
     
     return [self listingTaskWithPath:path parameters:nil pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)moderationQueueForSubreddit:(RKSubreddit *)subreddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)moderationQueueForSubreddit:(RDKSubreddit *)subreddit pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     return [self moderationQueueForSubredditWithName:subreddit.name pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)moderationQueueForSubredditWithName:(NSString *)subredditName pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)moderationQueueForSubredditWithName:(NSString *)subredditName pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     NSParameterAssert(subredditName);
     
@@ -236,12 +236,12 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
     return [self listingTaskWithPath:path parameters:nil pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)reportedContentInSubreddit:(RKSubreddit *)subreddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)reportedContentInSubreddit:(RDKSubreddit *)subreddit pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     return [self reportedContentInSubredditWithName:subreddit.name pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)reportedContentInSubredditWithName:(NSString *)subredditName pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)reportedContentInSubredditWithName:(NSString *)subredditName pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     NSParameterAssert(subredditName);
     
@@ -250,12 +250,12 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
     return [self listingTaskWithPath:path parameters:nil pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)spamContentInSubreddit:(RKSubreddit *)subreddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)spamContentInSubreddit:(RDKSubreddit *)subreddit pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     return [self spamContentInSubredditWithName:subreddit.name pagination:pagination completion:completion];
 }
 
-- (NSURLSessionDataTask *)spamContentInSubredditWithName:(NSString *)subredditName pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)spamContentInSubredditWithName:(NSString *)subredditName pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
     NSParameterAssert(subredditName);
     
@@ -266,17 +266,17 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
 
 #pragma mark - Approval & Removal
 
-- (NSURLSessionDataTask *)approveLink:(RKLink *)link completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)approveLink:(RDKLink *)link completion:(RDKCompletionBlock)completion
 {
     return [self approveThingWithFullName:[link fullName] completion:completion];
 }
 
-- (NSURLSessionDataTask *)approveComment:(RKComment *)comment completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)approveComment:(RDKComment *)comment completion:(RDKCompletionBlock)completion
 {
     return [self approveThingWithFullName:[comment fullName] completion:completion];
 }
 
-- (NSURLSessionDataTask *)approveThingWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)approveThingWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
     
@@ -285,17 +285,17 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
     return [self basicPostTaskWithPath:@"api/approve" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)removeLink:(RKLink *)link completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)removeLink:(RDKLink *)link completion:(RDKCompletionBlock)completion
 {
     return [self removeThingWithFullName:link.fullName completion:completion];
 }
 
-- (NSURLSessionDataTask *)removeComment:(RKComment *)comment completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)removeComment:(RDKComment *)comment completion:(RDKCompletionBlock)completion
 {
     return [self removeThingWithFullName:comment.fullName completion:completion];
 }
 
-- (NSURLSessionDataTask *)removeThingWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)removeThingWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
     
@@ -306,17 +306,17 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
 
 #pragma mark - Reports
 
-- (NSURLSessionDataTask *)ignoreReportsForLink:(RKLink *)link completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)ignoreReportsForLink:(RDKLink *)link completion:(RDKCompletionBlock)completion
 {
     return [self ignoreReportsForThingWithFullName:link.fullName completion:completion];
 }
 
-- (NSURLSessionDataTask *)ignoreReportsForComment:(RKLink *)comment completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)ignoreReportsForComment:(RDKLink *)comment completion:(RDKCompletionBlock)completion
 {
     return [self ignoreReportsForThingWithFullName:comment.fullName completion:completion];
 }
 
-- (NSURLSessionDataTask *)ignoreReportsForThingWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)ignoreReportsForThingWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
     
@@ -325,17 +325,17 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
     return [self basicPostTaskWithPath:@"api/ignore_reports" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)unignoreReportsForLink:(RKLink *)link completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)unignoreReportsForLink:(RDKLink *)link completion:(RDKCompletionBlock)completion
 {
     return [self unignoreReportsForThingWithFullName:link.fullName completion:completion];
 }
 
-- (NSURLSessionDataTask *)unignoreReportsForComment:(RKLink *)comment completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)unignoreReportsForComment:(RDKLink *)comment completion:(RDKCompletionBlock)completion
 {
     return [self unignoreReportsForThingWithFullName:comment.fullName completion:completion];
 }
 
-- (NSURLSessionDataTask *)unignoreReportsForThingWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)unignoreReportsForThingWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
     
@@ -346,12 +346,12 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
 
 #pragma mark - Banning
 
-- (NSURLSessionDataTask *)bannedUsersInSubreddit:(RKSubreddit *)subreddit completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)bannedUsersInSubreddit:(RDKSubreddit *)subreddit completion:(RDKArrayCompletionBlock)completion
 {
     return [self bannedUsersInSubredditWithName:subreddit.name completion:completion];
 }
 
-- (NSURLSessionDataTask *)bannedUsersInSubredditWithName:(NSString *)subredditName completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)bannedUsersInSubredditWithName:(NSString *)subredditName completion:(RDKArrayCompletionBlock)completion
 {
     NSParameterAssert(subredditName);
     
@@ -375,34 +375,34 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
     }];
 }
 
-- (NSURLSessionDataTask *)banUser:(RKUser *)user fromSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)banUser:(RDKUser *)user fromSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self banUserWithUsername:user.username fromSubredditWithName:subreddit.name fullName:subreddit.fullName completion:completion];
 }
 
-- (NSURLSessionDataTask *)banUserWithUsername:(NSString *)username fromSubredditWithName:(NSString *)name fullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)banUserWithUsername:(NSString *)username fromSubredditWithName:(NSString *)name fullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     return [self friendTaskWithContainer:fullName subredditName:name name:username type:@"banned" completion:completion];
 }
 
-- (NSURLSessionDataTask *)unbanUser:(RKUser *)user fromSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)unbanUser:(RDKUser *)user fromSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self unbanUserWithUsername:user.username fromSubredditWithName:subreddit.name fullName:subreddit.fullName completion:completion];
 }
 
-- (NSURLSessionDataTask *)unbanUserWithUsername:(NSString *)username fromSubredditWithName:(NSString *)name fullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)unbanUserWithUsername:(NSString *)username fromSubredditWithName:(NSString *)name fullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     return [self unfriendTaskWithContainer:fullName subredditName:name name:username type:@"banned" completion:completion];
 }
 
 #pragma mark - Resignation
 
-- (NSURLSessionDataTask *)resignAsContributorToSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)resignAsContributorToSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self resignAsContributorToSubredditWithFullName:subreddit.fullName completion:completion];
 }
 
-- (NSURLSessionDataTask *)resignAsContributorToSubredditWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)resignAsContributorToSubredditWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
     
@@ -411,12 +411,12 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
     return [self basicPostTaskWithPath:@"api/leavecontributor" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)resignAsModeratorOfSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)resignAsModeratorOfSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self resignAsModeratorOfSubredditWithFullName:subreddit.fullName completion:completion];
 }
 
-- (NSURLSessionDataTask *)resignAsModeratorOfSubredditWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)resignAsModeratorOfSubredditWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
     
@@ -427,12 +427,12 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
 
 #pragma mark - Subreddit Styling
 
-- (NSURLSessionDataTask *)stylesheetForSubreddit:(RKSubreddit *)subreddit completion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)stylesheetForSubreddit:(RDKSubreddit *)subreddit completion:(RDKObjectCompletionBlock)completion
 {
     return [self stylesheetForSubredditWithName:subreddit.name completion:completion];
 }
 
-- (NSURLSessionDataTask *)stylesheetForSubredditWithName:(NSString *)subredditName completion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)stylesheetForSubredditWithName:(NSString *)subredditName completion:(RDKObjectCompletionBlock)completion
 {
     NSParameterAssert(subredditName);
     
@@ -452,12 +452,12 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
     }];
 }
 
-- (NSURLSessionDataTask *)setStylesheet:(NSString *)stylesheet forSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)setStylesheet:(NSString *)stylesheet forSubreddit:(RDKSubreddit *)subreddit completion:(RDKCompletionBlock)completion
 {
     return [self setStylesheet:stylesheet forSubredditWithName:subreddit.name completion:completion];
 }
 
-- (NSURLSessionDataTask *)setStylesheet:(NSString *)stylesheet forSubredditWithName:(NSString *)subredditName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)setStylesheet:(NSString *)stylesheet forSubredditWithName:(NSString *)subredditName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(stylesheet);
     NSParameterAssert(subredditName);

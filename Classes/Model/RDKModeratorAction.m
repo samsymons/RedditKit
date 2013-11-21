@@ -1,4 +1,4 @@
-// RKModerationAction.m
+// RDKModerationAction.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,9 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKModeratorAction.h"
+#import "RDKModeratorAction.h"
 
-@implementation RKModeratorAction
+@implementation RDKModeratorAction
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {

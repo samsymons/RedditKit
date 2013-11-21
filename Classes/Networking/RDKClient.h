@@ -1,4 +1,4 @@
-// RKClient.h
+// RDKClient.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -21,18 +21,18 @@
 // THE SOFTWARE.
 
 #import "AFHTTPSessionManager.h"
-#import "RKCompletionBlocks.h"
+#import "RDKCompletionBlocks.h"
 
-extern NSString * const RKClientErrorDomain;
+extern NSString * const RDKClientErrorDomain;
 
-@class RKUser;
+@class RDKUser;
 
-@interface RKClient : AFHTTPSessionManager
+@interface RDKClient : AFHTTPSessionManager
 
 /**
  The currently signed in user.
  */
-@property (nonatomic, strong, readonly) RKUser *currentUser;
+@property (nonatomic, strong, readonly) RDKUser *currentUser;
 
 /**
  The modhash value for the current user.
@@ -52,12 +52,12 @@ extern NSString * const RKClientErrorDomain;
 + (instancetype)sharedClient;
 
 /**
- The URL to base HTTP requests on. Override this in an RKClient subclass to change the base URL.
+ The URL to base HTTP requests on. Override this in an RDKClient subclass to change the base URL.
  */
 + (NSURL *)APIBaseURL;
 
 /**
- The URL to base HTTPS requests on. Override this in an RKClient subclass to change the base HTTPS URL.
+ The URL to base HTTPS requests on. Override this in an RDKClient subclass to change the base HTTPS URL.
  */
 + (NSURL *)APIBaseHTTPSURL;
 
@@ -73,14 +73,14 @@ extern NSString * const RKClientErrorDomain;
  @param password The user's password.
  @param completion The block to be executed upon completion of the request.
  */
-- (NSURLSessionDataTask *)signInWithUsername:(NSString *)username password:(NSString *)password completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)signInWithUsername:(NSString *)username password:(NSString *)password completion:(RDKCompletionBlock)completion;
 
 /**
  Updates the current user. This is useful for getting updated karma totals, or checking whether they have unread private messages.
  
  @param completion The block to be executed upon completion of the request.
  */
-- (void)updateCurrentUserWithCompletion:(RKCompletionBlock)completion;
+- (void)updateCurrentUserWithCompletion:(RDKCompletionBlock)completion;
 
 /**
  Whether or not there is a user currently signed in.

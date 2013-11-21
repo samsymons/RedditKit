@@ -1,4 +1,4 @@
-// RKPagination.m
+// RDKPagination.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,72 +20,72 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKPagination.h"
+#import "RDKPagination.h"
 
-NSString * NSStringFromCommentSortingMethod(RKCommentSortingMethod sortingMethod)
+NSString * NSStringFromCommentSortingMethod(RDKCommentSortingMethod sortingMethod)
 {
     switch (sortingMethod)
     {
-        case RKCommentSortingMethodTop:
+        case RDKCommentSortingMethodTop:
             return @"top";
-        case RKCommentSortingMethodBest:
+        case RDKCommentSortingMethodBest:
             return @"best";
-        case RKCommentSortingMethodNew:
+        case RDKCommentSortingMethodNew:
             return @"new";
-        case RKCommentSortingMethodHot:
+        case RDKCommentSortingMethodHot:
             return @"hot";
-        case RKCommentSortingMethodControversial:
+        case RDKCommentSortingMethodControversial:
             return @"controversial";
-        case RKCommentSortingMethodOld:
+        case RDKCommentSortingMethodOld:
             return @"old";
         default:
             return nil;
     }
 }
 
-NSString * NSStringFromTimeSortingMethod(RKTimeSortingMethod sortingMethod)
+NSString * NSStringFromTimeSortingMethod(RDKTimeSortingMethod sortingMethod)
 {
     switch (sortingMethod)
     {
-        case RKTimeSortingMethodThisHour:
+        case RDKTimeSortingMethodThisHour:
             return @"hour";
-        case RKTimeSortingMethodToday:
+        case RDKTimeSortingMethodToday:
             return @"day";
-        case RKTimeSortingMethodThisWeek:
+        case RDKTimeSortingMethodThisWeek:
             return @"week";
-        case RKTimeSortingMethodThisMonth:
+        case RDKTimeSortingMethodThisMonth:
             return @"month";
-        case RKTimeSortingMethodThisYear:
+        case RDKTimeSortingMethodThisYear:
             return @"year";
-        case RKTimeSortingMethodAllTime:
+        case RDKTimeSortingMethodAllTime:
             return @"all";
         default:
             return nil;
 	}
 }
 
-NSString * NSStringFromUserContentSortingMethod(RKUserContentSortingMethod sortingMethod)
+NSString * NSStringFromUserContentSortingMethod(RDKUserContentSortingMethod sortingMethod)
 {
     switch (sortingMethod)
     {
-        case RKUserContentSortingMethodNew:
+        case RDKUserContentSortingMethodNew:
             return @"new";
-        case RKUserContentSortingMethodHot:
+        case RDKUserContentSortingMethodHot:
             return @"hot";
-        case RKUserContentSortingMethodTop:
+        case RDKUserContentSortingMethodTop:
             return @"top";
-        case RKUserContentSortingMethodControversial:
+        case RDKUserContentSortingMethodControversial:
             return @"controversial";
         default:
             return nil;
     }
 }
 
-@implementation RKPagination
+@implementation RDKPagination
 
-+ (RKPagination *)paginationFromListingResponse:(NSDictionary *)listingResponse
++ (RDKPagination *)paginationFromListingResponse:(NSDictionary *)listingResponse
 {
-    RKPagination *pagination = [[RKPagination alloc] init];
+    RDKPagination *pagination = [[RDKPagination alloc] init];
     
     id before = [listingResponse valueForKeyPath:@"data.before"];
     id after = [listingResponse valueForKeyPath:@"data.after"];
@@ -108,9 +108,9 @@ NSString * NSStringFromUserContentSortingMethod(RKUserContentSortingMethod sorti
     return pagination;
 }
 
-+ (RKPagination *)paginationWithLimit:(NSUInteger)limit
++ (RDKPagination *)paginationWithLimit:(NSUInteger)limit
 {
-    RKPagination *pagination = [[RKPagination alloc] init];
+    RDKPagination *pagination = [[RDKPagination alloc] init];
     pagination.limit = limit;
     
     return pagination;

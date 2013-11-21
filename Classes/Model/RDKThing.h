@@ -1,4 +1,4 @@
-// RKThing.h
+// RDKThing.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -23,7 +23,7 @@
 #import <Foundation/Foundation.h>
 #import <Mantle/Mantle.h>
 
-@interface RKThing : MTLModel <MTLJSONSerializing>
+@interface RDKThing : MTLModel <MTLJSONSerializing>
 
 /**
  A string identifier that indicates the object's type.

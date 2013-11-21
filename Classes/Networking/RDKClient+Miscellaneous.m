@@ -1,4 +1,4 @@
-// RKClient+Miscellaneous.m
+// RDKClient+Miscellaneous.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,26 +20,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient+Miscellaneous.h"
-#import "RKClient+Requests.h"
-#import "RKComment.h"
-#import "RKLink.h"
+#import "RDKClient+Miscellaneous.h"
+#import "RDKClient+Requests.h"
+#import "RDKComment.h"
+#import "RDKLink.h"
 
-@implementation RKClient (Miscellaneous)
+@implementation RDKClient (Miscellaneous)
 
 #pragma mark - Editing
 
-- (NSURLSessionDataTask *)editSelfPost:(RKLink *)link newText:(NSString *)text completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)editSelfPost:(RDKLink *)link newText:(NSString *)text completion:(RDKCompletionBlock)completion
 {
     return [self editSelfPostOrCommentWithFullName:[link fullName] newText:text completion:completion];
 }
 
-- (NSURLSessionDataTask *)editComment:(RKComment *)comment newText:(NSString *)text completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)editComment:(RDKComment *)comment newText:(NSString *)text completion:(RDKCompletionBlock)completion
 {
     return [self editSelfPostOrCommentWithFullName:[comment fullName] newText:text completion:completion];
 }
 
-- (NSURLSessionDataTask *)editSelfPostOrCommentWithFullName:(NSString *)fullName newText:(NSString *)text completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)editSelfPostOrCommentWithFullName:(NSString *)fullName newText:(NSString *)text completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
     NSParameterAssert(text);
@@ -50,17 +50,17 @@
 
 #pragma mark - Saving
 
-- (NSURLSessionDataTask *)saveLink:(RKLink *)link completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)saveLink:(RDKLink *)link completion:(RDKCompletionBlock)completion
 {
     return [self saveLinkOrCommentWithFullName:[link fullName] completion:completion];
 }
 
-- (NSURLSessionDataTask *)saveComment:(RKComment *)comment completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)saveComment:(RDKComment *)comment completion:(RDKCompletionBlock)completion
 {
     return [self saveLinkOrCommentWithFullName:[comment fullName] completion:completion];
 }
 
-- (NSURLSessionDataTask *)saveLinkOrCommentWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)saveLinkOrCommentWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
     
@@ -68,17 +68,17 @@
     return [self basicPostTaskWithPath:@"api/save" parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)unsaveLink:(RKLink *)link completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)unsaveLink:(RDKLink *)link completion:(RDKCompletionBlock)completion
 {
     return [self saveLinkOrCommentWithFullName:[link fullName] completion:completion];
 }
 
-- (NSURLSessionDataTask *)unsaveComment:(RKComment *)comment completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)unsaveComment:(RDKComment *)comment completion:(RDKCompletionBlock)completion
 {
     return [self unsaveLinkOrCommentWithFullName:[comment fullName] completion:completion];
 }
 
-- (NSURLSessionDataTask *)unsaveLinkOrCommentWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)unsaveLinkOrCommentWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
     
@@ -88,17 +88,17 @@
 
 #pragma mark - Reporting
 
-- (NSURLSessionDataTask *)reportLink:(RKLink *)link completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)reportLink:(RDKLink *)link completion:(RDKCompletionBlock)completion
 {
     return [self reportLinkOrCommentWithFullName:[link fullName] completion:completion];
 }
 
-- (NSURLSessionDataTask *)reportComment:(RKComment *)comment completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)reportComment:(RDKComment *)comment completion:(RDKCompletionBlock)completion
 {
     return [self reportLinkOrCommentWithFullName:[comment fullName] completion:completion];
 }
 
-- (NSURLSessionDataTask *)reportLinkOrCommentWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)reportLinkOrCommentWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
     
@@ -108,17 +108,17 @@
 
 #pragma mark - Deleting
 
-- (NSURLSessionDataTask *)deleteLink:(RKLink *)link completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)deleteLink:(RDKLink *)link completion:(RDKCompletionBlock)completion
 {
     return [self deleteLinkOrCommentWithFullName:[link fullName] completion:completion];
 }
 
-- (NSURLSessionDataTask *)deleteComment:(RKComment *)comment completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)deleteComment:(RDKComment *)comment completion:(RDKCompletionBlock)completion
 {
     return [self deleteLinkOrCommentWithFullName:[comment fullName] completion:completion];
 }
 
-- (NSURLSessionDataTask *)deleteLinkOrCommentWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)deleteLinkOrCommentWithFullName:(NSString *)fullName completion:(RDKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
     

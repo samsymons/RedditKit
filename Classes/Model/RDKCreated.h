@@ -1,4 +1,4 @@
-// RKCreated.h
+// RDKCreated.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,9 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKThing.h"
+#import "RDKThing.h"
 
-@interface RKCreated : RKThing
+@interface RDKCreated : RDKThing
 
 /**
  The time of the object's creation on reddit, in UTC.

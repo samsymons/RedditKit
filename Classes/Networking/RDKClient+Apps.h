@@ -1,4 +1,4 @@
-// RKClient+Apps.h
+// RDKClient+Apps.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,11 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
+#import "RDKClient.h"
 
-@class RKUser;
+@class RDKUser;
 
-@interface RKClient (Apps)
+@interface RDKClient (Apps)
 
 /**
  Creates an app under the current user's account.
@@ -36,7 +36,7 @@
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)createAppWithName:(NSString *)name description:(NSString *)description aboutURL:(NSString *)aboutURL redirectURL:(NSString *)redirectURL completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)createAppWithName:(NSString *)name description:(NSString *)description aboutURL:(NSString *)aboutURL redirectURL:(NSString *)redirectURL completion:(RDKCompletionBlock)completion;
 
 /**
  Updates an app's details.
@@ -49,7 +49,7 @@
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)updateAppWithIdentifier:(NSString *)identifier name:(NSString *)name description:(NSString *)description aboutURL:(NSString *)aboutURL redirectURL:(NSString *)redirectURL completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)updateAppWithIdentifier:(NSString *)identifier name:(NSString *)name description:(NSString *)description aboutURL:(NSString *)aboutURL redirectURL:(NSString *)redirectURL completion:(RDKCompletionBlock)completion;
 
 /**
  Deletes an app.
@@ -58,7 +58,7 @@
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)deleteAppWithIdentifier:(NSString *)identifier completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)deleteAppWithIdentifier:(NSString *)identifier completion:(RDKCompletionBlock)completion;
 
 /**
  Revokes an app.
@@ -67,7 +67,7 @@
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)revokeAppWithIdentifier:(NSString *)identifier completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)revokeAppWithIdentifier:(NSString *)identifier completion:(RDKCompletionBlock)completion;
 
 /**
  Adds a reddit user as a developer of an app.
@@ -77,7 +77,7 @@
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)addDeveloper:(RKUser *)developer toAppWithIdentifier:(NSString *)identifier completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)addDeveloper:(RDKUser *)developer toAppWithIdentifier:(NSString *)identifier completion:(RDKCompletionBlock)completion;
 
 /**
  Adds a reddit user as a developer of an app.
@@ -87,7 +87,7 @@
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)addDeveloperWithUsername:(NSString *)username toAppWithIdentifier:(NSString *)identifier completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)addDeveloperWithUsername:(NSString *)username toAppWithIdentifier:(NSString *)identifier completion:(RDKCompletionBlock)completion;
 
 /**
  Removes a reddit user from being a developer of an app.
@@ -97,7 +97,7 @@
  @param completion The block to be executed upon completion of the request.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)removeDeveloper:(RKUser *)developer fromAppWithIdentifier:(NSString *)identifier completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)removeDeveloper:(RDKUser *)developer fromAppWithIdentifier:(NSString *)identifier completion:(RDKCompletionBlock)completion;
 
 /**
  Removes a reddit user from being a developer of an app.
@@ -107,6 +107,6 @@
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)removeDeveloperWithUsername:(NSString *)username fromAppWithIdentifier:(NSString *)identifier completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)removeDeveloperWithUsername:(NSString *)username fromAppWithIdentifier:(NSString *)identifier completion:(RDKCompletionBlock)completion;
 
 @end

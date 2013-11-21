@@ -1,4 +1,4 @@
-// RKObjectBuilder.m
+// RDKObjectBuilder.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,18 +20,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKObjectBuilder.h"
+#import "RDKObjectBuilder.h"
 #import <Mantle/Mantle.h>
-#import "RKClient.h"
-#import "RKThing.h"
-#import "RKUser.h"
-#import "RKComment.h"
-#import "RKLink.h"
-#import "RKSubreddit.h"
-#import "RKMessage.h"
-#import "RKMultireddit.h"
-#import "RKMultiredditDescription.h"
-#import "RKModeratorAction.h"
+#import "RDKClient.h"
+#import "RDKThing.h"
+#import "RDKUser.h"
+#import "RDKComment.h"
+#import "RDKLink.h"
+#import "RDKSubreddit.h"
+#import "RDKMessage.h"
+#import "RDKMultireddit.h"
+#import "RDKMultiredditDescription.h"
+#import "RDKModeratorAction.h"
 
 NSString * const kRKObjectTypeComment = @"t1";
 NSString * const kRKObjectTypeAccount = @"t2";
@@ -43,20 +43,20 @@ NSString * const kRKObjectTypeMultiredditDescription = @"LabeledMultiDescription
 NSString * const kRKObjectTypeModeratorAction = @"modaction";
 NSString * const kRKObjectTypeMore = @"more";
 
-@interface RKObjectBuilder ()
+@interface RDKObjectBuilder ()
 
 - (Class)classForObjectKind:(NSString *)objectKind;
 
 @end
 
-@implementation RKObjectBuilder
+@implementation RDKObjectBuilder
 
 + (instancetype)objectBuilder
 {
-    static RKObjectBuilder *objectBuilder = nil;
+    static RDKObjectBuilder *objectBuilder = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        objectBuilder = [[RKObjectBuilder alloc] init];
+        objectBuilder = [[RDKObjectBuilder alloc] init];
     });
     
     return objectBuilder;
@@ -66,22 +66,22 @@ NSString * const kRKObjectTypeMore = @"more";
 {
     NSString *kind = JSON[@"kind"];
     
-    Class objectClass = [[RKObjectBuilder objectBuilder] classForObjectKind:kind];
+    Class objectClass = [[RDKObjectBuilder objectBuilder] classForObjectKind:kind];
     
     if (!objectClass)
     {
         return nil;
     }
     
-    // Check for a specific attribute if the object's class was equal to RKComment.
+    // Check for a specific attribute if the object's class was equal to RDKComment.
     // This is because, when fetching a user's messages, comment replies are given to us with the kRKObjectTypeComment type.
-    // Instead, the JSON of comment replies matches that of actual RKMessages.
+    // Instead, the JSON of comment replies matches that of actual RDKMessages.
     
-    if (objectClass == [RKComment class])
+    if (objectClass == [RDKComment class])
     {
         if ([JSON valueForKeyPath:@"data.was_comment"])
         {
-            objectClass = [RKMessage class];
+            objectClass = [RDKMessage class];
         }
     }
     
@@ -107,35 +107,35 @@ NSString * const kRKObjectTypeMore = @"more";
 {
     if ([objectKind isEqualToString:kRKObjectTypeComment])
     {
-        return [RKComment class];
+        return [RDKComment class];
     }
     else if ([objectKind isEqualToString:kRKObjectTypeAccount])
     {
-        return [RKUser class];
+        return [RDKUser class];
     }
     else if ([objectKind isEqualToString:kRKObjectTypeLink])
     {
-        return [RKLink class];
+        return [RDKLink class];
     }
     else if ([objectKind isEqualToString:kRKObjectTypeMessage])
     {
-        return [RKMessage class];
+        return [RDKMessage class];
     }
     else if ([objectKind isEqualToString:kRKObjectTypeMultireddit])
     {
-        return [RKMultireddit class];
+        return [RDKMultireddit class];
     }
     else if ([objectKind isEqualToString:kRKObjectTypeSubreddit])
     {
-        return [RKSubreddit class];
+        return [RDKSubreddit class];
     }
     else if ([objectKind isEqualToString:kRKObjectTypeMultiredditDescription])
     {
-        return [RKMultiredditDescription class];
+        return [RDKMultiredditDescription class];
     }
     else if ([objectKind isEqualToString:kRKObjectTypeModeratorAction])
     {
-        return [RKModeratorAction class];
+        return [RDKModeratorAction class];
     }
     else if ([objectKind isEqualToString:kRKObjectTypeMore])
     {

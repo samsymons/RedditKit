@@ -1,4 +1,4 @@
-// RKModeratorAction.h
+// RDKModeratorAction.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,9 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKCreated.h"
+#import "RDKCreated.h"
 
-@interface RKModeratorAction : RKCreated
+@interface RDKModeratorAction : RDKCreated
 
 /**
  The action taken by the moderator.

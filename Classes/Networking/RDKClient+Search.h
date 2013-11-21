@@ -1,4 +1,4 @@
-// RKClient+Search.h
+// RDKClient+Search.h
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,23 +20,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
-#import "RKCompletionBlocks.h"
-#import "RKClient+Requests.h"
+#import "RDKClient.h"
+#import "RDKCompletionBlocks.h"
+#import "RDKClient+Requests.h"
 
-@class RKSubreddit, RKPagination;
+@class RDKSubreddit, RDKPagination;
 
-@interface RKClient (Search)
+@interface RDKClient (Search)
 
 /**
  Gets the result of a reddit search.
  
  @param query The search query.
  @param pagination An optional pagination object.
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RDKLinks, an RDKPagination object, and any error that occurred.
  @see http://www.reddit.com/wiki/search
  */
-- (NSURLSessionDataTask *)search:(NSString *)query pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)search:(NSString *)query pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Gets the result of a reddit search.
@@ -45,10 +45,10 @@
  @param subreddit The optional subreddit to search.
  @param restrictSubreddit Whether to restrict the search to the specified subreddit.
  @param pagination An optional pagination object.
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RDKLinks, an RDKPagination object, and any error that occurred.
  @see http://www.reddit.com/wiki/search
  */
-- (NSURLSessionDataTask *)search:(NSString *)query subreddit:(RKSubreddit *)subreddit restrictSubreddit:(BOOL)restrictSubreddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)search:(NSString *)query subreddit:(RDKSubreddit *)subreddit restrictSubreddit:(BOOL)restrictSubreddit pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 /**
  Gets the result of a reddit search.
@@ -57,9 +57,9 @@
  @param subredditName The optional name of the subreddit to search.
  @param restrictSubreddit Whether to restrict the search to the specified subreddit.
  @param pagination An optional pagination object.
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RDKLinks, an RDKPagination object, and any error that occurred.
  @see http://www.reddit.com/wiki/search
  */
-- (NSURLSessionDataTask *)search:(NSString *)query subredditName:(NSString *)subredditName restrictSubreddit:(BOOL)restrictSubreddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)search:(NSString *)query subredditName:(NSString *)subredditName restrictSubreddit:(BOOL)restrictSubreddit pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion;
 
 @end

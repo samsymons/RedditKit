@@ -1,4 +1,4 @@
-// RKSubreddit.m
+// RDKSubreddit.m
 //
 // Copyright (c) 2013 Sam Symons (http://samsymons.com/)
 //
@@ -20,9 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKSubreddit.h"
+#import "RDKSubreddit.h"
 
-@implementation RKSubreddit
+@implementation RDKSubreddit
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
@@ -110,9 +110,9 @@
 + (NSValueTransformer *)acceptedSubmissionsTypeJSONTransformer
 {
     NSDictionary *types = @{
-        @"any": @(RKSubmissionTypeAny),
-        @"link": @(RKSubmissionTypeLink),
-        @"self": @(RKSubmissionTypeSelf)
+        @"any": @(RDKSubmissionTypeAny),
+        @"link": @(RDKSubmissionTypeLink),
+        @"self": @(RDKSubmissionTypeSelf)
     };
     
     return [MTLValueTransformer transformerWithBlock:^(NSString *type) {
@@ -123,11 +123,11 @@
 + (NSValueTransformer *)subredditTypeJSONTransformer
 {
     NSDictionary *types = @{
-        @"public": @(RKSubredditTypePublic),
-        @"private": @(RKSubredditTypePrivate),
-        @"restricted": @(RKSubredditTypeRestricted),
-        @"gold_restricted": @(RKSubredditTypeGoldRestricted),
-        @"archived": @(RKSubredditTypeArchived)
+        @"public": @(RDKSubredditTypePublic),
+        @"private": @(RDKSubredditTypePrivate),
+        @"restricted": @(RDKSubredditTypeRestricted),
+        @"gold_restricted": @(RDKSubredditTypeGoldRestricted),
+        @"archived": @(RDKSubredditTypeArchived)
     };
     
     return [MTLValueTransformer transformerWithBlock:^(NSString *type) {
@@ -137,31 +137,31 @@
 
 + (NSValueTransformer *)commentSpamFilterStrengthJSONTransformer
 {
-    return [RKSubreddit spamFilterValueTransformer];
+    return [RDKSubreddit spamFilterValueTransformer];
 }
 
 + (NSValueTransformer *)linkSpamFilterStrengthJSONTransformer
 {
-    return [RKSubreddit spamFilterValueTransformer];
+    return [RDKSubreddit spamFilterValueTransformer];
 }
 
 + (NSValueTransformer *)selfPostSpamFilterStrengthJSONTransformer
 {
-    return [RKSubreddit spamFilterValueTransformer];
+    return [RDKSubreddit spamFilterValueTransformer];
 }
 
 + (NSValueTransformer *)spamFilterValueTransformer
 {
     NSDictionary *strengths = @{
-        @"low": @(RKSpamFilterStrengthLow),
-        @"high": @(RKSpamFilterStrengthHigh),
-        @"all": @(RKSpamFilterStrengthAll)
+        @"low": @(RDKSpamFilterStrengthLow),
+        @"high": @(RDKSpamFilterStrengthHigh),
+        @"all": @(RDKSpamFilterStrengthAll)
     };
     
     return [MTLValueTransformer transformerWithBlock:^id(id strength) {
         if (!strength)
         {
-            return @(RKSpamFilterStrengthNoStrength);
+            return @(RDKSpamFilterStrengthNoStrength);
         }
         else
         {
