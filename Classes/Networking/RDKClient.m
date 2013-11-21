@@ -161,18 +161,6 @@ NSString * const RDKClientErrorDomain = @"RDKClientErrorDomain";
     self.currentUser = nil;
     self.modhash = nil;
     self.sessionIdentifier = nil;
-    
-    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    NSArray *cookies = [storage cookies];
-    
-    for (NSHTTPCookie *cookie in cookies)
-    {
-        if ([[cookie name] isEqualToString:@"reddit_session"])
-        {
-            [storage deleteCookie:cookie];
-            break;
-        }
-    }
 }
 
 - (void)setModhash:(NSString *)modhash
@@ -181,11 +169,16 @@ NSString * const RDKClientErrorDomain = @"RDKClientErrorDomain";
     [[self requestSerializer] setValue:_modhash forHTTPHeaderField:@"X-Modhash"];
 }
 
-- (void)setSessionIdentifier:(NSString *)sessionIdentifier {
-    
+- (void)setSessionIdentifier:(NSString *)sessionIdentifier
+{
     _sessionIdentifier = [sessionIdentifier copy];
     
-    NSString *cookieValue = _sessionIdentifier ? [NSString stringWithFormat:@"reddit_session=%@", [_sessionIdentifier stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] : nil;
+    // NSHTTPCookieStorage only seems to work when using the instance returned by sharedStorage.
+    // As a user may have more than one client, each requiring its own session cookie, we have to set the cookie manually.
+    
+    NSString *escapedSession = [_sessionIdentifier stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *cookieValue = _sessionIdentifier ? [NSString stringWithFormat:@"reddit_session=%@", escapedSession] : nil;
+    
     [[self requestSerializer] setValue:cookieValue forHTTPHeaderField:@"Cookie"];
 }
 
