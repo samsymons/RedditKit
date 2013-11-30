@@ -93,6 +93,20 @@
     }];
 }
 
++ (NSValueTransformer *)headerImageURLJSONTransformer
+{
+    return [MTLValueTransformer transformerWithBlock:^id(NSString *headerImageURL) {
+        if (!headerImageURL || [headerImageURL isEqual:[NSNull null]])
+        {
+            return nil;
+        }
+        else
+        {
+            return [NSURL URLWithString:headerImageURL];
+        }
+    }];
+}
+
 + (NSValueTransformer *)headerImageSizeJSONTransformer
 {
     return [MTLValueTransformer transformerWithBlock:^(NSArray *size) {
