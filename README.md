@@ -33,7 +33,7 @@ RedditKit is structured around the `RKClient` class. This class manages authenti
 }];
 ```
 
-Once you're signed in, `RKClient` will keep track of any necessary authentication state. You can then call methods which require authentication, such as getting the subreddits you are subscribed to.
+Once you're signed in, `RKClient` will keep track of any necessary authentication state. You can then call methods which require authentication, such as getting the subreddits you are subscribed to. **Note:** RedditKit does not persist your authentication credentials itself; you'll have to do this manually via the Keychain, and call `signInWithUsername:password:completion:` on your application's launch.
 
 ```obj-c
 [[RKClient sharedClient] subscribedSubredditsWithCompletion:^(NSArray *subreddits, NSError *error) {
