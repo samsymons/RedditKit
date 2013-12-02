@@ -20,6 +20,7 @@
 {
     self.client = [[RKClient alloc] init];
     self.client.modhash = @"12345";
+    self.client.sessionIdentifier = @"12345";
 }
 
 - (void)testSignedInClients

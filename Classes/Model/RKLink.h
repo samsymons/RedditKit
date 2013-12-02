@@ -47,7 +47,7 @@
 /**
  The link to the post on reddit.
  */
-@property (nonatomic, copy, readonly) NSString *permalink;
+@property (nonatomic, copy, readonly) NSURL *permalink;
 
 /**
  The username of the user who submitted the link.
