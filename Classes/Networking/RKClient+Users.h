@@ -90,7 +90,7 @@ typedef NS_ENUM(NSUInteger, RKSubscribedSubredditCategory)
  @param pagination The pagination object to be sent with the request.
  @param completion The block to be executed upon completion of the request. It takes three arguments: the response array of RKSubreddit objects, an RKPagination object, and any error that occurred.
  */
-- (NSURLSessionDataTask *)subscribedSubredditsInCategory:(RKSubscribedSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)subscribedSubredditsInCategory:(RKSubscribedSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
 
 /**
  Deletes the current user's account on reddit and signs them out from the RKClient.
