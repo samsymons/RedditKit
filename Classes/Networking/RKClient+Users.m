@@ -128,17 +128,23 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
     }];
 }
 
-- (NSURLSessionDataTask *)subscribedSubredditsWithCompletion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)subscribedSubredditsWithCompletion:(RKListingCompletionBlock)completion
 {
     return [self subscribedSubredditsInCategory:RKSubscribedSubredditCategorySubscriber completion:completion];
 }
 
-- (NSURLSessionDataTask *)subscribedSubredditsInCategory:(RKSubscribedSubredditCategory)category completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)subscribedSubredditsInCategory:(RKSubscribedSubredditCategory)category completion:(RKListingCompletionBlock)completion
 {
-    NSDictionary *parameters = @{@"un": @"samsymons"};
+    return [self subscribedSubredditsInCategory:category pagination:nil completion:completion];
+}
+
+- (NSURLSessionDataTask *)subscribedSubredditsInCategory:(RKSubscribedSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion {
+    NSMutableDictionary *taskParameters = [NSMutableDictionary dictionary];
+    [taskParameters addEntriesFromDictionary:[pagination dictionaryValue]];
+
     NSString *path = [NSString stringWithFormat:@"subreddits/mine/%@.json", NSStringFromSubscribedSubredditCategory(category)];
-    
-    return [self getPath:path parameters:parameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+
+    return [self getPath:path parameters:taskParameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         if (!completion) return;
         
         if (responseObject)
@@ -150,7 +156,7 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
             
             if (range.location != NSNotFound)
             {
-                completion(nil, [RKClient authenticationRequiredError]);
+                completion(nil, nil, [RKClient authenticationRequiredError]);
                 return;
             }
             
@@ -170,11 +176,13 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
                 }
             }
             
-            completion([subredditObjects copy], nil);
+            RKPagination *pagination = [RKPagination paginationFromListingResponse:responseObject];
+            
+            completion([subredditObjects copy], pagination, nil);
         }
         else
         {
-            completion(nil, error);
+            completion(nil, nil, error);
         }
     }];
 }
