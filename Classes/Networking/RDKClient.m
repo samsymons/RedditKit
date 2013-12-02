@@ -98,8 +98,7 @@ NSString * const RDKClientErrorDomain = @"RDKClientErrorDomain";
     
     NSURL *baseURL = [[self class] APIBaseHTTPSURL];
     NSString *URLString = [[NSURL URLWithString:@"api/login" relativeToURL:baseURL] absoluteString];
-    
-    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:URLString parameters:parameters];
+    NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:URLString parameters:parameters];
     
     __weak __typeof(self)weakSelf = self;
     NSURLSessionDataTask *authenticationTask = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
@@ -117,7 +116,7 @@ NSString * const RDKClientErrorDomain = @"RDKClientErrorDomain";
             NSString *sessionIdentifier = data[@"cookie"];
             
             [weakSelf setModhash:modhash];
-            [weakSelf setSessionIdentifier:sessionIdentifier];
+            [weakSelf setCookie:sessionIdentifier];
             
             [weakSelf currentUserWithCompletion:^(id object, NSError *error) {
                 weakSelf.currentUser = object;
@@ -153,14 +152,14 @@ NSString * const RDKClientErrorDomain = @"RDKClientErrorDomain";
 
 - (BOOL)isSignedIn
 {
-    return self.modhash != nil && self.sessionIdentifier != nil;
+    return self.modhash != nil && self.cookie != nil;
 }
 
 - (void)signOut
 {
     self.currentUser = nil;
     self.modhash = nil;
-    self.sessionIdentifier = nil;
+    self.cookie = nil;
 }
 
 - (void)setModhash:(NSString *)modhash
@@ -169,15 +168,15 @@ NSString * const RDKClientErrorDomain = @"RDKClientErrorDomain";
     [[self requestSerializer] setValue:_modhash forHTTPHeaderField:@"X-Modhash"];
 }
 
-- (void)setSessionIdentifier:(NSString *)sessionIdentifier
+- (void)setCookie:(NSString *)cookie
 {
-    _sessionIdentifier = [sessionIdentifier copy];
+    _cookie = [cookie copy];
     
     // NSHTTPCookieStorage only seems to work when using the instance returned by sharedStorage.
     // As a user may have more than one client, each requiring its own session cookie, we have to set the cookie manually.
     
-    NSString *escapedSession = [_sessionIdentifier stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *cookieValue = _sessionIdentifier ? [NSString stringWithFormat:@"reddit_session=%@", escapedSession] : nil;
+    NSString *escapedCookie = [_cookie stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *cookieValue = _cookie ? [NSString stringWithFormat:@"reddit_session=%@", escapedCookie] : nil;
     
     [[self requestSerializer] setValue:cookieValue forHTTPHeaderField:@"Cookie"];
 }
