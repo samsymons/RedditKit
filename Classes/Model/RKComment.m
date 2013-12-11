@@ -32,6 +32,7 @@
         @"approvedBy": @"data.approved_by",
         @"bannedBy": @"data.banned_by",
         @"author": @"data.author",
+        @"linkAuthor": @"data.link_author",
         @"body": @"data.body",
         @"bodyHTML": @"data.body_html",
         @"scoreHidden": @"data.score_hidden",
