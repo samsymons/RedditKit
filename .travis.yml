@@ -1,4 +1,5 @@
 language: objective-c
+rvm: 2.0.0
 before_install:
   - cd Tests && pod install && cd $TRAVIS_BUILD_DIR
 script: rake test
