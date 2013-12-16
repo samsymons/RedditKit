@@ -71,7 +71,7 @@
 + (NSValueTransformer *)voteStatusJSONTransformer
 {
     return [MTLValueTransformer transformerWithBlock:^(id forward) {
-        if (!forward)
+        if (!forward || forward == [NSNull null])
         {
             return @(RKVoteStatusNone);
         }
