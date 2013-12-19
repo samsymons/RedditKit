@@ -63,21 +63,21 @@
 
 - (BOOL)voted
 {
-    return (self.voteStatus == RKVoteStatusNone);
+    return (self.voteStatus != RKVoteStatusNone);
 }
 
 #pragma mark - MTLModel
 
 + (NSValueTransformer *)voteStatusJSONTransformer
 {
-    return [MTLValueTransformer transformerWithBlock:^(id forward) {
-        if (!forward || forward == [NSNull null])
+    return [MTLValueTransformer transformerWithBlock:^(id vote) {
+        if (!vote || vote == [NSNull null])
         {
             return @(RKVoteStatusNone);
         }
         else
         {   
-            BOOL likes = [forward boolValue];
+            BOOL likes = [vote boolValue];
             return likes ? @(RKVoteStatusUpvoted) : @(RKVoteStatusDownvoted);
         }
     }];

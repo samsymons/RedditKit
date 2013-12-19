@@ -21,7 +21,6 @@
 // THE SOFTWARE.
 
 #import "FrontPageViewController.h"
-#import <RedditKit/RedditKit.h>
 #import "LinkTableViewCell.h"
 #import "BrowserViewController.h"
 #import "AuthenticationManager.h"
