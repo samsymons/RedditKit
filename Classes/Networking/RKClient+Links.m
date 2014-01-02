@@ -95,7 +95,7 @@ NSString * NSStringFromSubredditCategory(RKSubredditCategory category)
 
 - (NSURLSessionDataTask *)linksInSubreddit:(RKSubreddit *)subreddit category:(RKSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
 {
-    return [self linksInSubredditWithName:subreddit.name pagination:pagination completion:completion];
+    return [self linksInSubredditWithName:subreddit.name category:category pagination:pagination completion:completion];
 }
 
 - (NSURLSessionDataTask *)linksInSubredditWithName:(NSString *)subredditName pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
