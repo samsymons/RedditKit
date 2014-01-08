@@ -1,3 +1,7 @@
+## 1.0.3
+
+* Fix an issue where subreddit categories were being ignored. (@rickharrison)
+
 ## 1.0.2
 
 * Fix a bug in RKVotable where `voted` would return an incorrect value.
