@@ -2,7 +2,8 @@ Pod::Spec.new do |s|
   s.name         = "RedditKit"
   s.version      = "1.0.2"
   s.summary      = "An Objective-C wrapper for the reddit API."
-  s.homepage     = "http://redditkit.com/"
+  s.homepage     = "https://github.com/samsymons/RedditKit"
+  s.social_media_url = "https://twitter.com/sam_symons"
   s.license      = 'MIT'
   s.author       = { "Sam Symons" => "sam@samsymons.com" }
   s.source       = { :git => "https://github.com/samsymons/RedditKit.git", :tag => s.version.to_s }
