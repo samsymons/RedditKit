@@ -33,19 +33,23 @@
     
     if (![self isSignedIn])
     {
-        if (completion)
-        {
-            completion([RKClient authenticationRequiredError]);
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (completion)
+            {
+                completion([RKClient authenticationRequiredError]);
+            }
+        });
         
         return nil;
     }
     
     return [self postPath:path parameters:parameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
-        if (completion)
-        {
-            completion(error);
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (completion)
+            {
+                completion(error);
+            }
+        });
     }];
 }
 
@@ -185,10 +189,12 @@
     NSURLRequest *request = [[self requestSerializer] requestWithMethod:method URLString:URLString parameters:[alteredParameters copy]];
     
     NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if (completion)
-        {
-            completion((NSHTTPURLResponse *)response, responseObject, error);
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (completion)
+            {
+                completion((NSHTTPURLResponse *)response, responseObject, error);
+            }
+        });
     }];
     
     [task resume];

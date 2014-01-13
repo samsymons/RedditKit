@@ -82,14 +82,17 @@
             return;
         }
         
-        if (!error)
-        {
-            completion([self imageFromData:data], nil);
-        }
-        else
-        {
-            completion(nil, error);
-        }
+        __weak __typeof(self)weakSelf = self;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!error)
+            {
+                completion([weakSelf imageFromData:data], nil);
+            }
+            else
+            {
+                completion(nil, error);
+            }
+        });
     }];
     
     [task resume];
