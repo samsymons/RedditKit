@@ -10,5 +10,5 @@
 
 #define kOAuthRedirectURI   @"http://example.com/redditauth"
 #define kOAuthState         @"1234567890"
-#define kOAuthClientID      @"yzHHPqSEX9gf8Q"
-#define kOAuthClientSecret  @"iqheUDW7NRmCVxOip5uG4Re0nnk"
+#define kOAuthClientID      @""
+#define kOAuthClientSecret  @""
