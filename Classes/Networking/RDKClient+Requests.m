@@ -192,7 +192,18 @@
     NSLog(@"Building request with base URL: %@", baseURL);
     
     NSString *URLString = [[NSURL URLWithString:path relativeToURL:baseURL] absoluteString];
-    NSURLRequest *request = [[self requestSerializer] requestWithMethod:method URLString:URLString parameters:[alteredParameters copy]];
+    NSError *serializationError = nil;
+    NSURLRequest *request = [[self requestSerializer] requestWithMethod:method URLString:URLString parameters:[alteredParameters copy] error:&serializationError];
+    
+    if (serializationError)
+    {
+        if (completion)
+        {
+            completion(nil, nil, serializationError);
+        }
+        
+        return nil;
+    }
     
     NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (completion)
