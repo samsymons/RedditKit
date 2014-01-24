@@ -69,12 +69,14 @@ RedditKit's OAuth support is contained in the `RDKOAuthClient` class, a subclass
 
 When [creating an app on reddit](https://ssl.reddit.com/prefs/apps/), you will need to enter a redirection URL in order for reddit to hand you an OAuth access code. Unfortunately, reddit only allows redirection URLs which have HTTP or HTTPS protocols, meaning you cannot use a custom URL scheme, such as `redditkit://`.
 
-This problem is solved by implementing the `webView:shouldStartLoadWithRequest:navigationType:` delegate method from `UIWebView`.
+You can solve this by displaying reddit's OAuth authorization page in an instance of `UIWebView`, then implementing the `webView:shouldStartLoadWithRequest:navigationType:` delegate method. In there, you can check for a request to your redirect URL, and extract the access code from there.
 
 Here's how to implement OAuth in your app:
 
-1. Create your app on reddit at https://ssl.reddit.com/prefs/apps/.
+1. Create your app on reddit at [https://ssl.reddit.com/prefs/apps/](https://ssl.reddit.com/prefs/apps/).
 2. Give your app a redirect URL beginning with `http://` or `https://`, such as `http://myapp.com/oauth`. Its value is arbitrary; you're going to intercept the request made with that URL anyway, so it will never actually be executed.
+
+RedditKit's [example project](Example/) shows OAuth in action.
 
 ## More Examples
 
