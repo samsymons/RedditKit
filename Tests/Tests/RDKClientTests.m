@@ -20,7 +20,7 @@
 {
     self.client = [[RDKClient alloc] init];
     self.client.modhash = @"12345";
-    self.client.sessionIdentifier = @"12345";
+    self.client.cookie = @"12345";
 }
 
 - (void)testSignedInClients
