@@ -76,7 +76,7 @@ Here's how to implement OAuth in your app:
 1. Create your app on reddit at [https://ssl.reddit.com/prefs/apps/](https://ssl.reddit.com/prefs/apps/).
 2. Give your app a redirect URL beginning with `http://` or `https://`, such as `http://myapp.com/oauth`. Its value is arbitrary; you're going to intercept the request made with that URL anyway, so it will never actually be executed.
 
-RedditKit's [example project](Example/) shows OAuth in action.
+RedditKit's [example project](Example/) shows how you could use OAuth in your app.
 
 ## More Examples
 
