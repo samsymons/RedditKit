@@ -1,6 +1,6 @@
 // RDKVotable.m
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -63,21 +63,21 @@
 
 - (BOOL)voted
 {
-    return (self.voteStatus == RDKVoteStatusNone);
+    return (self.voteStatus != RDKVoteStatusNone);
 }
 
 #pragma mark - MTLModel
 
 + (NSValueTransformer *)voteStatusJSONTransformer
 {
-    return [MTLValueTransformer transformerWithBlock:^(id forward) {
-        if (forward == [NSNull null])
+    return [MTLValueTransformer transformerWithBlock:^(id vote) {
+        if (!vote || vote == [NSNull null])
         {
             return @(RDKVoteStatusNone);
         }
         else
         {   
-            BOOL likes = [forward boolValue];
+            BOOL likes = [vote boolValue];
             return likes ? @(RDKVoteStatusUpvoted) : @(RDKVoteStatusDownvoted);
         }
     }];

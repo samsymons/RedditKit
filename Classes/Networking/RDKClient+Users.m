@@ -1,6 +1,6 @@
 // RDKClient+Users.m
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -128,17 +128,23 @@ NSString * NSStringFromSubscribedSubredditCategory(RDKSubscribedSubredditCategor
     }];
 }
 
-- (NSURLSessionDataTask *)subscribedSubredditsWithCompletion:(RDKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)subscribedSubredditsWithCompletion:(RDKListingCompletionBlock)completion
 {
     return [self subscribedSubredditsInCategory:RDKSubscribedSubredditCategorySubscriber completion:completion];
 }
 
-- (NSURLSessionDataTask *)subscribedSubredditsInCategory:(RDKSubscribedSubredditCategory)category completion:(RDKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)subscribedSubredditsInCategory:(RDKSubscribedSubredditCategory)category completion:(RDKListingCompletionBlock)completion
 {
-    NSDictionary *parameters = @{@"un": @"samsymons"};
+    return [self subscribedSubredditsInCategory:category pagination:nil completion:completion];
+}
+
+- (NSURLSessionDataTask *)subscribedSubredditsInCategory:(RDKSubscribedSubredditCategory)category pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion {
+    NSMutableDictionary *taskParameters = [NSMutableDictionary dictionary];
+    [taskParameters addEntriesFromDictionary:[pagination dictionaryValue]];
+
     NSString *path = [NSString stringWithFormat:@"subreddits/mine/%@.json", NSStringFromSubscribedSubredditCategory(category)];
-    
-    return [self getPath:path parameters:parameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+
+    return [self getPath:path parameters:taskParameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         if (!completion) return;
         
         if (responseObject)
@@ -150,7 +156,7 @@ NSString * NSStringFromSubscribedSubredditCategory(RDKSubscribedSubredditCategor
             
             if (range.location != NSNotFound)
             {
-                completion(nil, [RDKClient authenticationRequiredError]);
+                completion(nil, nil, [RDKClient authenticationRequiredError]);
                 return;
             }
             
@@ -170,11 +176,13 @@ NSString * NSStringFromSubscribedSubredditCategory(RDKSubscribedSubredditCategor
                 }
             }
             
-            completion([subredditObjects copy], nil);
+            RDKPagination *pagination = [RDKPagination paginationFromListingResponse:responseObject];
+            
+            completion([subredditObjects copy], pagination, nil);
         }
         else
         {
-            completion(nil, error);
+            completion(nil, nil, error);
         }
     }];
 }

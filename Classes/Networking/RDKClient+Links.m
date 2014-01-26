@@ -1,6 +1,6 @@
 // RDKClient+Links.m
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -95,7 +95,7 @@ NSString * NSStringFromSubredditCategory(RDKSubredditCategory category)
 
 - (NSURLSessionDataTask *)linksInSubreddit:(RDKSubreddit *)subreddit category:(RDKSubredditCategory)category pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
 {
-    return [self linksInSubredditWithName:subreddit.name pagination:pagination completion:completion];
+    return [self linksInSubredditWithName:subreddit.name category:category pagination:pagination completion:completion];
 }
 
 - (NSURLSessionDataTask *)linksInSubredditWithName:(NSString *)subredditName pagination:(RDKPagination *)pagination completion:(RDKListingCompletionBlock)completion
