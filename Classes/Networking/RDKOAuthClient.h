@@ -79,7 +79,7 @@ typedef NS_ENUM(NSUInteger, RDKOAuthScope) {
  
  @param redirectURI The app's redirect URL. This has to match the URL provided for the app you are authenticating with.
  @param state Optional state to send with the OAuth request.
- @param scope A bitwise flag of OAuth scopes to request access to.
+ @param scope A bitmask of OAuth scopes to request access to.
  
  @return The OAuth URL.
  */

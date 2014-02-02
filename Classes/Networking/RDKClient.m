@@ -98,6 +98,7 @@ NSString * const RDKClientErrorDomain = @"RDKClientErrorDomain";
     
     NSURL *baseURL = [[self class] APIBaseHTTPSURL];
     NSString *URLString = [[NSURL URLWithString:@"api/login" relativeToURL:baseURL] absoluteString];
+    
     NSError *serializationError = nil;
     NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:URLString parameters:parameters error:&serializationError];
     
