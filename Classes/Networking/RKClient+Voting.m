@@ -84,9 +84,23 @@ RKVoteStatus RKVoteStatusFromVoteDirection(RKVoteDirection voteDirection)
     return [self voteOnThingWithFullName:object.fullName direction:direction completion:^(NSError *error) {
         if (!error)
         {
-            RKVotable *votable = [RKVotable modelWithDictionary:@{ @"voteStatus": @(RKVoteStatusFromVoteDirection(direction)) } error:nil];
+            NSInteger upvotes = object.upvotes;
+            NSInteger downvotes = object.downvotes;
+            
+            upvotes += (direction == RKVoteDirectionUpvote) ? 1 : 0;
+            downvotes += (direction == RKVoteDirectionDownvote) ? 1 : 0;
+            
+            upvotes += (object.voteStatus == RKVoteStatusUpvoted) ? -1 : 0;
+            downvotes += (object.voteStatus == RKVoteStatusDownvoted) ? -1 : 0;
+            
+            RKVotable *votable = [RKVotable modelWithDictionary:@{ @"voteStatus": @(RKVoteStatusFromVoteDirection(direction)),
+                                                                   @"upvotes": @(upvotes),
+                                                                   @"downvotes": @(downvotes) }
+                                                          error:nil];
             
             [object mergeValueForKey:@"voteStatus" fromModel:votable];
+            [object mergeValueForKey:@"upvotes" fromModel:votable];
+            [object mergeValueForKey:@"downvotes" fromModel:votable];
         }
         
         if (completion)
