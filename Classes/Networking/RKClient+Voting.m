@@ -45,21 +45,55 @@ NSString * NSStringFromVoteDirection(RKVoteDirection voteDirection)
     }
 }
 
+RKVoteStatus RKVoteStatusFromVoteDirection(RKVoteDirection voteDirection)
+{
+    switch (voteDirection)
+    {
+        case RKVoteDirectionUpvote:
+            return RKVoteStatusUpvoted;
+            break;
+        case RKVoteDirectionDownvote:
+            return RKVoteStatusDownvoted;
+            break;
+        case RKVoteDirectionNone:
+        default:
+            return RKVoteStatusNone;
+            break;
+    }
+}
+
 @implementation RKClient (Voting)
 
 - (NSURLSessionDataTask *)upvote:(RKVotable *)object completion:(RKCompletionBlock)completion
 {
-    return [self voteOnThingWithFullName:object.fullName direction:RKVoteDirectionUpvote completion:completion];
+    return [self voteOnThing:object direction:RKVoteDirectionUpvote completion:completion];
 }
 
 - (NSURLSessionDataTask *)downvote:(RKVotable *)object completion:(RKCompletionBlock)completion
 {
-    return [self voteOnThingWithFullName:object.fullName direction:RKVoteDirectionDownvote completion:completion];
+    return [self voteOnThing:object direction:RKVoteDirectionDownvote completion:completion];
 }
 
 - (NSURLSessionDataTask *)revokeVote:(RKVotable *)object completion:(RKCompletionBlock)completion
 {
-    return [self voteOnThingWithFullName:object.fullName direction:RKVoteDirectionNone completion:completion];
+    return [self voteOnThing:object direction:RKVoteDirectionNone completion:completion];
+}
+
+- (NSURLSessionDataTask *)voteOnThing:(RKVotable *)object direction:(RKVoteDirection)direction completion:(RKCompletionBlock)completion
+{
+    return [self voteOnThingWithFullName:object.fullName direction:direction completion:^(NSError *error) {
+        if (!error)
+        {
+            RKVotable *votable = [RKVotable modelWithDictionary:@{ @"voteStatus": @(RKVoteStatusFromVoteDirection(direction)) } error:nil];
+            
+            [object mergeValueForKey:@"voteStatus" fromModel:votable];
+        }
+        
+        if (completion)
+        {
+            completion(error);
+        }
+    }];
 }
 
 - (NSURLSessionDataTask *)voteOnThingWithFullName:(NSString *)fullName direction:(RKVoteDirection)direction completion:(RKCompletionBlock)completion;
