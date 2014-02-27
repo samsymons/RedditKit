@@ -43,12 +43,7 @@
 
 - (NSInteger)score
 {
-    if (!_score)
-    {
-        _score = self.upvotes - self.downvotes;
-    }
-    
-    return _score;
+    return (self.upvotes - self.downvotes);
 }
 
 - (BOOL)upvoted

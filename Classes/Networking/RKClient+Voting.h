@@ -57,6 +57,15 @@ typedef NS_ENUM(NSInteger, RKVoteDirection) {
 - (NSURLSessionDataTask *)revokeVote:(RKVotable *)object completion:(RKCompletionBlock)completion;
 
 /**
+ Votes on a thing object.
+ 
+ @param object The object to vote on.
+ @param direction The direction of which to vote.
+ @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
+ */
+- (NSURLSessionDataTask *)voteOnThing:(RKVotable *)object direction:(RKVoteDirection)direction completion:(RKCompletionBlock)completion;
+
+/**
  Votes on a thing with a given full name.
  
  @param fullName The full name of the thing to vote on.
