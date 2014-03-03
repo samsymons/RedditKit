@@ -28,6 +28,16 @@ typedef void(^RKRequestCompletionBlock)(NSHTTPURLResponse *response, id response
 @interface RKClient (Requests)
 
 /**
+ Many of reddit's API methods require a set of parameters, return an error if they fail, and something when they succeed.
+ This method eliminates much of the repetition when writing methods around these methods.
+ 
+ @param path The path to request.
+ @param parameters The parameters to pass with the request.
+ @param completion A block to execute at the end of the request.
+ */
+- (NSURLSessionDataTask *)basicPostAndResponseTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKObjectCompletionBlock)completion;
+
+/**
  Many of reddit's API methods require a set of parameters and simply return an error if they fail, and nothing (of value, at least) when they succeed.
  This method eliminates much of the repetition when writing methods around these methods.
  
