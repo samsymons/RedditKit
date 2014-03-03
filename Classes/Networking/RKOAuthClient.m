@@ -106,7 +106,7 @@
 - (NSURLSessionDataTask *)userInfoWithCompletion:(RKObjectCompletionBlock)completion
 {
     
-    NSURL *baseURL = [[self class] APIBaseLoginURL];
+    NSURL *baseURL = [[self class] APIBaseHTTPSURL];
     NSString *URLString = [[NSURL URLWithString:[[self class] meURLPath] relativeToURL:baseURL] absoluteString];
     
     NSMutableURLRequest *request = [[self requestSerializer] requestWithMethod:@"GET" URLString:URLString parameters:@{}];
@@ -172,15 +172,19 @@
 {
     __weak __typeof(self)weakSelf = self;
     [self userInfoWithCompletion:^(id object, NSError *error) {
-        RKUser *account = [RKObjectBuilder objectFromJSON:@{@"kind": kRKObjectTypeAccount, @"data":object}];
-        if (account && !error) {
-            weakSelf.currentUser = account;
-            if (completion)
-            {
-                completion(nil);
-            }
-        } else if (completion) {
+        if (error) {
             completion(error);
+        } else {
+            RKUser *account = [RKObjectBuilder objectFromJSON:@{@"kind": kRKObjectTypeAccount, @"data":object}];
+            if (account && !error) {
+                weakSelf.currentUser = account;
+                if (completion)
+                {
+                    completion(nil);
+                }
+            } else if (completion) {
+                completion(error);
+            }
         }
     }];
 }

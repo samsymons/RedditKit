@@ -2,6 +2,8 @@
   <img src="https://raw.github.com/AFNetworking/AFNetworking/assets/afnetworking-logo.png" alt="AFNetworking" title="AFNetworking">
 </p>
 
+[![Build Status](https://travis-ci.org/AFNetworking/AFNetworking.png)](https://travis-ci.org/AFNetworking/AFNetworking)
+
 AFNetworking is a delightful networking library for iOS and Mac OS X. It's built on top of the [Foundation URL Loading System](http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/URLLoadingSystem/URLLoadingSystem.html), extending the powerful high-level networking abstractions built into Cocoa. It has a modular architecture with well-designed, feature-rich APIs that are a joy to use.
 
 Perhaps the most important feature of all, however, is the amazing community of developers who use and contribute to AFNetworking every day. AFNetworking powers some of the most popular and critically-acclaimed apps on the iPhone, iPad, and Mac.
@@ -142,7 +144,7 @@ NSURLRequest *request = [NSURLRequest requestWithURL:URL];
 
 NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
     NSURL *documentsDirectoryPath = [NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]];
-    return [documentsDirectoryPath URLByAppendingPathComponent:[targetPath lastPathComponent]];
+    return [documentsDirectoryPath URLByAppendingPathComponent:[response suggestedFilename]];
 } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
     NSLog(@"File downloaded to: %@", filePath);
 }];
@@ -169,6 +171,27 @@ NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithRequest:request from
 [uploadTask resume];
 ```
 
+#### Creating an Upload Task for a Multi-Part Request, with Progress
+
+```objective-c
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:@"http://example.com/upload" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileURL:[NSURL fileURLWithPath:@"file://path/to/image.jpg"] name:@"file" fileName:@"filename.jpg" mimeType:@"image/jpeg" error:nil];
+    } error:nil];
+
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSProgress *progress = nil;
+
+    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            NSLog(@"%@ %@", response, responseObject);
+        }
+    }];
+
+    [uploadTask resume];
+```
+
 #### Creating a Data Task
 
 ```objective-c
@@ -192,7 +215,7 @@ NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completion
 
 ### Request Serialization
 
-Request serializers create requests from URL strings, encoding parameters as either a query string or HTTP body. 
+Request serializers create requests from URL strings, encoding parameters as either a query string or HTTP body.
 
 ```objective-c
 NSString *URLString = @"http://example.com";
@@ -271,7 +294,7 @@ NSOperationQueue *operationQueue = manager.operationQueue;
 ### Security Policy
 
 `AFSecurityPolicy` evaluates server trust against pinned X.509 certificates and public keys over secure connections.
- 
+
 Adding pinned SSL certificates to your app helps prevent man-in-the-middle attacks and other vulnerabilities. Applications dealing with sensitive customer data or financial information are strongly encouraged to route all communication over an HTTPS connection with SSL pinning configured and enabled.
 
 #### Allowing Invalid SSL Certificates
@@ -328,21 +351,20 @@ NSArray *operations = [AFURLConnectionOperation batchOfRequestOperations:@[...] 
 
 ## Unit Tests
 
-AFNetworking includes a suite of unit tests within the Tests subdirectory. In order to run the unit tests, you must install the testing dependencies via CocoaPods:
+AFNetworking includes a suite of unit tests within the Tests subdirectory. In order to run the unit tests, you must install the testing dependencies via [CocoaPods](http://cocoapods.org/):
 
     $ cd Tests
     $ pod install
 
 Once testing dependencies are installed, you can execute the test suite via the 'iOS Tests' and 'OS X Tests' schemes within Xcode.
 
-### Using xctool
+### Running Tests from the Command Line
 
-Tests can also be run from the command line or within a continuous integration environment with [`xctool`](https://github.com/facebook/xctool), which can be installed with [Homebrew](http://brew.sh):
+Tests can also be run from the command line or within a continuous integration environment. The [`xcpretty`](https://github.com/mneorr/xcpretty) utility needs to be installed before running the tests from the command line:
 
-    $ brew update
-    $ brew install xctool --HEAD
+    $ gem install xcpretty
 
-Once `xctool` is installed, you can execute the suite via `rake test`.
+Once `xcpretty` is installed, you can execute the suite via `rake test`.
 
 ## Credits
 

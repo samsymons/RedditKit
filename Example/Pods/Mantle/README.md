@@ -218,15 +218,9 @@ typedef enum : NSUInteger {
 }
 
 + (NSValueTransformer *)stateJSONTransformer {
-    NSDictionary *states = @{
+    return [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{
         @"open": @(GHIssueStateOpen),
         @"closed": @(GHIssueStateClosed)
-    };
-
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
-        return states[str];
-    } reverseBlock:^(NSNumber *state) {
-        return [states allKeysForObject:state].lastObject;
     }];
 }
 
@@ -278,7 +272,7 @@ be invoked if overridden, giving you a convenient hook to upgrade old data.
 
 In order to serialize your model objects from or into JSON, you need to
 implement `<MTLJSONSerializing>` in your `MTLModel` subclass. This allows you to
-use `MTLJSONAdapter` convert your model objects from JSON and back:
+use `MTLJSONAdapter` to convert your model objects from JSON and back:
 
 ```objc
 NSError *error = nil;
