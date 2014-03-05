@@ -1,6 +1,6 @@
 # RedditKit
 
-RedditKit is a [reddit API](http://www.reddit.com/dev/api) wrapper, written in Objective-C.
+RedditKit is a [reddit API](http://www.reddit.com/dev/api) wrapper, written in Objective-C.  This fork has more of a focus on OAuth support than the master repo.
 
 ## Installation
 
@@ -8,7 +8,7 @@ RedditKit is a [reddit API](http://www.reddit.com/dev/api) wrapper, written in O
 
 Add this to your Podfile:
 
-	pod 'RedditKit', '~> 1.0'
+  pod 'RedditKit', :git => "git@github.com:pyro2927/RedditKit.git", :branch => "master"
 
 Then run:
 	
