@@ -1,1 +1,0 @@
-PODS_OSX_AFNETWORKING_OTHER_LDFLAGS = -framework CoreServices -framework Security -framework SystemConfiguration

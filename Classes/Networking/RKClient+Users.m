@@ -1,6 +1,6 @@
 // RKClient+Users.m
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,119 +30,125 @@
 
 NSString * NSStringFromUserContentCategory(RKUserContentCategory category)
 {
-	switch (category)
-	{
-		case RKUserContentCategoryOverview:
-			return @"overview";
-			break;
-		case RKUserContentCategoryComments:
-			return @"comments";
-			break;
+    switch (category)
+    {
+        case RKUserContentCategoryOverview:
+            return @"overview";
+            break;
+        case RKUserContentCategoryComments:
+            return @"comments";
+            break;
         case RKUserContentCategorySubmissions:
-			return @"submitted";
-			break;
+            return @"submitted";
+            break;
         case RKUserContentCategoryGilded:
-			return @"gilded";
-			break;
+            return @"gilded";
+            break;
         case RKUserContentCategoryLiked:
-			return @"liked";
-			break;
+            return @"liked";
+            break;
         case RKUserContentCategoryDisliked:
-			return @"disliked";
-			break;
+            return @"disliked";
+            break;
         default:
             return @"overview";
             break;
-	}
+    }
 }
 
 NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory category)
 {
-	switch (category)
-	{
-		case RKSubscribedSubredditCategorySubscriber:
-			return @"subscriber";
-			break;
-		case RKSubscribedSubredditCategoryContributor:
-			return @"contributor";
-			break;
+    switch (category)
+    {
+        case RKSubscribedSubredditCategorySubscriber:
+            return @"subscriber";
+            break;
+        case RKSubscribedSubredditCategoryContributor:
+            return @"contributor";
+            break;
         case RKSubscribedSubredditCategoryModerator:
-			return @"moderator";
-			break;
+            return @"moderator";
+            break;
         default:
             return @"subscriber";
             break;
-	}
+    }
 }
 
 @implementation RKClient (Users)
 
 - (NSURLSessionDataTask *)currentUserWithCompletion:(RKObjectCompletionBlock)completion
 {
-	return [self getPath:[[self class] meURLPath] parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
-		if (responseObject)
-		{
-			RKUser *account = [RKObjectBuilder objectFromJSON:responseObject];
-			
-			if (completion)
-			{
-				completion(account, nil);
-			}
-		}
-		else
-		{
-			if (completion)
-			{
-				completion(nil, error);
-			}
-		}
-	}];
+    return [self getPath:[[self class] meURLPath] parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+        if (responseObject)
+        {
+            RKUser *account = [RKObjectBuilder objectFromJSON:responseObject];
+            
+            if (completion)
+            {
+                completion(account, nil);
+            }
+        }
+        else
+        {
+            if (completion)
+            {
+                completion(nil, error);
+            }
+        }
+    }];
 }
 
 - (NSURLSessionDataTask *)user:(RKUser *)user completion:(RKObjectCompletionBlock)completion
 {
-	return [self userWithUsername:user.username completion:completion];
+    return [self userWithUsername:user.username completion:completion];
 }
 
 - (NSURLSessionDataTask *)userWithUsername:(NSString *)username completion:(RKObjectCompletionBlock)completion
 {
     NSParameterAssert(username);
     
-	NSString *path = [NSString stringWithFormat:@"user/%@/about.json", username];
-	
-	return [self getPath:path parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+    NSString *path = [NSString stringWithFormat:@"user/%@/about.json", username];
+    
+    return [self getPath:path parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         if (!completion)
         {
             return;
         }
         
-		if (responseObject)
-		{
-			RKUser *account = [RKObjectBuilder objectFromJSON:responseObject];
-			completion(account, nil);
-		}
-		else
-		{
-			completion(nil, error);
-		}
-	}];
+        if (responseObject)
+        {
+            RKUser *account = [RKObjectBuilder objectFromJSON:responseObject];
+            completion(account, nil);
+        }
+        else
+        {
+            completion(nil, error);
+        }
+    }];
 }
 
-- (NSURLSessionDataTask *)subscribedSubredditsWithCompletion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)subscribedSubredditsWithCompletion:(RKListingCompletionBlock)completion
 {
     return [self subscribedSubredditsInCategory:RKSubscribedSubredditCategorySubscriber completion:completion];
 }
 
-- (NSURLSessionDataTask *)subscribedSubredditsInCategory:(RKSubscribedSubredditCategory)category completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)subscribedSubredditsInCategory:(RKSubscribedSubredditCategory)category completion:(RKListingCompletionBlock)completion
 {
-    NSDictionary *parameters = @{@"un": @"samsymons"};
+    return [self subscribedSubredditsInCategory:category pagination:nil completion:completion];
+}
+
+- (NSURLSessionDataTask *)subscribedSubredditsInCategory:(RKSubscribedSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion {
+    NSMutableDictionary *taskParameters = [NSMutableDictionary dictionary];
+    [taskParameters addEntriesFromDictionary:[pagination dictionaryValue]];
+
     NSString *path = [NSString stringWithFormat:@"subreddits/mine/%@.json", NSStringFromSubscribedSubredditCategory(category)];
-	
-	return [self getPath:path parameters:parameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+
+    return [self getPath:path parameters:taskParameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         if (!completion) return;
         
-		if (responseObject)
-		{
+        if (responseObject)
+        {
             // A crude check to see if we have been redirected to the login page:
             
             NSString *path = [[response URL] path];
@@ -150,33 +156,35 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
             
             if (range.location != NSNotFound)
             {
-                completion(nil, [RKClient authenticationRequiredError]);
+                completion(nil, nil, [RKClient authenticationRequiredError]);
                 return;
             }
             
             // Parse the response:
             
-			NSArray *subredditsJSON = responseObject[@"data"][@"children"];
-			NSMutableArray *subredditObjects = [[NSMutableArray alloc] initWithCapacity:[subredditsJSON count]];
-			
-			for (NSDictionary *subredditJSON in subredditsJSON)
-			{
+            NSArray *subredditsJSON = responseObject[@"data"][@"children"];
+            NSMutableArray *subredditObjects = [[NSMutableArray alloc] initWithCapacity:[subredditsJSON count]];
+            
+            for (NSDictionary *subredditJSON in subredditsJSON)
+            {
                 NSError *mantleError = nil;
-				RKSubreddit *subreddit = [MTLJSONAdapter modelOfClass:[RKSubreddit class] fromJSONDictionary:subredditJSON error:&mantleError];
+                RKSubreddit *subreddit = [MTLJSONAdapter modelOfClass:[RKSubreddit class] fromJSONDictionary:subredditJSON error:&mantleError];
                 
                 if (!mantleError)
                 {
                     [subredditObjects addObject:subreddit];
                 }
-			}
-			
-			completion([subredditObjects copy], nil);
-		}
-		else
-		{
-			completion(nil, error);
-		}
-	}];
+            }
+            
+            RKPagination *pagination = [RKPagination paginationFromListingResponse:responseObject];
+            
+            completion([subredditObjects copy], pagination, nil);
+        }
+        else
+        {
+            completion(nil, nil, error);
+        }
+    }];
 }
 
 - (NSURLSessionDataTask *)deleteCurrentUserWithReason:(NSString *)reason currentPassword:(NSString *)currentPassword completion:(RKCompletionBlock)completion
@@ -189,9 +197,9 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
     __weak __typeof(self)weakSelf = self;
     return [self postPath:@"api/delete_user" parameters:parameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         if (!completion)
-		{
+        {
             return;
-		}
+        }
         
         [weakSelf signOut];
         
@@ -239,17 +247,17 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
 - (NSURLSessionDataTask *)contentForUserWithUsername:(NSString *)username category:(RKUserContentCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
 {
     NSParameterAssert(username);
-	
-	NSString *path = [NSString stringWithFormat:@"user/%@/%@.json", username, NSStringFromUserContentCategory(category)];
-	
-	return [self listingTaskWithPath:path parameters:nil pagination:pagination completion:completion];
+    
+    NSString *path = [NSString stringWithFormat:@"user/%@/%@.json", username, NSStringFromUserContentCategory(category)];
+    
+    return [self listingTaskWithPath:path parameters:nil pagination:pagination completion:completion];
 }
 
 #pragma mark - Friends
 
 - (NSURLSessionDataTask *)friendsWithCompletion:(RKArrayCompletionBlock)completion
 {
-	return [self getPath:@"prefs/friends.json" parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+    return [self getPath:@"prefs/friends.json" parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         if (!completion)
         {
             return;
@@ -272,7 +280,7 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
             
             completion(friends, nil);
         }
-	}];
+    }];
 }
 
 - (NSURLSessionDataTask *)submissionsByFriendsWithCompletion:(RKListingCompletionBlock)completion
@@ -282,7 +290,7 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
 
 - (NSURLSessionDataTask *)addFriend:(RKUser *)user completion:(RKCompletionBlock)completion
 {
-	return [self addFriendWithUsername:user.username completion:completion];
+    return [self addFriendWithUsername:user.username completion:completion];
 }
 
 - (NSURLSessionDataTask *)addFriendWithUsername:(NSString *)username completion:(RKCompletionBlock)completion
@@ -294,14 +302,14 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
 
 - (NSURLSessionDataTask *)removeFriend:(RKUser *)account completion:(RKCompletionBlock)completion
 {
-	return [self removeFriendWithUsername:account.username completion:completion];
+    return [self removeFriendWithUsername:account.username completion:completion];
 }
 
 - (NSURLSessionDataTask *)removeFriendWithUsername:(NSString *)username completion:(RKCompletionBlock)completion
 {
     NSParameterAssert(username);
     
-	return [self unfriendTaskWithContainer:self.currentUser.fullName subredditName:nil name:username type:@"friend" completion:completion];
+    return [self unfriendTaskWithContainer:self.currentUser.fullName subredditName:nil name:username type:@"friend" completion:completion];
 }
 
 #pragma mark - Registration

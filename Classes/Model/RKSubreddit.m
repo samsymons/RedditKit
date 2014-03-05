@@ -1,6 +1,6 @@
 // RKSubreddit.m
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -89,6 +89,20 @@
         else
         {
             return accountsActive;
+        }
+    }];
+}
+
++ (NSValueTransformer *)headerImageURLJSONTransformer
+{
+    return [MTLValueTransformer transformerWithBlock:^id(NSString *headerImageURL) {
+        if (!headerImageURL || [headerImageURL isEqual:[NSNull null]])
+        {
+            return nil;
+        }
+        else
+        {
+            return [NSURL URLWithString:headerImageURL];
         }
     }];
 }

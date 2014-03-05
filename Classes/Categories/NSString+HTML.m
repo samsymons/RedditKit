@@ -1,4 +1,4 @@
-// Copyright (c) 2008-2013 Sam Soffes, http://soff.es
+// Copyright (c) 2008-2014 Sam Soffes, http://soff.es
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -43,7 +43,7 @@
             [escapedString appendString:[unescapedString substringToIndex:r.location]];
             [unescapedString deleteCharactersInRange:NSMakeRange(0, r.location)];
         }
-		
+        
         if ([unescapedString hasPrefix:@"&lt;"])
         {
             [escapedString appendString:@"<"];

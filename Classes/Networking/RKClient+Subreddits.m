@@ -1,6 +1,6 @@
 // RKClient+Subreddits.m
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -32,25 +32,25 @@
 
 - (NSURLSessionDataTask *)subredditWithName:(NSString *)subredditName completion:(RKObjectCompletionBlock)completion
 {
-	NSParameterAssert(subredditName);
-	
-	NSString *path = [NSString stringWithFormat:@"r/%@/about.json", subredditName];
-	
-	return [self getPath:path parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
-		if (!completion) return;
-		
-		if (responseObject)
-		{
+    NSParameterAssert(subredditName);
+    
+    NSString *path = [NSString stringWithFormat:@"r/%@/about.json", subredditName];
+    
+    return [self getPath:path parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+        if (!completion) return;
+        
+        if (responseObject)
+        {
             NSError *mantleError = nil;
-			RKSubreddit *subreddit = [MTLJSONAdapter modelOfClass:[RKSubreddit class] fromJSONDictionary:responseObject error:&mantleError];
+            RKSubreddit *subreddit = [MTLJSONAdapter modelOfClass:[RKSubreddit class] fromJSONDictionary:responseObject error:&mantleError];
             
-			completion(subreddit, mantleError);
-		}
-		else
-		{
-			completion(nil, error);
-		}
-	}];
+            completion(subreddit, mantleError);
+        }
+        else
+        {
+            completion(nil, error);
+        }
+    }];
 }
 
 - (NSURLSessionDataTask *)popularSubredditsWithPagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
@@ -123,28 +123,28 @@
 
 - (NSURLSessionDataTask *)subscribeToSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
 {
-	return [self subscribeToSubredditWithFullName:[subreddit fullName] completion:completion];
+    return [self subscribeToSubredditWithFullName:[subreddit fullName] completion:completion];
 }
 
 - (NSURLSessionDataTask *)subscribeToSubredditWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
 {
-	NSParameterAssert(fullName);
-	
-	NSDictionary *parameters = @{ @"action": @"sub", @"sr": fullName, @"uh": self.modhash };
-	return [self basicPostTaskWithPath:@"api/subscribe" parameters:parameters completion:completion];
+    NSParameterAssert(fullName);
+    
+    NSDictionary *parameters = @{ @"action": @"sub", @"sr": fullName, @"uh": self.modhash };
+    return [self basicPostTaskWithPath:@"api/subscribe" parameters:parameters completion:completion];
 }
 
 - (NSURLSessionDataTask *)unsubscribeFromSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
 {
-	return [self unsubscribeFromSubredditWithFullName:[subreddit fullName] completion:completion];
+    return [self unsubscribeFromSubredditWithFullName:[subreddit fullName] completion:completion];
 }
 
 - (NSURLSessionDataTask *)unsubscribeFromSubredditWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
 {
-	NSParameterAssert(fullName);
-	
-	NSDictionary *parameters = @{ @"action": @"unsub", @"sr": fullName, @"uh": self.modhash };
-	return [self basicPostTaskWithPath:@"api/subscribe" parameters:parameters completion:completion];
+    NSParameterAssert(fullName);
+    
+    NSDictionary *parameters = @{ @"action": @"unsub", @"sr": fullName, @"uh": self.modhash };
+    return [self basicPostTaskWithPath:@"api/subscribe" parameters:parameters completion:completion];
 }
 
 @end

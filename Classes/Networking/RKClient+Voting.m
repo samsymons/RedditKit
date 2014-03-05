@@ -1,6 +1,6 @@
 // RKClient+Voting.m
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,48 +28,96 @@
 
 NSString * NSStringFromVoteDirection(RKVoteDirection voteDirection)
 {
-	switch (voteDirection)
-	{
-		case RKVoteDirectionUpvote:
-			return @"1";
-			break;
-		case RKVoteDirectionDownvote:
-			return @"-1";
-			break;
-		case RKVoteDirectionNone:
-			return @"0";
-			break;
-		default:
-			return @"0";
-			break;
-	}
+    switch (voteDirection)
+    {
+        case RKVoteDirectionUpvote:
+            return @"1";
+            break;
+        case RKVoteDirectionDownvote:
+            return @"-1";
+            break;
+        case RKVoteDirectionNone:
+            return @"0";
+            break;
+        default:
+            return @"0";
+            break;
+    }
+}
+
+RKVoteStatus RKVoteStatusFromVoteDirection(RKVoteDirection voteDirection)
+{
+    switch (voteDirection)
+    {
+        case RKVoteDirectionUpvote:
+            return RKVoteStatusUpvoted;
+            break;
+        case RKVoteDirectionDownvote:
+            return RKVoteStatusDownvoted;
+            break;
+        case RKVoteDirectionNone:
+        default:
+            return RKVoteStatusNone;
+            break;
+    }
 }
 
 @implementation RKClient (Voting)
 
 - (NSURLSessionDataTask *)upvote:(RKVotable *)object completion:(RKCompletionBlock)completion
 {
-    return [self voteOnThingWithFullName:object.fullName direction:RKVoteDirectionUpvote completion:completion];
+    return [self voteOnThing:object direction:RKVoteDirectionUpvote completion:completion];
 }
 
 - (NSURLSessionDataTask *)downvote:(RKVotable *)object completion:(RKCompletionBlock)completion
 {
-    return [self voteOnThingWithFullName:object.fullName direction:RKVoteDirectionDownvote completion:completion];
+    return [self voteOnThing:object direction:RKVoteDirectionDownvote completion:completion];
 }
 
 - (NSURLSessionDataTask *)revokeVote:(RKVotable *)object completion:(RKCompletionBlock)completion
 {
-    return [self voteOnThingWithFullName:object.fullName direction:RKVoteDirectionNone completion:completion];
+    return [self voteOnThing:object direction:RKVoteDirectionNone completion:completion];
+}
+
+- (NSURLSessionDataTask *)voteOnThing:(RKVotable *)object direction:(RKVoteDirection)direction completion:(RKCompletionBlock)completion
+{
+    return [self voteOnThingWithFullName:object.fullName direction:direction completion:^(NSError *error) {
+        if (!error)
+        {
+            NSInteger upvotes = object.upvotes;
+            NSInteger downvotes = object.downvotes;
+            
+            upvotes += (direction == RKVoteDirectionUpvote) ? 1 : 0;
+            downvotes += (direction == RKVoteDirectionDownvote) ? 1 : 0;
+            
+            upvotes += (object.voteStatus == RKVoteStatusUpvoted) ? -1 : 0;
+            downvotes += (object.voteStatus == RKVoteStatusDownvoted) ? -1 : 0;
+            
+            RKVotable *votable = [RKVotable modelWithDictionary:@{ @"voteStatus": @(RKVoteStatusFromVoteDirection(direction)),
+                                                                   @"upvotes": @(upvotes),
+                                                                   @"downvotes": @(downvotes) }
+                                                          error:nil];
+            
+            [object mergeValueForKey:@"voteStatus" fromModel:votable];
+            [object mergeValueForKey:@"upvotes" fromModel:votable];
+            [object mergeValueForKey:@"downvotes" fromModel:votable];
+        }
+        
+        if (completion)
+        {
+            completion(error);
+        }
+    }];
 }
 
 - (NSURLSessionDataTask *)voteOnThingWithFullName:(NSString *)fullName direction:(RKVoteDirection)direction completion:(RKCompletionBlock)completion;
 {
-	NSParameterAssert(fullName);
-	NSParameterAssert(direction);
-	
-	NSDictionary *parameters = @{@"id": fullName, @"dir": NSStringFromVoteDirection(direction)};
+    NSParameterAssert(fullName);
+    NSParameterAssert(direction);
     
-	return [self basicPostTaskWithPath:@"api/vote" parameters:parameters completion:completion];
+    NSDictionary *parameters = @{@"id": fullName, @"dir": NSStringFromVoteDirection(direction)};
+    
+    return [self basicPostTaskWithPath:@"api/vote" parameters:parameters completion:completion];
 }
 
 @end

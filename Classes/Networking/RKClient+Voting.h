@@ -1,6 +1,6 @@
 // RKClient+Voting.h
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -55,6 +55,15 @@ typedef NS_ENUM(NSInteger, RKVoteDirection) {
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
 - (NSURLSessionDataTask *)revokeVote:(RKVotable *)object completion:(RKCompletionBlock)completion;
+
+/**
+ Votes on a thing object.
+ 
+ @param object The object to vote on.
+ @param direction The direction of which to vote.
+ @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
+ */
+- (NSURLSessionDataTask *)voteOnThing:(RKVotable *)object direction:(RKVoteDirection)direction completion:(RKCompletionBlock)completion;
 
 /**
  Votes on a thing with a given full name.

@@ -1,6 +1,6 @@
 // RKObjectBuilder.m
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -66,7 +66,7 @@ NSString * const kRKObjectTypeMore = @"more";
 {
     NSString *kind = JSON[@"kind"];
     
-	Class objectClass = [[RKObjectBuilder objectBuilder] classForObjectKind:kind];
+    Class objectClass = [[RKObjectBuilder objectBuilder] classForObjectKind:kind];
     
     if (!objectClass)
     {
@@ -88,7 +88,7 @@ NSString * const kRKObjectTypeMore = @"more";
     // Continue with building:
     
     NSError *error = nil;
-	id model = [MTLJSONAdapter modelOfClass:objectClass fromJSONDictionary:JSON error:&error];
+    id model = [MTLJSONAdapter modelOfClass:objectClass fromJSONDictionary:JSON error:&error];
     
     if (!error)
     {
@@ -105,30 +105,30 @@ NSString * const kRKObjectTypeMore = @"more";
 
 - (Class)classForObjectKind:(NSString *)objectKind
 {
-	if ([objectKind isEqualToString:kRKObjectTypeComment])
-	{
-		return [RKComment class];
-	}
-	else if ([objectKind isEqualToString:kRKObjectTypeAccount])
-	{
-		return [RKUser class];
-	}
-	else if ([objectKind isEqualToString:kRKObjectTypeLink])
-	{
-		return [RKLink class];
-	}
-	else if ([objectKind isEqualToString:kRKObjectTypeMessage])
-	{
-		return [RKMessage class];
-	}
+    if ([objectKind isEqualToString:kRKObjectTypeComment])
+    {
+        return [RKComment class];
+    }
+    else if ([objectKind isEqualToString:kRKObjectTypeAccount])
+    {
+        return [RKUser class];
+    }
+    else if ([objectKind isEqualToString:kRKObjectTypeLink])
+    {
+        return [RKLink class];
+    }
+    else if ([objectKind isEqualToString:kRKObjectTypeMessage])
+    {
+        return [RKMessage class];
+    }
     else if ([objectKind isEqualToString:kRKObjectTypeMultireddit])
     {
         return [RKMultireddit class];
     }
-	else if ([objectKind isEqualToString:kRKObjectTypeSubreddit])
-	{
-		return [RKSubreddit class];
-	}
+    else if ([objectKind isEqualToString:kRKObjectTypeSubreddit])
+    {
+        return [RKSubreddit class];
+    }
     else if ([objectKind isEqualToString:kRKObjectTypeMultiredditDescription])
     {
         return [RKMultiredditDescription class];
@@ -137,12 +137,12 @@ NSString * const kRKObjectTypeMore = @"more";
     {
         return [RKModeratorAction class];
     }
-	else if ([objectKind isEqualToString:kRKObjectTypeMore])
-	{
-		// TODO: Add support for the More type.
-	}
-	
-	return nil;
+    else if ([objectKind isEqualToString:kRKObjectTypeMore])
+    {
+        // TODO: Add support for the More type.
+    }
+    
+    return nil;
 }
 
 @end

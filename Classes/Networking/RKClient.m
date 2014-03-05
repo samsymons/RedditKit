@@ -1,6 +1,6 @@
 // RKClient.m
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 
 + (instancetype)sharedClient
 {
-	static RKClient *sharedRKClient = nil;
+    static RKClient *sharedRKClient = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         sharedRKClient = [[[self class] alloc] init];
@@ -50,10 +50,10 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 - (id)init
 {
     if (self = [super initWithBaseURL:[[self class] APIBaseURL]])
-	{
+    {
         self.requestSerializer = [AFHTTPRequestSerializer serializer];
         self.responseSerializer = [RKResponseSerializer serializer];
-	}
+    }
     
     return self;
 }
@@ -94,7 +94,7 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
     NSParameterAssert(username);
     NSParameterAssert(password);
     
-	NSDictionary *parameters = @{@"user": username, @"passwd": password, @"api_type": @"json"};
+    NSDictionary *parameters = @{@"user": username, @"passwd": password, @"api_type": @"json"};
     
     NSURL *baseURL = [[self class] APIBaseHTTPSURL];
     NSString *URLString = [[NSURL URLWithString:@"api/login" relativeToURL:baseURL] absoluteString];
@@ -114,8 +114,10 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
         {
             NSDictionary *data = responseObject[@"json"][@"data"];
             NSString *modhash = data[@"modhash"];
+            NSString *sessionIdentifier = data[@"cookie"];
             
             [weakSelf setModhash:modhash];
+            [weakSelf setSessionIdentifier:sessionIdentifier];
             
             [weakSelf currentUserWithCompletion:^(id object, NSError *error) {
                 weakSelf.currentUser = object;
@@ -151,13 +153,14 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 
 - (BOOL)isSignedIn
 {
-	return self.modhash != nil;
+    return self.modhash != nil && self.sessionIdentifier != nil;
 }
 
 - (void)signOut
 {
-	self.currentUser = nil;
-	self.modhash = nil;
+    self.currentUser = nil;
+    self.modhash = nil;
+    self.sessionIdentifier = nil;
     
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     NSArray *cookies = [storage cookies];
@@ -176,6 +179,14 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 {
     _modhash = [modhash copy];
     [[self requestSerializer] setValue:_modhash forHTTPHeaderField:@"X-Modhash"];
+}
+
+- (void)setSessionIdentifier:(NSString *)sessionIdentifier {
+    
+    _sessionIdentifier = [sessionIdentifier copy];
+    
+    NSString *cookieValue = _sessionIdentifier ? [NSString stringWithFormat:@"reddit_session=%@", [_sessionIdentifier stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] : nil;
+    [[self requestSerializer] setValue:cookieValue forHTTPHeaderField:@"Cookie"];
 }
 
 - (void)setUserAgent:(NSString *)userAgent

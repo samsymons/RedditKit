@@ -1,6 +1,6 @@
 // RKVotable.m
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -43,42 +43,37 @@
 
 - (NSInteger)score
 {
-    if (!_score)
-    {
-        _score = self.upvotes - self.downvotes;
-    }
-    
-    return _score;
+    return (self.upvotes - self.downvotes);
 }
 
 - (BOOL)upvoted
 {
-	return (self.voteStatus == RKVoteStatusUpvoted);
+    return (self.voteStatus == RKVoteStatusUpvoted);
 }
 
 - (BOOL)downvoted
 {
-	return (self.voteStatus == RKVoteStatusDownvoted);
+    return (self.voteStatus == RKVoteStatusDownvoted);
 }
 
 - (BOOL)voted
 {
-    return (self.voteStatus == RKVoteStatusNone);
+    return (self.voteStatus != RKVoteStatusNone);
 }
 
 #pragma mark - MTLModel
 
 + (NSValueTransformer *)voteStatusJSONTransformer
 {
-    return [MTLValueTransformer transformerWithBlock:^(id forward) {
-        if (forward == [NSNull null])
+    return [MTLValueTransformer transformerWithBlock:^(id vote) {
+        if (!vote || vote == [NSNull null])
         {
             return @(RKVoteStatusNone);
         }
         else
         {   
-            BOOL likes = [forward boolValue];
-			return likes ? @(RKVoteStatusUpvoted) : @(RKVoteStatusDownvoted);
+            BOOL likes = [vote boolValue];
+            return likes ? @(RKVoteStatusUpvoted) : @(RKVoteStatusDownvoted);
         }
     }];
 }

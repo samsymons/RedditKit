@@ -1,6 +1,6 @@
 // RKLink.m
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -66,10 +66,10 @@
 
 - (BOOL)isImageLink
 {
-	NSSet *supportedFileTypeSuffixes = [NSSet setWithObjects:@"tiff", @"tif", @"jpg", @"jpeg", @"gif", @"png", nil];
-	NSString *extension = [[self URL] pathExtension];
+    NSSet *supportedFileTypeSuffixes = [NSSet setWithObjects:@"tiff", @"tif", @"jpg", @"jpeg", @"gif", @"png", nil];
+    NSString *extension = [[self URL] pathExtension];
     
-	return [supportedFileTypeSuffixes containsObject:extension];
+    return [supportedFileTypeSuffixes containsObject:extension];
 }
 
 #pragma mark - MTLModel
@@ -100,7 +100,7 @@
 {
     return [MTLValueTransformer transformerWithBlock:^(NSString *URL) {
         NSString *escapedURL = [URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-		return [NSURL URLWithString:escapedURL];
+        return [NSURL URLWithString:escapedURL];
     }];
 }
 
@@ -110,7 +110,7 @@
         NSString *escapedPermalink = [permalink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSString *fullPermalink = [NSString stringWithFormat:@"http://reddit.com%@", escapedPermalink];
         
-		return [NSURL URLWithString:fullPermalink];
+        return [NSURL URLWithString:fullPermalink];
     }];
 }
 

@@ -1,6 +1,6 @@
 // RKClient.h
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,6 +38,11 @@ extern NSString * const RKClientErrorDomain;
  The modhash value for the current user.
  */
 @property (nonatomic, strong) NSString *modhash;
+
+/**
+ The session cookie value for the current user.
+ */
+@property (nonatomic, strong) NSString *sessionIdentifier;
 
 /**
  The user agent for requests sent to reddit.

@@ -1,6 +1,6 @@
 // RKComment.m
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -32,6 +32,7 @@
         @"approvedBy": @"data.approved_by",
         @"bannedBy": @"data.banned_by",
         @"author": @"data.author",
+        @"linkAuthor": @"data.link_author",
         @"body": @"data.body",
         @"bodyHTML": @"data.body_html",
         @"scoreHidden": @"data.score_hidden",
@@ -55,7 +56,7 @@
 
 - (BOOL)isDeleted
 {
-	return [[self author] isEqualToString:@"[deleted]"] && [[self body] isEqualToString:@"[deleted]"];
+    return [[self author] isEqualToString:@"[deleted]"] && [[self body] isEqualToString:@"[deleted]"];
 }
 
 #pragma mark - MTLModel

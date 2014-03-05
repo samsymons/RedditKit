@@ -1,6 +1,6 @@
 // RKClient+Captcha.m
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,27 +37,27 @@
 
 - (NSURLSessionDataTask *)newCaptchaIdentifierWithCompletion:(RKObjectCompletionBlock)completion
 {
-	return [self postPath:@"api/new_captcha" parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
-		if (responseObject)
-		{
-			NSArray *responseArray = responseObject[@"jquery"];
-			NSArray *outerArray = [responseArray lastObject];
-			NSArray *catpchaWrapperArray = [outerArray lastObject];
-			NSString *captchaValue = [catpchaWrapperArray lastObject];
-			
-			if (completion)
-			{
-				completion(captchaValue, nil);
-			}
-		}
-		else
-		{
-			if (completion)
-			{
-				completion(nil, error);
-			}
-		}
-	}];
+    return [self postPath:@"api/new_captcha" parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+        if (responseObject)
+        {
+            NSArray *responseArray = responseObject[@"jquery"];
+            NSArray *outerArray = [responseArray lastObject];
+            NSArray *catpchaWrapperArray = [outerArray lastObject];
+            NSString *captchaValue = [catpchaWrapperArray lastObject];
+            
+            if (completion)
+            {
+                completion(captchaValue, nil);
+            }
+        }
+        else
+        {
+            if (completion)
+            {
+                completion(nil, error);
+            }
+        }
+    }];
 }
 
 - (NSURL *)URLForCaptchaWithIdentifier:(NSString *)identifier
@@ -73,7 +73,7 @@
 {
     NSParameterAssert(identifier);
     
-	NSURL *imageURL = [self URLForCaptchaWithIdentifier:identifier];
+    NSURL *imageURL = [self URLForCaptchaWithIdentifier:identifier];
     NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:imageURL.absoluteString parameters:nil error:nil];
     
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -82,14 +82,17 @@
             return;
         }
         
-        if (!error)
-        {
-            completion([self imageFromData:data], nil);
-        }
-        else
-        {
-            completion(nil, error);
-        }
+        __weak __typeof(self)weakSelf = self;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!error)
+            {
+                completion([weakSelf imageFromData:data], nil);
+            }
+            else
+            {
+                completion(nil, error);
+            }
+        });
     }];
     
     [task resume];

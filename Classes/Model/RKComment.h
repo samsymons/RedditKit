@@ -1,6 +1,6 @@
 // RKComment.h
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,6 +40,13 @@ typedef NS_ENUM(NSUInteger, RKDistinguishedStatus) {
  The username of the comment's author.
  */
 @property (nonatomic, copy, readonly) NSString *author;
+
+/**
+ The username of the user who posted the comment's parent link.
+ 
+ @note This property will only be set for comments retrieved outside of their parent submission. Read more here: http://redd.it/1rgf6j
+ */
+@property (nonatomic, copy, readonly) NSString *linkAuthor;
 
 /**
  The username of the moderator who banned this comment.

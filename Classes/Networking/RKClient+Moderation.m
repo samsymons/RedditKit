@@ -1,6 +1,6 @@
 // RKClient+Moderation.m
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,24 +30,24 @@
 
 NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
 {
-	switch (status)
-	{
-		case RKDistinguishedStatusYes:
-			return @"yes";
-			break;
-		case RKDistinguishedStatusNo:
-			return @"no";
-			break;
+    switch (status)
+    {
+        case RKDistinguishedStatusYes:
+            return @"yes";
+            break;
+        case RKDistinguishedStatusNo:
+            return @"no";
+            break;
         case RKDistinguishedStatusAdmin:
-			return @"admin";
-			break;
+            return @"admin";
+            break;
         case RKDistinguishedStatusSpecial:
-			return @"special";
-			break;
+            return @"special";
+            break;
         default:
             return @"no";
             break;
-	}
+    }
 }
 
 @implementation RKClient (Moderation)
@@ -60,10 +60,10 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
 - (NSURLSessionDataTask *)setLinkWithFullName:(NSString *)fullName asSticky:(BOOL)sticky completion:(RKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
-	
+    
     NSString *state = sticky ? @"True" : @"False";
-	NSDictionary *parameters = @{@"id": fullName, @"state": state};
-	
+    NSDictionary *parameters = @{@"id": fullName, @"state": state};
+    
     return [self basicPostTaskWithPath:@"api/set_subreddit_sticky" parameters:parameters completion:completion];
 }
 
@@ -75,10 +75,10 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
 - (NSURLSessionDataTask *)setContestMode:(BOOL)contestMode forLinkWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
-	
+    
     NSString *state = contestMode ? @"True" : @"False";
-	NSDictionary *parameters = @{@"id": fullName, @"state": state};
-	
+    NSDictionary *parameters = @{@"id": fullName, @"state": state};
+    
     return [self basicPostTaskWithPath:@"api/set_contest_mode" parameters:parameters completion:completion];
 }
 
@@ -268,40 +268,40 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
 
 - (NSURLSessionDataTask *)approveLink:(RKLink *)link completion:(RKCompletionBlock)completion
 {
-	return [self approveThingWithFullName:[link fullName] completion:completion];
+    return [self approveThingWithFullName:[link fullName] completion:completion];
 }
 
 - (NSURLSessionDataTask *)approveComment:(RKComment *)comment completion:(RKCompletionBlock)completion
 {
-	return [self approveThingWithFullName:[comment fullName] completion:completion];
+    return [self approveThingWithFullName:[comment fullName] completion:completion];
 }
 
 - (NSURLSessionDataTask *)approveThingWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
 {
-	NSParameterAssert(fullName);
-	
-	NSDictionary *parameters = @{@"id": fullName};
-	
+    NSParameterAssert(fullName);
+    
+    NSDictionary *parameters = @{@"id": fullName};
+    
     return [self basicPostTaskWithPath:@"api/approve" parameters:parameters completion:completion];
 }
 
 - (NSURLSessionDataTask *)removeLink:(RKLink *)link completion:(RKCompletionBlock)completion
 {
-	return [self removeThingWithFullName:link.fullName completion:completion];
+    return [self removeThingWithFullName:link.fullName completion:completion];
 }
 
 - (NSURLSessionDataTask *)removeComment:(RKComment *)comment completion:(RKCompletionBlock)completion
 {
-	return [self removeThingWithFullName:comment.fullName completion:completion];
+    return [self removeThingWithFullName:comment.fullName completion:completion];
 }
 
 - (NSURLSessionDataTask *)removeThingWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
 {
-	NSParameterAssert(fullName);
-	
-	NSDictionary *parameters = @{@"id": fullName};
-	
-	return [self basicPostTaskWithPath:@"api/remove" parameters:parameters completion:completion];
+    NSParameterAssert(fullName);
+    
+    NSDictionary *parameters = @{@"id": fullName};
+    
+    return [self basicPostTaskWithPath:@"api/remove" parameters:parameters completion:completion];
 }
 
 #pragma mark - Reports
@@ -319,10 +319,10 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
 - (NSURLSessionDataTask *)ignoreReportsForThingWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
-	
-	NSDictionary *parameters = @{@"id": fullName};
-	
-	return [self basicPostTaskWithPath:@"api/ignore_reports" parameters:parameters completion:completion];
+    
+    NSDictionary *parameters = @{@"id": fullName};
+    
+    return [self basicPostTaskWithPath:@"api/ignore_reports" parameters:parameters completion:completion];
 }
 
 - (NSURLSessionDataTask *)unignoreReportsForLink:(RKLink *)link completion:(RKCompletionBlock)completion
@@ -338,10 +338,10 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
 - (NSURLSessionDataTask *)unignoreReportsForThingWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
-	
-	NSDictionary *parameters = @{@"id": fullName};
-	
-	return [self basicPostTaskWithPath:@"api/unignore_reports" parameters:parameters completion:completion];
+    
+    NSDictionary *parameters = @{@"id": fullName};
+    
+    return [self basicPostTaskWithPath:@"api/unignore_reports" parameters:parameters completion:completion];
 }
 
 #pragma mark - Banning
@@ -405,10 +405,10 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
 - (NSURLSessionDataTask *)resignAsContributorToSubredditWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
-	
-	NSDictionary *parameters = @{@"id": fullName};
-	
-	return [self basicPostTaskWithPath:@"api/leavecontributor" parameters:parameters completion:completion];
+    
+    NSDictionary *parameters = @{@"id": fullName};
+    
+    return [self basicPostTaskWithPath:@"api/leavecontributor" parameters:parameters completion:completion];
 }
 
 - (NSURLSessionDataTask *)resignAsModeratorOfSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
@@ -419,10 +419,10 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
 - (NSURLSessionDataTask *)resignAsModeratorOfSubredditWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
 {
     NSParameterAssert(fullName);
-	
-	NSDictionary *parameters = @{@"id": fullName};
-	
-	return [self basicPostTaskWithPath:@"api/leavemoderator" parameters:parameters completion:completion];
+    
+    NSDictionary *parameters = @{@"id": fullName};
+    
+    return [self basicPostTaskWithPath:@"api/leavemoderator" parameters:parameters completion:completion];
 }
 
 #pragma mark - Subreddit Styling
@@ -461,11 +461,11 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
 {
     NSParameterAssert(stylesheet);
     NSParameterAssert(subredditName);
-	
-	NSDictionary *parameters = @{@"stylesheet_contents": stylesheet, @"op": @"save"};
-	NSString *path = [NSString stringWithFormat:@"r/%@/api/subreddit_stylesheet", subredditName];
     
-	return [self basicPostTaskWithPath:path parameters:parameters completion:completion];
+    NSDictionary *parameters = @{@"stylesheet_contents": stylesheet, @"op": @"save"};
+    NSString *path = [NSString stringWithFormat:@"r/%@/api/subreddit_stylesheet", subredditName];
+    
+    return [self basicPostTaskWithPath:path parameters:parameters completion:completion];
 }
 
 @end

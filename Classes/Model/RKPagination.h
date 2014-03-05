@@ -1,6 +1,6 @@
 // RKPagination.h
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,28 +23,28 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, RKCommentSortingMethod) {
-	RKCommentSortingMethodTop = 1,
-	RKCommentSortingMethodBest,
-	RKCommentSortingMethodNew,
-	RKCommentSortingMethodHot,
-	RKCommentSortingMethodControversial,
-	RKCommentSortingMethodOld
+    RKCommentSortingMethodTop = 1,
+    RKCommentSortingMethodBest,
+    RKCommentSortingMethodNew,
+    RKCommentSortingMethodHot,
+    RKCommentSortingMethodControversial,
+    RKCommentSortingMethodOld
 };
 
 typedef NS_ENUM(NSUInteger, RKUserContentSortingMethod) {
-	RKUserContentSortingMethodNew = 1,
-	RKUserContentSortingMethodHot,
-	RKUserContentSortingMethodTop,
-	RKUserContentSortingMethodControversial
+    RKUserContentSortingMethodNew = 1,
+    RKUserContentSortingMethodHot,
+    RKUserContentSortingMethodTop,
+    RKUserContentSortingMethodControversial
 };
 
 typedef NS_ENUM(NSUInteger, RKTimeSortingMethod) {
-	RKTimeSortingMethodThisHour = 1,
-	RKTimeSortingMethodToday,
-	RKTimeSortingMethodThisWeek,
-	RKTimeSortingMethodThisMonth,
-	RKTimeSortingMethodThisYear,
-	RKTimeSortingMethodAllTime
+    RKTimeSortingMethodThisHour = 1,
+    RKTimeSortingMethodToday,
+    RKTimeSortingMethodThisWeek,
+    RKTimeSortingMethodThisMonth,
+    RKTimeSortingMethodThisYear,
+    RKTimeSortingMethodAllTime
 };
 
 // extern NSString * NSStringFromCommentSortingMethod(RKCommentSortingMethod sortingMethod);

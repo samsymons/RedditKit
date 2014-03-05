@@ -1,6 +1,6 @@
 // RKClient+Comments.m
 //
-// Copyright (c) 2013 Sam Symons (http://samsymons.com/)
+// Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,18 +31,18 @@
 
 - (NSURLSessionDataTask *)submitComment:(NSString *)commentText onLink:(RKLink *)link completion:(RKCompletionBlock)completion
 {
-	return [self submitComment:commentText onThingWithFullName:[link fullName] completion:completion];
+    return [self submitComment:commentText onThingWithFullName:[link fullName] completion:completion];
 }
 
 - (NSURLSessionDataTask *)submitComment:(NSString *)commentText asReplyToComment:(RKComment *)comment completion:(RKCompletionBlock)completion
 {
-	return [self submitComment:commentText onThingWithFullName:[comment fullName] completion:completion];
+    return [self submitComment:commentText onThingWithFullName:[comment fullName] completion:completion];
 }
 
 - (NSURLSessionDataTask *)submitComment:(NSString *)commentText onThingWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
 {
-	NSParameterAssert(commentText);
-	NSParameterAssert(fullName);
+    NSParameterAssert(commentText);
+    NSParameterAssert(fullName);
     
     NSDictionary *parameters = @{@"text": commentText, @"thing_id": fullName};
     
@@ -53,15 +53,15 @@
 
 - (NSURLSessionDataTask *)commentsForLink:(RKLink *)link completion:(RKListingCompletionBlock)completion
 {
-	return [self commentsForLinkWithIdentifier:link.identifier completion:completion];
+    return [self commentsForLinkWithIdentifier:link.identifier completion:completion];
 }
 
 - (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier completion:(RKListingCompletionBlock)completion
 {
-	NSParameterAssert(linkIdentifier);
-	
-	NSString *path = [NSString stringWithFormat:@"comments/%@.json", linkIdentifier];
-	
+    NSParameterAssert(linkIdentifier);
+    
+    NSString *path = [NSString stringWithFormat:@"comments/%@.json", linkIdentifier];
+    
     return [self listingTaskWithPath:path parameters:nil pagination:nil completion:completion];
 }
 
