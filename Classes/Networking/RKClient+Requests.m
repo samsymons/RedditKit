@@ -182,7 +182,7 @@
     [alteredParameters setObject:@"json" forKey:@"api_type"];
     
     NSString *URLString = [[NSURL URLWithString:path relativeToURL:self.baseURL] absoluteString];
-	NSURLRequest *request = [[self requestSerializer] requestWithMethod:method URLString:URLString parameters:[alteredParameters copy]];
+	NSURLRequest *request = [[self requestSerializer] requestWithMethod:method URLString:URLString parameters:[alteredParameters copy] error:nil];
     
     NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (completion)
