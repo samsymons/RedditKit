@@ -135,7 +135,11 @@
         if (!error)
         {
             _accessToken = responseObject[@"access_token"];
-            _refreshToken = responseObject[@"refresh_token"];
+            if (responseObject[@"refresh_token"] && responseObject[@"refresh_token"] != [NSNull null]) {
+                _refreshToken = responseObject[@"refresh_token"];
+            } else {
+                _refreshToken = parameters[@"refresh_token"];
+            }
             //if our token expires, we should refresh it
             if (responseObject[@"expires_in"]) {
                 //if we have an existing timer, invalidate it so it doesn't fire twice
