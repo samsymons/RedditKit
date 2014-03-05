@@ -8,11 +8,11 @@ RedditKit is a [reddit API](http://www.reddit.com/dev/api) wrapper, written in O
 
 Add this to your Podfile:
 
-  pod 'RedditKit', :git => "git@github.com:pyro2927/RedditKit.git", :branch => "master"
+    pod 'RedditKit', :git => "git@github.com:pyro2927/RedditKit.git", :branch => "master"
 
 Then run:
 	
-	pod install
+    pod install
 
 ### Manually
 
