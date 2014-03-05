@@ -148,7 +148,7 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  @param captchaValue The optional value of the CAPTCHA you are submitting with this post.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)submitLinkPostWithTitle:(NSString *)title subreddit:(RKSubreddit *)subreddit URL:(NSURL *)URL captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)submitLinkPostWithTitle:(NSString *)title subreddit:(RKSubreddit *)subreddit URL:(NSURL *)URL captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKObjectCompletionBlock)completion;
 
 /**
  Submits a link post.
@@ -160,7 +160,7 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  @param captchaValue The optional value of the CAPTCHA you are submitting with this post.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)submitLinkPostWithTitle:(NSString *)title subredditName:(NSString *)subredditName URL:(NSURL *)URL captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)submitLinkPostWithTitle:(NSString *)title subredditName:(NSString *)subredditName URL:(NSURL *)URL captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKObjectCompletionBlock)completion;
 
 /**
  Submits a self post.
@@ -172,7 +172,7 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  @param captchaValue The optional value of the CAPTCHA you are submitting with this post.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)submitSelfPostWithTitle:(NSString *)title subreddit:(RKSubreddit *)subreddit text:(NSString *)text captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)submitSelfPostWithTitle:(NSString *)title subreddit:(RKSubreddit *)subreddit text:(NSString *)text captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKObjectCompletionBlock)completion;
 
 /**
  Submits a self post.
@@ -184,7 +184,7 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  @param captchaValue The optional value of the CAPTCHA you are submitting with this post.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
  */
-- (NSURLSessionDataTask *)submitSelfPostWithTitle:(NSString *)title subredditName:(NSString *)subredditName text:(NSString *)text captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)submitSelfPostWithTitle:(NSString *)title subredditName:(NSString *)subredditName text:(NSString *)text captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKObjectCompletionBlock)completion;
 
 #pragma mark - Marking NSFW
 

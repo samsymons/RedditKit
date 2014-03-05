@@ -5,8 +5,8 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/samsymons/RedditKit"
   s.social_media_url = "https://twitter.com/sam_symons"
   s.license      = 'MIT'
-  s.author       = { "Sam Symons" => "sam@samsymons.com" }
-  s.source       = { :git => "https://github.com/samsymons/RedditKit.git", :tag => s.version.to_s }
+  s.authors      = { "Sam Symons" => "sam@samsymons.com", "Joe Pintozzi" => "joseph@pintozzi.com" }
+  s.source       = { :git => "https://github.com/pyro2927/RedditKit.git", :branch => "master" }
   s.requires_arc = true
 
   s.ios.deployment_target = '7.0'

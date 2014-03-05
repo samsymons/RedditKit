@@ -74,7 +74,7 @@
     NSParameterAssert(identifier);
     
     NSURL *imageURL = [self URLForCaptchaWithIdentifier:identifier];
-    NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:imageURL.absoluteString parameters:nil];
+    NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:imageURL.absoluteString parameters:nil error:nil];
     
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (!completion)

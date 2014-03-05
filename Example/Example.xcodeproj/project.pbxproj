@@ -20,6 +20,7 @@
 		4BB0B6DD180652D20023BB24 /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB0B6DC180652D20023BB24 /* BrowserViewController.m */; };
 		4BC808121825AFEE0070B628 /* AuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC808111825AFEE0070B628 /* AuthenticationManager.m */; };
 		4BC8081518270FF80070B628 /* LinkTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC8081418270FF80070B628 /* LinkTitleLabel.m */; };
+		D8976D6518399D5300BF36C8 /* OAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8976D6418399D5300BF36C8 /* OAuthViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,8 @@
 		4BC8081418270FF80070B628 /* LinkTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkTitleLabel.m; sourceTree = "<group>"; };
 		6AD7909B16B44DE7A9159C04 /* libPods-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94D0CE0DEABE4AFA951E5C4A /* Pods-ios.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.xcconfig"; path = "Pods/Pods-ios.xcconfig"; sourceTree = "<group>"; };
+		D8976D6318399D5300BF36C8 /* OAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthViewController.h; sourceTree = "<group>"; };
+		D8976D6418399D5300BF36C8 /* OAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,8 @@
 				4B20490717F4C6350009BFF6 /* FrontPageViewController.m */,
 				4BB0B6DB180652D20023BB24 /* BrowserViewController.h */,
 				4BB0B6DC180652D20023BB24 /* BrowserViewController.m */,
+				D8976D6318399D5300BF36C8 /* OAuthViewController.h */,
+				D8976D6418399D5300BF36C8 /* OAuthViewController.m */,
 				4B723EDB1809A9C500E44AC1 /* LinkTableViewCell.h */,
 				4B723EDC1809A9C500E44AC1 /* LinkTableViewCell.m */,
 				4BC8081318270FF80070B628 /* LinkTitleLabel.h */,
@@ -225,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8976D6518399D5300BF36C8 /* OAuthViewController.m in Sources */,
 				4BC8081518270FF80070B628 /* LinkTitleLabel.m in Sources */,
 				4B20490817F4C6350009BFF6 /* FrontPageViewController.m in Sources */,
 				4BB0B6DD180652D20023BB24 /* BrowserViewController.m in Sources */,

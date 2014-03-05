@@ -27,7 +27,7 @@
 
 @implementation RKClient (Requests)
 
-- (NSURLSessionDataTask *)basicPostTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)basicPostAndResponseTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKObjectCompletionBlock)completion
 {
     NSParameterAssert(path);
     
@@ -36,7 +36,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             if (completion)
             {
-                completion([RKClient authenticationRequiredError]);
+                completion(nil, [RKClient authenticationRequiredError]);
             }
         });
         
@@ -44,6 +44,18 @@
     }
     
     return [self postPath:path parameters:parameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (completion)
+            {
+                completion(responseObject, error);
+            }
+        });
+    }];
+}
+
+- (NSURLSessionDataTask *)basicPostTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKCompletionBlock)completion
+{
+    return [self basicPostAndResponseTaskWithPath:path parameters:parameters completion:^(id object, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (completion)
             {
@@ -186,7 +198,7 @@
     [alteredParameters setObject:@"json" forKey:@"api_type"];
     
     NSString *URLString = [[NSURL URLWithString:path relativeToURL:self.baseURL] absoluteString];
-    NSURLRequest *request = [[self requestSerializer] requestWithMethod:method URLString:URLString parameters:[alteredParameters copy]];
+    NSURLRequest *request = [[self requestSerializer] requestWithMethod:method URLString:URLString parameters:[alteredParameters copy] error:nil];
     
     NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{

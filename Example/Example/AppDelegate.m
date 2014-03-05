@@ -41,7 +41,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
-        [[RKClient sharedClient] setUserAgent:@"RedditKit 1.0.0 Example Project"];
+        [[RKOAuthClient sharedClient] setUserAgent:@"RedditKit 1.0.0 Example Project"];
     });
 	
     return YES;
