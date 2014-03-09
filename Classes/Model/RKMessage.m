@@ -46,6 +46,7 @@
         @"author": @"data.author",
         @"messageBody": @"data.body",
         @"recipient": @"data.dest",
+        @"subject": @"data.subject",
         @"type": @"data.author",
         @"commentReply": @"data.was_comment",
         @"firstMessage": @"data.first_message",
