@@ -88,6 +88,14 @@ typedef NS_ENUM(NSUInteger, RKMessageCategory) {
 - (NSURLSessionDataTask *)markMessageAsRead:(RKMessage *)message completion:(RKCompletionBlock)completion;
 
 /**
+ Marks an array of messages as read.
+ 
+ @param messages The array of messages to be marked as read. The array must only contain RKMessage objects.
+ @param completion The block to be executed upon completion of the request.
+ */
+- (NSURLSessionDataTask *)markMessageArrayAsRead:(NSArray *)messages completion:(RKCompletionBlock)completion;
+
+/**
  Marks a message as read.
  
  @param fullName The full name of the message to be marked as read.
@@ -102,6 +110,14 @@ typedef NS_ENUM(NSUInteger, RKMessageCategory) {
  @param completion The block to be executed upon completion of the request.
  */
 - (NSURLSessionDataTask *)markMessageAsUnread:(RKMessage *)message completion:(RKCompletionBlock)completion;
+
+/**
+ Marks an array of messages as unread.
+ 
+ @param messages The array of messages to be marked as unread. The array must only contain RKMessage objects.
+ @param completion The block to be executed upon completion of the request.
+ */
+- (NSURLSessionDataTask *)markMessageArrayAsUnread:(NSArray *)messages completion:(RKCompletionBlock)completion;
 
 /**
  Marks a message as unread.
