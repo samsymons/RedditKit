@@ -32,6 +32,7 @@ const NSInteger RKClientErrorInvalidCredentials = 203;
 const NSInteger RKClientErrorRateLimited = 204;
 const NSInteger RKClientErrorTooManyFlairClassNames = 205;
 const NSInteger RKClientErrorArchived = 206;
+const NSInteger RKClientErrorInvalidSubreddit = 207;
 
 const NSInteger RKClientErrorInvalidMultiredditName = 401;
 const NSInteger RKClientErrorPermissionDenied = 401;
@@ -56,6 +57,7 @@ const NSInteger RKClientErrorTimedOut = 504;
             if ([RKClient string:responseString containsSubstring:@"BAD_CSS_NAME"]) return [RKClient invalidCSSClassNameError];
             if ([RKClient string:responseString containsSubstring:@"TOO_OLD"]) return [RKClient archivedError];
             if ([RKClient string:responseString containsSubstring:@"TOO_MUCH_FLAIR_CSS"]) return [RKClient tooManyFlairClassNamesError];
+            if ([RKClient string:responseString containsSubstring:@"SUBREDDIT_NOEXIST"]) return [RKClient invalidSubredditError];
             
             break;
         case 400:
@@ -123,6 +125,12 @@ const NSInteger RKClientErrorTimedOut = 504;
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Too many flair class names" failureReason:@"You have passed in too many flair class names"];
     return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorTooManyFlairClassNames userInfo:userInfo];
+}
+
++ (NSError *)invalidSubredditError
+{
+    NSDictionary *userInfo = [RKClient userInfoWithDescription:@"That subreddit does not exist" failureReason:@"You have entered an invalid subreddit name"];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorInvalidSubreddit userInfo:userInfo];
 }
 
 + (NSError *)archivedError

@@ -32,6 +32,7 @@ extern const NSInteger RKClientErrorInvalidCredentials;
 extern const NSInteger RKClientErrorRateLimited;
 extern const NSInteger RKClientErrorTooManyFlairClassNames;
 extern const NSInteger RKClientErrorArchived;
+extern const NSInteger RKClientErrorInvalidSubreddit;
 
 extern const NSInteger RKClientErrorInvalidMultiredditName;
 extern const NSInteger RKClientErrorPermissionDenied;
@@ -67,6 +68,11 @@ extern const NSInteger RKClientErrorTimedOut;
  Returns an error that occurs when the user attempts to sign in but either the username or password were incorrect.
  */
 + (NSError *)invalidCredentialsError;
+
+/**
+ Returns an error that occurs when you provide an invalid subreddit name.
+ */
++ (NSError *)invalidSubredditError;
 
 /**
  Returns an error that occurs when the user is rate limited.
