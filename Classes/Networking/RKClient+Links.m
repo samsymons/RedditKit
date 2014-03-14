@@ -134,7 +134,7 @@ NSString * NSStringFromSubredditCategory(RKSubredditCategory category)
 
 - (NSURLSessionDataTask *)submitLinkPostWithTitle:(NSString *)title subreddit:(RKSubreddit *)subreddit URL:(NSURL *)URL captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion
 {
-    return [self submitLinkPostWithTitle:title subredditName:subreddit.title URL:URL captchaIdentifier:captchaIdentifier captchaValue:captchaValue completion:completion];
+    return [self submitLinkPostWithTitle:title subredditName:subreddit.name URL:URL captchaIdentifier:captchaIdentifier captchaValue:captchaValue completion:completion];
 }
 
 - (NSURLSessionDataTask *)submitLinkPostWithTitle:(NSString *)title subredditName:(NSString *)subredditName URL:(NSURL *)URL captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion
@@ -159,7 +159,7 @@ NSString * NSStringFromSubredditCategory(RKSubredditCategory category)
 
 - (NSURLSessionDataTask *)submitSelfPostWithTitle:(NSString *)title subreddit:(RKSubreddit *)subreddit text:(NSString *)text captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion
 {
-    return [self submitSelfPostWithTitle:title subredditName:subreddit.title text:text captchaIdentifier:captchaIdentifier captchaValue:captchaValue completion:completion];
+    return [self submitSelfPostWithTitle:title subredditName:subreddit.name text:text captchaIdentifier:captchaIdentifier captchaValue:captchaValue completion:completion];
 }
 
 - (NSURLSessionDataTask *)submitSelfPostWithTitle:(NSString *)title subredditName:(NSString *)subredditName text:(NSString *)text captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion
