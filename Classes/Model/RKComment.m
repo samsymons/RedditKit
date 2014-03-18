@@ -36,7 +36,9 @@
         @"body": @"data.body",
         @"bodyHTML": @"data.body_html",
         @"scoreHidden": @"data.score_hidden",
-        @"replies": @"data.replies"
+        @"replies": @"data.replies",
+        @"edited": @"data.edited",
+        @"linkID": @"data.link_id"
     };
     
     return [[super JSONKeyPathsByPropertyKey] mtl_dictionaryByAddingEntriesFromDictionary:keyPaths];
@@ -94,6 +96,21 @@
         }
         
         return [comments copy];
+    }];
+}
+
++ (NSValueTransformer *)editedJSONTransformer
+{
+    return [MTLValueTransformer transformerWithBlock:^id(NSNumber *created) {
+        if (![created boolValue])
+        {
+            return nil;
+        }
+        else
+        {
+            NSTimeInterval createdTimeInterval = [created unsignedIntegerValue];
+            return [NSDate dateWithTimeIntervalSince1970:createdTimeInterval];
+        }
     }];
 }
 
