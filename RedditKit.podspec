@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
   s.source_files = 'Classes/*.{h,m}', 'Classes/**/*.{h,m}' 
   s.header_mappings_dir =  'Classes'
 
-  s.dependency 'AFNetworking', '~> 2.0'
+  s.dependency 'AFNetworking', '~> 2.2'
   s.dependency 'Mantle', '~> 1.3'
 end

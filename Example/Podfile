@@ -4,6 +4,5 @@ target :ios do
   platform :ios, '7.0'
   link_with 'Example'
 
-  pod 'AFNetworking/UIKit'
   pod 'RedditKit', :path => '../'
 end
