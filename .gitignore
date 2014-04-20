@@ -17,8 +17,6 @@ profile
 DerivedData
 .idea/
 Tests/Pods
-Tests/Podfile.lock
 Tests/Tests.xcodeproj/xcshareddata/xcschemes/
 Example/Pods
-Example/Podfile.lock
 

@@ -1,0 +1,31 @@
+PODS:
+  - AFNetworking/NSURLConnection (2.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.1.0):
+    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (2.1.0)
+  - AFNetworking/Security (2.1.0)
+  - AFNetworking/Serialization (2.1.0)
+  - Mantle (1.3.1):
+    - Mantle/extobjc
+  - Mantle/extobjc (1.3.1)
+  - RedditKit (2.0.0):
+    - AFNetworking/NSURLSession (~> 2.1)
+    - AFNetworking/Serialization (~> 2.1)
+    - Mantle (~> 1.3)
+
+DEPENDENCIES:
+  - RedditKit (from `../`)
+
+EXTERNAL SOURCES:
+  RedditKit:
+    :path: ../
+
+SPEC CHECKSUMS:
+  AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
+  Mantle: abc3b0c81bc66eb624cf9cebb8640e377d5a44ae
+  RedditKit: 15ad413c18a7d7f407bb456a8c82e92df3b5e034
+
+COCOAPODS: 0.29.0
