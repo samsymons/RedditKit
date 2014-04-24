@@ -31,7 +31,7 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
 	RKSubredditCategoryTop
 };
 
-@class RKLink, RKSubreddit;
+@class RKLink, RKSubreddit, RKMultireddit;
 
 @interface RKClient (Links)
 
@@ -127,6 +127,44 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
  */
 - (NSURLSessionDataTask *)linksInSubredditWithName:(NSString *)subredditName category:(RKSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+
+/**
+ Fetches links from a multireddit
+ 
+ @param multireddit The multireddit from which to fetch links.
+ @param pagination The pagination object to be sent with the request.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
+ */
+- (NSURLSessionDataTask *)linksInMultireddit:(RKMultireddit *)multireddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+
+/**
+ Fetches links from a multireddit
+ 
+ @param multireddit The multireddit from which to fetch links.
+ @param category The category from which to fetch links. Defaults to RKSubredditCategoryHot.
+ @param pagination The pagination object to be sent with the request.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
+ */
+- (NSURLSessionDataTask *)linksInMultireddit:(RKMultireddit *)multireddit category:(RKSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+
+/**
+ Fetches links from a multireddit
+ 
+ @param multiredditPath The path of the multireddit from which to fetch links.
+ @param pagination The pagination object to be sent with the request.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
+ */
+- (NSURLSessionDataTask *)linksInMultiredditWithPath:(NSString *)multiredditPath pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+
+/**
+ Fetches links from a multireddit
+ 
+ @param multiredditPath The path of the multireddit from which to fetch links.
+ @param category The category from which to fetch links. Defaults to RKSubredditCategoryHot.
+ @param pagination The pagination object to be sent with the request.
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKLinks, an RKPagination object, and any error that occurred.
+ */
+- (NSURLSessionDataTask *)linksInMultiredditWithPath:(NSString *)multiredditPath category:(RKSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
 
 /**
  Fetches a link object.
