@@ -55,6 +55,14 @@
 - (NSURLSessionDataTask *)multiredditWithName:(NSString *)multiredditName userWithUsername:(NSString *)username completion:(RKObjectCompletionBlock)completion;
 
 /**
+ Gets a multireddit with a given path
+ 
+ @param multiredditPath The path of the multireddit to fetch. (format: /user/username/m/multireddit_name)
+ @param completion An optional block to be executed on the completion of a request.
+ */
+- (NSURLSessionDataTask *)multiredditWithPath:(NSString *)multiredditPath completion:(RKObjectCompletionBlock)completion;
+
+/**
  Gets the description of a multireddit.
  
  @param multireddit The multireddit.
