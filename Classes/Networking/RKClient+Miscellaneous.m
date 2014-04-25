@@ -70,7 +70,7 @@
 
 - (NSURLSessionDataTask *)unsaveLink:(RKLink *)link completion:(RKCompletionBlock)completion
 {
-    return [self saveLinkOrCommentWithFullName:[link fullName] completion:completion];
+    return [self unsaveLinkOrCommentWithFullName:[link fullName] completion:completion];
 }
 
 - (NSURLSessionDataTask *)unsaveComment:(RKComment *)comment completion:(RKCompletionBlock)completion
