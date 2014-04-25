@@ -20,9 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKThing.h"
+#import "RKCreated.h"
 
-@interface RKUser : RKThing
+@interface RKUser : RKCreated
 
 /**
  The user's reddit username.
