@@ -254,4 +254,21 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
  */
 - (NSURLSessionDataTask *)unhideLinkWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
 
+/**
+ Stores a link visit for a gold user.
+ 
+ @param link The link to store.
+ @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
+ */
+- (NSURLSessionDataTask *)storeVisitedLink:(RKLink *)link completion:(RKCompletionBlock)completion;
+
+
+/**
+ Stores a link visit for a gold user.
+ 
+ @param fullName The full name of the link to store.
+ @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
+ */
+- (NSURLSessionDataTask *)storeVisitedLinkWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+
 @end
