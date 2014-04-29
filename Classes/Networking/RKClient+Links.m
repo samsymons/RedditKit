@@ -25,6 +25,7 @@
 #import "RKLink.h"
 #import "RKSubreddit.h"
 #import "RKPagination.h"
+#import "RKMultireddit.h"
 
 NSString * NSStringFromSubredditCategory(RKSubredditCategory category)
 {
@@ -108,6 +109,30 @@ NSString * NSStringFromSubredditCategory(RKSubredditCategory category)
     NSParameterAssert(subredditName);
     
     NSString *path = [NSString stringWithFormat:@"r/%@/%@.json", subredditName, NSStringFromSubredditCategory(category)];
+    
+    return [self listingTaskWithPath:path parameters:nil pagination:pagination completion:completion];
+}
+
+- (NSURLSessionDataTask *)linksInMultireddit:(RKMultireddit *)multireddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+{
+    return [self linksInMultireddit:multireddit category:RKSubredditCategoryHot pagination:pagination completion:completion];
+}
+
+- (NSURLSessionDataTask *)linksInMultireddit:(RKMultireddit *)multireddit category:(RKSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+{
+    return [self linksInMultiredditWithPath:multireddit.path category:category pagination:pagination completion:completion];
+}
+
+- (NSURLSessionDataTask *)linksInMultiredditWithPath:(NSString *)multiredditPath pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+{
+    return [self linksInMultiredditWithPath:multiredditPath category:RKSubredditCategoryHot pagination:pagination completion:completion];
+}
+
+- (NSURLSessionDataTask *)linksInMultiredditWithPath:(NSString *)multiredditPath category:(RKSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+{
+    NSParameterAssert(multiredditPath);
+    
+    NSString *path = [NSString stringWithFormat:@"%@/%@.json", multiredditPath, NSStringFromSubredditCategory(category)];
     
     return [self listingTaskWithPath:path parameters:nil pagination:pagination completion:completion];
 }
