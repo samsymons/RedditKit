@@ -237,4 +237,17 @@ NSString * NSStringFromSubredditCategory(RKSubredditCategory category)
     return [self basicPostTaskWithPath:@"api/unhide" parameters:parameters completion:completion];
 }
 
+- (NSURLSessionDataTask *)storeVisitedLink:(RKLink *)link completion:(RKCompletionBlock)completion
+{
+    return [self storeVisitedLinkWithFullName:[link fullName] completion:completion];
+}
+
+- (NSURLSessionDataTask *)storeVisitedLinkWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+{
+    NSParameterAssert(fullName);
+    
+    NSDictionary *parameters = @{@"links": fullName};
+    return [self basicPostTaskWithPath:@"api/store_visits" parameters:parameters completion:completion];
+}
+
 @end
