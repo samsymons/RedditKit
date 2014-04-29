@@ -22,6 +22,15 @@
 
 #import "RKClient.h"
 
+typedef NS_ENUM(NSUInteger, RKCommentSort) {
+        RKCommentSortTop = 1,
+        RKCommentSortHot,
+        RKCommentSortNew,
+        RKCommentSortControversial,
+        RKCommentSortOld,
+        RKCommentSortBest
+};
+
 @class RKLink, RKComment, RKMessage;
 
 @interface RKClient (Comments)
@@ -70,12 +79,22 @@
 - (NSURLSessionDataTask *)commentsForLink:(RKLink *)link completion:(RKListingCompletionBlock)completion;
 
 /**
- Submit a comment on a link or ocmment.
+ Gets any comments on a link.
  
  @param linkIdentifier The identifier of the link.
  @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKComments, an RKPagination object, and any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
 - (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier completion:(RKListingCompletionBlock)completion;
+
+/**
+ Gets any comments on a link with specified sort.
+ 
+ @param linkIdentifier The identifier of the link.
+ @param sort The sort option from which to fetch comments. Defaults to RKCommentSortTop
+ @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKComments, an RKPagination object, and any error that occurred.
+ @return The NSURLSessionDataTask for the request.
+ */
+- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier sort:(RKCommentSort)sort completion:(RKListingCompletionBlock)completion;
 
 @end

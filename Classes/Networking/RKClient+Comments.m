@@ -25,6 +25,34 @@
 #import "RKLink.h"
 #import "RKComment.h"
 
+NSString * NSStringFromCommentSort(RKCommentSort sort)
+{
+    switch (sort)
+    {
+        case RKCommentSortTop:
+            return @"top";
+            break;
+        case RKCommentSortHot:
+            return @"hot";
+            break;
+        case RKCommentSortNew:
+            return @"new";
+            break;
+        case RKCommentSortControversial:
+            return @"controversial";
+            break;
+        case RKCommentSortOld:
+            return @"old";
+            break;
+        case RKCommentSortBest:
+            return @"confidence";
+            break;
+        default:
+            return @"top";
+            break;
+	}
+}
+
 @implementation RKClient (Comments)
 
 #pragma mark - Submitting Comments
@@ -53,16 +81,22 @@
 
 - (NSURLSessionDataTask *)commentsForLink:(RKLink *)link completion:(RKListingCompletionBlock)completion
 {
-    return [self commentsForLinkWithIdentifier:link.identifier completion:completion];
+    return [self commentsForLinkWithIdentifier:link.identifier sort:RKCommentSortTop completion:completion];
 }
 
 - (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier completion:(RKListingCompletionBlock)completion
 {
+    return [self commentsForLinkWithIdentifier:linkIdentifier sort:RKCommentSortTop completion:completion];
+}
+
+- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier sort:(RKCommentSort)sort completion:(RKListingCompletionBlock)completion
+{
     NSParameterAssert(linkIdentifier);
     
+    NSDictionary *parameters = @{ @"sort": NSStringFromCommentSort(sort) };
     NSString *path = [NSString stringWithFormat:@"comments/%@.json", linkIdentifier];
     
-    return [self listingTaskWithPath:path parameters:nil pagination:nil completion:completion];
+    return [self listingTaskWithPath:path parameters:parameters pagination:nil completion:completion];
 }
 
 @end
