@@ -50,6 +50,12 @@ NSString * NSStringFromUserContentCategory(RKUserContentCategory category)
         case RKUserContentCategoryDisliked:
             return @"disliked";
             break;
+        case RKUserContentCategoryHidden:
+            return @"hidden";
+            break;
+        case RKUserContentCategorySaved:
+            return @"saved";
+            break;
         default:
             return @"overview";
             break;

@@ -30,7 +30,9 @@ typedef NS_ENUM(NSUInteger, RKUserContentCategory)
 	RKUserContentCategorySubmissions,
     RKUserContentCategoryGilded,
 	RKUserContentCategoryLiked,
-	RKUserContentCategoryDisliked
+	RKUserContentCategoryDisliked,
+    RKUserContentCategoryHidden,
+    RKUserContentCategorySaved
 };
 
 typedef NS_ENUM(NSUInteger, RKSubscribedSubredditCategory)
