@@ -99,16 +99,16 @@
 + (NSValueTransformer *)URLJSONTransformer
 {
     return [MTLValueTransformer transformerWithBlock:^(NSString *URL) {
-        NSString *escapedURL = [URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        return [NSURL URLWithString:escapedURL];
+        NSString *unescapedURL = [[URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByUnescapingHTMLEntities];
+        return [NSURL URLWithString:unescapedURL];
     }];
 }
 
 + (NSValueTransformer *)permalinkJSONTransformer
 {
     return [MTLValueTransformer transformerWithBlock:^(NSString *permalink) {
-        NSString *escapedPermalink = [permalink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSString *fullPermalink = [NSString stringWithFormat:@"http://reddit.com%@", escapedPermalink];
+        NSString *unescapedPermalink = [[permalink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByUnescapingHTMLEntities];
+        NSString *fullPermalink = [NSString stringWithFormat:@"http://reddit.com%@", unescapedPermalink];
         
         return [NSURL URLWithString:fullPermalink];
     }];
