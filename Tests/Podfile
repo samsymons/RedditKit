@@ -2,6 +2,8 @@ inhibit_all_warnings!
 
 def import_pods
   pod 'RedditKit', :path => '../'
+  pod 'Specta', '~> 0.2'
+  pod 'Expecta', '~> 0.3'
 end
 
 target :ios do
