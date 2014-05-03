@@ -1,19 +1,28 @@
 PODS:
-  - AFNetworking/NSURLConnection (2.1.0):
+  - AFNetworking (2.2.3):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.1.0):
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.2.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.2.3):
     - AFNetworking/NSURLConnection
-  - AFNetworking/Reachability (2.1.0)
-  - AFNetworking/Security (2.1.0)
-  - AFNetworking/Serialization (2.1.0)
-  - Mantle (1.3.1):
+  - AFNetworking/Reachability (2.2.3)
+  - AFNetworking/Security (2.2.3)
+  - AFNetworking/Serialization (2.2.3)
+  - AFNetworking/UIKit (2.2.3):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - Mantle (1.4.1):
     - Mantle/extobjc
-  - Mantle/extobjc (1.3.1)
-  - RedditKit (2.0.0):
-    - AFNetworking/NSURLSession (~> 2.1)
-    - AFNetworking/Serialization (~> 2.1)
+  - Mantle/extobjc (1.4.1)
+  - RedditKit (1.0.3):
+    - AFNetworking (~> 2.2)
     - Mantle (~> 1.3)
 
 DEPENDENCIES:
@@ -24,8 +33,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
-  Mantle: abc3b0c81bc66eb624cf9cebb8640e377d5a44ae
-  RedditKit: 15ad413c18a7d7f407bb456a8c82e92df3b5e034
+  AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
+  Mantle: 0714cdb2b8559d9e6c2410d6a8529e3307bff189
+  RedditKit: 17cbac8cf9ebbd9f47295c72c0efc1f3c500a897
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.32.1
