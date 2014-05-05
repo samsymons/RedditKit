@@ -1,3 +1,15 @@
+## 1.1
+
+* RKVotable subclasses now automatically update their voteStatus. (@rickharrison)
+* Messages can be marked as read or unread in batches. (@rickharrison)
+* Ensure that HTML entities are always unescaped correctly. (@christianselig)
+* Comments can be sorted. (@rickharrison)
+* It's now possible to access a user's saved and hidden links. (@rickharrison)
+* Support for storing links as a reddit gold member. (@rickharrison)
+* Improved support for multireddits. (@rickharrison)
+* RKUser now subclasses RKCreated. (@rickharrison)
+* Completion blocks are now called on the main thread.
+
 ## 1.0.3
 
 * Fix an issue where subreddit categories were being ignored. (@rickharrison)
