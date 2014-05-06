@@ -21,7 +21,7 @@ PODS:
   - Mantle (1.4.1):
     - Mantle/extobjc
   - Mantle/extobjc (1.4.1)
-  - RedditKit (1.0.3):
+  - RedditKit (1.1.0):
     - AFNetworking (~> 2.2)
     - Mantle (~> 1.3)
 
@@ -35,6 +35,6 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
   Mantle: 0714cdb2b8559d9e6c2410d6a8529e3307bff189
-  RedditKit: 17cbac8cf9ebbd9f47295c72c0efc1f3c500a897
+  RedditKit: 44e90a1d461a4b9504a13700e5deab320f9b7ce2
 
 COCOAPODS: 0.32.1
