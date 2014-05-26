@@ -2,6 +2,10 @@
 
 RedditKit is a [reddit API](http://www.reddit.com/dev/api) wrapper, written in Objective-C.
 
+## Documention
+
+Documentation for RedditKit is [available on CocoaDocs](http://cocoadocs.org/docsets/RedditKit/1.1.0/).
+
 ## Installation
 
 ### CocoaPods
