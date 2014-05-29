@@ -55,6 +55,8 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 - (void)resetLinks;
 - (void)loadNewLinks;
 
+- (void)showSortingOptionsActionSheet;
+
 @end
 
 @implementation FrontPageViewController
@@ -82,6 +84,13 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 	self.autoLayoutCell.hidden = YES;
     
 	[[self tableView] addSubview:self.autoLayoutCell];
+    
+    // Set up the toolbar:
+    
+    self.navigationController.toolbarHidden = NO;
+    UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showSortingOptionsActionSheet)];
+    self.toolbarItems = @[space, actionButton];
     
     // Set up the navigation, and load some links:
     
@@ -214,6 +223,11 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
             NSLog(@"Failed to get links, with error: %@", error);
         }
     }];
+}
+
+- (void)showSortingOptionsActionSheet
+{
+    
 }
 
 #pragma mark - UITableViewDataSource
