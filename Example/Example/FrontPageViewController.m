@@ -21,9 +21,12 @@
 // THE SOFTWARE.
 
 #import "FrontPageViewController.h"
-#import "LinkTableViewCell.h"
-#import "BrowserViewController.h"
+
 #import "AuthenticationManager.h"
+#import "BrowserViewController.h"
+#import "LinkTableViewCell.h"
+
+#import <RedditKit/RedditKit.h>
 
 static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 
