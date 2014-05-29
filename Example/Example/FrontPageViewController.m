@@ -30,7 +30,7 @@
 
 static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 
-@interface FrontPageViewController ()
+@interface FrontPageViewController () <UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSArray *links;
 @property (nonatomic, strong) RKPagination *currentPagination;
@@ -40,6 +40,7 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 
 @property (nonatomic, strong) AuthenticationManager *authenticationManager;
 @property (nonatomic, strong) UIBarButtonItem *accountButton;
+@property (nonatomic, strong) UIBarButtonItem *actionButton;
 
 @property (nonatomic, getter = isLoadingNewLinks) BOOL loadingNewLinks;
 
@@ -89,8 +90,8 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
     
     self.navigationController.toolbarHidden = NO;
     UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showSortingOptionsActionSheet)];
-    self.toolbarItems = @[space, actionButton];
+    self.actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showSortingOptionsActionSheet)];
+    self.toolbarItems = @[space, self.actionButton];
     
     // Set up the navigation, and load some links:
     
@@ -227,7 +228,13 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 
 - (void)showSortingOptionsActionSheet
 {
+    UIActionSheet *sortOptionsActionSheet = [[UIActionSheet alloc] initWithTitle:@"Sorting"
+                                                                        delegate:self
+                                                               cancelButtonTitle:@"Cancel"
+                                                          destructiveButtonTitle:nil
+                                                               otherButtonTitles:@"Hot", @"New", @"Rising", @"Controversial", @"Top", nil];
     
+    [sortOptionsActionSheet showFromBarButtonItem:self.actionButton animated:YES];
 }
 
 #pragma mark - UITableViewDataSource
