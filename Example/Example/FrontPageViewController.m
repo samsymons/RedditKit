@@ -28,14 +28,6 @@
 
 #import <RedditKit/RedditKit.h>
 
-typedef NS_ENUM(NSUInteger, SOSSubredditSortingOption) {
-    SOSSubredditSortingOptionHot,
-    SOSSubredditSortingOptionNew,
-    SOSSubredditSortingOptionRising,
-    SOSSubredditSortingOptionControversial,
-    SOSSubredditSortingOptionTop
-};
-
 static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 
 @interface FrontPageViewController () <UIActionSheetDelegate>
@@ -326,30 +318,7 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    // SOSSubredditSortingOption sortingOption = (SOSSubredditSortingOption)buttonIndex;
-    
     self.currentCategory = ((RKSubredditCategory)buttonIndex + 1);
-    
-    /*
-    switch (sortingOption) {
-        case SOSSubredditSortingOptionHot:
-            self.currentCategory = RKSubredditCategoryHot;
-            break;
-        case SOSSubredditSortingOptionNew:
-            self.currentCategory = RKSubredditCategoryNew;
-            break;
-        case SOSSubredditSortingOptionRising:
-            self.currentCategory = RKSubredditCategoryRising;
-            break;
-        case SOSSubredditSortingOptionControversial:
-            self.currentCategory = RKSubredditCategoryControversial;
-            break;
-        case SOSSubredditSortingOptionTop:
-            self.currentCategory = RKSubredditCategoryTop;
-            break;
-    }
-     */
-    
     [self resetLinks];
 }
 
