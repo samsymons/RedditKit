@@ -28,12 +28,21 @@
 
 #import <RedditKit/RedditKit.h>
 
+typedef NS_ENUM(NSUInteger, SOSSubredditSortingOption) {
+    SOSSubredditSortingOptionHot,
+    SOSSubredditSortingOptionNew,
+    SOSSubredditSortingOptionRising,
+    SOSSubredditSortingOptionControversial,
+    SOSSubredditSortingOptionTop
+};
+
 static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 
 @interface FrontPageViewController () <UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSArray *links;
 @property (nonatomic, strong) RKPagination *currentPagination;
+@property (nonatomic, assign) RKSubredditCategory currentCategory;
 
 @property (nonatomic, strong) LinkTableViewCell *autoLayoutCell;
 @property (nonatomic, strong) NSMutableDictionary *cellHeights;
@@ -204,7 +213,8 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
     self.loadingNewLinks = YES;
     
     __weak __typeof(self)weakSelf = self;
-    [[RKClient sharedClient] frontPageLinksWithPagination:self.currentPagination completion:^(NSArray *collection, RKPagination *pagination, NSError *error) {
+    
+    [[RKClient sharedClient] frontPageLinksWithCategory:self.currentCategory pagination:self.currentPagination completion:^(NSArray *collection, RKPagination *pagination, NSError *error) {
         if (!error)
         {
             [[weakSelf tableView] beginUpdates];
@@ -310,6 +320,37 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 	{
         [self loadNewLinks];
     }
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // SOSSubredditSortingOption sortingOption = (SOSSubredditSortingOption)buttonIndex;
+    
+    self.currentCategory = ((RKSubredditCategory)buttonIndex + 1);
+    
+    /*
+    switch (sortingOption) {
+        case SOSSubredditSortingOptionHot:
+            self.currentCategory = RKSubredditCategoryHot;
+            break;
+        case SOSSubredditSortingOptionNew:
+            self.currentCategory = RKSubredditCategoryNew;
+            break;
+        case SOSSubredditSortingOptionRising:
+            self.currentCategory = RKSubredditCategoryRising;
+            break;
+        case SOSSubredditSortingOptionControversial:
+            self.currentCategory = RKSubredditCategoryControversial;
+            break;
+        case SOSSubredditSortingOptionTop:
+            self.currentCategory = RKSubredditCategoryTop;
+            break;
+    }
+     */
+    
+    [self resetLinks];
 }
 
 @end
