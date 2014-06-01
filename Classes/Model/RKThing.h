@@ -20,8 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
-#import <Mantle/Mantle.h>
+#import "Mantle.h"
 
 @interface RKThing : MTLModel <MTLJSONSerializing>
 

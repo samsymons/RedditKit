@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 
 #import "RKObjectBuilder.h"
-#import <Mantle/Mantle.h>
+#import "Mantle.h"
 #import "RKClient.h"
 #import "RKThing.h"
 #import "RKUser.h"
