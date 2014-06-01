@@ -18,11 +18,20 @@ Then run:
 	
 	pod install
 
-### Manually
+### Submodules
 
-1. Add RedditKit as a git submodule of your project.
-2. Install its dependencies with `git submodule update --init --recursive`
-3. Drag and drop RedditKit and its dependencies into your project, and you're done!
+**Adding RedditKit:**
+
+1. Add RedditKit as a git submodule of your project: `git submodule add https://github.com/samsymons/RedditKit.git`
+2. Fetch its dependencies with `git submodule update --init --recursive`
+
+**Adding AFNetworking:**
+
+Inside the newly created `RedditKit` directory, there exists an `External` directory containing its dependencies which the `git submodule update` command will have populated. Drag AFNetworking's `Classes` directory into your project.
+
+**Adding Mantle:**
+
+Follow [Mantle's instructions on getting the project set up](https://github.com/Mantle/Mantle#importing-mantle).
 
 ## Getting Started
 
