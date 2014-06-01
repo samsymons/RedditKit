@@ -33,6 +33,8 @@ Inside the newly created `RedditKit` directory, there exists an `External` direc
 
 Follow [Mantle's instructions on getting the project set up](https://github.com/Mantle/Mantle#importing-mantle).
 
+Once you have everything set up, you may need to restart Xcode to have it pick up your changes.
+
 ## Getting Started
 
 RedditKit is structured around the `RKClient` class. This class manages authentication for a single reddit account and performs HTTP requests on that user's behalf. `RKClient` can be used as a singleton with its `sharedClient` class method, or as a standalone object.
