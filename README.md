@@ -87,10 +87,7 @@ RKLink *link = [[self links] firstObject];
 ```obj-c
 RKLink *link = [[self links] firstObject];
 
-RKPagination *pagination = [RKPagination paginationWithLimit:100];
-pagination.commentSortingMethod = RKCommentSortingMethodTop;
-
-[[RKClient sharedClient] commentsForLink:link pagination:pagination completion:^(NSArray *comments, NSError *error) {
+[[RKClient sharedClient] commentsForLink:link completion:^(NSArray *comments, NSError *error) {
 	if (comments)
 	{
 		NSLog(@"Comments: %@", comments);
