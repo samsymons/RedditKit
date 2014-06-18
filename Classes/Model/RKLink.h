@@ -169,4 +169,11 @@
  */
 - (BOOL)isImageLink;
 
+/**
+ Returns the URL in a shortened format. This uses reddit's URL shortener.
+ 
+ @example http://redd.it/92dd8
+ */
+- (NSURL *)shortURL;
+
 @end

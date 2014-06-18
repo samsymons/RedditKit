@@ -7,6 +7,7 @@
 //
 
 #import "RKTestCase.h"
+#import <RedditKit/Model/RKLink.h>
 
 @interface RKLinkTests : RKTestCase
 
@@ -35,6 +36,11 @@
 {
     XCTAssertTrue([[self imageLink] isImageLink], @"The image link should return true.");
     XCTAssertFalse([[self nonImageLink] isImageLink], @"The non image link should not return true.");
+}
+
+- (void)testShortURL
+{
+    XCTAssertEqualObjects([[self imageLink] shortURL], [NSURL URLWithString:@"http://redd.it/123456"], @"The link should return a short URL.");
 }
 
 @end

@@ -72,6 +72,12 @@
     return [supportedFileTypeSuffixes containsObject:extension];
 }
 
+- (NSURL *)shortURL
+{
+    NSURL *baseURL = [NSURL URLWithString:@"http://redd.it/"];
+    return [baseURL URLByAppendingPathComponent:self.identifier];
+}
+
 #pragma mark - MTLModel
 
 + (NSValueTransformer *)totalReportsJSONTransformer
