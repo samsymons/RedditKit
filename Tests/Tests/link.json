@@ -10,6 +10,7 @@
 		"likes": null,
 		"link_flair_text": null,
 		"id": "123456",
+        "gilded": 2,
 		"clicked": false,
 		"title": "Example title",
 		"media": null,
@@ -33,6 +34,7 @@
 		"author": "samsymons",
 		"created_utc": 100000000,
 		"ups": 2000,
+        "upvote_ratio": 0.90,
 		"num_comments": 100,
 		"num_reports": null,
 		"distinguished": null

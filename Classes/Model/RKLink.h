@@ -55,9 +55,20 @@
 @property (nonatomic, copy, readonly) NSString *author;
 
 /**
+ The ratio of upvotes to downvotes.
+ This is the percentage of how many users like this link.
+ */
+@property (nonatomic, assign, readonly) CGFloat upvoteRatio;
+
+/**
  The time of editing, or nil if it has not been edited.
  */
 @property (nonatomic, strong, readonly) NSDate *edited;
+
+/**
+ The number of times the link has been gilded.
+ */
+@property (nonatomic, assign, readonly) NSUInteger gilded;
 
 /**
  Whether the link has been distinguished by a moderator or admin.

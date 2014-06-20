@@ -32,6 +32,12 @@
     self.nonImageLink = [MTLJSONAdapter modelOfClass:[RKLink class] fromJSONDictionary:nonImageLinkJSON error:nil];
 }
 
+- (void)testInitialization
+{
+    XCTAssertEqualObjects([[self imageLink] domain], @"example.com", @"The link should have a domain.");
+    XCTAssertEqualWithAccuracy([[self imageLink] upvoteRatio], 0.9, 0.01, @"The link should have an upvote ratio, if provided.");
+}
+
 - (void)testIsImageLink
 {
     XCTAssertTrue([[self imageLink] isImageLink], @"The image link should return true.");

@@ -49,6 +49,8 @@
         @"hidden": @"data.hidden",
         @"NSFW": @"data.over_18",
         @"edited": @"data.edited",
+        @"upvoteRatio": @"data.upvote_ratio",
+        @"gilded": @"data.gilded",
         @"thumbnailURL": @"data.thumbnail",
         @"authorFlairClass": @"data.author_flair_css_class",
         @"authorFlairText": @"data.author_flair_text",
