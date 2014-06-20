@@ -155,6 +155,31 @@ NSString * NSStringFromSubredditCategory(RKSubredditCategory category)
     }];
 }
 
+- (NSURLSessionDataTask *)linkByExpandingInformationForLink:(RKLink *)link completion:(RKObjectCompletionBlock)completion
+{
+    NSParameterAssert(link);
+    
+    NSString *path = [NSString stringWithFormat:@"r/%@/comments/%@.json", link.subreddit, link.identifier];
+    
+    return [self fullListingWithPath:path parameters:nil pagination:nil completion:^(NSArray *responseObject, NSError *error) {
+        if (responseObject)
+        {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSDictionary *linkResponse = [responseObject firstObject];
+                NSArray *links = [self objectsFromListingResponse:linkResponse];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion([links firstObject], nil);
+                });
+            });
+        }
+        else
+        {
+            completion(nil, error);
+        }
+    }];
+}
+
 #pragma mark - Submitting
 
 - (NSURLSessionDataTask *)submitLinkPostWithTitle:(NSString *)title subreddit:(RKSubreddit *)subreddit URL:(NSURL *)URL captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion

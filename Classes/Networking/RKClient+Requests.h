@@ -48,6 +48,18 @@ typedef void(^RKRequestCompletionBlock)(NSHTTPURLResponse *response, id response
 - (NSURLSessionDataTask *)listingTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
 
 /**
+ This method makes a request for a listing and returns the full response.
+ This is in contrast to listingTaskWithPath:parameters:pagination:completion: which returns
+ a listing in its formatted state, with all JSON parsed.
+ 
+ @param path The path to request.
+ @param parameters The parameters to pass with the request.
+ @param pagination The optional pagination object.
+ @param completion A block to execute at the end of the request.
+ */
+- (NSURLSessionDataTask *)fullListingWithPath:(NSString *)path parameters:(NSDictionary *)parameters pagination:(RKPagination *)pagination completion:(RKObjectCompletionBlock)completion;
+
+/**
  This method wraps around the 'api/friend' API, as many different methods are based on this endpoint.
  
  @param container The 'container' parameter.

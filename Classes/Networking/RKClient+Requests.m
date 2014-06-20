@@ -57,11 +57,7 @@
 {
     NSParameterAssert(path);
     
-    NSMutableDictionary *taskParameters = [NSMutableDictionary dictionary];
-    [taskParameters addEntriesFromDictionary:parameters];
-    [taskParameters addEntriesFromDictionary:[pagination dictionaryValue]];
-    
-    return [self getPath:path parameters:taskParameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+    return [self fullListingWithPath:path parameters:parameters pagination:pagination completion:^(id responseObject, NSError *error) {
         if (!completion)
         {
             return;
@@ -87,6 +83,33 @@
         else
         {
             completion(nil, nil, error);
+        }
+    }];
+}
+
+- (NSURLSessionDataTask *)fullListingWithPath:(NSString *)path parameters:(NSDictionary *)parameters pagination:(RKPagination *)pagination completion:(RKObjectCompletionBlock)completion
+{
+    NSParameterAssert(path);
+    
+    NSMutableDictionary *taskParameters = [NSMutableDictionary dictionary];
+    [taskParameters addEntriesFromDictionary:parameters];
+    [taskParameters addEntriesFromDictionary:[pagination dictionaryValue]];
+    
+    return [self getPath:path parameters:taskParameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+        if (!completion)
+        {
+            return;
+        }
+        
+        if (responseObject)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(responseObject, nil);
+            });
+        }
+        else
+        {
+            completion(nil, error);
         }
     }];
 }

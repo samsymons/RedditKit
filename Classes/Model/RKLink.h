@@ -57,6 +57,12 @@
 /**
  The ratio of upvotes to downvotes.
  This is the percentage of how many users like this link.
+ 
+ @note The upvoteRatio is only available to links which have had their information
+ expanded via `linkByExpandingInformationForLink:completion:`.
+ 
+ The upvote ratio is not explicitly rounded to any specific precision. When displaying
+ the ratio to the screen, you will want to specify this yourself.
  */
 @property (nonatomic, assign, readonly) CGFloat upvoteRatio;
 
