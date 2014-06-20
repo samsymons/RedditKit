@@ -1,3 +1,9 @@
+## 1.2
+
+* RKLink now has a `shortURL` method.
+* RKLink now has properties for `upvoteRatio` and `gilded`.
+* Fixes for those using submodules to install RedditKit.
+
 ## 1.1
 
 * RKVotable subclasses now automatically update their voteStatus. (@rickharrison)
