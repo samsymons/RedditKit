@@ -4,7 +4,7 @@ RedditKit is a [reddit API](http://www.reddit.com/dev/api) wrapper, written in O
 
 ## Documention
 
-Documentation for RedditKit is [available on CocoaDocs](http://cocoadocs.org/docsets/RedditKit/1.1.0/).
+Documentation for RedditKit is [available on CocoaDocs](http://cocoadocs.org/docsets/RedditKit/1.2.0/).
 
 ## Installation
 
@@ -12,7 +12,7 @@ Documentation for RedditKit is [available on CocoaDocs](http://cocoadocs.org/doc
 
 Add this to your Podfile:
 
-	pod 'RedditKit', '~> 1.0'
+	pod 'RedditKit', '~> 1.2'
 
 Then run:
 	
