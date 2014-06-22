@@ -21,10 +21,14 @@
 // THE SOFTWARE.
 
 #import "RKClient+Subreddits.h"
-#import "RKClient+Requests.h"
-#import "RKSubreddit.h"
-#import "RKPagination.h"
+
 #import "RKLink.h"
+#import "RKPagination.h"
+#import "RKObjectBuilder.h"
+#import "RKSubreddit.h"
+
+#import "RKClient+Errors.h"
+#import "RKClient+Requests.h"
 
 @implementation RKClient (Subreddits)
 
@@ -41,6 +45,11 @@
         
         if (responseObject)
         {
+            if (![[responseObject objectForKey:@"kind"] isEqualToString:kRKObjectTypeSubreddit]) {
+                completion(nil, [RKClient invalidSubredditError]);
+                return;
+            }
+            
             NSError *mantleError = nil;
             RKSubreddit *subreddit = [MTLJSONAdapter modelOfClass:[RKSubreddit class] fromJSONDictionary:responseObject error:&mantleError];
             
