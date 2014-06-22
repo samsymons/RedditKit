@@ -1,4 +1,4 @@
-# RedditKit
+# RedditKit [![Build Status](https://travis-ci.org/samsymons/RedditKit.svg?branch=master)](https://travis-ci.org/samsymons/RedditKit)
 
 RedditKit is a [reddit API](http://www.reddit.com/dev/api) wrapper, written in Objective-C.
 
