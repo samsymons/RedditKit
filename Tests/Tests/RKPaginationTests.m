@@ -6,9 +6,9 @@
 //
 //
 
-#import "RKTestCase.h"
+#import "RKSpecHelper.h"
 
-@interface RKPaginationTests : RKTestCase
+@interface RKPaginationTests : XCTestCase
 
 @end
 
@@ -16,7 +16,7 @@
 
 - (void)testGettingAPaginationObjectFromAListingResponse
 {
-    NSDictionary *listingJSON = [self JSONFromLocalFileWithName:@"listing"];
+    NSDictionary *listingJSON = [RKSpecHelper JSONFromLocalFileWithName:@"listing"];
     NSString *after = [listingJSON valueForKeyPath:@"data.after"];
     
     RKPagination *pagination = [RKPagination paginationFromListingResponse:listingJSON];

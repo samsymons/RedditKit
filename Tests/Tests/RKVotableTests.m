@@ -6,9 +6,7 @@
 //
 //
 
-#import "RKTestCase.h"
-
-@interface RKVotableTests : RKTestCase
+@interface RKVotableTests : XCTestCase
 
 @property (nonatomic, strong) RKVotable *upvotedObject;
 @property (nonatomic, strong) RKVotable *downvotedObject;

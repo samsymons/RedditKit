@@ -6,9 +6,9 @@
 //
 //
 
-#import "RKTestCase.h"
+#import "RKSpecHelper.h"
 
-@interface RKMultiredditTests : RKTestCase
+@interface RKMultiredditTests : XCTestCase
 
 @property (nonatomic, strong) RKMultireddit *multireddit;
 
@@ -18,7 +18,7 @@
 
 - (void)setUp
 {
-    NSDictionary *multiredditJSON = [self JSONFromLocalFileWithName:@"multireddit"];
+    NSDictionary *multiredditJSON = [RKSpecHelper JSONFromLocalFileWithName:@"multireddit"];
     self.multireddit = [MTLJSONAdapter modelOfClass:[RKMultireddit class] fromJSONDictionary:multiredditJSON error:nil];
 }
 

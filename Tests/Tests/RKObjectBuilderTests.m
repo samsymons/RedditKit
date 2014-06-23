@@ -6,10 +6,10 @@
 //
 //
 
-#import "RKTestCase.h"
+#import "RKSpecHelper.h"
 #import "RKObjectBuilder.h"
 
-@interface RKObjectBuilderTests : RKTestCase
+@interface RKObjectBuilderTests : XCTestCase
 
 @property (nonatomic, strong) NSDictionary *linkJSON;
 @property (nonatomic, strong) NSDictionary *subredditJSON;
@@ -22,8 +22,8 @@
 {
     [super setUp];
     
-	self.linkJSON = [self JSONFromLocalFileWithName:@"link"];
-    self.subredditJSON = [self JSONFromLocalFileWithName:@"subreddit"];
+	self.linkJSON = [RKSpecHelper JSONFromLocalFileWithName:@"link"];
+    self.subredditJSON = [RKSpecHelper JSONFromLocalFileWithName:@"subreddit"];
 }
 
 - (void)testObjectBuilding

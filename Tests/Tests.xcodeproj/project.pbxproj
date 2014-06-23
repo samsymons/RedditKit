@@ -20,20 +20,16 @@
 		4B7480221829CAF300B7A63E /* link.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B3B93F3178E07D7005FB5FE /* link.json */; };
 		4B7480231829CAF300B7A63E /* multireddit.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B723EE3180A135900E44AC1 /* multireddit.json */; };
 		4B7480241829CAF300B7A63E /* subreddit.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B723EDE180A05BB00E44AC1 /* subreddit.json */; };
-		4B7480281829CAFF00B7A63E /* RKThingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B33CF1617642F1A00132717 /* RKThingTests.m */; };
-		4B7480291829CAFF00B7A63E /* RKLinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B33CF191764D79D00132717 /* RKLinkTests.m */; };
 		4B74802A1829CAFF00B7A63E /* RKMultiredditTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B723EE1180A121200E44AC1 /* RKMultiredditTests.m */; };
 		4B74802B1829CAFF00B7A63E /* RKPaginationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE6C62A182969C900BC1E79 /* RKPaginationTests.m */; };
 		4B74802C1829CAFF00B7A63E /* RKVotableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE6C621182961BF00BC1E79 /* RKVotableTests.m */; };
 		4B74802D1829CAFF00B7A63E /* RKObjectBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3B93F1178E047C005FB5FE /* RKObjectBuilderTests.m */; };
-		4B74802F1829CAFF00B7A63E /* RKTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE6C62D1829887000BC1E79 /* RKTestCase.m */; };
-		4B7480331829DF3300B7A63E /* RKThingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B33CF1617642F1A00132717 /* RKThingTests.m */; };
-		4B7480341829DF3300B7A63E /* RKLinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B33CF191764D79D00132717 /* RKLinkTests.m */; };
+		4B74802F1829CAFF00B7A63E /* RKSpecHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE6C62D1829887000BC1E79 /* RKSpecHelper.m */; };
 		4B7480351829DF3300B7A63E /* RKMultiredditTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B723EE1180A121200E44AC1 /* RKMultiredditTests.m */; };
 		4B7480361829DF3300B7A63E /* RKPaginationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE6C62A182969C900BC1E79 /* RKPaginationTests.m */; };
 		4B7480371829DF3300B7A63E /* RKVotableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE6C621182961BF00BC1E79 /* RKVotableTests.m */; };
 		4B7480381829DF3300B7A63E /* RKObjectBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3B93F1178E047C005FB5FE /* RKObjectBuilderTests.m */; };
-		4B7480391829DF3300B7A63E /* RKTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE6C62D1829887000BC1E79 /* RKTestCase.m */; };
+		4B7480391829DF3300B7A63E /* RKSpecHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE6C62D1829887000BC1E79 /* RKSpecHelper.m */; };
 		4B74803A1829DF3A00B7A63E /* comments.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BBCF8891780D5DD00A33E13 /* comments.json */; };
 		4B74803B1829DF3A00B7A63E /* link.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B3B93F3178E07D7005FB5FE /* link.json */; };
 		4B74803C1829DF3A00B7A63E /* multireddit.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B723EE3180A135900E44AC1 /* multireddit.json */; };
@@ -44,6 +40,10 @@
 		4BE14B1D1957BCC50008BDB0 /* RKClientCaptchaSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE14B1B1957BCC50008BDB0 /* RKClientCaptchaSpec.m */; };
 		4BE14B201957BE400008BDB0 /* RKCreatedSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE14B1F1957BE400008BDB0 /* RKCreatedSpec.m */; };
 		4BE14B211957BE400008BDB0 /* RKCreatedSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE14B1F1957BE400008BDB0 /* RKCreatedSpec.m */; };
+		4BE14B241957BFA50008BDB0 /* RKThingSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE14B231957BFA50008BDB0 /* RKThingSpec.m */; };
+		4BE14B251957BFA50008BDB0 /* RKThingSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE14B231957BFA50008BDB0 /* RKThingSpec.m */; };
+		4BE14B281957C1E80008BDB0 /* RKLinkSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE14B271957C1E80008BDB0 /* RKLinkSpec.m */; };
+		4BE14B291957C1E80008BDB0 /* RKLinkSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE14B271957C1E80008BDB0 /* RKLinkSpec.m */; };
 		7B6D14EF114848DDB2515813 /* libPods-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99B2991131214B2E8D0760E2 /* libPods-ios.a */; };
 /* End PBXBuildFile section */
 
@@ -52,8 +52,6 @@
 		4B33CEFE17642A3500132717 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		4B33CF0017642A3500132717 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		4B33CF0217642A3500132717 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		4B33CF1617642F1A00132717 /* RKThingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKThingTests.m; sourceTree = "<group>"; };
-		4B33CF191764D79D00132717 /* RKLinkTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKLinkTests.m; sourceTree = "<group>"; };
 		4B3B93F1178E047C005FB5FE /* RKObjectBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKObjectBuilderTests.m; sourceTree = "<group>"; };
 		4B3B93F3178E07D7005FB5FE /* link.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = link.json; sourceTree = "<group>"; };
 		4B61B1C8182C5C5900DFEB89 /* listing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = listing.json; sourceTree = "<group>"; };
@@ -73,10 +71,12 @@
 		4BE14B171957BAD30008BDB0 /* RKClientSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKClientSpec.m; sourceTree = "<group>"; };
 		4BE14B1B1957BCC50008BDB0 /* RKClientCaptchaSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKClientCaptchaSpec.m; sourceTree = "<group>"; };
 		4BE14B1F1957BE400008BDB0 /* RKCreatedSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKCreatedSpec.m; sourceTree = "<group>"; };
+		4BE14B231957BFA50008BDB0 /* RKThingSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKThingSpec.m; sourceTree = "<group>"; };
+		4BE14B271957C1E80008BDB0 /* RKLinkSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKLinkSpec.m; sourceTree = "<group>"; };
 		4BE6C621182961BF00BC1E79 /* RKVotableTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKVotableTests.m; sourceTree = "<group>"; };
 		4BE6C62A182969C900BC1E79 /* RKPaginationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKPaginationTests.m; sourceTree = "<group>"; };
-		4BE6C62C1829887000BC1E79 /* RKTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKTestCase.h; sourceTree = "<group>"; };
-		4BE6C62D1829887000BC1E79 /* RKTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKTestCase.m; sourceTree = "<group>"; };
+		4BE6C62C1829887000BC1E79 /* RKSpecHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKSpecHelper.h; sourceTree = "<group>"; };
+		4BE6C62D1829887000BC1E79 /* RKSpecHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKSpecHelper.m; sourceTree = "<group>"; };
 		6F615A5F27E0497C9A350CD9 /* libPods-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78CE21BC522C4EA0B0660DA3 /* Pods-osx.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.xcconfig"; path = "Pods/Pods-osx.xcconfig"; sourceTree = "<group>"; };
 		99B2991131214B2E8D0760E2 /* libPods-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,14 +195,14 @@
 				4BE14B171957BAD30008BDB0 /* RKClientSpec.m */,
 				4BE14B1B1957BCC50008BDB0 /* RKClientCaptchaSpec.m */,
 				4BE14B1F1957BE400008BDB0 /* RKCreatedSpec.m */,
-				4B33CF1617642F1A00132717 /* RKThingTests.m */,
-				4B33CF191764D79D00132717 /* RKLinkTests.m */,
+				4BE14B231957BFA50008BDB0 /* RKThingSpec.m */,
+				4BE14B271957C1E80008BDB0 /* RKLinkSpec.m */,
 				4B723EE1180A121200E44AC1 /* RKMultiredditTests.m */,
 				4BE6C62A182969C900BC1E79 /* RKPaginationTests.m */,
 				4BE6C621182961BF00BC1E79 /* RKVotableTests.m */,
 				4B3B93F1178E047C005FB5FE /* RKObjectBuilderTests.m */,
-				4BE6C62C1829887000BC1E79 /* RKTestCase.h */,
-				4BE6C62D1829887000BC1E79 /* RKTestCase.m */,
+				4BE6C62C1829887000BC1E79 /* RKSpecHelper.h */,
+				4BE6C62D1829887000BC1E79 /* RKSpecHelper.m */,
 				4BBCF88B1780D5F500A33E13 /* Test Data */,
 			);
 			path = Tests;
@@ -380,16 +380,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B7480331829DF3300B7A63E /* RKThingTests.m in Sources */,
-				4B7480341829DF3300B7A63E /* RKLinkTests.m in Sources */,
 				4BE14B211957BE400008BDB0 /* RKCreatedSpec.m in Sources */,
 				4BE14B1D1957BCC50008BDB0 /* RKClientCaptchaSpec.m in Sources */,
 				4B7480351829DF3300B7A63E /* RKMultiredditTests.m in Sources */,
 				4B7480361829DF3300B7A63E /* RKPaginationTests.m in Sources */,
+				4BE14B291957C1E80008BDB0 /* RKLinkSpec.m in Sources */,
 				4B7480371829DF3300B7A63E /* RKVotableTests.m in Sources */,
 				4B7480381829DF3300B7A63E /* RKObjectBuilderTests.m in Sources */,
+				4BE14B251957BFA50008BDB0 /* RKThingSpec.m in Sources */,
 				4BE14B191957BAD30008BDB0 /* RKClientSpec.m in Sources */,
-				4B7480391829DF3300B7A63E /* RKTestCase.m in Sources */,
+				4B7480391829DF3300B7A63E /* RKSpecHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,14 +397,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B7480291829CAFF00B7A63E /* RKLinkTests.m in Sources */,
 				4B74802A1829CAFF00B7A63E /* RKMultiredditTests.m in Sources */,
 				4BE14B201957BE400008BDB0 /* RKCreatedSpec.m in Sources */,
 				4BE14B1C1957BCC50008BDB0 /* RKClientCaptchaSpec.m in Sources */,
 				4B74802B1829CAFF00B7A63E /* RKPaginationTests.m in Sources */,
+				4BE14B281957C1E80008BDB0 /* RKLinkSpec.m in Sources */,
 				4B74802D1829CAFF00B7A63E /* RKObjectBuilderTests.m in Sources */,
-				4B74802F1829CAFF00B7A63E /* RKTestCase.m in Sources */,
-				4B7480281829CAFF00B7A63E /* RKThingTests.m in Sources */,
+				4B74802F1829CAFF00B7A63E /* RKSpecHelper.m in Sources */,
+				4BE14B241957BFA50008BDB0 /* RKThingSpec.m in Sources */,
 				4BE14B181957BAD30008BDB0 /* RKClientSpec.m in Sources */,
 				4B74802C1829CAFF00B7A63E /* RKVotableTests.m in Sources */,
 			);

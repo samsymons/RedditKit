@@ -1,16 +1,16 @@
 //
-//  RKTestCase.m
+//  RKSpecHelper.m
 //  Tests
 //
 //  Created by Sam Symons on 11/5/2013.
 //
 //
 
-#import "RKTestCase.h"
+#import "RKSpecHelper.h"
 
-@implementation RKTestCase
+@implementation RKSpecHelper
 
-- (id)JSONFromLocalFileWithName:(NSString *)name
++ (id)JSONFromLocalFileWithName:(NSString *)name
 {
 	NSBundle *bundle = [NSBundle bundleForClass:[self class]];
 	NSString *commentsPath = [bundle pathForResource:name ofType:@"json"];
