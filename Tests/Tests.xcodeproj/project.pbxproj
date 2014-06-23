@@ -317,11 +317,11 @@ fi
 			<key>files</key>
 			<array>
 				<string>4BE14B211957BE400008BDB0</string>
+				<string>4BE14B3A1957CC360008BDB0</string>
+				<string>4BE14B361957CAA80008BDB0</string>
 				<string>4BE14B1D1957BCC50008BDB0</string>
-				<string>4B7480361829DF3300B7A63E</string>
 				<string>4BE14B2D1957C6780008BDB0</string>
 				<string>4BE14B291957C1E80008BDB0</string>
-				<string>4B7480371829DF3300B7A63E</string>
 				<string>4BE14B251957BFA50008BDB0</string>
 				<string>4BE14B191957BAD30008BDB0</string>
 				<string>4BE14B311957C77C0008BDB0</string>
@@ -680,15 +680,15 @@ fi
 			<key>files</key>
 			<array>
 				<string>4BE14B201957BE400008BDB0</string>
+				<string>4BE14B391957CC360008BDB0</string>
+				<string>4BE14B351957CAA80008BDB0</string>
 				<string>4BE14B1C1957BCC50008BDB0</string>
-				<string>4B74802B1829CAFF00B7A63E</string>
 				<string>4BE14B2C1957C6780008BDB0</string>
 				<string>4BE14B281957C1E80008BDB0</string>
 				<string>4B74802F1829CAFF00B7A63E</string>
 				<string>4BE14B241957BFA50008BDB0</string>
 				<string>4BE14B181957BAD30008BDB0</string>
 				<string>4BE14B301957C77C0008BDB0</string>
-				<string>4B74802C1829CAFF00B7A63E</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -1078,38 +1078,10 @@ fi
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>4B74802B1829CAFF00B7A63E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4BE6C62A182969C900BC1E79</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>4B74802C1829CAFF00B7A63E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4BE6C621182961BF00BC1E79</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>4B74802F1829CAFF00B7A63E</key>
 		<dict>
 			<key>fileRef</key>
 			<string>4BE6C62D1829887000BC1E79</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>4B7480361829DF3300B7A63E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4BE6C62A182969C900BC1E79</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>4B7480371829DF3300B7A63E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4BE6C621182961BF00BC1E79</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -1389,14 +1361,12 @@ fi
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Support</string>
 			<key>path</key>
 			<string>Support</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>4BE6C621182961BF00BC1E79</key>
+		<key>4BE14B341957CAA80008BDB0</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -1405,11 +1375,25 @@ fi
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>path</key>
-			<string>RKVotableTests.m</string>
+			<string>RKVotableSpec.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>4BE6C62A182969C900BC1E79</key>
+		<key>4BE14B351957CAA80008BDB0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4BE14B341957CAA80008BDB0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4BE14B361957CAA80008BDB0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4BE14B341957CAA80008BDB0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4BE14B381957CC360008BDB0</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -1418,9 +1402,23 @@ fi
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>path</key>
-			<string>RKPaginationTests.m</string>
+			<string>RKPaginationSpec.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4BE14B391957CC360008BDB0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4BE14B381957CC360008BDB0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4BE14B3A1957CC360008BDB0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4BE14B381957CC360008BDB0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>4BE6C62C1829887000BC1E79</key>
 		<dict>
@@ -1458,9 +1456,9 @@ fi
 				<string>4BE14B271957C1E80008BDB0</string>
 				<string>4BE14B2B1957C6780008BDB0</string>
 				<string>4BE14B2F1957C77C0008BDB0</string>
-				<string>4BE6C62A182969C900BC1E79</string>
+				<string>4BE14B381957CC360008BDB0</string>
 				<string>4BE14B231957BFA50008BDB0</string>
-				<string>4BE6C621182961BF00BC1E79</string>
+				<string>4BE14B341957CAA80008BDB0</string>
 				<string>4BE14B321957CA0C0008BDB0</string>
 				<string>4BBCF88B1780D5F500A33E13</string>
 			</array>

@@ -111,6 +111,7 @@ NSString * NSStringFromUserContentSortingMethod(RKUserContentSortingMethod sorti
 + (RKPagination *)paginationWithLimit:(NSUInteger)limit
 {
     RKPagination *pagination = [[RKPagination alloc] init];
+    
     pagination.limit = limit;
     
     return pagination;
@@ -128,14 +129,7 @@ NSString * NSStringFromUserContentSortingMethod(RKUserContentSortingMethod sorti
 
 - (void)setLimit:(NSUInteger)limit
 {
-    if (limit > 100)
-    {
-        _limit = 100;
-    }
-    else
-    {
-        _limit = limit;
-    }
+    _limit = MIN(100, limit);
 }
 
 - (NSString *)description
