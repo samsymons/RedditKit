@@ -5,8 +5,13 @@
 //
 
 #ifdef __OBJC__
+    #define EXP_SHORTHAND
+
     #import <Cocoa/Cocoa.h>
     #import <Foundation/Foundation.h>
     #import <XCTest/XCTest.h>
+    #import <Specta/Specta.h>
+    #import <Expecta/Expecta.h>
+
     #import <RedditKit/RedditKit.h>
 #endif
