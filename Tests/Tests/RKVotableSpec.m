@@ -27,23 +27,23 @@ RKVotable *nonVotedObject = [MTLJSONAdapter modelOfClass:[RKVotable class] fromJ
 
 describe(@"upvoted objects", ^{
     it(@"should return the correct vote direction", ^{
-        expect(upvotedObject.upvoted).to.beTruthy;
-        expect(downvotedObject.upvoted).to.beFalsy;
+        expect(upvotedObject.upvoted).to.beTruthy();
+        expect(downvotedObject.upvoted).to.beFalsy();
     });
 });
 
 describe(@"downvoted objects", ^{
     it(@"should return the correct vote direction", ^{
-        expect(upvotedObject.downvoted).to.beFalsy;
-        expect(downvotedObject.downvoted).to.beTruthy;
+        expect(upvotedObject.downvoted).to.beFalsy();
+        expect(downvotedObject.downvoted).to.beTruthy();
     });
 });
 
 describe(@"objects with no vote", ^{
     it(@"should return the correct vote direction", ^{
-        expect(nonVotedObject.voted).to.beFalsy;
-        expect(nonVotedObject.upvoted).to.beFalsy;
-        expect(nonVotedObject.downvoted).to.beFalsy;
+        expect(nonVotedObject.voted).to.beFalsy();
+        expect(nonVotedObject.upvoted).to.beFalsy();
+        expect(nonVotedObject.downvoted).to.beFalsy();
     });
 });
 

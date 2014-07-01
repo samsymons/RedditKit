@@ -17,7 +17,7 @@ describe(@"paginationFromListingResponse:", ^{
         
         RKPagination *pagination = [RKPagination paginationFromListingResponse:listingJSON];
         
-        expect(pagination.before).to.beNil;
+        expect(pagination.before).to.beNil();
         expect(pagination.after).to.equal(after);
     });
 });
@@ -45,7 +45,7 @@ describe(@"dictionaryValue", ^{
         NSDictionary *dictionaryValue = [pagination dictionaryValue];
         NSDictionary *expectedValue = @{@"limit": @"50", @"before": @"12345", @"t": @"hour"};
         
-        expect([dictionaryValue isEqualToDictionary:expectedValue]).to.beTruthy;
+        expect([dictionaryValue isEqualToDictionary:expectedValue]).to.beTruthy();
         
         // Test the second dictionary value:
         
@@ -55,7 +55,7 @@ describe(@"dictionaryValue", ^{
         dictionaryValue = [pagination dictionaryValue];
         expectedValue = @{@"limit": @"5", @"before": @"12345", @"after": @"54321", @"t": @"hour"};
         
-        expect([dictionaryValue isEqualToDictionary:expectedValue]).to.beTruthy;
+        expect([dictionaryValue isEqualToDictionary:expectedValue]).to.beTruthy();
     });
 });
 

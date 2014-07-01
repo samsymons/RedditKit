@@ -29,8 +29,8 @@ describe(@"initialization", ^{
 
 describe(@"isImageLink", ^{
     it(@"should return whether the link is to an image", ^{
-        expect(imageLink.isImageLink).to.beTruthy;
-        expect(nonImageLink.isImageLink).to.beFalsy;
+        expect(imageLink.isImageLink).to.beTruthy();
+        expect(nonImageLink.isImageLink).to.beFalsy();
     });
 });
 

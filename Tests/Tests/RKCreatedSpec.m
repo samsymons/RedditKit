@@ -15,7 +15,7 @@ RKCreated *createdObject = [MTLJSONAdapter modelOfClass:[RKCreated class] fromJS
 
 describe(@"created", ^{
     it(@"should return the date of creation", ^{
-        expect(createdObject.created).toNot.beNil;
+        expect(createdObject.created).toNot.beNil();
     });
 });
 
