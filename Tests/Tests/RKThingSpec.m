@@ -24,7 +24,7 @@ describe(@"fullName", ^{
         NSString *fullName = [thing fullName];
         NSString *expectedFullName = [NSString stringWithFormat:@"%@_%@", thing.kind, thing.identifier];
         
-        expect(fullName).equal(expectedFullName);
+        expect(fullName).to.equal(expectedFullName);
     });
 });
 
