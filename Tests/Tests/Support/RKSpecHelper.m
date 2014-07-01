@@ -13,8 +13,8 @@
 + (id)JSONFromLocalFileWithName:(NSString *)name
 {
 	NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-	NSString *commentsPath = [bundle pathForResource:name ofType:@"json"];
-	NSData *data = [NSData dataWithContentsOfFile:commentsPath];
+	NSString *filePath = [bundle pathForResource:name ofType:@"json"];
+	NSData *data = [NSData dataWithContentsOfFile:filePath];
 	
 	NSError *error = nil;
 	id JSON = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
@@ -25,6 +25,14 @@
 	}
 	
 	return JSON;
+}
+
++ (NSString *)contentsOfLocalFileWithName:(NSString *)name
+{
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+	NSString *filePath = [bundle pathForResource:name ofType:@"json"];
+    
+    return [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
 }
 
 @end

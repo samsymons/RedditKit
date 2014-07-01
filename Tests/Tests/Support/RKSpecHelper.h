@@ -9,5 +9,6 @@
 @interface RKSpecHelper : NSObject
 
 + (id)JSONFromLocalFileWithName:(NSString *)name;
++ (NSString *)contentsOfLocalFileWithName:(NSString *)name;
 
 @end

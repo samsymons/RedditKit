@@ -39,7 +39,7 @@ extern const NSInteger RKClientErrorPermissionDenied;
 extern const NSInteger RKClientErrorConflict;
 
 extern const NSInteger RKClientErrorInternalServerError;
-extern const NSInteger RKClientErroBadGateway;
+extern const NSInteger RKClientErrorBadGateway;
 extern const NSInteger RKClientErrorServiceUnavailable;
 extern const NSInteger RKClientErrorTimedOut;
 

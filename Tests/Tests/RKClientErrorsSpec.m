@@ -1,15 +1,23 @@
 //
-//  RKErrorHandlingSpec.m
+//  RKClientErrorsSpecs.m
 //  Tests
 //
 //  Created by Sam Symons on 2014-06-30.
 //
 //
 
+#import "RKSpecHelper.h"
+
 SpecBegin(RKClient_Errors);
 
 describe(@"successful responses", ^{
-    
+    it(@"does not raise an error when given a successful comment response", ^{
+        NSString *responseString = [RKSpecHelper contentsOfLocalFileWithName:@"comment-response"];
+        NSHTTPURLResponse *response = [[NSHTTPURLResponse alloc] initWithURL:nil statusCode:200 HTTPVersion:nil headerFields:nil];
+        NSError *error = [RKClient errorFromResponse:response responseString:responseString];
+        
+        expect(error).to.beNil;
+    });
 });
 
 describe(@"failed responses", ^{
