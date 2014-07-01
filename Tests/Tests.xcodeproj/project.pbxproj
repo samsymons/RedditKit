@@ -322,6 +322,7 @@ fi
 				<string>4BE14B1D1957BCC50008BDB0</string>
 				<string>4BE14B2D1957C6780008BDB0</string>
 				<string>4BE14B291957C1E80008BDB0</string>
+				<string>4BC13125196250A900EEB5F8</string>
 				<string>4BE14B251957BFA50008BDB0</string>
 				<string>4BE14B191957BAD30008BDB0</string>
 				<string>4BE14B311957C77C0008BDB0</string>
@@ -354,6 +355,7 @@ fi
 			<array>
 				<string>4B61B1CA182C5F5D00DFEB89</string>
 				<string>4B74803A1829DF3A00B7A63E</string>
+				<string>4BC1312B1962534200EEB5F8</string>
 				<string>4B74803B1829DF3A00B7A63E</string>
 				<string>4B74803C1829DF3A00B7A63E</string>
 				<string>4B74803D1829DF3A00B7A63E</string>
@@ -685,6 +687,7 @@ fi
 				<string>4BE14B1C1957BCC50008BDB0</string>
 				<string>4BE14B2C1957C6780008BDB0</string>
 				<string>4BE14B281957C1E80008BDB0</string>
+				<string>4BC13124196250A900EEB5F8</string>
 				<string>4B74802F1829CAFF00B7A63E</string>
 				<string>4BE14B241957BFA50008BDB0</string>
 				<string>4BE14B181957BAD30008BDB0</string>
@@ -719,6 +722,7 @@ fi
 			<array>
 				<string>4B61B1C9182C5C5900DFEB89</string>
 				<string>4B7480211829CAF300B7A63E</string>
+				<string>4BC1312A1962534200EEB5F8</string>
 				<string>4B7480221829CAF300B7A63E</string>
 				<string>4B7480231829CAF300B7A63E</string>
 				<string>4B7480241829CAF300B7A63E</string>
@@ -1137,6 +1141,7 @@ fi
 		<dict>
 			<key>children</key>
 			<array>
+				<string>4BC13126196250B000EEB5F8</string>
 				<string>4BBCF8891780D5DD00A33E13</string>
 				<string>4B3B93F3178E07D7005FB5FE</string>
 				<string>4B61B1C8182C5C5900DFEB89</string>
@@ -1149,6 +1154,104 @@ fi
 			<string>Test Data</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4BC13123196250A900EEB5F8</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RKClientErrorsSpec.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4BC13124196250A900EEB5F8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4BC13123196250A900EEB5F8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4BC13125196250A900EEB5F8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4BC13123196250A900EEB5F8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4BC13126196250B000EEB5F8</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4BC13128196250C100EEB5F8</string>
+				<string>4BC13127196250BB00EEB5F8</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Error Handling</string>
+			<key>path</key>
+			<string>Error Handling</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4BC13127196250BB00EEB5F8</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4BC131291962534200EEB5F8</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Successful Responses</string>
+			<key>path</key>
+			<string>Successful Responses</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4BC13128196250C100EEB5F8</key>
+		<dict>
+			<key>children</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Failed Responses</string>
+			<key>path</key>
+			<string>Failed Responses</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4BC131291962534200EEB5F8</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.json</string>
+			<key>path</key>
+			<string>comment-response.json</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4BC1312A1962534200EEB5F8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4BC131291962534200EEB5F8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4BC1312B1962534200EEB5F8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4BC131291962534200EEB5F8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>4BE0C071176FD9720052E533</key>
 		<dict>
@@ -1459,6 +1562,7 @@ fi
 				<string>4BE14B381957CC360008BDB0</string>
 				<string>4BE14B231957BFA50008BDB0</string>
 				<string>4BE14B341957CAA80008BDB0</string>
+				<string>4BC13123196250A900EEB5F8</string>
 				<string>4BE14B321957CA0C0008BDB0</string>
 				<string>4BBCF88B1780D5F500A33E13</string>
 			</array>
