@@ -91,6 +91,36 @@ const NSInteger RKClientErrorTimedOut = 504;
     return nil;
 }
 
++ (NSError *)errorFromResponseObject:(id)responseObject
+{
+    NSParameterAssert(responseObject);
+    
+    if ([responseObject isKindOfClass:[NSDictionary class]])
+    {
+        NSDictionary *response = responseObject;
+        NSArray *errors = [response valueForKeyPath:@"json.errors"];
+        
+        if ([errors isKindOfClass:[NSArray class]] && [errors count] > 0)
+        {
+            id firstObject = [errors firstObject];
+            
+            if ([firstObject isKindOfClass:[NSArray class]] && [firstObject count] > 1)
+            {
+                NSString *firstString = [firstObject firstObject];
+                NSString *secondString = [firstObject objectAtIndex:1];
+                
+                if ([firstString isKindOfClass:[NSString class]] && [secondString isKindOfClass:[NSString class]])
+                {
+                    NSDictionary *userInfo = [RKClient userInfoWithDescription:firstString failureReason:secondString];
+                    return [NSError errorWithDomain:RKClientErrorDomain code:100 userInfo:userInfo];
+                }
+            }
+        }
+    }
+    
+    return nil;
+}
+
 + (NSError *)authenticationRequiredError
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Authentication required" failureReason:@"This method requires you to be signed in."];
