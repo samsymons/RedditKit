@@ -11,4 +11,6 @@
 + (id)JSONFromLocalFileWithName:(NSString *)name;
 + (NSString *)contentsOfLocalFileWithName:(NSString *)name;
 
++ (NSData *)dataWithContentsOfLocalFileWithName:(NSString *)name;
+
 @end

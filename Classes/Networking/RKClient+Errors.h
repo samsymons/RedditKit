@@ -48,6 +48,8 @@ extern const NSInteger RKClientErrorTimedOut;
  */
 + (NSError *)errorFromResponse:(NSHTTPURLResponse *)response responseString:(NSString *)responseString;
 
++ (NSError *)errorFromResponseObject:(id)responseObject;
+
 /**
  Returns an error that occurs when there is no user signed in and an attempt is made to access a resouce which requires authentication.
  For example, this error occurs when attempting to retrieve a list of subscribed subreddits without being signed in.
