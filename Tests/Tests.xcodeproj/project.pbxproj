@@ -10,6 +10,8 @@
 		1E170621B77B418EA92B1AB3 /* libPods-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F615A5F27E0497C9A350CD9 /* libPods-osx.a */; };
 		4B28DC8119687E9B007C2473 /* RKResponseSerializerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B28DC8019687E9B007C2473 /* RKResponseSerializerSpec.m */; };
 		4B28DC8219687E9B007C2473 /* RKResponseSerializerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B28DC8019687E9B007C2473 /* RKResponseSerializerSpec.m */; };
+		4B28DC84196881D0007C2473 /* not-found.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B28DC83196881D0007C2473 /* not-found.json */; };
+		4B28DC85196881D0007C2473 /* not-found.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B28DC83196881D0007C2473 /* not-found.json */; };
 		4B61B1C9182C5C5900DFEB89 /* listing.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B61B1C8182C5C5900DFEB89 /* listing.json */; };
 		4B61B1CA182C5F5D00DFEB89 /* listing.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B61B1C8182C5C5900DFEB89 /* listing.json */; };
 		4B7377651829C36900E995E5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE0C071176FD9720052E533 /* XCTest.framework */; };
@@ -56,6 +58,7 @@
 /* Begin PBXFileReference section */
 		088608F9486543C196150E4A /* Pods-ios.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.xcconfig"; path = "Pods/Pods-ios.xcconfig"; sourceTree = SOURCE_ROOT; };
 		4B28DC8019687E9B007C2473 /* RKResponseSerializerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKResponseSerializerSpec.m; sourceTree = "<group>"; };
+		4B28DC83196881D0007C2473 /* not-found.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "not-found.json"; sourceTree = "<group>"; };
 		4B33CEFE17642A3500132717 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		4B33CF0017642A3500132717 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		4B33CF0217642A3500132717 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -219,6 +222,7 @@
 		4BC13128196250C100EEB5F8 /* Failed Responses */ = {
 			isa = PBXGroup;
 			children = (
+				4B28DC83196881D0007C2473 /* not-found.json */,
 			);
 			path = "Failed Responses";
 			sourceTree = "<group>";
@@ -332,6 +336,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B28DC85196881D0007C2473 /* not-found.json in Resources */,
 				4B61B1CA182C5F5D00DFEB89 /* listing.json in Resources */,
 				4B74803A1829DF3A00B7A63E /* comments.json in Resources */,
 				4BC1312B1962534200EEB5F8 /* comment-response.json in Resources */,
@@ -346,6 +351,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B28DC84196881D0007C2473 /* not-found.json in Resources */,
 				4B61B1C9182C5C5900DFEB89 /* listing.json in Resources */,
 				4B7480211829CAF300B7A63E /* comments.json in Resources */,
 				4BC1312A1962534200EEB5F8 /* comment-response.json in Resources */,

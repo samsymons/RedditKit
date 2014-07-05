@@ -35,8 +35,9 @@ const NSInteger RKClientErrorArchived = 206;
 const NSInteger RKClientErrorInvalidSubreddit = 207;
 
 const NSInteger RKClientErrorInvalidMultiredditName = 401;
-const NSInteger RKClientErrorPermissionDenied = 401;
-const NSInteger RKClientErrorConflict = 401;
+const NSInteger RKClientErrorPermissionDenied = 402;
+const NSInteger RKClientErrorConflict = 403;
+const NSInteger RKClientErrorNotFound = 404;
 
 const NSInteger RKClientErrorInternalServerError = 501;
 const NSInteger RKClientErrorBadGateway = 502;
@@ -48,7 +49,12 @@ const NSInteger RKClientErrorTimedOut = 504;
     NSParameterAssert(response);
     NSParameterAssert(responseString);
     
-    switch (response.statusCode)
+    return [[self class] errorFromStatusCode:response.statusCode responseString:responseString];
+}
+
++ (NSError *)errorFromStatusCode:(NSInteger)statusCode responseString:(NSString *)responseString
+{
+    switch (statusCode)
     {
         case 200:
             if ([RKClient string:responseString containsSubstring:@"WRONG_PASSWORD"]) return [RKClient invalidCredentialsError];
@@ -68,6 +74,9 @@ const NSInteger RKClientErrorTimedOut = 504;
             if ([RKClient string:responseString containsSubstring:@"USER_REQUIRED"]) return [RKClient authenticationRequiredError];
             
             return [RKClient permissionDeniedError];
+            break;
+        case 404:
+            return [RKClient notFoundError];
             break;
         case 409:
             return [RKClient conflictError];
@@ -98,6 +107,7 @@ const NSInteger RKClientErrorTimedOut = 504;
     if ([responseObject isKindOfClass:[NSDictionary class]])
     {
         NSDictionary *response = responseObject;
+        NSNumber *statusCodeError = response[@"error"];
         NSArray *errors = [response valueForKeyPath:@"json.errors"];
         
         if ([errors isKindOfClass:[NSArray class]] && [errors count] > 0)
@@ -115,6 +125,10 @@ const NSInteger RKClientErrorTimedOut = 504;
                     return [NSError errorWithDomain:RKClientErrorDomain code:100 userInfo:userInfo];
                 }
             }
+        }
+        else if (statusCodeError)
+        {
+            return [[self class] errorFromStatusCode:[statusCodeError integerValue] responseString:@""];
         }
     }
     
@@ -185,6 +199,12 @@ const NSInteger RKClientErrorTimedOut = 504;
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Conflict" failureReason:@"Your attempt to create a resource caused a conflict."];
     return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorConflict userInfo:userInfo];
+}
+
++ (NSError *)notFoundError
+{
+    NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Not found" failureReason:@"This content could not be found."];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorNotFound userInfo:userInfo];
 }
 
 + (NSError *)internalServerError

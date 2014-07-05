@@ -37,6 +37,7 @@ extern const NSInteger RKClientErrorInvalidSubreddit;
 extern const NSInteger RKClientErrorInvalidMultiredditName;
 extern const NSInteger RKClientErrorPermissionDenied;
 extern const NSInteger RKClientErrorConflict;
+extern const NSInteger RKClientErrorNotFound;
 
 extern const NSInteger RKClientErrorInternalServerError;
 extern const NSInteger RKClientErrorBadGateway;
@@ -100,6 +101,18 @@ extern const NSInteger RKClientErrorTimedOut;
  Returns an error that occurs when the user was denied access to a particular resource, such as a subreddit.
  */
 + (NSError *)permissionDeniedError;
+
+/**
+ Returns an error that occurs when a conflict was attempted.
+ */
++ (NSError *)conflictError;
+
+/**
+ Returns an error that occurs when trying to retrieve content that could not be found.
+ 
+ @example This happens when trying to retrive the info of a subreddit which does not exist.
+ */
++ (NSError *)notFoundError;
 
 /**
  Returns an error that occurs when the reddit servers are unavailable.
