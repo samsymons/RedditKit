@@ -43,6 +43,14 @@ describe(@"failed responses", ^{
         expect(object).to.beNil();
         expect(responseError.code).to.equal(RKClientErrorNotFound);
     });
+    
+    fit(@"returns an error when commenting on something that is too old", ^{
+        NSError *responseError = nil;
+        id object = RKJSONResponse(serializer, @"too-old", 200, &responseError);
+        
+        expect(object).to.beNil();
+        expect(responseError.code).to.equal(RKClientErrorArchived);
+    });
 });
 
 SpecEnd

@@ -121,8 +121,7 @@ const NSInteger RKClientErrorTimedOut = 504;
                 
                 if ([firstString isKindOfClass:[NSString class]] && [secondString isKindOfClass:[NSString class]])
                 {
-                    NSDictionary *userInfo = [RKClient userInfoWithDescription:firstString failureReason:secondString];
-                    return [NSError errorWithDomain:RKClientErrorDomain code:100 userInfo:userInfo];
+                    return [[self class] errorFromStatusCode:200 responseString:firstString];
                 }
             }
         }
