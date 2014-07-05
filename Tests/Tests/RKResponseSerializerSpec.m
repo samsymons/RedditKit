@@ -8,18 +8,32 @@
 
 #import "RKSpecHelper.h"
 #import "RKResponseSerializer.h"
+#import "RKClient+Errors.h"
+
+id RKJSONResponse(RKResponseSerializer *serializer, NSString *fileName, NSInteger statusCode, NSError **error)
+{
+    NSData *responseData = [RKSpecHelper dataWithContentsOfLocalFileWithName:fileName];
+    NSHTTPURLResponse *response = [[NSHTTPURLResponse alloc] initWithURL:nil statusCode:statusCode HTTPVersion:nil headerFields:nil];
+    
+    return [serializer responseObjectForResponse:response data:responseData error:error];
+};
 
 SpecBegin(RKResponseSerializer);
 
 RKResponseSerializer *serializer = [[RKResponseSerializer alloc] init];
 
 describe(@"successful responses", ^{
-    it(@"does not return an error when given a successful comment response", ^{
-        NSData *responseData = [RKSpecHelper dataWithContentsOfLocalFileWithName:@"comment-response"];
-        NSHTTPURLResponse *response = [[NSHTTPURLResponse alloc] initWithURL:nil statusCode:200 HTTPVersion:nil headerFields:nil];
+    it(@"does not return an error when given a successful subreddit listing response", ^{
         NSError *responseError = nil;
+        id object = RKJSONResponse(serializer, @"subreddit-listing", 200, &responseError);
         
-        id object = [serializer responseObjectForResponse:response data:responseData error:&responseError];
+        expect(object).toNot.beNil();
+        expect(responseError).to.beNil();
+    });
+    
+    it(@"does not return an error when given a successful comment response", ^{
+        NSError *responseError = nil;
+        id object = RKJSONResponse(serializer, @"comment-response", 200, &responseError);
         
         expect(object).toNot.beNil();
         expect(responseError).to.beNil();
@@ -27,15 +41,12 @@ describe(@"successful responses", ^{
 });
 
 describe(@"failed responses", ^{
-    fit(@"returns an error when a 404 occurs", ^{
-        NSData *responseData = [RKSpecHelper dataWithContentsOfLocalFileWithName:@"not-found"];
-        NSHTTPURLResponse *response = [[NSHTTPURLResponse alloc] initWithURL:nil statusCode:404 HTTPVersion:nil headerFields:nil];
+    it(@"returns an error when a 404 occurs", ^{
         NSError *responseError = nil;
-        
-        id object = [serializer responseObjectForResponse:response data:responseData error:&responseError];
+        id object = RKJSONResponse(serializer, @"not-found", 404, &responseError);
         
         expect(object).to.beNil();
-        expect(responseError).toNot.beNil();
+        expect(responseError.code).to.equal(RKClientErrorNotFound);
     });
 });
 
