@@ -22,22 +22,17 @@ SpecBegin(RKResponseSerializer);
 
 RKResponseSerializer *serializer = [[RKResponseSerializer alloc] init];
 
-describe(@"successful responses", ^{
-    it(@"does not return an error when given a successful subreddit listing response", ^{
-        NSError *responseError = nil;
-        id object = RKJSONResponse(serializer, @"subreddit-listing", 200, &responseError);
-        
-        expect(object).toNot.beNil();
-        expect(responseError).to.beNil();
-    });
+it(@"does not return an error when given a successful response", ^{
+    NSArray *responses = @[@"comment-response", @"subreddit-listing"];
     
-    it(@"does not return an error when given a successful comment response", ^{
+    for (NSString *response in responses)
+    {
         NSError *responseError = nil;
-        id object = RKJSONResponse(serializer, @"comment-response", 200, &responseError);
+        id object = RKJSONResponse(serializer, response, 200, &responseError);
         
         expect(object).toNot.beNil();
         expect(responseError).to.beNil();
-    });
+    }
 });
 
 describe(@"failed responses", ^{
