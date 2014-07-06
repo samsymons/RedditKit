@@ -16,6 +16,8 @@
 		4B28DC881968878F007C2473 /* subreddit-listing.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B28DC861968878F007C2473 /* subreddit-listing.json */; };
 		4B28DC8A196893F3007C2473 /* too-old.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B28DC89196893F3007C2473 /* too-old.json */; };
 		4B28DC8B196893F3007C2473 /* too-old.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B28DC89196893F3007C2473 /* too-old.json */; };
+		4B4056CD1969EA1100E2DFE1 /* rate-limit.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B4056CC1969EA1100E2DFE1 /* rate-limit.json */; };
+		4B4056CE1969EA1100E2DFE1 /* rate-limit.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B4056CC1969EA1100E2DFE1 /* rate-limit.json */; };
 		4B61B1C9182C5C5900DFEB89 /* listing.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B61B1C8182C5C5900DFEB89 /* listing.json */; };
 		4B61B1CA182C5F5D00DFEB89 /* listing.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B61B1C8182C5C5900DFEB89 /* listing.json */; };
 		4B7377651829C36900E995E5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE0C071176FD9720052E533 /* XCTest.framework */; };
@@ -69,6 +71,7 @@
 		4B33CF0017642A3500132717 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		4B33CF0217642A3500132717 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		4B3B93F3178E07D7005FB5FE /* link.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = link.json; sourceTree = "<group>"; };
+		4B4056CC1969EA1100E2DFE1 /* rate-limit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "rate-limit.json"; sourceTree = "<group>"; };
 		4B61B1C8182C5C5900DFEB89 /* listing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = listing.json; sourceTree = "<group>"; };
 		4B723EDE180A05BB00E44AC1 /* subreddit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = subreddit.json; sourceTree = "<group>"; };
 		4B723EE3180A135900E44AC1 /* multireddit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = multireddit.json; sourceTree = "<group>"; };
@@ -231,6 +234,7 @@
 			children = (
 				4B28DC83196881D0007C2473 /* not-found.json */,
 				4B28DC89196893F3007C2473 /* too-old.json */,
+				4B4056CC1969EA1100E2DFE1 /* rate-limit.json */,
 			);
 			path = "Failed Responses";
 			sourceTree = "<group>";
@@ -349,6 +353,7 @@
 				4B74803A1829DF3A00B7A63E /* comments.json in Resources */,
 				4BC1312B1962534200EEB5F8 /* comment-response.json in Resources */,
 				4B74803B1829DF3A00B7A63E /* link.json in Resources */,
+				4B4056CE1969EA1100E2DFE1 /* rate-limit.json in Resources */,
 				4B74803C1829DF3A00B7A63E /* multireddit.json in Resources */,
 				4B28DC8B196893F3007C2473 /* too-old.json in Resources */,
 				4B74803D1829DF3A00B7A63E /* subreddit.json in Resources */,
@@ -366,6 +371,7 @@
 				4B7480211829CAF300B7A63E /* comments.json in Resources */,
 				4BC1312A1962534200EEB5F8 /* comment-response.json in Resources */,
 				4B7480221829CAF300B7A63E /* link.json in Resources */,
+				4B4056CD1969EA1100E2DFE1 /* rate-limit.json in Resources */,
 				4B7480231829CAF300B7A63E /* multireddit.json in Resources */,
 				4B28DC8A196893F3007C2473 /* too-old.json in Resources */,
 				4B7480241829CAF300B7A63E /* subreddit.json in Resources */,

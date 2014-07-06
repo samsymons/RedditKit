@@ -44,12 +44,20 @@ describe(@"failed responses", ^{
         expect(responseError.code).to.equal(RKClientErrorNotFound);
     });
     
-    fit(@"returns an error when commenting on something that is too old", ^{
+    it(@"returns an error when commenting on something that is too old", ^{
         NSError *responseError = nil;
         id object = RKJSONResponse(serializer, @"too-old", 200, &responseError);
         
         expect(object).to.beNil();
         expect(responseError.code).to.equal(RKClientErrorArchived);
+    });
+    
+    it(@"returns an error when rate limited", ^{
+        NSError *responseError = nil;
+        id object = RKJSONResponse(serializer, @"rate-limit", 200, &responseError);
+        
+        expect(object).to.beNil();
+        expect(responseError.code).to.equal(RKClientErrorRateLimited);
     });
 });
 
