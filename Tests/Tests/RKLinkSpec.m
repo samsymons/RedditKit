@@ -22,8 +22,8 @@ RKLink *nonImageLink = [MTLJSONAdapter modelOfClass:[RKLink class] fromJSONDicti
 
 describe(@"initialization", ^{
     it(@"should create the object correctly", ^{
-        expect(imageLink.domain).to.equal(@"example.com");
-        expect(imageLink.upvoteRatio).to.equal(0.9);
+        expect(imageLink.domain).to.equal(@"imgur.com");
+        expect(imageLink.upvoteRatio).to.equal(0.95);
     });
 });
 
@@ -36,7 +36,7 @@ describe(@"isImageLink", ^{
 
 describe(@"shortURL", ^{
     it(@"should return a short URL", ^{
-        expect([imageLink shortURL]).to.equal([NSURL URLWithString:@"http://redd.it/123456"]);
+        expect([imageLink shortURL]).to.equal([NSURL URLWithString:@"http://redd.it/2a0wzj"]);
     });
 });
 
