@@ -31,6 +31,8 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
 	RKSubredditCategoryTop
 };
 
+extern NSString * RKStringFromSubredditCategory(RKSubredditCategory category);
+
 @class RKLink, RKSubreddit, RKMultireddit;
 
 @interface RKClient (Links)

@@ -27,7 +27,7 @@
 #import "RKPagination.h"
 #import "RKMultireddit.h"
 
-NSString * NSStringFromSubredditCategory(RKSubredditCategory category)
+NSString * RKStringFromSubredditCategory(RKSubredditCategory category)
 {
     switch (category)
     {
@@ -63,7 +63,7 @@ NSString * NSStringFromSubredditCategory(RKSubredditCategory category)
 
 - (NSURLSessionDataTask *)frontPageLinksWithCategory:(RKSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
 {
-    NSString *path = [NSString stringWithFormat:@"%@.json", NSStringFromSubredditCategory(category)];
+    NSString *path = [NSString stringWithFormat:@"%@.json", RKStringFromSubredditCategory(category)];
     return [self listingTaskWithPath:path parameters:nil pagination:pagination completion:completion];
 }
 
@@ -74,7 +74,7 @@ NSString * NSStringFromSubredditCategory(RKSubredditCategory category)
 
 - (NSURLSessionDataTask *)linksInAllSubredditsWithCategory:(RKSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
 {
-    NSString *path = [NSString stringWithFormat:@"r/all/%@.json", NSStringFromSubredditCategory(category)];
+    NSString *path = [NSString stringWithFormat:@"r/all/%@.json", RKStringFromSubredditCategory(category)];
     return [self listingTaskWithPath:path parameters:nil pagination:pagination completion:completion];
 }
 
@@ -85,7 +85,7 @@ NSString * NSStringFromSubredditCategory(RKSubredditCategory category)
 
 - (NSURLSessionDataTask *)linksInModeratedSubredditsWithCategory:(RKSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
 {
-    NSString *path = [NSString stringWithFormat:@"r/mod/%@.json", NSStringFromSubredditCategory(category)];
+    NSString *path = [NSString stringWithFormat:@"r/mod/%@.json", RKStringFromSubredditCategory(category)];
     return [self listingTaskWithPath:path parameters:nil pagination:pagination completion:completion];
 }
 
@@ -108,7 +108,7 @@ NSString * NSStringFromSubredditCategory(RKSubredditCategory category)
 {
     NSParameterAssert(subredditName);
     
-    NSString *path = [NSString stringWithFormat:@"r/%@/%@.json", subredditName, NSStringFromSubredditCategory(category)];
+    NSString *path = [NSString stringWithFormat:@"r/%@/%@.json", subredditName, RKStringFromSubredditCategory(category)];
     
     return [self listingTaskWithPath:path parameters:nil pagination:pagination completion:completion];
 }
@@ -132,7 +132,7 @@ NSString * NSStringFromSubredditCategory(RKSubredditCategory category)
 {
     NSParameterAssert(multiredditPath);
     
-    NSString *path = [NSString stringWithFormat:@"%@/%@.json", multiredditPath, NSStringFromSubredditCategory(category)];
+    NSString *path = [NSString stringWithFormat:@"%@/%@.json", multiredditPath, RKStringFromSubredditCategory(category)];
     
     return [self listingTaskWithPath:path parameters:nil pagination:pagination completion:completion];
 }
