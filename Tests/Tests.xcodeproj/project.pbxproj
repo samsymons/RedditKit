@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1E170621B77B418EA92B1AB3 /* libPods-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F615A5F27E0497C9A350CD9 /* libPods-osx.a */; };
+		4B0AA309196B232700DEC58C /* embedded-media.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B0AA308196B232700DEC58C /* embedded-media.json */; };
+		4B0AA30A196B232700DEC58C /* embedded-media.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B0AA308196B232700DEC58C /* embedded-media.json */; };
+		4B0AA30C196B238300DEC58C /* RKLinkEmbeddedMediaSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0AA30B196B238300DEC58C /* RKLinkEmbeddedMediaSpec.m */; };
+		4B0AA30D196B238300DEC58C /* RKLinkEmbeddedMediaSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0AA30B196B238300DEC58C /* RKLinkEmbeddedMediaSpec.m */; };
 		4B28DC8119687E9B007C2473 /* RKResponseSerializerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B28DC8019687E9B007C2473 /* RKResponseSerializerSpec.m */; };
 		4B28DC8219687E9B007C2473 /* RKResponseSerializerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B28DC8019687E9B007C2473 /* RKResponseSerializerSpec.m */; };
 		4B28DC84196881D0007C2473 /* not-found.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B28DC83196881D0007C2473 /* not-found.json */; };
@@ -63,6 +67,8 @@
 
 /* Begin PBXFileReference section */
 		088608F9486543C196150E4A /* Pods-ios.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.xcconfig"; path = "Pods/Pods-ios.xcconfig"; sourceTree = SOURCE_ROOT; };
+		4B0AA308196B232700DEC58C /* embedded-media.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "embedded-media.json"; sourceTree = "<group>"; };
+		4B0AA30B196B238300DEC58C /* RKLinkEmbeddedMediaSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKLinkEmbeddedMediaSpec.m; sourceTree = "<group>"; };
 		4B28DC8019687E9B007C2473 /* RKResponseSerializerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKResponseSerializerSpec.m; sourceTree = "<group>"; };
 		4B28DC83196881D0007C2473 /* not-found.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "not-found.json"; sourceTree = "<group>"; };
 		4B28DC861968878F007C2473 /* subreddit-listing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "subreddit-listing.json"; sourceTree = "<group>"; };
@@ -207,6 +213,7 @@
 				4B61B1C8182C5C5900DFEB89 /* listing.json */,
 				4B723EE3180A135900E44AC1 /* multireddit.json */,
 				4B723EDE180A05BB00E44AC1 /* subreddit.json */,
+				4B0AA308196B232700DEC58C /* embedded-media.json */,
 			);
 			path = "Test Data";
 			sourceTree = "<group>";
@@ -262,6 +269,7 @@
 				4BE14B341957CAA80008BDB0 /* RKVotableSpec.m */,
 				4BC13123196250A900EEB5F8 /* RKClientErrorsSpec.m */,
 				4B28DC8019687E9B007C2473 /* RKResponseSerializerSpec.m */,
+				4B0AA30B196B238300DEC58C /* RKLinkEmbeddedMediaSpec.m */,
 				4BE14B321957CA0C0008BDB0 /* Support */,
 				4BBCF88B1780D5F500A33E13 /* Test Data */,
 			);
@@ -354,6 +362,7 @@
 				4BC1312B1962534200EEB5F8 /* comment-response.json in Resources */,
 				4B74803B1829DF3A00B7A63E /* link.json in Resources */,
 				4B4056CE1969EA1100E2DFE1 /* rate-limit.json in Resources */,
+				4B0AA30A196B232700DEC58C /* embedded-media.json in Resources */,
 				4B74803C1829DF3A00B7A63E /* multireddit.json in Resources */,
 				4B28DC8B196893F3007C2473 /* too-old.json in Resources */,
 				4B74803D1829DF3A00B7A63E /* subreddit.json in Resources */,
@@ -372,6 +381,7 @@
 				4BC1312A1962534200EEB5F8 /* comment-response.json in Resources */,
 				4B7480221829CAF300B7A63E /* link.json in Resources */,
 				4B4056CD1969EA1100E2DFE1 /* rate-limit.json in Resources */,
+				4B0AA309196B232700DEC58C /* embedded-media.json in Resources */,
 				4B7480231829CAF300B7A63E /* multireddit.json in Resources */,
 				4B28DC8A196893F3007C2473 /* too-old.json in Resources */,
 				4B7480241829CAF300B7A63E /* subreddit.json in Resources */,
@@ -450,6 +460,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B0AA30D196B238300DEC58C /* RKLinkEmbeddedMediaSpec.m in Sources */,
 				4BE14B211957BE400008BDB0 /* RKCreatedSpec.m in Sources */,
 				4BE14B3A1957CC360008BDB0 /* RKPaginationSpec.m in Sources */,
 				4B28DC8219687E9B007C2473 /* RKResponseSerializerSpec.m in Sources */,
@@ -469,6 +480,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B0AA30C196B238300DEC58C /* RKLinkEmbeddedMediaSpec.m in Sources */,
 				4BE14B201957BE400008BDB0 /* RKCreatedSpec.m in Sources */,
 				4BE14B391957CC360008BDB0 /* RKPaginationSpec.m in Sources */,
 				4B28DC8119687E9B007C2473 /* RKResponseSerializerSpec.m in Sources */,

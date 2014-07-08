@@ -1,0 +1,17 @@
+{
+    "type":"imgur.com",
+    "oembed":{
+        "provider_url":"http://imgur.com",
+        "description":"The most viral images on the internet, curated in real time by a dedicated community through commenting, voting and sharing.",
+        "title":"imgur: the simple image sharer",
+        "thumbnail_width":1920,
+        "height":550,
+        "width":550,
+        "html":"&lt;iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=http%3A%2F%2Fimgur.com%2Fa%2FRDBz8%2Fembed&amp;url=http%3A%2F%2Fimgur.com%2Fa%2FRDBz8&amp;image=http%3A%2F%2Fi.imgur.com%2F8XOO1Bb.jpg&amp;key=2aa3c4d5f3de4f5b9120b660ad850dc9&amp;type=text%2Fhtml&amp;schema=imgur\" width=\"550\" height=\"550\" scrolling=\"no\" frameborder=\"0\" allowfullscreen&gt;&lt;/iframe&gt;",
+        "version":"1.0",
+        "provider_name":"Imgur",
+        "thumbnail_url":"http://i.imgur.com/8XOO1Bb.jpg",
+        "type":"rich",
+        "thumbnail_height":1080
+    }
+}

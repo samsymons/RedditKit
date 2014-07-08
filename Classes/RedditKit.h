@@ -40,6 +40,7 @@
 
 #import "RKComment.h"
 #import "RKLink.h"
+#import "RKLinkEmbeddedMedia.h"
 #import "RKMessage.h"
 #import "RKMultireddit.h"
 #import "RKMultiredditDescription.h"
