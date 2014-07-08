@@ -31,6 +31,8 @@ typedef NS_ENUM(NSUInteger, RKCommentSort) {
         RKCommentSortBest
 };
 
+extern NSString * RKStringFromCommentSort(RKCommentSort sort);
+
 @class RKLink, RKComment, RKMessage;
 
 @interface RKClient (Comments)

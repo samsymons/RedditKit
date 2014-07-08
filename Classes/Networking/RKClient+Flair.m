@@ -26,7 +26,7 @@
 #import "RKUser.h"
 #import "RKLink.h"
 
-NSString * NSStringFromFlairType(RKFlairTemplateType templateType)
+NSString * RKStringFromFlairType(RKFlairTemplateType templateType)
 {
     switch (templateType)
     {
@@ -41,7 +41,7 @@ NSString * NSStringFromFlairType(RKFlairTemplateType templateType)
     }
 }
 
-NSString * NSStringFromUserFlairPosition(RKUserFlairPosition userFlairPosition)
+NSString * RKStringFromUserFlairPosition(RKUserFlairPosition userFlairPosition)
 {
     switch (userFlairPosition)
     {
@@ -57,7 +57,7 @@ NSString * NSStringFromUserFlairPosition(RKUserFlairPosition userFlairPosition)
     }
 }
 
-NSString * NSStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
+NSString * RKStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
 {
     switch (linkFlairPosition)
     {
@@ -94,11 +94,11 @@ NSString * NSStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
     NSString *flairEnabledString = flairEnabled ? @"true" : @"false";
     [parameters setObject:flairEnabledString forKey:@"flair_enabled"];
     
-    [parameters setObject:NSStringFromUserFlairPosition(userFlairPosition) forKey:@"flair_position"];
+    [parameters setObject:RKStringFromUserFlairPosition(userFlairPosition) forKey:@"flair_position"];
     NSString *userFlairSelfAssignEnabledString = userFlair ? @"true" : @"false";
     [parameters setObject:userFlairSelfAssignEnabledString	forKey:@"flair_self_assign_enabled"];
     
-    [parameters setObject:NSStringFromLinkFlairPosition(linkFlairPosition) forKey:@"link_flair_position"];
+    [parameters setObject:RKStringFromLinkFlairPosition(linkFlairPosition) forKey:@"link_flair_position"];
     NSString *linkFlairSelfAssignEnabledString = linkFlair ? @"true" : @"false";
     [parameters setObject:linkFlairSelfAssignEnabledString	forKey:@"link_flair_self_assign_enabled"];
     
@@ -169,7 +169,7 @@ NSString * NSStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
     if (flairClass) [parameters setObject:flairClass forKey:@"css_class"];
     
     [parameters setObject:subredditName forKey:@"r"];
-    [parameters setObject:NSStringFromFlairType(type) forKey:@"flair_type"];
+    [parameters setObject:RKStringFromFlairType(type) forKey:@"flair_type"];
     
     return [self basicPostTaskWithPath:@"api/flairtemplate" parameters:parameters completion:completion];
 }
@@ -235,7 +235,7 @@ NSString * NSStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
     NSParameterAssert(type);
     NSParameterAssert(subredditName);
     
-    NSDictionary *parameters = @{@"flair_type": NSStringFromFlairType(type), @"r": subredditName};
+    NSDictionary *parameters = @{@"flair_type": RKStringFromFlairType(type), @"r": subredditName};
     return [self basicPostTaskWithPath:@"api/clearflairtemplates" parameters:parameters completion:completion];
 }
 

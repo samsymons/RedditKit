@@ -26,7 +26,7 @@
 #import "RKMessage.h"
 #import "RKPagination.h"
 
-NSString * NSStringFromMessageCategory(RKMessageCategory messageCategory)
+NSString * RKStringFromMessageCategory(RKMessageCategory messageCategory)
 {
     switch (messageCategory)
     {
@@ -81,7 +81,7 @@ NSString * NSStringFromMessageCategory(RKMessageCategory messageCategory)
 
 - (NSURLSessionDataTask *)messagesInCategory:(RKMessageCategory)category pagination:(RKPagination *)pagination markRead:(BOOL)read completion:(RKListingCompletionBlock)completion
 {
-    NSString *path = [NSString stringWithFormat:@"message/%@.json", NSStringFromMessageCategory(category)];
+    NSString *path = [NSString stringWithFormat:@"message/%@.json", RKStringFromMessageCategory(category)];
     NSDictionary *parameters = @{@"mark": (read) ? @"true" : @"false" };
     
 	return [self listingTaskWithPath:path parameters:parameters pagination:pagination completion:completion];

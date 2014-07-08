@@ -26,7 +26,7 @@
 
 #import "RKVotable.h"
 
-NSString * NSStringFromVoteDirection(RKVoteDirection voteDirection)
+NSString * RKStringFromVoteDirection(RKVoteDirection voteDirection)
 {
     switch (voteDirection)
     {
@@ -115,7 +115,7 @@ RKVoteStatus RKVoteStatusFromVoteDirection(RKVoteDirection voteDirection)
     NSParameterAssert(fullName);
     NSParameterAssert(direction);
     
-    NSDictionary *parameters = @{@"id": fullName, @"dir": NSStringFromVoteDirection(direction)};
+    NSDictionary *parameters = @{@"id": fullName, @"dir": RKStringFromVoteDirection(direction)};
     
     return [self basicPostTaskWithPath:@"api/vote" parameters:parameters completion:completion];
 }

@@ -28,7 +28,7 @@
 #import "RKSubreddit.h"
 #import "RKPagination.h"
 
-NSString * NSStringFromUserContentCategory(RKUserContentCategory category)
+NSString * RKStringFromUserContentCategory(RKUserContentCategory category)
 {
     switch (category)
     {
@@ -62,7 +62,7 @@ NSString * NSStringFromUserContentCategory(RKUserContentCategory category)
     }
 }
 
-NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory category)
+NSString * RKStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory category)
 {
     switch (category)
     {
@@ -148,7 +148,7 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
     NSMutableDictionary *taskParameters = [NSMutableDictionary dictionary];
     [taskParameters addEntriesFromDictionary:[pagination dictionaryValue]];
 
-    NSString *path = [NSString stringWithFormat:@"subreddits/mine/%@.json", NSStringFromSubscribedSubredditCategory(category)];
+    NSString *path = [NSString stringWithFormat:@"subreddits/mine/%@.json", RKStringFromSubscribedSubredditCategory(category)];
 
     return [self getPath:path parameters:taskParameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         if (!completion) return;
@@ -254,7 +254,7 @@ NSString * NSStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
 {
     NSParameterAssert(username);
     
-    NSString *path = [NSString stringWithFormat:@"user/%@/%@.json", username, NSStringFromUserContentCategory(category)];
+    NSString *path = [NSString stringWithFormat:@"user/%@/%@.json", username, RKStringFromUserContentCategory(category)];
     
     return [self listingTaskWithPath:path parameters:nil pagination:pagination completion:completion];
 }

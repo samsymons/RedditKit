@@ -45,9 +45,9 @@ typedef NS_ENUM(NSUInteger, RKTimeSortingMethod) {
     RKTimeSortingMethodAllTime
 };
 
-// extern NSString * NSStringFromCommentSortingMethod(RKCommentSortingMethod sortingMethod);
-// extern NSString * NSStringFromTimeSortingMethod(RKTimeSortingMethod sortingMethod);
-// extern NSString * NSStringFromUserContentSortingMethod(RKUserContentSortingMethod sortingMethod);
+// extern NSString * RKStringFromCommentSortingMethod(RKCommentSortingMethod sortingMethod);
+// extern NSString * RKStringFromTimeSortingMethod(RKTimeSortingMethod sortingMethod);
+// extern NSString * RKStringFromUserContentSortingMethod(RKUserContentSortingMethod sortingMethod);
 
 @interface RKPagination : NSObject
 

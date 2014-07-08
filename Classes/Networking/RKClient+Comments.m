@@ -25,7 +25,7 @@
 #import "RKLink.h"
 #import "RKComment.h"
 
-NSString * NSStringFromCommentSort(RKCommentSort sort)
+NSString * RKStringFromCommentSort(RKCommentSort sort)
 {
     switch (sort)
     {
@@ -93,7 +93,7 @@ NSString * NSStringFromCommentSort(RKCommentSort sort)
 {
     NSParameterAssert(linkIdentifier);
     
-    NSDictionary *parameters = @{ @"sort": NSStringFromCommentSort(sort) };
+    NSDictionary *parameters = @{ @"sort": RKStringFromCommentSort(sort) };
     NSString *path = [NSString stringWithFormat:@"comments/%@.json", linkIdentifier];
     
     return [self listingTaskWithPath:path parameters:parameters pagination:nil completion:completion];

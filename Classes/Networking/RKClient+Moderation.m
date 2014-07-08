@@ -28,7 +28,7 @@
 #import "RKLink.h"
 #import "RKSubreddit.h"
 
-NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
+NSString * RKStringFromDistinguishedStatus(RKDistinguishedStatus status)
 {
     switch (status)
     {
@@ -205,7 +205,7 @@ NSString * NSStringFromDistinguishedStatus(RKDistinguishedStatus status)
 
 - (NSURLSessionDataTask *)distinguishThingWithFullName:(NSString *)fullName status:(RKDistinguishedStatus)status completion:(RKCompletionBlock)completion
 {
-    NSDictionary *parameters = @{@"how": NSStringFromDistinguishedStatus(status), @"id": fullName};
+    NSDictionary *parameters = @{@"how": RKStringFromDistinguishedStatus(status), @"id": fullName};
     
     return [self basicPostTaskWithPath:@"api/distinguish" parameters:parameters completion:completion];
 }
