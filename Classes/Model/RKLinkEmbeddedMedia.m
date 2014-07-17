@@ -25,4 +25,9 @@
              };
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p, type: %@, thumbnail URL: %@>", NSStringFromClass([self class]), self, self.type, self.thumbnailURL];
+}
+
 @end

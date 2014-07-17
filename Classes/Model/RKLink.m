@@ -22,6 +22,7 @@
 
 #import "RKLink.h"
 #import "NSString+HTML.h"
+#import "RKLinkEmbeddedMedia.h"
 
 @implementation RKLink
 
@@ -33,6 +34,7 @@
         @"permalink": @"data.permalink",
         @"domain": @"data.domain",
         @"author": @"data.author",
+        @"media": @"data.media",
         @"totalComments": @"data.num_comments",
         @"totalReports": @"data.num_reports",
         @"subreddit": @"data.subreddit",
@@ -147,6 +149,21 @@
         {
             NSTimeInterval createdTimeInterval = [created unsignedIntegerValue];
             return [NSDate dateWithTimeIntervalSince1970:createdTimeInterval];
+        }
+    }];
+}
+
++ (NSValueTransformer *)mediaJSONTransformer
+{
+    return [MTLValueTransformer transformerWithBlock:^id(NSDictionary *media) {
+        NSError *error = nil;
+        RKLinkEmbeddedMedia *mediaObject = [MTLJSONAdapter modelOfClass:[RKLinkEmbeddedMedia class] fromJSONDictionary:media error:&error];
+        
+        if (error) {
+            return nil;
+        }
+        else {
+            return mediaObject;
         }
     }];
 }

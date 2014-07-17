@@ -22,6 +22,8 @@
 
 #import "RKVotable.h"
 
+@class RKLinkEmbeddedMedia;
+
 @interface RKLink : RKVotable
 
 /**
@@ -144,6 +146,11 @@
  The full name of the subreddit to which the link was posted.
  */
 @property (nonatomic, copy, readonly) NSString *subredditFullName;
+
+/**
+ The media embedded in this link, if any.
+ */
+@property (nonatomic, strong, readonly) RKLinkEmbeddedMedia *media;
 
 /**
  The URL of the thumbnail for the link.

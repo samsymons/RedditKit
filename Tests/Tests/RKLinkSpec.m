@@ -25,6 +25,10 @@ describe(@"initialization", ^{
         expect(imageLink.domain).to.equal(@"imgur.com");
         expect(imageLink.upvoteRatio).to.equal(0.95);
     });
+    
+    fit(@"instantiates its embedded media", ^{
+        expect(imageLink.media).toNot.beNil();
+    });
 });
 
 describe(@"isImageLink", ^{
