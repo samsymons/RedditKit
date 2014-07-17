@@ -28,6 +28,7 @@ describe(@"initialization", ^{
     
     fit(@"instantiates its embedded media", ^{
         expect(imageLink.media).toNot.beNil();
+        expect(imageLink.media.type).to.equal(@"imgur.com");
     });
 });
 

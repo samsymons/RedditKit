@@ -13,9 +13,21 @@
 /**
  The type of the provider, typically their domain name.
  
- @example "imgur.com"
+ @example "imgur.com" or "video"
  */
 @property (nonatomic, copy) NSString *type;
+
+/**
+ The name of the content's author, if any.
+ This is typically populated when viewing video content.
+ */
+@property (nonatomic, copy) NSString *authorName;
+
+/**
+ The URL to the content's author, if any.
+ This is typically populated when viewing video content.
+ */
+@property (nonatomic, copy) NSString *authorURL;
 
 /**
  The URL for the provider.

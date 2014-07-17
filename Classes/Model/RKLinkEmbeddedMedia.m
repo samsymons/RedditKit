@@ -14,6 +14,8 @@
 {
     return @{
              @"type": @"type",
+             @"authorName": @"oembed.author_name",
+             @"authorURL": @"oembed.author_url",
              @"providerURL": @"oembed.provider_url",
              @"providerDescription": @"oembed.description",
              @"providerTitle": @"oembed.title",
