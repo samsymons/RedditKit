@@ -84,6 +84,7 @@
 
 /**
  Gets the list of moderators of a subreddit.
+ The returned array contains NSDictionary objects with information about each moderator.
  
  @param subreddit The subreddit from which to get the list of moderators.
  @param completion The block to be executed upon completion of the request.
@@ -92,6 +93,7 @@
 
 /**
  Gets the list of moderators of a subreddit.
+ The returned array contains NSDictionary objects with information about each moderator.
  
  @param name The name of the subreddit from which to get the list of moderators.
  @param completion The block to be executed upon completion of the request.
