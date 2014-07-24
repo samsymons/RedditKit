@@ -23,7 +23,6 @@
 #import "RKClient.h"
 #import "RKCompletionBlocks.h"
 
-@class AFJSONRequestOperation;
 @class AFImageRequestOperation;
 
 @interface RKClient (Captcha)

@@ -24,7 +24,6 @@
 #import "RKCompletionBlocks.h"
 #import "RKPagination.h"
 
-@class AFJSONRequestOperation;
 @class RKSubreddit;
 
 @interface RKClient (Subreddits)
