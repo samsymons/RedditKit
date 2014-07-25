@@ -28,7 +28,7 @@ typedef void(^RKRequestCompletionBlock)(NSHTTPURLResponse *response, id response
 @interface RKClient (Requests)
 
 /**
- Many of reddit's API methods require a set of parameters and simply return an error if they fail, and nothing (of value, at least) when they succeed.
+ Many of reddit's API methods require a set of parameters and simply return an error if they fail, and nothing of value when they succeed.
  This method eliminates much of the repetition when writing methods around these methods.
  
  @param path The path to request.

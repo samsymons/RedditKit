@@ -46,6 +46,8 @@ typedef NS_ENUM(NSUInteger, RKSubscribedSubredditCategory)
 
 @interface RKClient (Users)
 
+#pragma mark - Current User
+
 /**
  Gets the current user.
  
@@ -54,21 +56,16 @@ typedef NS_ENUM(NSUInteger, RKSubscribedSubredditCategory)
 - (NSURLSessionDataTask *)currentUserWithCompletion:(RKObjectCompletionBlock)completion;
 
 /**
- Gets a specific user.
- This method is useful when you already have an RKUser object, but need to get up-to-date karma totals and post history.
+ Deletes the current user's account on reddit and signs them out from the RKClient.
  
- @param user The user object to fetch.
- @param completion The block to be executed upon completion of the request. It takes two arguments: the response object (an RKUser) and any error that occurred.
+ @param reason An optional reason for the account deletion. Defaults to "Deleted via the reddit API".
+ @param currentPassword The current user's password.
+ @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
+ @note This will delete the current user's reddit account permanently.
  */
-- (NSURLSessionDataTask *)user:(RKUser *)user completion:(RKObjectCompletionBlock)completion;
+- (NSURLSessionDataTask *)deleteCurrentUserWithReason:(NSString *)reason currentPassword:(NSString *)currentPassword completion:(RKCompletionBlock)completion;
 
-/**
- Gets a specific user.
- 
- @param username The username to gather information for.
- @param completion The block to be executed upon completion of the request. It takes two arguments: the response object (an RKUser) and any error that occurred.
- */
-- (NSURLSessionDataTask *)userWithUsername:(NSString *)username completion:(RKObjectCompletionBlock)completion;
+#pragma mark - Subreddits
 
 /**
  Gets the subreddits to which the current user is subscribed.
@@ -87,22 +84,31 @@ typedef NS_ENUM(NSUInteger, RKSubscribedSubredditCategory)
 
 /**
  Gets the subreddits to which the current user is subscribed.
-
+ 
  @param category The category of subreddits to return.
  @param pagination The pagination object to be sent with the request.
  @param completion The block to be executed upon completion of the request. It takes three arguments: the response array of RKSubreddit objects, an RKPagination object, and any error that occurred.
  */
 - (NSURLSessionDataTask *)subscribedSubredditsInCategory:(RKSubscribedSubredditCategory)category pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
 
+#pragma mark - Other Users
+
 /**
- Deletes the current user's account on reddit and signs them out from the RKClient.
+ Gets a specific user.
+ This method is useful when you already have an RKUser object, but need to get up-to-date karma totals and post history.
  
- @param reason An optional reason for the account deletion. Defaults to "Deleted via the reddit API".
- @param currentPassword The current user's password.
- @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
- @note This will delete the current user's reddit account permanently.
+ @param user The user object to fetch.
+ @param completion The block to be executed upon completion of the request. It takes two arguments: the response object (an RKUser) and any error that occurred.
  */
-- (NSURLSessionDataTask *)deleteCurrentUserWithReason:(NSString *)reason currentPassword:(NSString *)currentPassword completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)user:(RKUser *)user completion:(RKObjectCompletionBlock)completion;
+
+/**
+ Gets a specific user.
+ 
+ @param username The username to gather information for.
+ @param completion The block to be executed upon completion of the request. It takes two arguments: the response object (an RKUser) and any error that occurred.
+ */
+- (NSURLSessionDataTask *)userWithUsername:(NSString *)username completion:(RKObjectCompletionBlock)completion;
 
 #pragma mark - User Content
 
@@ -239,7 +245,5 @@ typedef NS_ENUM(NSUInteger, RKSubscribedSubredditCategory)
 
  */
 - (NSURLSessionDataTask *)checkAvailabilityOfUsername:(NSString *)username completion:(RKBooleanCompletionBlock)completion;
-
-// TODO: Register account
 
 @end
