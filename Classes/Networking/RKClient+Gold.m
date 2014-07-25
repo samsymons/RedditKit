@@ -30,7 +30,7 @@
 {
     NSParameterAssert(username);
     
-    NSUInteger duration = MAX(0, months);
+    NSUInteger duration = MAX(1, months);
     duration = MIN(32, months);
     
     NSString *path = [NSString stringWithFormat:@"/api/v1/gold/give/%@", username];
