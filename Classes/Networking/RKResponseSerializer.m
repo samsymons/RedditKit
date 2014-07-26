@@ -67,15 +67,6 @@
         }
     }
     
-    // Parse the response:
-    
-    /*
-    if (responseString && ![responseString isEqualToString:@" "] && ![responseString isEqualToString:@"\"{}\""])
-    {
-        return [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:error];
-    }
-     */
-    
     return responseObject;
 }
 

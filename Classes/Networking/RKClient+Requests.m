@@ -218,6 +218,12 @@
     }
     
     NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        NSDictionary *headers = [((NSHTTPURLResponse *)response) allHeaderFields];
+        
+        self.rateLimitedRequestsUsed = [[headers objectForKey:@"x-ratelimit-remaining"] intValue];
+        self.rateLimitedRequestsRemaining = [[headers objectForKey:@"x-ratelimit-used"] intValue];
+        self.timeUntilRateLimitReset = [[headers objectForKey:@"x-ratelimit-reset"] intValue];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             if (completion)
             {

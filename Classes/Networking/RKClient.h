@@ -45,6 +45,27 @@ extern NSString * const RKClientErrorDomain;
 @property (nonatomic, strong) NSString *sessionIdentifier;
 
 /**
+ How many requests are allowed before the rate limit is reset.
+ 
+ @note This is only accurate at the time of the last request.
+ */
+@property (nonatomic, assign) NSUInteger rateLimitedRequestsRemaining;
+
+/**
+ How many requests have been made in this current rate limited period.
+ 
+ @note This is only accurate at the time of the last request.
+ */
+@property (nonatomic, assign) NSUInteger rateLimitedRequestsUsed;
+
+/**
+ The time, in seconds, until the rate limit resets.
+ 
+ @note This is only accurate at the time of the last request.
+ */
+@property (nonatomic, assign) NSTimeInterval timeUntilRateLimitReset;
+
+/**
  The user agent for requests sent to reddit.
  */
 @property (nonatomic, strong) NSString *userAgent;
