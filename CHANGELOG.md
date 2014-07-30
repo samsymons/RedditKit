@@ -1,3 +1,11 @@
+## 1.3
+
+* Improved error handling, thanks to Rick Harrison.
+* Add support for the rate limit headers.
+* Initial support for giving reddit gold to users and comments.
+* Initial support for embedded media in `RKLink`.
+* Many of the `RKStringFrom*` methods are now public, as they may be useful.
+
 ## 1.2
 
 * RKLink now has a `shortURL` method.
