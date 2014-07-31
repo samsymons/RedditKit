@@ -90,6 +90,8 @@ typedef void(^RKRequestCompletionBlock)(NSHTTPURLResponse *response, id response
 
 #pragma mark - Request Helpers
 
+- (NSString *)stringFromBoolean:(BOOL)boolean;
+
 - (NSURLSessionDataTask *)getPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKRequestCompletionBlock)completion;
 - (NSURLSessionDataTask *)postPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKRequestCompletionBlock)completion;
 - (NSURLSessionDataTask *)putPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKRequestCompletionBlock)completion;

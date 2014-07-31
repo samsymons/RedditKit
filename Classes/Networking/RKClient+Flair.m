@@ -91,15 +91,15 @@ NSString * RKStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
     
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithCapacity:7];
     
-    NSString *flairEnabledString = flairEnabled ? @"true" : @"false";
+    NSString *flairEnabledString = [self stringFromBoolean:flairEnabled];
     [parameters setObject:flairEnabledString forKey:@"flair_enabled"];
     
     [parameters setObject:RKStringFromUserFlairPosition(userFlairPosition) forKey:@"flair_position"];
-    NSString *userFlairSelfAssignEnabledString = userFlair ? @"true" : @"false";
+    NSString *userFlairSelfAssignEnabledString = [self stringFromBoolean:userFlair];
     [parameters setObject:userFlairSelfAssignEnabledString	forKey:@"flair_self_assign_enabled"];
     
     [parameters setObject:RKStringFromLinkFlairPosition(linkFlairPosition) forKey:@"link_flair_position"];
-    NSString *linkFlairSelfAssignEnabledString = linkFlair ? @"true" : @"false";
+    NSString *linkFlairSelfAssignEnabledString = [self stringFromBoolean:linkFlair];
     [parameters setObject:linkFlairSelfAssignEnabledString	forKey:@"link_flair_self_assign_enabled"];
     
     [parameters setObject:subredditName	forKey:@"r"];
@@ -145,7 +145,7 @@ NSString * RKStringFromLinkFlairPosition(RKLinkFlairPosition linkFlairPosition)
 {
     NSParameterAssert(subredditName);
     
-    NSString *flairAllowedString = flairAllowed ? @"true" : @"false";
+    NSString *flairAllowedString = [self stringFromBoolean:flairAllowed];
     NSDictionary *parameters = @{@"enabled": flairAllowedString, @"r": subredditName};
     
     return [self basicPostTaskWithPath:@"api/setflairenabled" parameters:parameters completion:completion];

@@ -61,7 +61,7 @@ NSString * RKStringFromDistinguishedStatus(RKDistinguishedStatus status)
 {
     NSParameterAssert(fullName);
     
-    NSString *state = sticky ? @"True" : @"False";
+    NSString *state = [self stringFromBoolean:sticky];
     NSDictionary *parameters = @{@"id": fullName, @"state": state};
     
     return [self basicPostTaskWithPath:@"api/set_subreddit_sticky" parameters:parameters completion:completion];
@@ -76,7 +76,7 @@ NSString * RKStringFromDistinguishedStatus(RKDistinguishedStatus status)
 {
     NSParameterAssert(fullName);
     
-    NSString *state = contestMode ? @"True" : @"False";
+    NSString *state = [self stringFromBoolean:contestMode];
     NSDictionary *parameters = @{@"id": fullName, @"state": state};
     
     return [self basicPostTaskWithPath:@"api/set_contest_mode" parameters:parameters completion:completion];

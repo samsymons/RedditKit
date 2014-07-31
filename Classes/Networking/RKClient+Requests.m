@@ -180,6 +180,11 @@
 
 #pragma mark - Request Helpers
 
+- (NSString *)stringFromBoolean:(BOOL)boolean
+{
+    return boolean ? @"true" : @"false";
+}
+
 - (NSURLSessionDataTask *)getPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKRequestCompletionBlock)completion
 {
     return [self taskWithMethod:@"GET" path:path parameters:parameters completion:completion];

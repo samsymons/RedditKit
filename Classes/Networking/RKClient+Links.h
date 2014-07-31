@@ -195,6 +195,8 @@ extern NSString * RKStringFromSubredditCategory(RKSubredditCategory category);
  @param captchaIdentifier The optional identifier of the CAPTCHA you are submitting with this post.
  @param captchaValue The optional value of the CAPTCHA you are submitting with this post.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
+ 
+ @note This does not resubmit the link if it already exists.
  */
 - (NSURLSessionDataTask *)submitLinkPostWithTitle:(NSString *)title subreddit:(RKSubreddit *)subreddit URL:(NSURL *)URL captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion;
 
@@ -207,8 +209,23 @@ extern NSString * RKStringFromSubredditCategory(RKSubredditCategory category);
  @param captchaIdentifier The optional identifier of the CAPTCHA you are submitting with this post.
  @param captchaValue The optional value of the CAPTCHA you are submitting with this post.
  @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
+ 
+ @note This does not resubmit the link if it already exists.
  */
 - (NSURLSessionDataTask *)submitLinkPostWithTitle:(NSString *)title subredditName:(NSString *)subredditName URL:(NSURL *)URL captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion;
+
+/**
+ Submits a link post.
+ 
+ @param title The title of the post.
+ @param subredditName The name of the subreddit in which to submit the post.
+ @param URL The URL to submit.
+ @param resubmit Whether to resubmit the link if it already exists.
+ @param captchaIdentifier The optional identifier of the CAPTCHA you are submitting with this post.
+ @param captchaValue The optional value of the CAPTCHA you are submitting with this post.
+ @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
+ */
+- (NSURLSessionDataTask *)submitLinkPostWithTitle:(NSString *)title subredditName:(NSString *)subredditName URL:(NSURL *)URL resubmit:(BOOL)resubmit captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion;
 
 /**
  Submits a self post.

@@ -82,7 +82,8 @@ NSString * RKStringFromMessageCategory(RKMessageCategory messageCategory)
 - (NSURLSessionDataTask *)messagesInCategory:(RKMessageCategory)category pagination:(RKPagination *)pagination markRead:(BOOL)read completion:(RKListingCompletionBlock)completion
 {
     NSString *path = [NSString stringWithFormat:@"message/%@.json", RKStringFromMessageCategory(category)];
-    NSDictionary *parameters = @{@"mark": (read) ? @"true" : @"false" };
+    NSString *markRead = [self stringFromBoolean:read];
+    NSDictionary *parameters = @{ @"mark": markRead };
     
 	return [self listingTaskWithPath:path parameters:parameters pagination:pagination completion:completion];
 }

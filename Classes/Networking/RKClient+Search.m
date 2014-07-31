@@ -42,7 +42,8 @@
     NSParameterAssert(query);
     
     NSString *path = subredditName ? [NSString stringWithFormat:@"r/%@/search.json", subredditName] : @"search.json";
-    NSDictionary *parameters = @{@"q": query, @"restrict_sr": restrictSubreddit ? @"true" : @"false"};
+    NSString *restrictString = [self stringFromBoolean:restrictSubreddit];
+    NSDictionary *parameters = @{@"q": query, @"restrict_sr": restrictString };
     
     return [self listingTaskWithPath:path parameters:parameters pagination:pagination completion:completion];
 }

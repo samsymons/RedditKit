@@ -189,6 +189,11 @@ NSString * RKStringFromSubredditCategory(RKSubredditCategory category)
 
 - (NSURLSessionDataTask *)submitLinkPostWithTitle:(NSString *)title subredditName:(NSString *)subredditName URL:(NSURL *)URL captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion
 {
+    return [self submitLinkPostWithTitle:title subredditName:subredditName URL:URL resubmit:NO captchaIdentifier:captchaIdentifier captchaValue:captchaValue completion:completion];
+}
+
+- (NSURLSessionDataTask *)submitLinkPostWithTitle:(NSString *)title subredditName:(NSString *)subredditName URL:(NSURL *)URL resubmit:(BOOL)resubmit captchaIdentifier:(NSString *)captchaIdentifier captchaValue:(NSString *)captchaValue completion:(RKCompletionBlock)completion
+{
     NSParameterAssert(title);
     NSParameterAssert(subredditName);
     NSParameterAssert(URL);
@@ -198,6 +203,7 @@ NSString * RKStringFromSubredditCategory(RKSubredditCategory category)
     [parameters setObject:title forKey:@"title"];
     [parameters setObject:subredditName forKey:@"sr"];
     [parameters setObject:[URL absoluteString] forKey:@"url"];
+    [parameters setObject:[self stringFromBoolean:resubmit] forKey:@"resubmit"];
     
     if (captchaIdentifier) [parameters setObject:captchaIdentifier forKey:@"iden"];
     if (captchaValue) [parameters setObject:captchaValue forKey:@"captcha"];
