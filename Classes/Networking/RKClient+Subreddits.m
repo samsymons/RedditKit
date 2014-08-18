@@ -128,6 +128,21 @@
     }];
 }
 
+- (NSURLSessionDataTask *)randomSubredditWithCompletion:(RKObjectCompletionBlock)completion
+{
+    return [self getPath:@"r/random" parameters:nil completion:^(NSHTTPURLResponse *response, NSArray *responseObject, NSError *error) {
+        if (!completion)
+        {
+            return;
+        }
+        
+        NSURL *subredditURL = response.URL;
+        NSString *subredditName = [subredditURL lastPathComponent];
+        
+        [self subredditWithName:subredditName completion:completion];
+    }];
+}
+
 #pragma mark - Subscribing
 
 - (NSURLSessionDataTask *)subscribeToSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion

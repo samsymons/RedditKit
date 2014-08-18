@@ -79,6 +79,13 @@
  */
 - (NSURLSessionDataTask *)recommendedSubredditsForSubreddits:(NSArray *)subreddits completion:(RKArrayCompletionBlock)completion;
 
+/**
+ Gets a random subreddit.
+ 
+ @param completion An optional block to be executed on the completion of a request. Its object parameter is an RKSubreddit object.
+ */
+- (NSURLSessionDataTask *)randomSubredditWithCompletion:(RKObjectCompletionBlock)completion;
+
 #pragma mark - Subscribing
 
 /**
