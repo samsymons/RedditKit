@@ -136,10 +136,17 @@
             return;
         }
         
-        NSURL *subredditURL = response.URL;
-        NSString *subredditName = [subredditURL lastPathComponent];
-        
-        [self subredditWithName:subredditName completion:completion];
+        if (error)
+        {
+            completion(nil, error);
+        }
+        else
+        {
+            NSURL *subredditURL = response.URL;
+            NSString *subredditName = [subredditURL lastPathComponent];
+            
+            [self subredditWithName:subredditName completion:completion];
+        }
     }];
 }
 
