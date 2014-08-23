@@ -46,6 +46,9 @@ NSString * RKStringFromSubredditCategory(RKSubredditCategory category)
         case RKSubredditCategoryTop:
             return @"top";
             break;
+        case RKSubredditCategoryPromoted:
+            return @"ads";
+            break;
         default:
             return @"hot";
             break;

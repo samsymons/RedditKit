@@ -28,7 +28,8 @@ typedef NS_ENUM(NSUInteger, RKSubredditCategory) {
 	RKSubredditCategoryNew,
 	RKSubredditCategoryRising,
 	RKSubredditCategoryControversial,
-	RKSubredditCategoryTop
+	RKSubredditCategoryTop,
+    RKSubredditCategoryPromoted
 };
 
 extern NSString * RKStringFromSubredditCategory(RKSubredditCategory category);
