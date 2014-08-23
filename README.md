@@ -121,6 +121,8 @@ NSURLSessionDataTask *task = [[RKClient sharedClient] frontPageLinksWithCompleti
 [task cancel];
 ```
 
+> When using RedditKit's APIs, it's important to remember that users who have reddit gold may have settings which affect the response from the server. For example, users who have disabled promoted links will see an empty array returned when retrieving links from the promoted category of a subreddit.
+
 ## Pagination
 
 Methods which are paginated can accept `RKPagination` objects.
