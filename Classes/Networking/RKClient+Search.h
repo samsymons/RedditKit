@@ -62,4 +62,15 @@
  */
 - (NSURLSessionDataTask *)search:(NSString *)query subredditName:(NSString *)subredditName restrictSubreddit:(BOOL)restrictSubreddit pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
 
+
+/**
+ Gets subreddit autocomplete suggestions.
+ 
+ @param query The subreddit name
+ @param includeOver18 Whether to include adult subreddits
+ @see: http://www.reddit.com/dev/api#POST_api_search_reddit_names.json
+ */
+
+- (NSURLSessionDataTask *)searchRedditNames:(NSString *)query includeOver18:(BOOL)includeOver18 pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+
 @end

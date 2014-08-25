@@ -114,6 +114,67 @@
     }];
 }
 
+- (NSURLSessionDataTask *)postListingTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+{
+    NSParameterAssert(path);
+    
+    return [self fullPostListingWithPath:path parameters:parameters pagination:pagination completion:^(id responseObject, NSError *error) {
+        if (!completion)
+        {
+            return;
+        }
+        
+        if (responseObject)
+        {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSDictionary *response = responseObject;
+                if ([responseObject isKindOfClass:[NSArray class]])
+                {
+                    response = [responseObject lastObject];
+                }
+                
+                NSArray *links = [self namesFromListingResponse:response];
+                RKPagination *pagination = [RKPagination paginationFromListingResponse:response];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(links, pagination, nil);
+                });
+            });
+        }
+        else
+        {
+            completion(nil, nil, error);
+        }
+    }];
+}
+
+- (NSURLSessionDataTask *)fullPostListingWithPath:(NSString *)path parameters:(NSDictionary *)parameters pagination:(RKPagination *)pagination completion:(RKObjectCompletionBlock)completion
+{
+    NSParameterAssert(path);
+    
+    NSMutableDictionary *taskParameters = [NSMutableDictionary dictionary];
+    [taskParameters addEntriesFromDictionary:parameters];
+    [taskParameters addEntriesFromDictionary:[pagination dictionaryValue]];
+    
+    return [self postPath:path parameters:taskParameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+        if (!completion)
+        {
+            return;
+        }
+        
+        if (responseObject)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(responseObject, nil);
+            });
+        }
+        else
+        {
+            completion(nil, error);
+        }
+    }];
+}
+
 - (NSURLSessionDataTask *)friendTaskWithContainer:(NSString *)container subredditName:(NSString *)subredditName name:(NSString *)name type:(NSString *)type completion:(RKCompletionBlock)completion
 {
     NSParameterAssert(container);
@@ -169,6 +230,24 @@
     {
         id object = [RKObjectBuilder objectFromJSON:objectJSON];
         
+        if (object)
+        {
+            [objects addObject:object];
+        }
+    }
+    
+    return [objects copy];
+}
+
+- (NSArray *)namesFromListingResponse:(NSDictionary *)listingResponse
+{
+    NSParameterAssert(listingResponse);
+    
+    NSArray *objectsAsJSON = listingResponse[@"names"];
+    NSMutableArray *objects = [[NSMutableArray alloc] initWithCapacity:[objectsAsJSON count]];
+    
+    for (id object in objectsAsJSON)
+    {
         if (object)
         {
             [objects addObject:object];
