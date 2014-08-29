@@ -63,16 +63,28 @@ typedef NS_ENUM(NSUInteger, RKSpamFilterStrength) {
 
 /**
  The description of the subreddit.
+ 
+ This is the content of the sidebar, formatted as Markdown. It is delivered as-is
+ from reddit's API, meaning that there are unescaped HTML elements and raw newline
+ characters, etc.
  */
 @property (nonatomic, copy, readonly) NSString *subredditDescription;
 
 /**
  The description of the subreddit as HTML.
+ 
+ This is the content of the sidebar, formatted as HTML. It is delivered as-is
+ from reddit's API, meaning that there are unescaped HTML elements and raw newline
+ characters, etc.
  */
 @property (nonatomic, copy, readonly) NSString *subredditDescriptionHTML;
 
 /**
  The public description of the subreddit.
+ 
+ This is a short description of the subreddit, ideal for displaying in a list of
+ subreddits with subtitled descriptions. It is typically no longer than one or two
+ sentences.
  */
 @property (nonatomic, copy, readonly) NSString *publicDescription;
 
@@ -104,9 +116,9 @@ typedef NS_ENUM(NSUInteger, RKSpamFilterStrength) {
 @property (nonatomic, copy, readonly) NSString *URL;
 
 /**
- Whether the subreddit is set as NSFW.
+ Whether the subreddit is set as NSFW and may contain mature content.
  */
-@property (nonatomic, assign, readonly, getter=isOver18) BOOL over18;
+@property (nonatomic, assign, readonly, getter = isOver18) BOOL over18;
 
 /**
  Whether the current user is a contributor to the subreddit.
@@ -170,11 +182,17 @@ typedef NS_ENUM(NSUInteger, RKSpamFilterStrength) {
 
 /**
  Text that displays as a user is submitting a post.
+ 
+ This is ideal for displaying in link-submissions interface, as a guideline for
+ which content is appropriate.
  */
 @property (nonatomic, copy, readonly) NSString *submitText;
 
 /**
  Text that displays as a user is submitting a post, in HTML.
+ 
+ This is ideal for displaying in link-submissions interface, as a guideline for
+ which content is appropriate.
  */
 @property (nonatomic, copy, readonly) NSString *submitTextHTML;
 
