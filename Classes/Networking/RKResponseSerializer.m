@@ -43,6 +43,10 @@
 {
     NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
+    if ([[[response allHeaderFields] objectForKey:@"Content-Type"] rangeOfString:@"application/json"].location == NSNotFound) {
+        return nil;
+    }
+    
     // Attempt to parse the JSON:
     
     NSError *parseError = nil;
