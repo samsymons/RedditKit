@@ -38,6 +38,7 @@
 #import "RKClient+Voting.h"
 #import "RKClient+Wiki.h"
 
+#import "RKMoreComments.h"
 #import "RKComment.h"
 #import "RKLink.h"
 #import "RKLinkEmbeddedMedia.h"
