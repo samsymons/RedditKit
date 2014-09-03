@@ -75,15 +75,9 @@
         NSMutableArray *comments = [[NSMutableArray alloc] initWithCapacity:repliesData.count];
         
         for (NSDictionary *commentJSON in repliesData)
-        {
-            NSString *kind = commentJSON[@"kind"];
-            if (![kind isEqualToString:kRKObjectTypeComment])
-            {
-                continue;
-            }
-            
+        {   
             NSError *error = nil;
-            id model = [MTLJSONAdapter modelOfClass:[RKComment class] fromJSONDictionary:commentJSON error:&error];
+            id model = [RKObjectBuilder objectFromJSON:commentJSON];
             
             if (!error)
             {

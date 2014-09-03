@@ -32,6 +32,7 @@
 #import "RKMultireddit.h"
 #import "RKMultiredditDescription.h"
 #import "RKModeratorAction.h"
+#import "RKMoreComments.h"
 
 NSString * const kRKObjectTypeComment = @"t1";
 NSString * const kRKObjectTypeAccount = @"t2";
@@ -139,7 +140,7 @@ NSString * const kRKObjectTypeMore = @"more";
     }
     else if ([objectKind isEqualToString:kRKObjectTypeMore])
     {
-        // TODO: Add support for the More type.
+        return [RKMoreComments class];
     }
     
     return nil;

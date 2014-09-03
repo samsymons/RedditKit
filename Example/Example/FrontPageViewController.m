@@ -100,6 +100,10 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
     self.navigationItem.leftBarButtonItem = self.accountButton;
     
     [self loadNewLinks];
+    
+    [[RKClient sharedClient] commentsForLinkWithIdentifier:@"2f9n76" completion:^(NSArray *comments, RKPagination *pagination, NSError *error) {
+        NSLog(@"Comments: %@", comments);
+    }];
 }
 
 - (BOOL)shouldAutorotate
