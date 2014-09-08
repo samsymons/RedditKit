@@ -100,14 +100,23 @@ NSString * RKStringFromCommentSort(RKCommentSort sort)
     return [self listingTaskWithPath:path parameters:parameters pagination:nil completion:completion];
 }
 
-- (NSURLSessionDataTask *)moreComments:(RKMoreComments *)moreComments onLink:(RKLink *)link completion:(RKObjectCompletionBlock)completion
+- (NSURLSessionDataTask *)moreComments:(RKMoreComments *)moreComments onLink:(RKLink *)link completion:(RKArrayCompletionBlock)completion
 {
     NSParameterAssert(moreComments);
     
-    NSDictionary *parameters = @{ @"id": moreComments.identifier, @"children": moreComments.childIdentifiers, @"link_id": link.fullName, @"sort": @"confidence" };
+    NSString *children = [moreComments.childIdentifiers componentsJoinedByString:@","];
+    NSDictionary *parameters = @{ @"children": children, @"link_id": link.fullName, @"api_type": @"json" };
     
     return [self postPath:@"api/morechildren" parameters:parameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
-        NSLog(@"Response object: %@", responseObject);
+        if (error)
+        {
+            completion(nil, error);
+        }
+        else
+        {
+            NSArray *comments = [responseObject valueForKeyPath:@"json.data.things"];
+            completion(comments, nil);
+        }
     }];
 }
 

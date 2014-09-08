@@ -101,8 +101,16 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
     
     [self loadNewLinks];
     
-    [[RKClient sharedClient] commentsForLinkWithIdentifier:@"2f9n76" completion:^(NSArray *comments, RKPagination *pagination, NSError *error) {
-        NSLog(@"Comments: %@", comments);
+    [[RKClient sharedClient] linkWithFullName:@"t3_2f9n76" completion:^(RKLink *link, NSError *error) {
+        [[RKClient sharedClient] commentsForLink:link completion:^(NSArray *comments, RKPagination *pagination, NSError *error) {
+            RKComment *comment = [comments firstObject];
+            NSArray *replies = comment.replies;
+            RKMoreComments *moreComments = [replies lastObject];
+            
+            [[RKClient sharedClient] moreComments:moreComments onLink:link completion:^(id object, NSError *error) {
+                
+            }];
+        }];
     }];
 }
 

@@ -22,6 +22,8 @@
 
 #import "RKClient.h"
 
+#import "RKMoreComments.h"
+
 typedef NS_ENUM(NSUInteger, RKCommentSort) {
         RKCommentSortTop = 1,
         RKCommentSortHot,
@@ -99,6 +101,23 @@ extern NSString * RKStringFromCommentSort(RKCommentSort sort);
  */
 - (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier sort:(RKCommentSort)sort completion:(RKListingCompletionBlock)completion;
 
-- (NSURLSessionDataTask *)moreComments:(RKMoreComments *)moreComments onLink:(RKLink *)link completion:(RKObjectCompletionBlock)completion;
+/**
+ Gets comment data from an RKMoreComments object.
+ 
+ @param moreComments The RKMoreComments object for which to fetch comments.
+ @param link The link the comment was posted in.
+ @param completion An optional block to be executed upon request completion. It
+        takes two arguments: an array of comment data, and any error that
+        occurred.
+ @return The NSURLSessionDataTask for the request.
+ 
+ @note This method does not return true RKComment objects. Because the API
+       response from reddit does not match that of actual comment objects, this
+       method instead returns the raw dictionaries from reddit's API. From there,
+       you will need to extract the comment identifiers and fetch each comment
+       individually. This is an unfortunate sacrifice until if or when reddit
+       improves their comment API.
+ */
+- (NSURLSessionDataTask *)moreComments:(RKMoreComments *)moreComments onLink:(RKLink *)link completion:(RKArrayCompletionBlock)completion;
 
 @end
