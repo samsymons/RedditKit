@@ -24,6 +24,7 @@
 #import "RKClient+Requests.h"
 #import "RKLink.h"
 #import "RKComment.h"
+#import "RKMoreComments.h"
 
 NSString * RKStringFromCommentSort(RKCommentSort sort)
 {
@@ -97,6 +98,17 @@ NSString * RKStringFromCommentSort(RKCommentSort sort)
     NSString *path = [NSString stringWithFormat:@"comments/%@.json", linkIdentifier];
     
     return [self listingTaskWithPath:path parameters:parameters pagination:nil completion:completion];
+}
+
+- (NSURLSessionDataTask *)moreComments:(RKMoreComments *)moreComments onLink:(RKLink *)link completion:(RKObjectCompletionBlock)completion
+{
+    NSParameterAssert(moreComments);
+    
+    NSDictionary *parameters = @{ @"id": moreComments.identifier, @"children": moreComments.childIdentifiers, @"link_id": link.fullName, @"sort": @"confidence" };
+    
+    return [self postPath:@"api/morechildren" parameters:parameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+        NSLog(@"Response object: %@", responseObject);
+    }];
 }
 
 @end

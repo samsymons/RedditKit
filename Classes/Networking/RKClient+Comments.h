@@ -99,4 +99,6 @@ extern NSString * RKStringFromCommentSort(RKCommentSort sort);
  */
 - (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier sort:(RKCommentSort)sort completion:(RKListingCompletionBlock)completion;
 
+- (NSURLSessionDataTask *)moreComments:(RKMoreComments *)moreComments onLink:(RKLink *)link completion:(RKObjectCompletionBlock)completion;
+
 @end
