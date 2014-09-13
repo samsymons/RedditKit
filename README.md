@@ -15,7 +15,7 @@ Add this to your Podfile:
 	pod 'RedditKit', '~> 1.3'
 
 Then run:
-	
+
 	pod install
 
 ### Submodules
@@ -131,6 +131,8 @@ Methods which are paginated can accept `RKPagination` objects.
 
 In addition to letting you change the pagination of your requests, RedditKit also gives you pagination information for any requests made. A request for links in a subreddit has a pagination object as an argument in its completion block.
 
+Due to the way reddit's API is structured, comments do not have support for pagination. Instead, comment listings will return `RKMoreComments` object which can then be used to retrieve the comments in question.
+
 > The [example project](Example/) implements pagination in a table view controller, loading new links when the user scrolls to the bottom.
 
 ## Multiple Accounts
@@ -157,7 +159,7 @@ How you manage the various `RKClient` instances is up to you. Probably with an `
 
 ## Configuration
 
-You can configure various aspects of RedditKit's operation, including its default API endpoint and user agent. Check out the `RKClient` header file for more.
+You can configure various aspects of RedditKit, including its default API endpoint and user agent. Check out the `RKClient` header file for more.
 
 **You should set your user agent to the name and version of your app, along with your reddit username. That way, if you ever have a buggy version of your app in the wild, the reddit admins will know who to contact.**
 
