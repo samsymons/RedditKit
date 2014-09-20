@@ -33,6 +33,7 @@ extern const NSInteger RKClientErrorRateLimited;
 extern const NSInteger RKClientErrorTooManyFlairClassNames;
 extern const NSInteger RKClientErrorArchived;
 extern const NSInteger RKClientErrorInvalidSubreddit;
+extern const NSInteger RKClientErrorLinkAlreadySubmitted;
 
 extern const NSInteger RKClientErrorInvalidMultiredditName;
 extern const NSInteger RKClientErrorPermissionDenied;
@@ -76,6 +77,11 @@ extern const NSInteger RKClientErrorTimedOut;
  Returns an error that occurs when you provide an invalid subreddit name.
  */
 + (NSError *)invalidSubredditError;
+
+/**
+ Returns an error that occurs when you try to submit a link which has already been submitted.
+ */
++ (NSError *)linkAlreadySubmittedError;
 
 /**
  Returns an error that occurs when the user is rate limited.

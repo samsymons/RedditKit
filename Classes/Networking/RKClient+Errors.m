@@ -33,6 +33,7 @@ const NSInteger RKClientErrorRateLimited = 204;
 const NSInteger RKClientErrorTooManyFlairClassNames = 205;
 const NSInteger RKClientErrorArchived = 206;
 const NSInteger RKClientErrorInvalidSubreddit = 207;
+const NSInteger RKClientErrorLinkAlreadySubmitted = 208;
 
 const NSInteger RKClientErrorInvalidMultiredditName = 401;
 const NSInteger RKClientErrorPermissionDenied = 402;
@@ -64,6 +65,7 @@ const NSInteger RKClientErrorTimedOut = 504;
             if ([RKClient string:responseString containsSubstring:@"TOO_OLD"]) return [RKClient archivedError];
             if ([RKClient string:responseString containsSubstring:@"TOO_MUCH_FLAIR_CSS"]) return [RKClient tooManyFlairClassNamesError];
             if ([RKClient string:responseString containsSubstring:@"SUBREDDIT_NOEXIST"]) return [RKClient invalidSubredditError];
+            if ([RKClient string:responseString containsSubstring:@"ALREADY_SUB"]) return [RKClient linkAlreadySubmittedError];
             
             break;
         case 400:
@@ -156,6 +158,12 @@ const NSInteger RKClientErrorTimedOut = 504;
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Invalid credentials" failureReason:@"Your username or password were incorrect."];
     return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorInvalidCredentials userInfo:userInfo];
+}
+
++ (NSError *)linkAlreadySubmittedError
+{
+    NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Link already submitted" failureReason:@"This link has already been submitted to this subreddit."];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorLinkAlreadySubmitted userInfo:userInfo];
 }
 
 + (NSError *)rateLimitedError
