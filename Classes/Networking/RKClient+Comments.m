@@ -26,6 +26,8 @@
 #import "RKComment.h"
 #import "RKMoreComments.h"
 
+#define DEFAULT_COMMENT_LIMIT 200
+
 NSString * RKStringFromCommentSort(RKCommentSort sort)
 {
     switch (sort)
@@ -80,44 +82,53 @@ NSString * RKStringFromCommentSort(RKCommentSort sort)
 
 #pragma mark - Getting Comments
 
-- (NSURLSessionDataTask *)commentsForLink:(RKLink *)link completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)commentsForLink:(RKLink *)link completion:(RKArrayCompletionBlock)completion
 {
-    return [self commentsForLinkWithIdentifier:link.identifier sort:RKCommentSortTop completion:completion];
+    return [self commentsForLinkWithIdentifier:link.identifier sort:RKCommentSortTop limit:DEFAULT_COMMENT_LIMIT completion:completion];
 }
 
-- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier completion:(RKArrayCompletionBlock)completion
 {
-    return [self commentsForLinkWithIdentifier:linkIdentifier sort:RKCommentSortTop completion:completion];
+    return [self commentsForLinkWithIdentifier:linkIdentifier sort:RKCommentSortTop limit:DEFAULT_COMMENT_LIMIT completion:completion];
 }
 
-- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier sort:(RKCommentSort)sort completion:(RKListingCompletionBlock)completion
+- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier sort:(RKCommentSort)sort limit:(NSInteger)limit completion:(RKArrayCompletionBlock)completion
 {
     NSParameterAssert(linkIdentifier);
     
-    NSDictionary *parameters = @{ @"sort": RKStringFromCommentSort(sort) };
+    NSDictionary *parameters = @{
+                                 @"sort": RKStringFromCommentSort(sort),
+                                 @"limit": @(limit),
+                                 };
     NSString *path = [NSString stringWithFormat:@"comments/%@.json", linkIdentifier];
     
-    return [self listingTaskWithPath:path parameters:parameters pagination:nil completion:completion];
+    return [self commentsListingTaskWithPath:path parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)moreComments:(RKMoreComments *)moreComments onLink:(RKLink *)link completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)moreComments:(RKMoreComments *)moreComments forLink:(RKLink *)link sort:(RKCommentSort)sort completion:(RKArrayCompletionBlock)completion
 {
     NSParameterAssert(moreComments);
+    NSParameterAssert(link);
+    NSParameterAssert(sort);
     
-    NSString *children = [moreComments.childIdentifiers componentsJoinedByString:@","];
-    NSDictionary *parameters = @{ @"children": children, @"link_id": link.fullName, @"api_type": @"json" };
+    // Example parameter data:
+    //
+    // link_id=t3_1t3epj
+    // children=ce3zlpt,ce40nud,ce42fe8,ce42h8q,ce438cc
+    // depth=
+    // id=t1_ce3zlpt
+    // pv_hex=
+    // r=gifs
     
-    return [self postPath:@"api/morechildren" parameters:parameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
-        if (error)
-        {
-            completion(nil, error);
-        }
-        else
-        {
-            NSArray *comments = [responseObject valueForKeyPath:@"json.data.things"];
-            completion(comments, nil);
-        }
-    }];
+    NSDictionary *parameters = @{@"link_id": link.fullName,
+                                 @"children": [moreComments.children componentsJoinedByString:@","],
+                                 @"depth": @"",
+                                 @"id": moreComments.fullName,
+                                 @"pv_hex": @"",
+                                 @"r": link.subreddit
+                                 };
+    
+    return [self postMoreCommentsListingTaskWithPath:@"api/morechildren.json" parameters:parameters completion:completion];
 }
 
 @end

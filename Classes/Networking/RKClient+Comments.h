@@ -22,8 +22,6 @@
 
 #import "RKClient.h"
 
-#import "RKMoreComments.h"
-
 typedef NS_ENUM(NSUInteger, RKCommentSort) {
         RKCommentSortTop = 1,
         RKCommentSortHot,
@@ -35,7 +33,7 @@ typedef NS_ENUM(NSUInteger, RKCommentSort) {
 
 extern NSString * RKStringFromCommentSort(RKCommentSort sort);
 
-@class RKLink, RKComment, RKMessage;
+@class RKLink, RKComment, RKMoreComments, RKMessage;
 
 @interface RKClient (Comments)
 
@@ -74,50 +72,44 @@ extern NSString * RKStringFromCommentSort(RKCommentSort sort);
 #pragma mark - Getting Comments
 
 /**
- Gets any comments on a link.
+ Gets any comments on a link. Defaults to RKCommentSortTop sort order.
  
  @param link The link.
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKComments, an RKPagination object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes two arguments: an array of RKComments and any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)commentsForLink:(RKLink *)link completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)commentsForLink:(RKLink *)link completion:(RKArrayCompletionBlock)completion;
 
 /**
- Gets any comments on a link.
+ Gets any comments on a link. Defaults to RKCommentSortTop sort order.
  
  @param linkIdentifier The identifier of the link.
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKComments, an RKPagination object, and any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes two arguments: an array of RKComments and any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier completion:(RKArrayCompletionBlock)completion;
 
 /**
- Gets any comments on a link with specified sort.
+ Gets any comments on a link with specified sort and limit.
  
  @param linkIdentifier The identifier of the link.
- @param sort The sort option from which to fetch comments. Defaults to RKCommentSortTop
- @param completion An optional block to be executed upon request completion. It takes three arguments: an array of RKComments, an RKPagination object, and any error that occurred.
+ @param sort The sort option from which to fetch comments.
+ @param limit Maximum number of comments to be retrieved in a single request.
+ @param completion An optional block to be executed upon request completion. It takes two arguments: an array of RKComments and any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier sort:(RKCommentSort)sort completion:(RKListingCompletionBlock)completion;
+- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier sort:(RKCommentSort)sort limit:(NSInteger)limit completion:(RKArrayCompletionBlock)completion;
+
 
 /**
- Gets comment data from an RKMoreComments object.
+ Gets "more" comments on a link with specified sort and limit.
  
- @param moreComments The RKMoreComments object for which to fetch comments.
- @param link The link the comment was posted in.
- @param completion An optional block to be executed upon request completion. It
-        takes two arguments: an array of comment data, and any error that
-        occurred.
+ @param moreComments RKMoreComments object containing an array of children comments referenced by identifer (e.g. ce40nud).
+ @param link The link.
+ @param sort The sort option from which to fetch comments.
+ @param completion An optional block to be executed upon request completion. It takes two arguments: an array of RKComments and any error that occurred.
  @return The NSURLSessionDataTask for the request.
- 
- @note This method does not return true RKComment objects. Because the API
-       response from reddit does not match that of actual comment objects, this
-       method instead returns the raw dictionaries from reddit's API. From there,
-       you will need to extract the comment identifiers and fetch each comment
-       individually. This is an unfortunate sacrifice until if or when reddit
-       improves their comment API.
  */
-- (NSURLSessionDataTask *)moreComments:(RKMoreComments *)moreComments onLink:(RKLink *)link completion:(RKArrayCompletionBlock)completion;
+- (NSURLSessionDataTask *)moreComments:(RKMoreComments *)moreComments forLink:(RKLink *)link sort:(RKCommentSort)sort completion:(RKArrayCompletionBlock)completion;
 
 @end

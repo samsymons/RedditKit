@@ -53,6 +53,77 @@
     }];
 }
 
+- (NSURLSessionDataTask *)postMoreCommentsListingTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKArrayCompletionBlock)completion
+{
+    NSParameterAssert(path);
+    
+    NSMutableDictionary *taskParameters = [NSMutableDictionary dictionary];
+    [taskParameters addEntriesFromDictionary:parameters];
+    
+    return [self postPath:path parameters:parameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!completion)
+            {
+                return;
+            }
+            
+            if (responseObject)
+            {
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    NSDictionary *response = responseObject;
+                    if ([responseObject isKindOfClass:[NSArray class]])
+                    {
+                        response = [responseObject lastObject];
+                    }
+                    
+                    NSArray *commentsAndMoreComments = [self objectsFromMoreCommentsListingResponse:response];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completion(commentsAndMoreComments, nil);
+                    });
+                });
+            }
+            else
+            {
+                completion(nil, error);
+            }
+        });
+    }];
+}
+
+- (NSURLSessionDataTask *)commentsListingTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKArrayCompletionBlock)completion
+{
+    NSParameterAssert(path);
+    
+    return [self fullListingWithPath:path parameters:parameters pagination:nil completion:^(id responseObject, NSError *error) {
+        if (!completion)
+        {
+            return;
+        }
+        
+        if (responseObject)
+        {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSDictionary *response = responseObject;
+                if ([responseObject isKindOfClass:[NSArray class]])
+                {
+                    response = [responseObject lastObject];
+                }
+                
+                NSArray *links = [self objectsFromListingResponse:response];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(links, nil);
+                });
+            });
+        }
+        else
+        {
+            completion(nil, error);
+        }
+    }];
+}
+
 - (NSURLSessionDataTask *)listingTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters pagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
 {
     NSParameterAssert(path);
@@ -224,6 +295,26 @@
     }
     
     NSArray *objectsAsJSON = listingResponse[@"data"][@"children"];
+    NSMutableArray *objects = [[NSMutableArray alloc] initWithCapacity:[objectsAsJSON count]];
+    
+    for (NSDictionary *objectJSON in objectsAsJSON)
+    {
+        id object = [RKObjectBuilder objectFromJSON:objectJSON];
+        
+        if (object)
+        {
+            [objects addObject:object];
+        }
+    }
+    
+    return [objects copy];
+}
+
+- (NSArray *)objectsFromMoreCommentsListingResponse:(NSDictionary *)listingResponse
+{
+    NSParameterAssert(listingResponse);
+    
+    NSArray *objectsAsJSON = listingResponse[@"json"][@"data"][@"things"];
     NSMutableArray *objects = [[NSMutableArray alloc] initWithCapacity:[objectsAsJSON count]];
     
     for (NSDictionary *objectJSON in objectsAsJSON)
