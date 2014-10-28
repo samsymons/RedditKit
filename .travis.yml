@@ -1,5 +1,7 @@
 language: objective-c
 before_install:
+  - brew update
+  - if brew outdated | grep -qx xctool; then brew upgrade xctool; fi
   - gem install cocoapods --no-rdoc --no-ri --no-document --quiet
   - cd Tests && pod install && cd $TRAVIS_BUILD_DIR
 script: rake test
