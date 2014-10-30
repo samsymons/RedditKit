@@ -1,5 +1,7 @@
 # inhibit_all_warnings!
 
+source 'https://github.com/CocoaPods/Specs.git'
+
 target :ios do
   platform :ios, '7.0'
   link_with 'Example'
