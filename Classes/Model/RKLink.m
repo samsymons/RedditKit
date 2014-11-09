@@ -110,7 +110,7 @@
 {
     return [MTLValueTransformer transformerWithBlock:^(NSString *URL) {
         NSString *unescapedURL = [URL stringByUnescapingHTMLEntities];
-        return [NSURL URLWithString:unescapedURL];
+        return [NSURL URLWithString:[unescapedURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }];
 }
 
