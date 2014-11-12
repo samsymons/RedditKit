@@ -17,8 +17,8 @@ RKMoreComments *moreCommentsObject = [MTLJSONAdapter modelOfClass:[RKMoreComment
 describe(@"initialization", ^{
     it(@"should create the object correctly", ^{
         expect(moreCommentsObject.count).to.equal(2);
-        expect(moreCommentsObject.parentFullName).to.equal(@"t1_ck724t6");
-        expect(moreCommentsObject.childIdentifiers).to.equal(@[@"ck74tch", @"ck78qib"]);
+        expect(moreCommentsObject.parentID).to.equal(@"t1_ck724t6");
+        expect(moreCommentsObject.children).to.equal(@[@"ck74tch", @"ck78qib"]);
     });
 });
 

@@ -38,7 +38,13 @@
         @"scoreHidden": @"data.score_hidden",
         @"replies": @"data.replies",
         @"edited": @"data.edited",
-        @"linkID": @"data.link_id"
+        @"linkID": @"data.link_id",
+        @"gilded": @"data.gilded",
+        @"parentID": @"data.parent_id",
+        @"subreddit": @"data.subreddit",
+        @"subredditID": @"data.subreddit_id"
+        //		@"totalReports": @"data.num_reports",          // not required for now.
+        //		@"distinguishedStatus": @"data.distinguished", // not required for now.
     };
     
     return [[super JSONKeyPathsByPropertyKey] mtl_dictionaryByAddingEntriesFromDictionary:keyPaths];
@@ -48,11 +54,11 @@
 {
     if (self.scoreHidden)
     {
-        return [NSString stringWithFormat:@"<%@: %p, full name: %@, author: %@, score hidden>", NSStringFromClass([self class]), self, self.fullName, self.author];
+        return [NSString stringWithFormat:@"<%@: %p, author: %@, parentID: %@, fullName: %@, replies: %lu>", NSStringFromClass([self class]), self, self.author, self.parentID, self.fullName, (unsigned long)self.replies.count];
     }
     else
     {
-        return [NSString stringWithFormat:@"<%@: %p, full name: %@, author: %@, score: %li>", NSStringFromClass([self class]), self, self.fullName, self.author, (long)self.score];
+        return [NSString stringWithFormat:@"<%@: %p, author: %@, parentID: %@, fullName: %@, replies: %lu>", NSStringFromClass([self class]), self, self.author, self.parentID, self.fullName, (unsigned long)self.replies.count];
     }
 }
 

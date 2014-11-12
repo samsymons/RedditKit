@@ -11,18 +11,18 @@
 @interface RKMoreComments : RKThing
 
 /**
- The number of comments referenced by this object.
+ Array of children comment identifiers represented by this RKMoreComment object.
  */
-@property (nonatomic, assign, readonly) NSUInteger count;
+@property (nonatomic, strong, readonly) NSArray *children;
 
 /**
- The full name of this object's parent, which is an RKComment object.
+ The total number of comments represented by all the children comments (and children's children's comments, etc. ad infinitum).
  */
-@property (nonatomic, strong, readonly) NSString *parentFullName;
+@property (nonatomic, assign, readonly) NSInteger count;
 
 /**
- The identifiers of the comments referenced by this object.
+ The identifier of the comment's parent, if it has one. (It will only have one if the comment is a reply.)
  */
-@property (nonatomic, strong, readonly) NSArray *childIdentifiers;
+@property (nonatomic, copy, readonly) NSString *parentID;
 
 @end
