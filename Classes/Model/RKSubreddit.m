@@ -68,7 +68,7 @@
 
 + (NSValueTransformer *)JSONTransformerForKey:(NSString *)key
 {
-    NSSet *keys = [NSSet setWithObjects:@"banned", @"contributor", @"moderator", @"subscriber", nil];
+    NSSet *keys = [NSSet setWithObjects:@"banned", @"contributor", @"moderator", @"subscriber", @"over18", @"trafficPagePubliclyAccessible", nil];
     if ([keys containsObject:key])
     {
         return [MTLValueTransformer transformerWithBlock:^id(id boolean) {
@@ -77,6 +77,13 @@
     }
     
     return nil;
+}
+
++ (NSValueTransformer *)totalSubscribersJSONTransformer
+{
+    return [MTLValueTransformer transformerWithBlock:^id(id value) {
+        return (!value || value == [NSNull null] ? @0 : value);
+    }];
 }
 
 + (NSValueTransformer *)accountsActiveJSONTransformer
@@ -130,7 +137,7 @@
     };
     
     return [MTLValueTransformer transformerWithBlock:^(NSString *type) {
-        return types[type];
+        return (!type || [type isEqual:[NSNull null]] ? @(RKSubmissionTypeAny) : types[type]);
     }];
 }
 
