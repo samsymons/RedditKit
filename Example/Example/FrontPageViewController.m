@@ -318,8 +318,10 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    self.currentCategory = ((RKSubredditCategory)buttonIndex + 1);
-    [self resetLinks];
+    if (buttonIndex < 5) {
+        self.currentCategory = ((RKSubredditCategory)buttonIndex + 1);
+        [self resetLinks];
+    }
 }
 
 @end
