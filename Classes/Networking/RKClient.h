@@ -88,6 +88,8 @@ extern NSString * const RKClientErrorDomain;
  @param username The user's username.
  @param password The user's password.
  @param completion The block to be executed upon completion of the request.
+ 
+ @note This method signs out the current client before attempting to sign in.
  */
 - (NSURLSessionDataTask *)signInWithUsername:(NSString *)username password:(NSString *)password completion:(RKCompletionBlock)completion;
 

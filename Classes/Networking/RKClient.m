@@ -102,6 +102,8 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
         return nil;
     }
     
+    [self signOut];
+    
     __weak __typeof(self)weakSelf = self;
     NSURLSessionDataTask *authenticationTask = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (error)
@@ -117,8 +119,8 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
             NSString *modhash = data[@"modhash"];
             NSString *sessionIdentifier = data[@"cookie"];
             
-            [weakSelf setModhash:modhash];
-            [weakSelf setSessionIdentifier:sessionIdentifier];
+            weakSelf.modhash = modhash;
+            weakSelf.sessionIdentifier = sessionIdentifier;
             
             [weakSelf currentUserWithCompletion:^(id object, NSError *error) {
                 weakSelf.currentUser = object;
