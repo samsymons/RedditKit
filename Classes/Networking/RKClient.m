@@ -102,6 +102,8 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
         return nil;
     }
     
+    // Login requests fail with 409 if an existing `reddit_session` cookie is included in the request.
+    [request setHTTPShouldHandleCookies:NO];
     [self signOut];
     
     __weak __typeof(self)weakSelf = self;
