@@ -103,6 +103,15 @@
     }];
 }
 
+- (NSURLSessionDataTask *)subredditsByFullNames:(NSString *)fullNames completion:(RKArrayCompletionBlock)completion
+{
+    NSParameterAssert(fullNames);
+    
+    NSDictionary *parameters = @{@"id": fullNames};
+    
+    return [self listingTaskWithPath:@"api/info.json" parameters:parameters completion:completion];
+}
+
 - (NSURLSessionDataTask *)recommendedSubredditsForSubreddits:(NSArray *)subreddits completion:(RKArrayCompletionBlock)completion
 {
     NSParameterAssert(subreddits);
