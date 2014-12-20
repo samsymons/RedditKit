@@ -89,7 +89,7 @@
                                  };
     NSString *path = [NSString stringWithFormat:@"comments/%@.json", linkIdentifier];
     
-    return [self commentsListingTaskWithPath:path parameters:parameters completion:completion];
+    return [self listingTaskWithPath:path parameters:parameters completion:completion];
 }
 
 - (NSURLSessionDataTask *)moreComments:(RKMoreComments *)moreComments forLink:(RKLink *)link sort:(RKCommentSortingMethod)sort completion:(RKArrayCompletionBlock)completion
