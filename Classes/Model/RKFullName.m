@@ -12,6 +12,8 @@
 
 - (instancetype)initWithFullName:(NSString *)fullName
 {
+    NSParameterAssert(fullName);
+    
     if (self = [super init])
     {
         _fullName = fullName;
@@ -26,6 +28,8 @@
         NSArray *components = [[self fullName] componentsSeparatedByString:@"_"];
         return components.lastObject;
     }
+    
+    return nil;
 }
 
 - (BOOL)isValid
