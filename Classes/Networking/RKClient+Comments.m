@@ -22,6 +22,7 @@
 
 #import "RKClient+Comments.h"
 #import "RKClient+Requests.h"
+#import "RKFullName.h"
 #import "RKLink.h"
 #import "RKComment.h"
 #import "RKMoreComments.h"
@@ -94,10 +95,11 @@ NSString * RKStringFromCommentSort(RKCommentSort sort)
 
 - (NSURLSessionDataTask *)context:(NSUInteger)context forComment:(RKComment *)comment completion:(RKArrayCompletionBlock)completion;
 {
-    return [self context:context forCommentWithIdentifier:comment.identifier linkIdentifier:comment.linkID completion:completion];
+    RKFullName *fullName = [[RKFullName alloc] initWithFullName:comment.linkID];
+    return [self context:context forCommentWithIdentifier:comment.identifier linkIdentifier:[fullName identifier] completion:completion];
 }
 
-- (NSURLSessionDataTask *)contextForCommentWithIdentifier:(NSString *)commentIdentifier linkIdentifier:(NSString *)linkIdentifier context:(NSUInteger)context completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)context:(NSUInteger)context forCommentWithIdentifier:(NSString *)commentIdentifier linkIdentifier:(NSString *)linkIdentifier completion:(RKArrayCompletionBlock)completion
 {
     NSString *path = [NSString stringWithFormat:@"http://www.reddit.com/comments/%@/_/%@.json", linkIdentifier, commentIdentifier];
     NSDictionary *parameters = @{ @"context": @(context) };
