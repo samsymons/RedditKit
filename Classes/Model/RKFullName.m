@@ -35,7 +35,7 @@
     NSString *pattern = @"t[0-9]_.+";
     NSRegularExpression *expression = [NSRegularExpression regularExpressionWithPattern:pattern options:kNilOptions error:&error];
     
-    if (error)
+    if (error || self.fullName == nil)
     {
         return NO;
     }

@@ -23,7 +23,7 @@ RKLink *nonImageLink = [MTLJSONAdapter modelOfClass:[RKLink class] fromJSONDicti
 describe(@"initialization", ^{
     it(@"should create the object correctly", ^{
         expect(imageLink.domain).to.equal(@"imgur.com");
-        expect(imageLink.URL).to.equal(@"http://imgur.com/a/RDBz8");
+        expect(imageLink.URL).to.equal([NSURL URLWithString:@"http://example.com/test.png"]);
         expect(imageLink.upvoteRatio).to.equal(0.95);
     });
     
@@ -32,7 +32,7 @@ describe(@"initialization", ^{
         expect(imageLink.media.type).to.equal(@"imgur.com");
     });
     
-    fit(@"accepts Unicode characters", ^{
+    it(@"accepts Unicode characters", ^{
         NSError *unicodeError = nil;
         NSDictionary *unicodeJSON = [RKSpecHelper JSONFromLocalFileWithName:@"unicode-link"];
         RKLink *unicodeLink = [MTLJSONAdapter modelOfClass:[RKLink class] fromJSONDictionary:unicodeJSON error:&unicodeError];
