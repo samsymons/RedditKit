@@ -100,6 +100,26 @@ extern NSString * RKStringFromCommentSort(RKCommentSort sort);
  */
 - (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier sort:(RKCommentSort)sort limit:(NSInteger)limit completion:(RKArrayCompletionBlock)completion;
 
+/**
+ Gets the context for a given comment.
+ 
+ @param context The depth of the context. e.g., if this value is set to two, the API will return comments two levels up.
+ @param comment The comment for which to fetch context.
+ @param completion An optional block to be executed upon request completion. It takes two arguments: an array of RKComments and any error that occurred.
+ @return The NSURLSessionDataTask for the request.
+ */
+- (NSURLSessionDataTask *)context:(NSUInteger)context forComment:(RKComment *)comment completion:(RKArrayCompletionBlock)completion;
+
+/**
+ Gets the context for a given comment.
+ 
+ @param context The depth of the context. e.g., if this value is set to two, the API will return comments two levels up.
+ @param commentIdentifier The identifier of the comment for which to fetch context.
+ @param linkIdentifier The identifier of the link to which the comment was posted.
+ @param completion An optional block to be executed upon request completion. It takes two arguments: an array of RKComments and any error that occurred.
+ @return The NSURLSessionDataTask for the request.
+ */
+- (NSURLSessionDataTask *)context:(NSUInteger)context forCommentWithIdentifier:(NSString *)commentIdentifier linkIdentifier:(NSString *)linkIdentifier completion:(RKArrayCompletionBlock)completion;
 
 /**
  Gets "more" comments on a link with specified sort and limit.

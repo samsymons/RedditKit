@@ -92,6 +92,19 @@ NSString * RKStringFromCommentSort(RKCommentSort sort)
     return [self commentsForLinkWithIdentifier:linkIdentifier sort:RKCommentSortTop limit:DEFAULT_COMMENT_LIMIT completion:completion];
 }
 
+- (NSURLSessionDataTask *)context:(NSUInteger)context forComment:(RKComment *)comment completion:(RKArrayCompletionBlock)completion;
+{
+    return [self context:context forCommentWithIdentifier:comment.identifier linkIdentifier:comment.linkID completion:completion];
+}
+
+- (NSURLSessionDataTask *)contextForCommentWithIdentifier:(NSString *)commentIdentifier linkIdentifier:(NSString *)linkIdentifier context:(NSUInteger)context completion:(RKArrayCompletionBlock)completion
+{
+    NSString *path = [NSString stringWithFormat:@"http://www.reddit.com/comments/%@/_/%@.json", linkIdentifier, commentIdentifier];
+    NSDictionary *parameters = @{ @"context": @(context) };
+    
+    return [self commentsListingTaskWithPath:path parameters:parameters completion:completion];
+}
+
 - (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier sort:(RKCommentSort)sort limit:(NSInteger)limit completion:(RKArrayCompletionBlock)completion
 {
     NSParameterAssert(linkIdentifier);
