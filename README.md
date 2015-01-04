@@ -180,6 +180,8 @@ ARC is required. For projects that don't use ARC, you can set the `-fobjc-arc` c
 
 [SAMCategories](https://github.com/soffes/SAMCategories) by Sam Soffes is used for unescaping HTML entities in reddit link titles.
 
+Also, a big thanks to [all of the contributors](https://github.com/samsymons/RedditKit/graphs/contributors) to RedditKit.
+
 ## Need Help?
 
 Open an [issue](https://github.com/samsymons/RedditKit/issues), or hit me up on [Twitter](http://twitter.com/sam_symons).
