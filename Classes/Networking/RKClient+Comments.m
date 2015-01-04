@@ -29,34 +29,6 @@
 
 #define DEFAULT_COMMENT_LIMIT 200
 
-NSString * RKStringFromCommentSort(RKCommentSort sort)
-{
-    switch (sort)
-    {
-        case RKCommentSortTop:
-            return @"top";
-            break;
-        case RKCommentSortHot:
-            return @"hot";
-            break;
-        case RKCommentSortNew:
-            return @"new";
-            break;
-        case RKCommentSortControversial:
-            return @"controversial";
-            break;
-        case RKCommentSortOld:
-            return @"old";
-            break;
-        case RKCommentSortBest:
-            return @"confidence";
-            break;
-        default:
-            return @"top";
-            break;
-	}
-}
-
 @implementation RKClient (Comments)
 
 #pragma mark - Submitting Comments
@@ -85,12 +57,12 @@ NSString * RKStringFromCommentSort(RKCommentSort sort)
 
 - (NSURLSessionDataTask *)commentsForLink:(RKLink *)link completion:(RKArrayCompletionBlock)completion
 {
-    return [self commentsForLinkWithIdentifier:link.identifier sort:RKCommentSortTop limit:DEFAULT_COMMENT_LIMIT completion:completion];
+    return [self commentsForLinkWithIdentifier:link.identifier sort:RKCommentSortingMethodTop limit:DEFAULT_COMMENT_LIMIT completion:completion];
 }
 
 - (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier completion:(RKArrayCompletionBlock)completion
 {
-    return [self commentsForLinkWithIdentifier:linkIdentifier sort:RKCommentSortTop limit:DEFAULT_COMMENT_LIMIT completion:completion];
+    return [self commentsForLinkWithIdentifier:linkIdentifier sort:RKCommentSortingMethodTop limit:DEFAULT_COMMENT_LIMIT completion:completion];
 }
 
 - (NSURLSessionDataTask *)context:(NSUInteger)context forComment:(RKComment *)comment completion:(RKArrayCompletionBlock)completion;
@@ -107,12 +79,12 @@ NSString * RKStringFromCommentSort(RKCommentSort sort)
     return [self commentsListingTaskWithPath:path parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier sort:(RKCommentSort)sort limit:(NSInteger)limit completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier sort:(RKCommentSortingMethod)sort limit:(NSInteger)limit completion:(RKArrayCompletionBlock)completion
 {
     NSParameterAssert(linkIdentifier);
     
     NSDictionary *parameters = @{
-                                 @"sort": RKStringFromCommentSort(sort),
+                                 @"sort": RKStringFromCommentSortingMethod(sort),
                                  @"limit": @(limit),
                                  };
     NSString *path = [NSString stringWithFormat:@"comments/%@.json", linkIdentifier];
@@ -120,7 +92,7 @@ NSString * RKStringFromCommentSort(RKCommentSort sort)
     return [self commentsListingTaskWithPath:path parameters:parameters completion:completion];
 }
 
-- (NSURLSessionDataTask *)moreComments:(RKMoreComments *)moreComments forLink:(RKLink *)link sort:(RKCommentSort)sort completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)moreComments:(RKMoreComments *)moreComments forLink:(RKLink *)link sort:(RKCommentSortingMethod)sort completion:(RKArrayCompletionBlock)completion
 {
     NSParameterAssert(moreComments);
     NSParameterAssert(link);

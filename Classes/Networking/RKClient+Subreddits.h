@@ -21,8 +21,6 @@
 // THE SOFTWARE.
 
 #import "RKClient.h"
-#import "RKCompletionBlocks.h"
-#import "RKPagination.h"
 
 @class RKSubreddit;
 

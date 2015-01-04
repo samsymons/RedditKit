@@ -22,6 +22,7 @@
 
 #import "AFHTTPSessionManager.h"
 #import "RKCompletionBlocks.h"
+#import "RKPagination.h"
 
 extern NSString * const RKClientErrorDomain;
 

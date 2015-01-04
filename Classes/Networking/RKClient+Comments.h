@@ -22,17 +22,6 @@
 
 #import "RKClient.h"
 
-typedef NS_ENUM(NSUInteger, RKCommentSort) {
-        RKCommentSortTop = 1,
-        RKCommentSortHot,
-        RKCommentSortNew,
-        RKCommentSortControversial,
-        RKCommentSortOld,
-        RKCommentSortBest
-};
-
-extern NSString * RKStringFromCommentSort(RKCommentSort sort);
-
 @class RKLink, RKComment, RKMoreComments, RKMessage;
 
 @interface RKClient (Comments)
@@ -98,7 +87,7 @@ extern NSString * RKStringFromCommentSort(RKCommentSort sort);
  @param completion An optional block to be executed upon request completion. It takes two arguments: an array of RKComments and any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier sort:(RKCommentSort)sort limit:(NSInteger)limit completion:(RKArrayCompletionBlock)completion;
+- (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier sort:(RKCommentSortingMethod)sort limit:(NSInteger)limit completion:(RKArrayCompletionBlock)completion;
 
 /**
  Gets the context for a given comment.
@@ -130,6 +119,6 @@ extern NSString * RKStringFromCommentSort(RKCommentSort sort);
  @param completion An optional block to be executed upon request completion. It takes two arguments: an array of RKComments and any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)moreComments:(RKMoreComments *)moreComments forLink:(RKLink *)link sort:(RKCommentSort)sort completion:(RKArrayCompletionBlock)completion;
+- (NSURLSessionDataTask *)moreComments:(RKMoreComments *)moreComments forLink:(RKLink *)link sort:(RKCommentSortingMethod)sort completion:(RKArrayCompletionBlock)completion;
 
 @end
