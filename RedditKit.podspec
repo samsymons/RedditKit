@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RedditKit"
-  s.version      = "1.3.0"
+  s.version      = "1.4.0"
   s.summary      = "An Objective-C wrapper for the reddit API."
   s.homepage     = "http://redditkit.com/"
   s.social_media_url = "https://twitter.com/sam_symons"
