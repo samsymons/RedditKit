@@ -1,3 +1,7 @@
+## 1.4
+
+* Add support for getting comment context.
+
 ## 1.3
 
 * Improved error handling, thanks to Rick Harrison.
