@@ -167,7 +167,7 @@ If you do not set one manually, the user agent will be provided by [AFNetworking
 
 ## Requirements
 
-RedditKit requires either iOS 7.0+ or Mac OS X 10.9+. Xcode 5 is required in order to run its test suite.
+RedditKit requires either iOS 7.0+ or Mac OS X 10.9+. Xcode 5 or greater is required in order to run its test suite.
 
 ARC is required. For projects that don't use ARC, you can set the `-fobjc-arc` compiler flag on the RedditKit source files.
 
