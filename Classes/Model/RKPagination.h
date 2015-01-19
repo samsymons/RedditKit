@@ -49,7 +49,7 @@ extern NSString * RKStringFromCommentSortingMethod(RKCommentSortingMethod sortin
 extern NSString * RKStringFromTimeSortingMethod(RKTimeSortingMethod sortingMethod);
 extern NSString * RKStringFromUserContentSortingMethod(RKUserContentSortingMethod sortingMethod);
 
-@interface RKPagination : NSObject
+@interface RKPagination : NSObject <NSSecureCoding>
 
 /*
  The total number of things to return. This is 25 by default, and limited to 100.

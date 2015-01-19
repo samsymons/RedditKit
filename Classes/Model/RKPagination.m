@@ -175,4 +175,30 @@ NSString * RKStringFromUserContentSortingMethod(RKUserContentSortingMethod sorti
     return [parameters copy];
 }
 
+#pragma mark - NSSecureCoding
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super init]) {
+        _limit = [[decoder decodeObjectOfClass:[NSNumber class] forKey:@"limit"] unsignedIntegerValue];
+        _before = [decoder decodeObjectOfClass:[NSString class] forKey:@"before"];
+        _after = [decoder decodeObjectOfClass:[NSString class] forKey:@"after"];
+        _commentSortingMethod = [[decoder decodeObjectOfClass:[NSNumber class] forKey:@"commentSortingMethod"] unsignedIntegerValue];
+        _userContentSortingMethod = [[decoder decodeObjectOfClass:[NSNumber class] forKey:@"userContentSortingMethod"] unsignedIntegerValue];
+        _timeMethod = [[decoder decodeObjectOfClass:[NSNumber class] forKey:@"timeMethod"] unsignedIntegerValue];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:@(self.limit) forKey:@"limit"];
+    [coder encodeObject:self.before forKey:@"before"];
+    [coder encodeObject:self.after forKey:@"after"];
+    [coder encodeObject:@(self.commentSortingMethod) forKey:@"commentSortingMethod"];
+    [coder encodeObject:@(self.userContentSortingMethod) forKey:@"userContentSortingMethod"];
+    [coder encodeObject:@(self.timeMethod) forKey:@"timeMethod"];
+}
+
 @end
