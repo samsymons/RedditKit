@@ -177,6 +177,11 @@ NSString * RKStringFromUserContentSortingMethod(RKUserContentSortingMethod sorti
 
 #pragma mark - NSSecureCoding
 
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+}
+
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if (self = [super init]) {
