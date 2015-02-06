@@ -51,6 +51,7 @@
         @"hidden": @"data.hidden",
         @"NSFW": @"data.over_18",
         @"edited": @"data.edited",
+        @"archived": @"data.archived",
         @"upvoteRatio": @"data.upvote_ratio",
         @"gilded": @"data.gilded",
         @"thumbnailURL": @"data.thumbnail",

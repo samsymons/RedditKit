@@ -38,6 +38,7 @@
         @"scoreHidden": @"data.score_hidden",
         @"replies": @"data.replies",
         @"edited": @"data.edited",
+        @"archived": @"data.archived",
         @"linkID": @"data.link_id",
         @"gilded": @"data.gilded",
         @"parentID": @"data.parent_id",

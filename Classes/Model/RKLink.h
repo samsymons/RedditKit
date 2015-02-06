@@ -79,6 +79,11 @@
 @property (nonatomic, assign, readonly) NSUInteger gilded;
 
 /**
+ Whether the link has been archived.
+ */
+@property (nonatomic, assign, readonly, getter=isArchived) BOOL archived;
+
+/**
  Whether the link has been distinguished by a moderator or admin.
  This will either be set to 'yes', 'no', 'admin', 'special' or nil.
  More information here: http://www.reddit.com/r/redditdev/comments/19ak1b/api_change_distinguished_is_now_available_in_the/
@@ -103,7 +108,7 @@
 /**
  Whether the link has been marked NSFW.
  */
-@property (nonatomic, assign, readonly, getter = isNSFW) BOOL NSFW;
+@property (nonatomic, assign, readonly, getter=isNSFW) BOOL NSFW;
 
 /**
  Whether the link has been saved by the current user.

@@ -74,6 +74,11 @@ typedef NS_ENUM(NSUInteger, RKDistinguishedStatus) {
 @property (nonatomic, assign, readonly) NSUInteger gilded;
 
 /**
+ Whether the comment has been archived.
+ */
+@property (nonatomic, assign, readonly, getter=isArchived) BOOL archived;
+
+/**
  The identifier of the link to which this comment was posted.
  */
 @property (nonatomic, copy, readonly) NSString *linkID;
