@@ -39,6 +39,7 @@
         @"replies": @"data.replies",
         @"edited": @"data.edited",
         @"archived": @"data.archived",
+        @"saved": @"data.saved",
         @"linkID": @"data.link_id",
         @"gilded": @"data.gilded",
         @"parentID": @"data.parent_id",

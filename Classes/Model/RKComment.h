@@ -79,6 +79,11 @@ typedef NS_ENUM(NSUInteger, RKDistinguishedStatus) {
 @property (nonatomic, assign, readonly, getter=isArchived) BOOL archived;
 
 /**
+ Whether the comment has been saved by the current user.
+ */
+@property (nonatomic, assign, readonly, getter=isSaved) BOOL saved;
+
+/**
  The identifier of the link to which this comment was posted.
  */
 @property (nonatomic, copy, readonly) NSString *linkID;
