@@ -104,10 +104,21 @@ typedef NS_ENUM(NSUInteger, RKDistinguishedStatus) {
 @property (nonatomic, copy, readonly) NSString *parentID;
 
 /**
+ The score of the comment.
+ */
+@property (nonatomic, assign, readonly) NSUInteger score;
+
+/**
  Whether the score of this comment is currently hidden.
  Some subreddits hide the scores of new comments for a short period of time, to prevent voting from being skewed via the bandwagon effect.
  */
 @property (nonatomic, assign, readonly) BOOL scoreHidden;
+
+/**
+ The controversiality of the comment.
+ This is currently an integer which is either 1 or 0, but may be expanded in the future.
+ */
+@property (nonatomic, assign, readonly) NSUInteger controversiality;
 
 /**
  The name of the subreddit to which this comment was posted.

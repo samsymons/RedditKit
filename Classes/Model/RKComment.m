@@ -42,6 +42,8 @@
         @"saved": @"data.saved",
         @"linkID": @"data.link_id",
         @"gilded": @"data.gilded",
+        @"score": @"data.score",
+        @"controversiality": @"controversiality",
         @"parentID": @"data.parent_id",
         @"subreddit": @"data.subreddit",
         @"subredditID": @"data.subreddit_id"
