@@ -54,14 +54,7 @@
 
 - (NSString *)description
 {
-    if (self.scoreHidden)
-    {
-        return [NSString stringWithFormat:@"<%@: %p, author: %@, parentID: %@, fullName: %@, replies: %lu>", NSStringFromClass([self class]), self, self.author, self.parentID, self.fullName, (unsigned long)self.replies.count];
-    }
-    else
-    {
-        return [NSString stringWithFormat:@"<%@: %p, author: %@, parentID: %@, fullName: %@, replies: %lu>", NSStringFromClass([self class]), self, self.author, self.parentID, self.fullName, (unsigned long)self.replies.count];
-    }
+    return [NSString stringWithFormat:@"<%@: %p, author: %@, parentID: %@, fullName: %@, replies: %lu>", NSStringFromClass([self class]), self, self.author, self.parentID, self.fullName, (unsigned long)self.replies.count];
 }
 
 - (BOOL)isDeleted
@@ -90,10 +83,6 @@
             if (!error)
             {
                 [comments addObject:model];
-            }
-            else
-            {
-                NSLog(@"Failed to build comment reply: %@", error);
             }
         }
         
