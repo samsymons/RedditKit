@@ -106,7 +106,7 @@ typedef NS_ENUM(NSUInteger, RKDistinguishedStatus) {
 /**
  The score of the comment.
  */
-@property (nonatomic, assign, readonly) NSUInteger score;
+@property (nonatomic, assign, readonly) NSInteger score;
 
 /**
  Whether the score of this comment is currently hidden.
