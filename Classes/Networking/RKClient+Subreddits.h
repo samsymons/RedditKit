@@ -92,6 +92,13 @@
  */
 - (NSURLSessionDataTask *)randomSubredditWithCompletion:(RKObjectCompletionBlock)completion;
 
+/**
+ Gets a random NSFW subreddit.
+
+ @param completion An optional block to be executed on the completion of a request. Its object parameter is an RKSubreddit object.
+ */
+- (NSURLSessionDataTask *)randomNSFWSubredditWithCompletion:(RKObjectCompletionBlock)completion;
+
 #pragma mark - Subscribing
 
 /**

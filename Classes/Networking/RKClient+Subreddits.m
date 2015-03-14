@@ -160,6 +160,28 @@
     }];
 }
 
+- (NSURLSessionDataTask *)randomNSFWSubredditWithCompletion:(RKObjectCompletionBlock)completion
+{
+	return [self getPath:@"r/randnsfw" parameters:nil completion:^(NSHTTPURLResponse *response, NSArray *responseObject, NSError *error) {
+		if (!completion)
+		{
+			return;
+		}
+
+		if (error)
+		{
+			completion(nil, error);
+		}
+		else
+		{
+			NSURL *subredditURL = response.URL;
+			NSString *subredditName = [subredditURL lastPathComponent];
+
+			[self subredditWithName:subredditName completion:completion];
+		}
+	}];
+}
+
 #pragma mark - Subscribing
 
 - (NSURLSessionDataTask *)subscribeToSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
