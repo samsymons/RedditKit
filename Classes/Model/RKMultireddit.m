@@ -34,7 +34,11 @@
 {
     NSDictionary *keyPaths = @{
         @"name": @"data.name",
+        @"displayName": @"data.display_name",
         @"path": @"data.path",
+        @"descriptionHTML": @"data.description_html",
+        @"descriptionMarkdown": @"data.description_md",
+        @"copiedFrom": @"data.copied_from",
         @"editable": @"data.can_edit",
         @"subreddits": @"data.subreddits",
         @"visibility": @"data.visibility",

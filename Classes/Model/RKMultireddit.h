@@ -35,9 +35,30 @@ typedef NS_ENUM(NSUInteger, RKMultiredditVisibility) {
 @property (nonatomic, copy, readonly) NSString *name;
 
 /**
+ The multireddit's display name. This is identical to the `name` property.
+ */
+@property (nonatomic, copy, readonly) NSString *displayName;
+
+/**
  The multireddit's path, in the format of '/user/username/m/multiredditname'.
  */
 @property (nonatomic, copy, readonly) NSString *path;
+
+/**
+ The multireddit's description, formatted as HTML.
+ */
+@property (nonatomic, copy, readonly) NSString *descriptionHTML;
+
+/**
+ The multireddit's description, formatted as Markdown.
+ */
+@property (nonatomic, copy, readonly) NSString *descriptionMarkdown;
+
+/**
+ The path of the multireddit which this one was copied from.
+ This will be nil if the multireddit was not copied from any other.
+ */
+@property (nonatomic, copy, readonly) NSString *copiedFrom;
 
 /**
  The multireddit's subreddits. The array contains NSStrings, each of which is a multireddit name.
