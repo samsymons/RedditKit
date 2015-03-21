@@ -91,7 +91,7 @@
     }];
 }
 
-- (NSURLSessionDataTask *)commentsListingTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKArrayCompletionBlock)completion
+- (NSURLSessionDataTask *)listingTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKArrayCompletionBlock)completion
 {
     NSParameterAssert(path);
     
@@ -110,11 +110,11 @@
                     response = [responseObject lastObject];
                 }
                 
-                NSArray *links = [self objectsFromListingResponse:response];
+                NSArray *objects = [self objectsFromListingResponse:response];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    completion(links, nil);
-                });
+                    completion(objects, nil);
+				});
             });
         }
         else
