@@ -70,6 +70,14 @@
 - (NSURLSessionDataTask *)subredditsByTopic:(NSString *)topic completion:(RKArrayCompletionBlock)completion;
 
 /**
+ Gets a list of subreddits from their fullnames.
+ 
+ @param fullNames An array of subreddit fullnames.
+ @param completion An optional block to be executed on the completion of a request. Its collection parameter contains RKSubreddit objects.
+ */
+- (NSURLSessionDataTask *)subredditsByFullNames:(NSArray *)subredditFullNames completion:(RKArrayCompletionBlock)completion;
+
+/**
  Gets a list of recommended subreddits from an array of subreddit names.
  
  @param subreddits An array of NSStrings, each representing the name of a subreddit.
