@@ -76,7 +76,7 @@
     NSString *path = [NSString stringWithFormat:@"http://www.reddit.com/comments/%@/_/%@.json", linkIdentifier, commentIdentifier];
     NSDictionary *parameters = @{ @"context": @(context) };
     
-    return [self commentsListingTaskWithPath:path parameters:parameters completion:completion];
+    return [self listingTaskWithPath:path parameters:parameters completion:completion];
 }
 
 - (NSURLSessionDataTask *)commentsForLinkWithIdentifier:(NSString *)linkIdentifier sort:(RKCommentSortingMethod)sort limit:(NSInteger)limit completion:(RKArrayCompletionBlock)completion
@@ -89,7 +89,7 @@
                                  };
     NSString *path = [NSString stringWithFormat:@"comments/%@.json", linkIdentifier];
     
-    return [self commentsListingTaskWithPath:path parameters:parameters completion:completion];
+	return [self listingTaskWithPath:path parameters:parameters completion:completion];
 }
 
 - (NSURLSessionDataTask *)moreComments:(RKMoreComments *)moreComments forLink:(RKLink *)link sort:(RKCommentSortingMethod)sort completion:(RKArrayCompletionBlock)completion
