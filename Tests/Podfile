@@ -4,7 +4,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 def import_pods
   pod 'RedditKit', :path => '../'
-  pod 'Specta', :git => 'https://github.com/specta/specta.git', :tag => 'v0.3.0.beta1'
+  pod 'Specta', '~> 0.4'
   pod 'Expecta', '~> 0.3'
 end
 
