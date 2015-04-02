@@ -147,4 +147,34 @@ typedef NS_ENUM(NSUInteger, RKDistinguishedStatus) {
  */
 - (BOOL)isDeleted;
 
+/**
+ Note: This data is only sent back from reddit's API as a response to submitting a new comment.
+ 
+ The body text of the comment, as Markdown.
+ */
+@property (nonatomic, copy, readonly) NSString *submissionContentText;
+
+/**
+ Note: This data is only sent back from reddit's API as a response to submitting a new comment.
+ 
+ The body text of the comment, as HTML.
+ */
+@property (nonatomic, copy, readonly) NSString *submissionContentHTML;
+
+/**
+ Note: This data is only sent back from reddit's API as a response to submitting a new comment.
+ 
+ The identifier of the link to which this comment was posted.
+ */
+@property (nonatomic, copy, readonly) NSString *submissionLink;
+
+/**
+ Note: This data is only sent back from reddit's API as a response to submitting a new comment.
+ 
+ The identifier of the comment's parent. It can be the link if it's a top-level comment. Otherwise
+ the parent can be a comment, if it's a reply.
+ */
+@property (nonatomic, copy, readonly) NSString *submissionParent;
+
+
 @end

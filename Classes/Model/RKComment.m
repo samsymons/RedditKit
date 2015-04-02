@@ -46,7 +46,11 @@
         @"controversiality": @"controversiality",
         @"parentID": @"data.parent_id",
         @"subreddit": @"data.subreddit",
-        @"subredditID": @"data.subreddit_id"
+        @"subredditID": @"data.subreddit_id",
+		@"submissionContentText": @"data.contentText", // Note: This data is only sent back from reddit's API as a response to submitting a new comment.
+		@"submissionContentHTML": @"data.contentHTML", // Note: This data is only sent back from reddit's API as a response to submitting a new comment.
+		@"submissionLink": @"data.link", // Note: This data is only sent back from reddit's API as a response to submitting a new comment.
+		@"submissionParent": @"data.parent" // Note: This data is only sent back from reddit's API as a response to submitting a new comment.
         //		@"totalReports": @"data.num_reports",          // not required for now.
         //		@"distinguishedStatus": @"data.distinguished", // not required for now.
     };
@@ -56,7 +60,13 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p, author: %@, parentID: %@, fullName: %@, replies: %lu>", NSStringFromClass([self class]), self, self.author, self.parentID, self.fullName, (unsigned long)self.replies.count];
+	// The following is just a way to show the content of a comment that represents either a "real" comment vs. a "submission" comment response received
+	// after calling the submitComment:onThingWithFullName:forLink:finished: API. I'm totally open to another approach if anyone has any suggestions
+	// and/or is familiar with what I'm talking about.
+	NSString *parentIDString = self.parentID ? @"parentID" : @"parent";
+	NSString *fullNameIDString = self.parentID ? @"fullName" : @"identifier";
+	
+	return [NSString stringWithFormat:@"<%@: %p, author: %@, %@: %@, %@: %@, replies: %lu>", NSStringFromClass([self class]), self, self.author, parentIDString, self.parentID ? self.submissionParent : self.submissionParent, fullNameIDString, self.parentID ? self.fullName : self.identifier, (unsigned long)self.replies.count];
 }
 
 - (BOOL)isDeleted
