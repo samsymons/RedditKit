@@ -52,12 +52,30 @@
 
 - (NSURLSessionDataTask *)saveLink:(RKLink *)link completion:(RKCompletionBlock)completion
 {
-    return [self saveLinkOrCommentWithFullName:[link fullName] completion:completion];
+    return [self saveLinkOrCommentWithFullName:[link fullName] completion:^(NSError *error) {
+        if (!error) {
+            RKLink *newLink = [RKLink modelWithDictionary:@{ @"saved": @YES } error:nil];
+            [link mergeValueForKey:@"saved" fromModel:newLink];
+        }
+        
+        if (completion) {
+            completion(error);
+        }
+    }];
 }
 
 - (NSURLSessionDataTask *)saveComment:(RKComment *)comment completion:(RKCompletionBlock)completion
 {
-    return [self saveLinkOrCommentWithFullName:[comment fullName] completion:completion];
+    return [self saveLinkOrCommentWithFullName:[comment fullName] completion:^(NSError *error) {
+        if (!error) {
+            RKLink *object = [RKLink modelWithDictionary:@{ @"saved": @YES } error:nil];
+            [comment mergeValueForKey:@"saved" fromModel:object];
+        }
+        
+        if (completion) {
+            completion(error);
+        }
+    }];
 }
 
 - (NSURLSessionDataTask *)saveLinkOrCommentWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
@@ -70,12 +88,30 @@
 
 - (NSURLSessionDataTask *)unsaveLink:(RKLink *)link completion:(RKCompletionBlock)completion
 {
-    return [self unsaveLinkOrCommentWithFullName:[link fullName] completion:completion];
+    return [self unsaveLinkOrCommentWithFullName:[link fullName] completion:^(NSError *error) {
+        if (!error) {
+            RKLink *object = [RKLink modelWithDictionary:@{ @"saved": @NO } error:nil];
+            [link mergeValueForKey:@"saved" fromModel:object];
+        }
+        
+        if (completion) {
+            completion(error);
+        }
+    }];
 }
 
 - (NSURLSessionDataTask *)unsaveComment:(RKComment *)comment completion:(RKCompletionBlock)completion
 {
-    return [self unsaveLinkOrCommentWithFullName:[comment fullName] completion:completion];
+    return [self unsaveLinkOrCommentWithFullName:[comment fullName] completion:^(NSError *error) {
+        if (!error) {
+            RKLink *object = [RKLink modelWithDictionary:@{ @"saved": @NO } error:nil];
+            [comment mergeValueForKey:@"saved" fromModel:object];
+        }
+        
+        if (completion) {
+            completion(error);
+        }
+    }];
 }
 
 - (NSURLSessionDataTask *)unsaveLinkOrCommentWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion

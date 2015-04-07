@@ -284,7 +284,16 @@ NSString * RKStringFromSubredditCategory(RKSubredditCategory category)
 
 - (NSURLSessionDataTask *)hideLink:(RKLink *)link completion:(RKCompletionBlock)completion
 {
-    return [self hideLinkWithFullName:[link fullName] completion:completion];
+    return [self hideLinkWithFullName:[link fullName] completion:^(NSError *error) {
+        if (!error) {
+            RKLink *object = [RKLink modelWithDictionary:@{ @"hidden": @YES } error:nil];
+            [link mergeValueForKey:@"hidden" fromModel:object];
+        }
+        
+        if (completion) {
+            completion(error);
+        }
+    }];
 }
 
 - (NSURLSessionDataTask *)hideLinkWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
@@ -297,7 +306,16 @@ NSString * RKStringFromSubredditCategory(RKSubredditCategory category)
 
 - (NSURLSessionDataTask *)unhideLink:(RKLink *)link completion:(RKCompletionBlock)completion
 {
-    return [self unhideLinkWithFullName:[link fullName] completion:completion];
+    return [self unhideLinkWithFullName:[link fullName] completion:^(NSError *error) {
+        if (!error) {
+            RKLink *object = [RKLink modelWithDictionary:@{ @"hidden": @NO } error:nil];
+            [link mergeValueForKey:@"hidden" fromModel:object];
+        }
+        
+        if (completion) {
+            completion(error);
+        }
+    }];
 }
 
 - (NSURLSessionDataTask *)unhideLinkWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
