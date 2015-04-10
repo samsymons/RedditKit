@@ -29,23 +29,23 @@
 
 #pragma mark - Editing
 
-- (NSURLSessionDataTask *)editSelfPost:(RKLink *)link newText:(NSString *)text completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)editSelfPost:(RKLink *)link newText:(NSString *)text completion:(RKObjectCompletionBlock)completion
 {
     return [self editSelfPostOrCommentWithFullName:[link fullName] newText:text completion:completion];
 }
 
-- (NSURLSessionDataTask *)editComment:(RKComment *)comment newText:(NSString *)text completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)editComment:(RKComment *)comment newText:(NSString *)text completion:(RKObjectCompletionBlock)completion
 {
     return [self editSelfPostOrCommentWithFullName:[comment fullName] newText:text completion:completion];
 }
 
-- (NSURLSessionDataTask *)editSelfPostOrCommentWithFullName:(NSString *)fullName newText:(NSString *)text completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)editSelfPostOrCommentWithFullName:(NSString *)fullName newText:(NSString *)text completion:(RKObjectCompletionBlock)completion
 {
     NSParameterAssert(fullName);
     NSParameterAssert(text);
     
     NSDictionary *parameters = @{ @"text": text, @"thing_id": fullName, @"uh": self.modhash };
-    return [self basicPostTaskWithPath:@"api/editusertext" parameters:parameters completion:completion];
+	return [self postSubmitCommentOrEditUserTextTaskWithPath:@"api/editusertext" parameters:parameters completion:completion];
 }
 
 #pragma mark - Saving
