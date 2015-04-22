@@ -53,6 +53,53 @@
     }];
 }
 
+- (NSURLSessionDataTask *)postSubmitCommentTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKObjectCompletionBlock)completion
+{
+	NSParameterAssert(path);
+	
+	if (![self isSignedIn])
+	{
+		dispatch_async(dispatch_get_main_queue(), ^{
+			if (completion)
+			{
+				completion(nil, [RKClient authenticationRequiredError]);
+			}
+		});
+		
+		return nil;
+	}
+	
+	return [self postPath:path parameters:parameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+		dispatch_async(dispatch_get_main_queue(), ^{
+			if (!completion)
+			{
+				return;
+			}
+			
+			if (responseObject)
+			{
+				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+					NSDictionary *response = responseObject;
+					if ([responseObject isKindOfClass:[NSArray class]])
+					{
+						response = [responseObject lastObject];
+					}
+					
+					NSArray *commentsAndMoreComments = [self objectsFromMoreCommentsListingResponse:responseObject];
+					
+					dispatch_async(dispatch_get_main_queue(), ^{
+						completion([commentsAndMoreComments firstObject], nil);
+					});
+				});
+			}
+			else
+			{
+				completion(nil, error);
+			}
+		});
+	}];
+}
+
 - (NSURLSessionDataTask *)postMoreCommentsListingTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKArrayCompletionBlock)completion
 {
     NSParameterAssert(path);

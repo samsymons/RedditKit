@@ -33,24 +33,24 @@
 
 #pragma mark - Submitting Comments
 
-- (NSURLSessionDataTask *)submitComment:(NSString *)commentText onLink:(RKLink *)link completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)submitComment:(NSString *)commentText onLink:(RKLink *)link completion:(RKObjectCompletionBlock)completion
 {
     return [self submitComment:commentText onThingWithFullName:[link fullName] completion:completion];
 }
 
-- (NSURLSessionDataTask *)submitComment:(NSString *)commentText asReplyToComment:(RKComment *)comment completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)submitComment:(NSString *)commentText asReplyToComment:(RKComment *)comment completion:(RKObjectCompletionBlock)completion
 {
     return [self submitComment:commentText onThingWithFullName:[comment fullName] completion:completion];
 }
 
-- (NSURLSessionDataTask *)submitComment:(NSString *)commentText onThingWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion
+- (NSURLSessionDataTask *)submitComment:(NSString *)commentText onThingWithFullName:(NSString *)fullName completion:(RKObjectCompletionBlock)completion
 {
     NSParameterAssert(commentText);
     NSParameterAssert(fullName);
     
     NSDictionary *parameters = @{@"text": commentText, @"thing_id": fullName};
     
-    return [self basicPostTaskWithPath:@"api/comment" parameters:parameters completion:completion];
+    return [self postSubmitCommentTaskWithPath:@"api/comment" parameters:parameters completion:completion];
 }
 
 #pragma mark - Getting Comments

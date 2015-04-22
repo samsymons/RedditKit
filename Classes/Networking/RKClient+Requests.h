@@ -38,6 +38,15 @@ typedef void(^RKRequestCompletionBlock)(NSHTTPURLResponse *response, id response
 - (NSURLSessionDataTask *)basicPostTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKCompletionBlock)completion;
 
 /**
+ This method wraps around the 'api/comment' API (aka "Submit Comment" API), using parameters set into the body of an HTTP POST request.
+ 
+ @param path The path to request.
+ @param parameters The parameters to pass with the request.
+ @param completion A block to execute at the end of the request.
+ */
+- (NSURLSessionDataTask *)postSubmitCommentTaskWithPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(RKObjectCompletionBlock)completion;
+
+/**
  This method wraps around the 'api/morechildren' API, using parameters set into the body of an HTTP POST request.
  
  @param path The path to request.

@@ -33,30 +33,30 @@
  
  @param commentText The body of the comment, as Markdown.
  @param link The link on which to comment.
- @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes two arguments: a bare-bones RKComment response representing the actual comment that was submitted, and any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)submitComment:(NSString *)commentText onLink:(RKLink *)link completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)submitComment:(NSString *)commentText onLink:(RKLink *)link completion:(RKObjectCompletionBlock)completion;
 
 /**
  Submit a comment as a reply to another comment.
  
  @param commentText The body of the comment, as Markdown.
  @param comment The comment.
- @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes two arguments: a bare-bones RKComment response representing the actual comment that was submitted, and any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)submitComment:(NSString *)commentText asReplyToComment:(RKComment *)comment completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)submitComment:(NSString *)commentText asReplyToComment:(RKComment *)comment completion:(RKObjectCompletionBlock)completion;
 
 /**
  Submit a comment on a link or ocmment.
  
  @param commentText The body of the comment, as Markdown.
  @param fullName The full name of the link or comment.
- @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes two arguments: a bare-bones RKComment response representing the actual comment that was submitted, and any error that occurred.
  @return The NSURLSessionDataTask for the request.
  */
-- (NSURLSessionDataTask *)submitComment:(NSString *)commentText onThingWithFullName:(NSString *)fullName completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)submitComment:(NSString *)commentText onThingWithFullName:(NSString *)fullName completion:(RKObjectCompletionBlock)completion;
 
 #pragma mark - Getting Comments
 
