@@ -22,6 +22,8 @@
 
 #import "RKClient.h"
 
+#import "RKClient+OAuth.h"
+
 #import "RKClient+Apps.h"
 #import "RKClient+Captcha.h"
 #import "RKClient+Comments.h"

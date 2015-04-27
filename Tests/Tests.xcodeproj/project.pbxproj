@@ -16,6 +16,8 @@
 		4B0AA30A196B232700DEC58C /* embedded-media.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B0AA308196B232700DEC58C /* embedded-media.json */; };
 		4B0AA30C196B238300DEC58C /* RKLinkEmbeddedMediaSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0AA30B196B238300DEC58C /* RKLinkEmbeddedMediaSpec.m */; };
 		4B0AA30D196B238300DEC58C /* RKLinkEmbeddedMediaSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0AA30B196B238300DEC58C /* RKLinkEmbeddedMediaSpec.m */; };
+		4B23F5D01AEDBFFE0026180D /* RKClientOAuthSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B23F5CF1AEDBFFE0026180D /* RKClientOAuthSpec.m */; };
+		4B23F5D11AEDBFFE0026180D /* RKClientOAuthSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B23F5CF1AEDBFFE0026180D /* RKClientOAuthSpec.m */; };
 		4B28DC8119687E9B007C2473 /* RKResponseSerializerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B28DC8019687E9B007C2473 /* RKResponseSerializerSpec.m */; };
 		4B28DC8219687E9B007C2473 /* RKResponseSerializerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B28DC8019687E9B007C2473 /* RKResponseSerializerSpec.m */; };
 		4B28DC84196881D0007C2473 /* not-found.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B28DC83196881D0007C2473 /* not-found.json */; };
@@ -78,6 +80,7 @@
 		4B0203C419B6CCAC004A8036 /* RKMoreCommentsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKMoreCommentsSpec.m; sourceTree = "<group>"; };
 		4B0AA308196B232700DEC58C /* embedded-media.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "embedded-media.json"; sourceTree = "<group>"; };
 		4B0AA30B196B238300DEC58C /* RKLinkEmbeddedMediaSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKLinkEmbeddedMediaSpec.m; sourceTree = "<group>"; };
+		4B23F5CF1AEDBFFE0026180D /* RKClientOAuthSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKClientOAuthSpec.m; sourceTree = "<group>"; };
 		4B28DC8019687E9B007C2473 /* RKResponseSerializerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKResponseSerializerSpec.m; sourceTree = "<group>"; };
 		4B28DC83196881D0007C2473 /* not-found.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "not-found.json"; sourceTree = "<group>"; };
 		4B28DC861968878F007C2473 /* subreddit-listing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "subreddit-listing.json"; sourceTree = "<group>"; };
@@ -274,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				4BE14B1B1957BCC50008BDB0 /* RKClientCaptchaSpec.m */,
+				4B23F5CF1AEDBFFE0026180D /* RKClientOAuthSpec.m */,
 				4BE14B171957BAD30008BDB0 /* RKClientSpec.m */,
 				4BE14B1F1957BE400008BDB0 /* RKCreatedSpec.m */,
 				4B3ECD311A58A4CD00B179B4 /* RKFullNameSpec.m */,
@@ -498,6 +502,7 @@
 				4B28DC8219687E9B007C2473 /* RKResponseSerializerSpec.m in Sources */,
 				4BE14B361957CAA80008BDB0 /* RKVotableSpec.m in Sources */,
 				4BE14B1D1957BCC50008BDB0 /* RKClientCaptchaSpec.m in Sources */,
+				4B23F5D11AEDBFFE0026180D /* RKClientOAuthSpec.m in Sources */,
 				4BE14B2D1957C6780008BDB0 /* RKMultiredditSpec.m in Sources */,
 				4BE14B291957C1E80008BDB0 /* RKLinkSpec.m in Sources */,
 				4B0203C619B6CCAC004A8036 /* RKMoreCommentsSpec.m in Sources */,
@@ -520,6 +525,7 @@
 				4B28DC8119687E9B007C2473 /* RKResponseSerializerSpec.m in Sources */,
 				4BE14B351957CAA80008BDB0 /* RKVotableSpec.m in Sources */,
 				4BE14B1C1957BCC50008BDB0 /* RKClientCaptchaSpec.m in Sources */,
+				4B23F5D01AEDBFFE0026180D /* RKClientOAuthSpec.m in Sources */,
 				4BE14B2C1957C6780008BDB0 /* RKMultiredditSpec.m in Sources */,
 				4BE14B281957C1E80008BDB0 /* RKLinkSpec.m in Sources */,
 				4B0203C519B6CCAC004A8036 /* RKMoreCommentsSpec.m in Sources */,

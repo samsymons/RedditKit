@@ -30,6 +30,8 @@ extern NSString * const RKClientErrorDomain;
 
 @interface RKClient : AFHTTPSessionManager
 
+#pragma mark - Properties
+
 /**
  The currently signed in user.
  */
@@ -70,6 +72,18 @@ extern NSString * const RKClientErrorDomain;
  The user agent for requests sent to reddit.
  */
 @property (nonatomic, strong) NSString *userAgent;
+
+#pragma mark - OAuth Properties
+
+/**
+ The OAuth client identifier from reddit's OAuth application page.
+ This is optional, and only required if you are authenticating with OAuth.
+ */
+@property (nonatomic, strong) NSString *clientIdentifier;
+
+@property (nonatomic, strong) NSString *authorizationCode;
+
+#pragma mark - Methods
 
 + (instancetype)sharedClient;
 
