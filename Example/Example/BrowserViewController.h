@@ -23,5 +23,6 @@
 @interface BrowserViewController : UIViewController <UIWebViewDelegate>
 
 - (instancetype)initWithLink:(RKLink *)link;
+- (instancetype)initWithURL:(NSURL *)URL;
 
 @end

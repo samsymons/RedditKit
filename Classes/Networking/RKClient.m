@@ -60,13 +60,13 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 
 - (NSString *)description
 {
-    if (self.isSignedIn)
+    if ([self isAuthenticated])
     {
         return [NSString stringWithFormat:@"<%@: %p, username: %@>", NSStringFromClass([self class]), self, self.currentUser.username];
     }
     else
     {
-        return [NSString stringWithFormat:@"<%@: %p, not signed in>", NSStringFromClass([self class]), self];
+        return [NSString stringWithFormat:@"<%@: %p>", NSStringFromClass([self class]), self];
     }
 }
 
@@ -156,9 +156,14 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
     }];
 }
 
-- (BOOL)isSignedIn
+- (BOOL)isAuthenticated
 {
-    return self.modhash != nil && self.sessionIdentifier != nil;
+    return (self.modhash != nil && self.sessionIdentifier != nil);
+}
+
+- (BOOL)isAuthenticatedWithOAuth
+{
+    return (self.authorizationCode != nil);
 }
 
 - (void)signOut
@@ -180,6 +185,8 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
     }
 }
 
+#pragma mark - Properties
+
 - (void)setModhash:(NSString *)modhash
 {
     _modhash = [modhash copy];
@@ -198,6 +205,12 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 {
     _userAgent = [userAgent copy];
     [[self requestSerializer] setValue:_userAgent forHTTPHeaderField:@"User-Agent"];
+}
+
+- (void)setAuthorizationCode:(NSString *)authorizationCode
+{
+    _authorizationCode = [authorizationCode copy];
+    [[self requestSerializer] setValue:_modhash forHTTPHeaderField:@"Authorization"];
 }
 
 @end

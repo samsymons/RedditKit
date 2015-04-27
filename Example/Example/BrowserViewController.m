@@ -50,12 +50,16 @@
 
 - (instancetype)initWithLink:(RKLink *)link
 {
+    _link = link;
+    return [self initWithURL:link.URL];
+}
+
+- (instancetype)initWithURL:(NSURL *)URL
+{
     if (self = [super initWithNibName:nil bundle:nil])
     {
-        self.title = [[link URL] absoluteString];
-        
-        _link = link;
-        _currentURL = link.URL;
+        self.title = [URL absoluteString];
+        _currentURL = URL;
     }
     
     return self;
@@ -117,7 +121,7 @@
 
 - (void)tappedActionButton:(id)sender
 {
-    if (![[RKClient sharedClient] isSignedIn])
+    if (![[RKClient sharedClient] isAuthenticated])
     {
         self.authenticationManager = [[AuthenticationManager alloc] init];
         [[self authenticationManager] showSignInAlertViewWithCompletion:nil];

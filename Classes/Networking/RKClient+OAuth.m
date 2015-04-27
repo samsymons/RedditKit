@@ -42,6 +42,11 @@
     return NO;
 }
 
+- (BOOL)hasScope:(RKOAuthScope)scope
+{
+    return (self.authorizationScope & scope);
+}
+
 - (NSString *)scopeStringFromScope:(RKOAuthScope)scope
 {
     NSParameterAssert(scope);

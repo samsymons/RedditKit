@@ -24,6 +24,33 @@
 #import "RKCompletionBlocks.h"
 #import "RKPagination.h"
 
+typedef NS_OPTIONS(NSUInteger, RKOAuthScope) {
+    RKOAuthScopeAccount             = 1 << 0,
+    RKOAuthScopeCreddits            = 1 << 1,
+    RKOAuthScopeEdit                = 1 << 2,
+    RKOAuthScopeFlair               = 1 << 3,
+    RKOAuthScopeHistory             = 1 << 4,
+    RKOAuthScopeIdentity            = 1 << 5,
+    RKOAuthScopeManageLiveThreads   = 1 << 6,
+    RKOAuthScopeModerationConfig    = 1 << 7,
+    RKOAuthScopeModerationFlair     = 1 << 8,
+    RKOAuthScopeModerationLog       = 1 << 9,
+    RKOAuthScopeModerationOthers    = 1 << 10,
+    RKOAuthScopeModerationPosts     = 1 << 11,
+    RKOAuthScopeModerationSelf      = 1 << 12,
+    RKOAuthScopeModerationWiki      = 1 << 13,
+    RKOAuthScopeSubreddits          = 1 << 14,
+    RKOAuthScopePrivateMessages     = 1 << 15,
+    RKOAuthScopeRead                = 1 << 16,
+    RKOAuthScopeReport              = 1 << 17,
+    RKOAuthScopeSave                = 1 << 18,
+    RKOAuthScopeSubmit              = 1 << 19,
+    RKOAuthScopeSubscribe           = 1 << 20,
+    RKOAuthScopeVote                = 1 << 21,
+    RKOAuthScopeEditWikis           = 1 << 22,
+    RKOAuthScopeReadWikis           = 1 << 23
+};
+
 extern NSString * const RKClientErrorDomain;
 
 @class RKUser;
@@ -81,7 +108,13 @@ extern NSString * const RKClientErrorDomain;
  */
 @property (nonatomic, strong) NSString *clientIdentifier;
 
+/**
+ The OAuth authorization code returned by reddit.
+ This is used when authenticating with OAuth.
+ */
 @property (nonatomic, strong) NSString *authorizationCode;
+
+@property (nonatomic, assign, readonly) RKOAuthScope authorizationScope;
 
 #pragma mark - Methods
 
@@ -116,11 +149,18 @@ extern NSString * const RKClientErrorDomain;
 - (void)updateCurrentUserWithCompletion:(RKCompletionBlock)completion;
 
 /**
- Whether or not there is a user currently signed in.
+ Whether or not there is a user currently authenticated via their username and password.
  
  @note This returns YES if there is an existing modhash value, but cannot guarantee its validity.
  */
-- (BOOL)isSignedIn;
+- (BOOL)isAuthenticated;
+
+/**
+ Whether or not there is a user currently signed in via OAuth.
+ 
+ @note This returns YES if there is an existing authorization code value, but cannot guarantee its validity.
+ */
+- (BOOL)isAuthenticatedWithOAuth;
 
 /**
  Signs the current user out.

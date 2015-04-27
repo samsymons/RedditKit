@@ -31,7 +31,7 @@
 {
     NSParameterAssert(path);
     
-    if (![self isSignedIn])
+    if (![self isAuthenticated])
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (completion)
@@ -57,7 +57,7 @@
 {
 	NSParameterAssert(path);
 	
-	if (![self isSignedIn])
+	if (![self isAuthenticated])
 	{
 		dispatch_async(dispatch_get_main_queue(), ^{
 			if (completion)
