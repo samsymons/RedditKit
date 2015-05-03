@@ -148,7 +148,9 @@
         @"private": @(RKSubredditTypePrivate),
         @"restricted": @(RKSubredditTypeRestricted),
         @"gold_restricted": @(RKSubredditTypeGoldRestricted),
-        @"archived": @(RKSubredditTypeArchived)
+		@"gold_only": @(RKSubredditTypeGoldOnly),
+        @"archived": @(RKSubredditTypeArchived),
+		@"employees_only": @(RKSubredditTypeEmployeesOnly)
     };
     
     return [MTLValueTransformer transformerWithBlock:^(NSString *type) {

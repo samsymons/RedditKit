@@ -33,7 +33,9 @@ typedef NS_ENUM(NSUInteger, RKSubredditType) {
     RKSubredditTypePrivate,
     RKSubredditTypeRestricted,
     RKSubredditTypeGoldRestricted,
-    RKSubredditTypeArchived
+	RKSubredditTypeGoldOnly,
+    RKSubredditTypeArchived,
+	RKSubredditTypeEmployeesOnly
 };
 
 typedef NS_ENUM(NSUInteger, RKSpamFilterStrength) {
