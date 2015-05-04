@@ -34,27 +34,27 @@
  
  @param link The link to edit.
  @param text The text to be set as the self post's body. This will replace the old text.
- @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes two arguments: a bare-bones response representing the actual self post that was submitted, and any error that occurred.
  */
-- (NSURLSessionDataTask *)editSelfPost:(RKLink *)link newText:(NSString *)text completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)editSelfPost:(RKLink *)link newText:(NSString *)text completion:(RKObjectCompletionBlock)completion;
 
 /**
  Edits a comment created by the current user.
  
  @param comment The comment to edit.
  @param text The text to be set as the comment's body. This will replace the old text.
- @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes two arguments: a bare-bones response representing the actual comment that was submitted, and any error that occurred.
  */
-- (NSURLSessionDataTask *)editComment:(RKComment *)comment newText:(NSString *)text completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)editComment:(RKComment *)comment newText:(NSString *)text completion:(RKObjectCompletionBlock)completion;
 
 /**
  Edits a self post or a comment created by the current user.
  
  @param fullName The full name of the self post or comment.
  @param text The text to be set as the body. This will replace the old text.
- @param completion An optional block to be executed upon request completion. Its only argument is any error that occurred.
+ @param completion An optional block to be executed upon request completion. It takes two arguments: a bare-bones response representing the actual self post or comment that was submitted, and any error that occurred.
  */
-- (NSURLSessionDataTask *)editSelfPostOrCommentWithFullName:(NSString *)fullName newText:(NSString *)text completion:(RKCompletionBlock)completion;
+- (NSURLSessionDataTask *)editSelfPostOrCommentWithFullName:(NSString *)fullName newText:(NSString *)text completion:(RKObjectCompletionBlock)completion;
 
 #pragma mark - Saving
 

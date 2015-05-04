@@ -50,7 +50,7 @@
     
     NSDictionary *parameters = @{@"text": commentText, @"thing_id": fullName};
     
-    return [self postSubmitCommentTaskWithPath:@"api/comment" parameters:parameters completion:completion];
+    return [self postSubmitCommentOrEditUserTextTaskWithPath:@"api/comment" parameters:parameters completion:completion];
 }
 
 #pragma mark - Getting Comments
