@@ -26,6 +26,8 @@
 
 @implementation RKComment
 
+@dynamic score;
+
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
     NSDictionary *keyPaths = @{
