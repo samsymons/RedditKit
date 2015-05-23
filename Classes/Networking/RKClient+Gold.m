@@ -29,9 +29,8 @@
 - (NSURLSessionDataTask *)giveGoldToUserWithUsername:(NSString *)username duration:(NSUInteger)months completion:(RKCompletionBlock)completion
 {
     NSParameterAssert(username);
-    
-    NSUInteger duration = MAX(1, months);
-    duration = MIN(32, months);
+	
+    NSUInteger duration = MIN(32, months);
     
     NSString *path = [NSString stringWithFormat:@"/api/v1/gold/give/%@", username];
     return [self basicPostTaskWithPath:path parameters:@{ @"username": username, @"months": @(duration) } completion:completion];
