@@ -22,6 +22,8 @@
 
 #import "RKClient.h"
 
+#import "RKOAuthCredential.h"
+#import "RKAccessToken.h"
 #import "RKClient+OAuth.h"
 
 #import "RKClient+Apps.h"

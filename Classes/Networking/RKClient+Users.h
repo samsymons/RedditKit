@@ -65,6 +65,8 @@ typedef NS_ENUM(NSUInteger, RKSubscribedSubredditCategory)
  */
 - (NSURLSessionDataTask *)deleteCurrentUserWithReason:(NSString *)reason currentPassword:(NSString *)currentPassword completion:(RKCompletionBlock)completion;
 
+- (NSURLSessionDataTask *)trophiesForCurrentUserWithCompletion:(RKArrayCompletionBlock)completion;
+
 #pragma mark - Subreddits
 
 /**
