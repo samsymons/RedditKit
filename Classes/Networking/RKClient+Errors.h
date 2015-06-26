@@ -25,6 +25,7 @@
 @interface RKClient (Errors)
 
 extern const NSInteger RKClientErrorAuthenticationFailed;
+extern const NSInteger RKClientErrorInvalidOAuthScope;
 
 extern const NSInteger RKClientErrorInvalidCaptcha;
 extern const NSInteger RKClientErrorInvalidCSSClassName;
@@ -57,6 +58,11 @@ extern const NSInteger RKClientErrorTimedOut;
  For example, this error occurs when attempting to retrieve a list of subscribed subreddits without being signed in.
  */
 + (NSError *)authenticationRequiredError;
+
+/**
+ Returns an error that occurs when the current client does not have the appropriate OAuth privileges.
+ */
++ (NSError *)invalidOAuthScopeError;
 
 /**
  Returns an error that occurs when the user filled out a CAPTCHA incorrectly, or provided an invalid CAPTCHA identifier.
