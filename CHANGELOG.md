@@ -1,3 +1,8 @@
+## 2.0
+
+* Add support for retrieving a user's trophies.
+* Add support for viewing a user's karma across subreddits.
+
 ## 1.4
 
 * Add support for getting comment context.

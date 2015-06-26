@@ -65,7 +65,19 @@ typedef NS_ENUM(NSUInteger, RKSubscribedSubredditCategory)
  */
 - (NSURLSessionDataTask *)deleteCurrentUserWithReason:(NSString *)reason currentPassword:(NSString *)currentPassword completion:(RKCompletionBlock)completion;
 
+/**
+ Retrieves a list of trophies for the current user.
+ 
+ @param completion An optional block to be executed upon request completion. It takes two arguments: the response array, and any error that occurred.
+ */
 - (NSURLSessionDataTask *)trophiesForCurrentUserWithCompletion:(RKArrayCompletionBlock)completion;
+
+/**
+ Retrieves a per-subreddit karma breakdown for the current user.
+
+ @param completion An optional block to be executed upon request completion. It takes two arguments: the response array, and any error that occurred.
+ */
+- (NSURLSessionDataTask *)karmaForCurrentUserWithCompletion:(RKArrayCompletionBlock)completion;
 
 #pragma mark - Subreddits
 

@@ -150,6 +150,21 @@ NSString * RKStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
     }];
 }
 
+- (NSURLSessionDataTask *)karmaForCurrentUserWithCompletion:(RKArrayCompletionBlock)completion
+{
+    return [self getPath:@"api/v1/me/karma.json" parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+
+        if (responseObject)
+        {
+            completion(responseObject, nil);
+        }
+        else
+        {
+            completion(nil, error);
+        }
+    }];
+}
+
 #pragma mark - Subreddits
 
 - (NSURLSessionDataTask *)subscribedSubredditsWithCompletion:(RKListingCompletionBlock)completion
