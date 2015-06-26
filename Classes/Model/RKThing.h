@@ -33,6 +33,7 @@
  t3: Link
  t4: Message
  t5: Subreddit
+ t6: Trophy
  */
 @property (nonatomic, copy, readonly) NSString *kind;
 

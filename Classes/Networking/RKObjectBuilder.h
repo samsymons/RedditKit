@@ -25,6 +25,7 @@ extern NSString * const kRKObjectTypeAccount;
 extern NSString * const kRKObjectTypeLink;
 extern NSString * const kRKObjectTypeMessage;
 extern NSString * const kRKObjectTypeSubreddit;
+extern NSString * const kRKObjectTypeTrophy;
 extern NSString * const kRKObjectTypeMultireddit;
 extern NSString * const kRKObjectTypeMultiredditDescription;
 extern NSString * const kRKObjectTypeModeratorAction;

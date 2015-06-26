@@ -127,6 +127,29 @@ NSString * RKStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
     }];
 }
 
+- (NSURLSessionDataTask *)trophiesForCurrentUserWithCompletion:(RKArrayCompletionBlock)completion
+{
+    return [self getPath:@"api/v1/me/trophies.json" parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+
+        if (responseObject)
+        {
+            NSMutableArray *trophies = [[NSMutableArray alloc] initWithCapacity:[responseObject count]];
+            NSArray *trophyJSON = [responseObject valueForKeyPath:@"data.trophies"];
+
+            for (NSDictionary *trophy in trophyJSON)
+            {
+                [trophies addObject:[RKObjectBuilder objectFromJSON:trophy]];
+            }
+
+            completion([trophies copy], nil);
+        }
+        else
+        {
+            completion(nil, error);
+        }
+    }];
+}
+
 #pragma mark - Subreddits
 
 - (NSURLSessionDataTask *)subscribedSubredditsWithCompletion:(RKListingCompletionBlock)completion
