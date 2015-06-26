@@ -22,23 +22,26 @@
 
 #import "RKObjectBuilder.h"
 #import "Mantle.h"
+
 #import "RKClient.h"
-#import "RKThing.h"
-#import "RKUser.h"
 #import "RKComment.h"
 #import "RKLink.h"
-#import "RKSubreddit.h"
 #import "RKMessage.h"
 #import "RKMultireddit.h"
 #import "RKMultiredditDescription.h"
 #import "RKModeratorAction.h"
 #import "RKMoreComments.h"
+#import "RKSubreddit.h"
+#import "RKTrophy.h"
+#import "RKThing.h"
+#import "RKUser.h"
 
 NSString * const kRKObjectTypeComment = @"t1";
 NSString * const kRKObjectTypeAccount = @"t2";
 NSString * const kRKObjectTypeLink = @"t3";
 NSString * const kRKObjectTypeMessage = @"t4";
 NSString * const kRKObjectTypeSubreddit = @"t5";
+NSString * const kRKObjectTypeTrophy = @"t6";
 NSString * const kRKObjectTypeMultireddit = @"LabeledMulti";
 NSString * const kRKObjectTypeMultiredditDescription = @"LabeledMultiDescription";
 NSString * const kRKObjectTypeModeratorAction = @"modaction";
@@ -122,13 +125,17 @@ NSString * const kRKObjectTypeMore = @"more";
     {
         return [RKMessage class];
     }
-    else if ([objectKind isEqualToString:kRKObjectTypeMultireddit])
-    {
-        return [RKMultireddit class];
-    }
     else if ([objectKind isEqualToString:kRKObjectTypeSubreddit])
     {
         return [RKSubreddit class];
+    }
+    else if ([objectKind isEqualToString:kRKObjectTypeTrophy])
+    {
+        return [RKTrophy class];
+    }
+    else if ([objectKind isEqualToString:kRKObjectTypeMultireddit])
+    {
+        return [RKMultireddit class];
     }
     else if ([objectKind isEqualToString:kRKObjectTypeMultiredditDescription])
     {
