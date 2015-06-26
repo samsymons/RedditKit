@@ -21,7 +21,6 @@
 // THE SOFTWARE.
 
 #import "BrowserViewController.h"
-#import "AuthenticationManager.h"
 
 @interface BrowserViewController ()
 
@@ -33,8 +32,6 @@
 @property (nonatomic, strong) UIBarButtonItem *downvoteItem;
 @property (nonatomic, strong) UIBarButtonItem *saveItem;
 @property (nonatomic, strong) UIBarButtonItem *hideItem;
-
-@property (nonatomic, strong) AuthenticationManager *authenticationManager;
 
 - (UIBarButtonItem *)barButtonItemWithImageNamed:(NSString *)imageName;
 - (void)tappedActionButton:(id)sender;
@@ -83,6 +80,10 @@
 
 - (NSArray *)toolbarItems
 {
+    if (!self.link) {
+        return nil;
+    }
+    
     self.upvoteItem = [self barButtonItemWithImageNamed:@"upvote"];
     self.downvoteItem = [self barButtonItemWithImageNamed:@"downvote"];
     self.saveItem = [self barButtonItemWithImageNamed:@"save"];
@@ -123,9 +124,6 @@
 {
     if (![[RKClient sharedClient] isAuthenticated])
     {
-        self.authenticationManager = [[AuthenticationManager alloc] init];
-        [[self authenticationManager] showSignInAlertViewWithCompletion:nil];
-        
         return;
     }
     

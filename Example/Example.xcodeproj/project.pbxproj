@@ -19,7 +19,6 @@
 		4B2389B91A33893600052C72 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B2389B81A33893600052C72 /* Launch Screen.xib */; };
 		4B723EDD1809A9C600E44AC1 /* LinkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B723EDC1809A9C500E44AC1 /* LinkTableViewCell.m */; };
 		4BB0B6DD180652D20023BB24 /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB0B6DC180652D20023BB24 /* BrowserViewController.m */; };
-		4BC808121825AFEE0070B628 /* AuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC808111825AFEE0070B628 /* AuthenticationManager.m */; };
 		4BC8081518270FF80070B628 /* LinkTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC8081418270FF80070B628 /* LinkTitleLabel.m */; };
 /* End PBXBuildFile section */
 
@@ -43,8 +42,6 @@
 		4B723EDC1809A9C500E44AC1 /* LinkTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkTableViewCell.m; sourceTree = "<group>"; };
 		4BB0B6DB180652D20023BB24 /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
 		4BB0B6DC180652D20023BB24 /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
-		4BC808101825AFEE0070B628 /* AuthenticationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationManager.h; sourceTree = "<group>"; };
-		4BC808111825AFEE0070B628 /* AuthenticationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationManager.m; sourceTree = "<group>"; };
 		4BC8081318270FF80070B628 /* LinkTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkTitleLabel.h; sourceTree = "<group>"; };
 		4BC8081418270FF80070B628 /* LinkTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkTitleLabel.m; sourceTree = "<group>"; };
 		6AD7909B16B44DE7A9159C04 /* libPods-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,8 +116,6 @@
 				4B723EDC1809A9C500E44AC1 /* LinkTableViewCell.m */,
 				4BC8081318270FF80070B628 /* LinkTitleLabel.h */,
 				4BC8081418270FF80070B628 /* LinkTitleLabel.m */,
-				4BC808101825AFEE0070B628 /* AuthenticationManager.h */,
-				4BC808111825AFEE0070B628 /* AuthenticationManager.m */,
 				4B2048E917F4C6020009BFF6 /* Images.xcassets */,
 				4B2048D817F4C6020009BFF6 /* Supporting Files */,
 			);
@@ -245,7 +240,6 @@
 				4B723EDD1809A9C600E44AC1 /* LinkTableViewCell.m in Sources */,
 				4B2048E217F4C6020009BFF6 /* AppDelegate.m in Sources */,
 				4B2048DE17F4C6020009BFF6 /* main.m in Sources */,
-				4BC808121825AFEE0070B628 /* AuthenticationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
