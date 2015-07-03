@@ -131,7 +131,8 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 {
     [[RKClient sharedClient] authenticateWithClientIdentifier:@"zeZtZ4A8c71d8w"];
 
-    NSURL *authenticationURL = [[RKClient sharedClient] authenticationURLWithScope:RKOAuthScopeAccount|RKOAuthScopeIdentity redirectURI:@"redditkit://oauth"];
+    RKOAuthScope scope = RKOAuthScopeSubreddits;
+    NSURL *authenticationURL = [[RKClient sharedClient] authenticationURLWithScope:scope redirectURI:@"redditkit://oauth"];
     BrowserViewController *browserViewController = [[BrowserViewController alloc] initWithURL:authenticationURL];
 
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:browserViewController];

@@ -14,14 +14,14 @@ client.sessionIdentifier = @"12345";
 
 describe(@"isSignedIn", ^{
     it(@"should return whether the user is signed in", ^{
-        expect(client.isSignedIn).to.beTruthy();
+        expect([client isAuthenticated]).to.beTruthy();
     });
 });
 
 describe(@"signOut", ^{
     it(@"should sign the user out", ^{
         [client signOut];
-        expect(client.isSignedIn).to.beFalsy();
+        expect([client isAuthenticated]).to.beFalsy();
     });
 });
 
