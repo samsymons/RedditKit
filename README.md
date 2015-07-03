@@ -1,8 +1,8 @@
-# RedditKit [![Build Status](https://travis-ci.org/samsymons/RedditKit.svg?branch=master)](https://travis-ci.org/samsymons/RedditKit)
+# RedditKit 2.0 beta 1 [![Build Status](https://travis-ci.org/samsymons/RedditKit.svg?branch=2.0)](https://travis-ci.org/samsymons/RedditKit)
 
 RedditKit is a [reddit API](http://www.reddit.com/dev/api) wrapper, written in Objective-C.
 
-## Documention
+## Documentation
 
 Documentation for RedditKit is [available on CocoaDocs](http://cocoadocs.org/docsets/RedditKit/1.3.0/).
 
