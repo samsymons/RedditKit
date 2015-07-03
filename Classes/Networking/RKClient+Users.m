@@ -127,6 +127,21 @@ NSString * RKStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
     }];
 }
 
+- (NSURLSessionDataTask *)blockedUsersWithCompletion:(RKArrayCompletionBlock)completion
+{
+    return [self getPath:@"prefs/blocked.json" parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+
+        if (responseObject)
+        {
+            completion(responseObject, nil);
+        }
+        else
+        {
+            completion(nil, error);
+        }
+    }];
+}
+
 - (NSURLSessionDataTask *)trophiesForCurrentUserWithCompletion:(RKArrayCompletionBlock)completion
 {
     return [self getPath:@"api/v1/me/trophies.json" parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {

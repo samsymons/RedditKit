@@ -66,6 +66,13 @@ typedef NS_ENUM(NSUInteger, RKSubscribedSubredditCategory)
 - (NSURLSessionDataTask *)deleteCurrentUserWithReason:(NSString *)reason currentPassword:(NSString *)currentPassword completion:(RKCompletionBlock)completion;
 
 /**
+ Gets the current user's blocked user list.
+
+ @param completion The block to be executed upon completion of the request. It takes two arguments: the response array and any error that occurred. The response array contains NSDictionary objects, each representing a blocked user. Each dictionary contains three key-value pairs: the user's full name (the 'id' key), and their name (the 'name' key).
+ */
+- (NSURLSessionDataTask *)blockedUsersWithCompletion:(RKArrayCompletionBlock)completion;
+
+/**
  Retrieves a list of trophies for the current user.
  
  @param completion An optional block to be executed upon request completion. It takes two arguments: the response array, and any error that occurred.
