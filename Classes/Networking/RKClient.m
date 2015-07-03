@@ -181,6 +181,7 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
     self.currentUser = nil;
     self.modhash = nil;
     self.sessionIdentifier = nil;
+    self.authorizationCredential = nil;
     
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     NSArray *cookies = [storage cookies];
