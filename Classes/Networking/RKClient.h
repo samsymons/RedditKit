@@ -126,9 +126,9 @@ extern NSString * const RKClientErrorDomain;
 + (NSURL *)APIBaseURL;
 
 /**
- The URL to base HTTPS requests on. Override this in an RKClient subclass to change the base HTTPS URL.
+ The URL to base OAuth requests on. Override this in an RKClient subclass to change the base OAuth URL.
  */
-+ (NSURL *)APIBaseHTTPSURL;
++ (NSURL *)APIBaseOAuthURL;
 
 /**
  Signs into reddit.

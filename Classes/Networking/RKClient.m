@@ -74,12 +74,12 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 
 + (NSURL *)APIBaseURL
 {
-    return [NSURL URLWithString:@"http://www.reddit.com/"];
+    return [NSURL URLWithString:@"https://www.reddit.com/"];
 }
 
-+ (NSURL *)APIBaseHTTPSURL
++ (NSURL *)APIBaseOAuthURL
 {
-    return [NSURL URLWithString:@"https://ssl.reddit.com/"];
+    return [NSURL URLWithString:@"https://oauth.reddit.com/"];
 }
 
 #pragma mark - Authentication
@@ -91,7 +91,7 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
     
     NSDictionary *parameters = @{@"user": username, @"passwd": password, @"api_type": @"json"};
     
-    NSURL *baseURL = [[self class] APIBaseHTTPSURL];
+    NSURL *baseURL = [[self class] APIBaseURL];
     NSString *URLString = [[NSURL URLWithString:@"api/login" relativeToURL:baseURL] absoluteString];
     
     NSError *serializerError;
