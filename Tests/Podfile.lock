@@ -20,19 +20,19 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Expecta (0.4.2)
+  - Expecta (1.0.0)
   - Mantle (1.5.4):
     - Mantle/extobjc (= 1.5.4)
   - Mantle/extobjc (1.5.4)
   - RedditKit (2.0.0-beta1):
     - AFNetworking (~> 2.4)
     - Mantle (~> 1.5)
-  - Specta (0.5.0)
+  - Specta (1.0.2)
 
 DEPENDENCIES:
-  - Expecta (~> 0.3)
+  - Expecta (~> 1.0)
   - RedditKit (from `../`)
-  - Specta (~> 0.4)
+  - Specta (~> 1.0)
 
 EXTERNAL SOURCES:
   RedditKit:
@@ -40,9 +40,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
-  Expecta: 78b4e8b0c8291fa4524d7f74016b6065c2e391ec
+  Expecta: 32604574add2c46a36f8d2f716b6c5736eb75024
   Mantle: 60acd0cd363e27d945bda0a6b8e90577112d28f3
   RedditKit: c006313e6a8585bf4afaec0a9903447d3ed61080
-  Specta: eb90708ed77569bbda089f8ead10bb99b8e9489e
+  Specta: 9cec98310dca411f7c7ffd6943552b501622abfe
 
 COCOAPODS: 0.37.2

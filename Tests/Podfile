@@ -4,8 +4,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 def import_pods
   pod 'RedditKit', :path => '../'
-  pod 'Specta', '~> 0.4'
-  pod 'Expecta', '~> 0.3'
+  pod 'Specta', '~> 1.0'
+  pod 'Expecta', '~> 1.0'
 end
 
 target :ios do
