@@ -47,6 +47,21 @@
     return YES;
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    if ([url.scheme isEqualToString:@"redditkit"]) {
+        [[RKClient sharedClient] handleRedirectURI:url];
+
+        [[RKClient sharedClient] retrieveAccessTokenWithCompletion:^(id object, NSError *error) {
+            // TODO: Complete the OAuth flow here.
+        }];
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
 - (void)configureAppearance
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];

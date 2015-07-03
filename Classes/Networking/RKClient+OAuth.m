@@ -57,8 +57,6 @@
     NSArray *codeParam = [queryParams filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF BEGINSWITH %@", @"code="]];
     
     if ([codeParam count] > 0) {
-        NSLog(@"Code param: %@", codeParam);
-
         NSString *codeQuery = [codeParam objectAtIndex:0];
         NSString *code = [codeQuery stringByReplacingOccurrencesOfString:@"code=" withString:@""];
         self.authorizationCredential.authorizationCode = code;
@@ -69,16 +67,25 @@
     return NO;
 }
 
+- (NSURLSessionDataTask *)retrieveAccessTokenWithCompletion:(RKObjectCompletionBlock)completion
+{
+    return [self retrieveAccessTokenWithAuthorizationCode:self.authorizationCredential.authorizationCode completion:completion];
+}
+
 - (NSURLSessionDataTask *)retrieveAccessTokenWithAuthorizationCode:(NSString *)authorizationCode completion:(RKObjectCompletionBlock)completion
 {
+    NSParameterAssert(authorizationCode);
+    
     NSDictionary *parameters = @{ @"grant_type": @"authorization_code", @"code": authorizationCode, @"redirect_uri": @"redditkit://oauth" };
     
     return [self postPath:@"api/v1/access_token" parameters:parameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         RKAccessToken *token = [[RKAccessToken alloc] init];
         token.accessToken = responseObject[@"access_token"];
 
-        self.authorizationCredential.accessToken = token;
-        self.authorizationCredential = self.authorizationCredential;
+        RKOAuthCredential *credential = self.authorizationCredential;
+        credential.accessToken = token;
+
+        self.authorizationCredential = credential;
 
         if (completion) {
             completion(nil, error);

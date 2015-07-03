@@ -430,7 +430,6 @@
     NSMutableDictionary *alteredParameters = [parameters mutableCopy];
     [alteredParameters setObject:@"json" forKey:@"api_type"];
     
-    NSString *URLString = [[NSURL URLWithString:path relativeToURL:self.baseURL] absoluteString];
     NSURL *URL = [self isAuthenticatedWithOAuth] ? [[self class] APIBaseOAuthURL] : [[self class] APIBaseURL];
     NSString *URLString = [[NSURL URLWithString:path relativeToURL:URL] absoluteString];
     NSError *serializerError;

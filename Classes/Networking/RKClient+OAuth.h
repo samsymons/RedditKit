@@ -24,6 +24,14 @@
  */
 - (BOOL)handleRedirectURI:(NSURL *)redirectURI;
 
+/**
+ Retrieves an OAuth access token using the current authorization code.
+ */
+- (NSURLSessionDataTask *)retrieveAccessTokenWithCompletion:(RKObjectCompletionBlock)completion;
+
+/**
+ Retrieves an OAuth access token using a custom authorization code.
+ */
 - (NSURLSessionDataTask *)retrieveAccessTokenWithAuthorizationCode:(NSString *)authorizationCode completion:(RKObjectCompletionBlock)completion;
 
 - (BOOL)hasScope:(RKOAuthScope)scope;
