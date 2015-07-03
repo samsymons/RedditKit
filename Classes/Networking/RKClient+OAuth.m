@@ -8,19 +8,45 @@
 
 #import "RKClient+OAuth.h"
 
+#import "RKClient+Requests.h"
+
+#import "RKAccessToken.h"
+
 @implementation RKClient (OAuth)
 
 #pragma mark - Authorization
 
-- (NSURL *)authenticationURLWithScope:(RKOAuthScope)scope
+- (NSURL *)authenticationURLWithScope:(RKOAuthScope)scope redirectURI:(NSString *)redirectURI
 {
-    return [self authenticationURLWithScope:scope state:nil compact:YES];
+    return [self authenticationURLWithScope:scope redirectURI:redirectURI state:nil compact:YES];
 }
 
-- (NSURL *)authenticationURLWithScope:(RKOAuthScope)scope state:(NSString *)state compact:(BOOL)compact
+- (NSURL *)authenticationURLWithScope:(RKOAuthScope)scope redirectURI:(NSString *)redirectURI state:(NSString *)state compact:(BOOL)compact
 {
+    NSParameterAssert(scope);
+    NSParameterAssert(redirectURI);
+
     NSString *scopeString = [self scopeStringFromScope:scope];
-    NSString *URL = [[NSString alloc] initWithFormat:@"https://ssl.reddit.com/api/v1/authorize.compact?client_id=%@&response_type=code&state=RedditKit&redirect_uri=redditkit://oauth&duration=permanent&scope=%@", self.clientIdentifier, scopeString];
+
+    if (scopeString == nil) {
+        NSLog(@"No scope was provided");
+        return nil;
+    }
+
+    self.authorizationScope = scope;
+
+    // Build up the authorization URL to present in the browser.
+    //
+    // Parameters:
+    //
+    // client_id = The app's client identifier
+    // response_type = For mobile apps, this is always set to `code`
+    // state = A random string, used to ensure that callback URLs are not faked
+    // redirect_uri = The redirect URI chosen when setting up the OAuth application on Reddit
+    // duration = For mobile apps, this is always set to `permanent`
+    // scope = The authorization scope string passed into this method
+
+    NSString *URL = [[NSString alloc] initWithFormat:@"https://ssl.reddit.com/api/v1/authorize?client_id=%@&response_type=code&state=RedditKit&redirect_uri=%@&duration=permanent&scope=%@", self.authorizationCredential.clientIdentifier, redirectURI, scopeString];
     
     return [NSURL URLWithString:URL];
 }
@@ -31,15 +57,33 @@
     NSArray *codeParam = [queryParams filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF BEGINSWITH %@", @"code="]];
     
     if ([codeParam count] > 0) {
+        NSLog(@"Code param: %@", codeParam);
+
         NSString *codeQuery = [codeParam objectAtIndex:0];
         NSString *code = [codeQuery stringByReplacingOccurrencesOfString:@"code=" withString:@""];
-        
-        [[RKClient sharedClient] setAuthorizationCode:code];
+        self.authorizationCredential.authorizationCode = code;
         
         return YES;
     }
     
     return NO;
+}
+
+- (NSURLSessionDataTask *)retrieveAccessTokenWithAuthorizationCode:(NSString *)authorizationCode completion:(RKObjectCompletionBlock)completion
+{
+    NSDictionary *parameters = @{ @"grant_type": @"authorization_code", @"code": authorizationCode, @"redirect_uri": @"redditkit://oauth" };
+    
+    return [self postPath:@"api/v1/access_token" parameters:parameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+        RKAccessToken *token = [[RKAccessToken alloc] init];
+        token.accessToken = responseObject[@"access_token"];
+
+        self.authorizationCredential.accessToken = token;
+        self.authorizationCredential = self.authorizationCredential;
+
+        if (completion) {
+            completion(nil, error);
+        }
+    }];
 }
 
 - (BOOL)hasScope:(RKOAuthScope)scope
@@ -50,6 +94,10 @@
 - (NSString *)scopeStringFromScope:(RKOAuthScope)scope
 {
     NSParameterAssert(scope);
+
+    if (scope == 0) {
+        return nil;
+    }
     
     NSMutableArray *scopes = [[NSMutableArray alloc] init];
     
@@ -96,10 +144,10 @@
         [scopes addObject:@"modwiki"];
     }
     if (scope & RKOAuthScopeSubreddits) {
-        [scopes addObject:@"subreddits"];
+        [scopes addObject:@"mysubreddits"];
     }
-    if (scope & RKOAuthScopeSubreddits) {
-        [scopes addObject:@"privatesubreddits"];
+    if (scope & RKOAuthScopePrivateMessages) {
+        [scopes addObject:@"privatemessages"];
     }
     if (scope & RKOAuthScopeRead) {
         [scopes addObject:@"read"];

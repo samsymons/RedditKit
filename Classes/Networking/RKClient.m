@@ -21,6 +21,8 @@
 // THE SOFTWARE.
 
 #import "RKClient.h"
+
+#import "RKAccessToken.h"
 #import "RKUser.h"
 #import "RKResponseSerializer.h"
 
@@ -140,6 +142,14 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
     return authenticationTask;
 }
 
+- (void)authenticateWithClientIdentifier:(NSString *)clientIdentifier
+{
+    RKOAuthCredential *credential = [[RKOAuthCredential alloc] init];
+    credential.clientIdentifier = clientIdentifier;
+
+    self.authorizationCredential = credential;
+}
+
 - (void)updateCurrentUserWithCompletion:(RKCompletionBlock)completion
 {
     __weak __typeof(self)weakSelf = self;
@@ -163,7 +173,7 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
 
 - (BOOL)isAuthenticatedWithOAuth
 {
-    return (self.authorizationCode != nil);
+    return (self.authorizationCredential.accessToken != nil);
 }
 
 - (void)signOut
@@ -207,10 +217,19 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
     [[self requestSerializer] setValue:_userAgent forHTTPHeaderField:@"User-Agent"];
 }
 
-- (void)setAuthorizationCode:(NSString *)authorizationCode
+- (void)setAuthorizationCredential:(RKOAuthCredential *)authorizationCredential
 {
-    _authorizationCode = [authorizationCode copy];
-    [[self requestSerializer] setValue:_modhash forHTTPHeaderField:@"Authorization"];
+    _authorizationCredential = authorizationCredential;
+
+    [[self requestSerializer] setValue:nil forHTTPHeaderField:@"Cookie"];
+    [[self requestSerializer] setAuthorizationHeaderFieldWithUsername:authorizationCredential.clientIdentifier password:@""];
+
+    if (authorizationCredential.accessToken.accessToken) {
+        NSLog(@"Setting authorization code: %@", authorizationCredential.accessToken.accessToken);
+
+        NSString *value = [[NSString alloc] initWithFormat:@"bearer %@", authorizationCredential.accessToken.accessToken];
+        [[self requestSerializer] setValue:value forHTTPHeaderField:@"Authorization"];
+    }
 }
 
 @end

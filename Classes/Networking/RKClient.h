@@ -21,34 +21,36 @@
 // THE SOFTWARE.
 
 #import "AFHTTPSessionManager.h"
+
 #import "RKCompletionBlocks.h"
 #import "RKPagination.h"
+#import "RKOAuthCredential.h"
 
 typedef NS_OPTIONS(NSUInteger, RKOAuthScope) {
-    RKOAuthScopeAccount             = 1 << 0,
-    RKOAuthScopeCreddits            = 1 << 1,
-    RKOAuthScopeEdit                = 1 << 2,
-    RKOAuthScopeFlair               = 1 << 3,
-    RKOAuthScopeHistory             = 1 << 4,
-    RKOAuthScopeIdentity            = 1 << 5,
-    RKOAuthScopeManageLiveThreads   = 1 << 6,
-    RKOAuthScopeModerationConfig    = 1 << 7,
-    RKOAuthScopeModerationFlair     = 1 << 8,
-    RKOAuthScopeModerationLog       = 1 << 9,
-    RKOAuthScopeModerationOthers    = 1 << 10,
-    RKOAuthScopeModerationPosts     = 1 << 11,
-    RKOAuthScopeModerationSelf      = 1 << 12,
-    RKOAuthScopeModerationWiki      = 1 << 13,
-    RKOAuthScopeSubreddits          = 1 << 14,
-    RKOAuthScopePrivateMessages     = 1 << 15,
-    RKOAuthScopeRead                = 1 << 16,
-    RKOAuthScopeReport              = 1 << 17,
-    RKOAuthScopeSave                = 1 << 18,
-    RKOAuthScopeSubmit              = 1 << 19,
-    RKOAuthScopeSubscribe           = 1 << 20,
-    RKOAuthScopeVote                = 1 << 21,
-    RKOAuthScopeEditWikis           = 1 << 22,
-    RKOAuthScopeReadWikis           = 1 << 23
+    RKOAuthScopeAccount             = 1 << 1,
+    RKOAuthScopeCreddits            = 1 << 2,
+    RKOAuthScopeEdit                = 1 << 3,
+    RKOAuthScopeFlair               = 1 << 4,
+    RKOAuthScopeHistory             = 1 << 5,
+    RKOAuthScopeIdentity            = 1 << 6,
+    RKOAuthScopeManageLiveThreads   = 1 << 7,
+    RKOAuthScopeModerationConfig    = 1 << 8,
+    RKOAuthScopeModerationFlair     = 1 << 9,
+    RKOAuthScopeModerationLog       = 1 << 10,
+    RKOAuthScopeModerationOthers    = 1 << 11,
+    RKOAuthScopeModerationPosts     = 1 << 12,
+    RKOAuthScopeModerationSelf      = 1 << 13,
+    RKOAuthScopeModerationWiki      = 1 << 14,
+    RKOAuthScopeSubreddits          = 1 << 15,
+    RKOAuthScopePrivateMessages     = 1 << 16,
+    RKOAuthScopeRead                = 1 << 17,
+    RKOAuthScopeReport              = 1 << 18,
+    RKOAuthScopeSave                = 1 << 19,
+    RKOAuthScopeSubmit              = 1 << 20,
+    RKOAuthScopeSubscribe           = 1 << 21,
+    RKOAuthScopeVote                = 1 << 22,
+    RKOAuthScopeEditWikis           = 1 << 23,
+    RKOAuthScopeReadWikis           = 1 << 24
 };
 
 extern NSString * const RKClientErrorDomain;
@@ -102,19 +104,9 @@ extern NSString * const RKClientErrorDomain;
 
 #pragma mark - OAuth Properties
 
-/**
- The OAuth client identifier from reddit's OAuth application page.
- This is optional, and only required if you are authenticating with OAuth.
- */
-@property (nonatomic, strong) NSString *clientIdentifier;
+@property (nonatomic, strong) RKOAuthCredential *authorizationCredential;
 
-/**
- The OAuth authorization code returned by reddit.
- This is used when authenticating with OAuth.
- */
-@property (nonatomic, strong) NSString *authorizationCode;
-
-@property (nonatomic, assign, readonly) RKOAuthScope authorizationScope;
+@property (nonatomic, assign) RKOAuthScope authorizationScope;
 
 #pragma mark - Methods
 
@@ -140,6 +132,8 @@ extern NSString * const RKClientErrorDomain;
  @note This method signs out the current client before attempting to sign in.
  */
 - (NSURLSessionDataTask *)signInWithUsername:(NSString *)username password:(NSString *)password completion:(RKCompletionBlock)completion;
+
+- (void)authenticateWithClientIdentifier:(NSString *)clientIdentifier;
 
 /**
  Updates the current user. This is useful for getting updated karma totals, or checking whether they have unread private messages.

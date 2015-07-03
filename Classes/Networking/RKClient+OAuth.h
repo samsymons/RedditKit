@@ -10,12 +10,24 @@
 
 @interface RKClient (OAuth)
 
-- (NSURL *)authenticationURLWithScope:(RKOAuthScope)scope;
-- (NSURL *)authenticationURLWithScope:(RKOAuthScope)scope state:(NSString *)state compact:(BOOL)compact;
+/**
+ Provides an authentication URL to present within a web view.
+ This allows the user to authenticate and grant access to your application.
+ */
+- (NSURL *)authenticationURLWithScope:(RKOAuthScope)scope redirectURI:(NSString *)redirectURI;
 
+- (NSURL *)authenticationURLWithScope:(RKOAuthScope)scope redirectURI:(NSString *)redirectURI state:(NSString *)state compact:(BOOL)compact;
+
+/**
+ Parses a redirect URI from reddit and configures the current RKClient with
+ the appropriate authorization.
+ */
 - (BOOL)handleRedirectURI:(NSURL *)redirectURI;
 
+- (NSURLSessionDataTask *)retrieveAccessTokenWithAuthorizationCode:(NSString *)authorizationCode completion:(RKObjectCompletionBlock)completion;
+
 - (BOOL)hasScope:(RKOAuthScope)scope;
+
 - (NSString *)scopeStringFromScope:(RKOAuthScope)scope;
 
 @end
