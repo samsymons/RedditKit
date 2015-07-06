@@ -39,14 +39,7 @@ Once you have everything set up, you may need to restart Xcode to have it pick u
 
 RedditKit is structured around the `RKClient` class. This class manages authentication for a single reddit account and performs HTTP requests on that user's behalf. `RKClient` can be used as a singleton with its `sharedClient` class method, or as a standalone object.
 
-```obj-c
-[[RKClient sharedClient] signInWithUsername:@"name" password:@"password" completion:^(NSError *error) {
-    if (!error)
-    {
-        NSLog(@"Successfully signed in!");
-    }
-}];
-```
+RedditKit's primary method of authentication is via OAuth. To learn how to use OAuth in your apps, check out the OAuth section below.
 
 Once you're signed in, `RKClient` will keep track of any necessary authentication state. You can then call methods which require authentication, such as getting the subreddits you are subscribed to.
 
@@ -79,6 +72,22 @@ RKLink *link = [[self links] firstObject];
 ```
 
 > RedditKit doesn't have any built-in rate limiting. reddit's API rules require that you make no more than 30 requests per minute and try to avoid requesting the same page more than once every 30 seconds. You can read up on the API rules [on their wiki page](https://github.com/reddit/reddit/wiki/API).
+
+## OAuth
+
+RedditKit 2.0 supports authentication via OAuth. To begin, call `authenticateWithClientIdentifier:` on an instance of `RKClient`. Once you have given RedditKit your client identifier,  you will need to obtain a URL to present to the user, allowing them to sign in their account and grant your app access.
+
+```
+RKOAuthScope scope = RKOAuthScopeSubreddits|RKOAuthScopeRead;
+NSURL *authenticationURL = [[RKClient sharedClient] authenticationURLWithScope:scope redirectURI:@"redditkit://oauth"];
+```
+
+This URL uses a redirect URI to pass data back to your app. Here, you have two options:
+
+1. Present the URL in Safari and await a callback
+2. Present the URL inside `UIWebView` and capture the redirect via its delegate methods
+
+The second option provides a better user experience, and is how the RedditKit demo application does it.
 
 ## More Examples
 
