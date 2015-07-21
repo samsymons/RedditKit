@@ -128,7 +128,7 @@
 + (NSValueTransformer *)thumbnailURLJSONTransformer
 {
     return [MTLValueTransformer transformerWithBlock:^id(NSString *thumbnailURL) {
-        if ([thumbnailURL isEqualToString:@"self"])
+        if (![thumbnailURL isKindOfClass:[NSString class]] || [thumbnailURL isEqualToString:@"self"])
         {
             return nil;
         }
