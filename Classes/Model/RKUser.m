@@ -26,6 +26,8 @@
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
+    // Commented out until I check the manual authentication method:
+    /*
     NSDictionary *keyPaths = @{
         @"username": @"data.name",
         @"commentKarma": @"data.comment_karma",
@@ -38,6 +40,19 @@
         @"mod": @"data.is_mod",
         @"over18": @"data.over_18"
     };
+     */
+
+    NSDictionary *keyPaths = @{
+                               @"username": @"name",
+                               @"commentKarma": @"comment_karma",
+                               @"inboxCount": @"inbox_count",
+                               @"linkKarma": @"link_karma",
+                               @"hasVerifiedEmailAddress": @"has_verified_email",
+                               @"gold": @"is_gold",
+                               @"friend": @"is_friend",
+                               @"mod": @"is_mod",
+                               @"over18": @"over_18"
+                               };
     
     return [[super JSONKeyPathsByPropertyKey] mtl_dictionaryByAddingEntriesFromDictionary:keyPaths];
 }

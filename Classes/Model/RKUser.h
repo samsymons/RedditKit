@@ -40,14 +40,9 @@
 @property (nonatomic, assign, readonly) NSInteger linkKarma;
 
 /**
- Whether the user has unread mail.
+ The number of messages in the user's inbox.
  */
-@property (nonatomic, assign, readonly) BOOL hasMail;
-
-/**
- Whether the user has unread moderator mail.
- */
-@property (nonatomic, assign, readonly) BOOL hasModeratorMail;
+@property (nonatomic, assign, readonly) NSUInteger inboxCount;
 
 /**
  Whether the user has verified their email address.
