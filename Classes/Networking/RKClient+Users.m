@@ -28,6 +28,8 @@
 #import "RKSubreddit.h"
 #import "RKPagination.h"
 
+#import "RKClient+OAuth.h"
+
 NSString * RKStringFromUserContentCategory(RKUserContentCategory category)
 {
     switch (category)
@@ -87,11 +89,12 @@ NSString * RKStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
 
 - (NSURLSessionDataTask *)currentUserWithCompletion:(RKObjectCompletionBlock)completion
 {
-    return [self getPath:@"api/me.json" parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+    return [self getPath:@"api/v1/me.json" parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         if (responseObject)
         {
-            RKUser *account = [RKObjectBuilder objectFromJSON:responseObject];
-            
+            // RKUser *account = [RKObjectBuilder objectFromJSON:responseObject];
+            RKUser *account = [MTLJSONAdapter modelOfClass:[RKUser class] fromJSONDictionary:responseObject error:nil];
+
             if (completion)
             {
                 completion(account, nil);
