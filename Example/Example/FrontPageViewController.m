@@ -131,7 +131,7 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 {
     [[RKClient sharedClient] authenticateWithClientIdentifier:@"zeZtZ4A8c71d8w"];
 
-    RKOAuthScope scope = RKOAuthScopeSubreddits;
+    RKOAuthScope scope = RKOAuthScopeSubreddits|RKOAuthScopeRead;
     NSURL *authenticationURL = [[RKClient sharedClient] authenticationURLWithScope:scope redirectURI:@"redditkit://oauth"];
     BrowserViewController *browserViewController = [[BrowserViewController alloc] initWithURL:authenticationURL];
 
