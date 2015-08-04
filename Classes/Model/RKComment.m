@@ -66,7 +66,7 @@
 	NSString *parentIDString = self.parentID ? @"parentID" : @"parent";
 	NSString *fullNameIDString = self.parentID ? @"fullName" : @"identifier";
 	
-	return [NSString stringWithFormat:@"<%@: %p, author: %@, %@: %@, %@: %@, replies: %lu>", NSStringFromClass([self class]), self, self.author, parentIDString, self.parentID ? self.submissionParent : self.submissionParent, fullNameIDString, self.parentID ? self.fullName : self.identifier, (unsigned long)self.replies.count];
+	return [NSString stringWithFormat:@"<%@: %p, author: %@, %@: %@, %@: %@, replies: %lu>", NSStringFromClass([self class]), self, self.author, parentIDString, self.parentID ?: self.submissionParent, fullNameIDString, self.parentID ? self.fullName : self.identifier, (unsigned long)self.replies.count];
 }
 
 - (BOOL)isDeleted

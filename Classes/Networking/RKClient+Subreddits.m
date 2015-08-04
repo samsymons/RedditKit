@@ -182,6 +182,12 @@
 	}];
 }
 
+- (NSURLSessionDataTask  *)defaultSubredditsWithPagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+{
+    
+    return [self listingTaskWithPath:@"subreddits/default.json" parameters:nil pagination:pagination completion:completion];
+    
+}
 #pragma mark - Subscribing
 
 - (NSURLSessionDataTask *)subscribeToSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion

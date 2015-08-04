@@ -21,7 +21,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (HTML)
+@interface NSString (RKHTML)
 
 - (NSString *)stringByUnescapingHTMLEntities;
 

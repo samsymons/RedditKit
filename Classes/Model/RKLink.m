@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 
 #import "RKLink.h"
-#import "NSString+HTML.h"
+#import "NSString+RKHTML.h"
 #import "RKLinkEmbeddedMedia.h"
 
 @implementation RKLink
@@ -128,7 +128,7 @@
 + (NSValueTransformer *)thumbnailURLJSONTransformer
 {
     return [MTLValueTransformer transformerWithBlock:^id(NSString *thumbnailURL) {
-        if ([thumbnailURL isEqualToString:@"self"])
+        if (![thumbnailURL isKindOfClass:[NSString class]] || [thumbnailURL isEqualToString:@"self"])
         {
             return nil;
         }
