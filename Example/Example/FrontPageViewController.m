@@ -29,7 +29,7 @@
 
 static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 
-@interface FrontPageViewController () <UIActionSheetDelegate>
+@interface FrontPageViewController () <UIActionSheetDelegate, BrowserViewControllerDelegate>
 
 @property (nonatomic, strong) NSArray *links;
 @property (nonatomic, strong) RKPagination *currentPagination;
@@ -129,11 +129,12 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
 
 - (void)showAuthenticationPage
 {
-    [[RKClient sharedClient] authenticateWithClientIdentifier:@"zeZtZ4A8c71d8w"];
+    [[RKClient sharedClient] authenticateWithClientIdentifier:@"zeZtZ4A8c71d8w" redirectURI:[NSURL URLWithString:@"redditkit://oauth"]];
 
     RKOAuthScope scope = RKOAuthScopeSubreddits|RKOAuthScopeRead;
-    NSURL *authenticationURL = [[RKClient sharedClient] authenticationURLWithScope:scope redirectURI:@"redditkit://oauth"];
+    NSURL *authenticationURL = [[RKClient sharedClient] authenticationURLWithScope:scope];
     BrowserViewController *browserViewController = [[BrowserViewController alloc] initWithURL:authenticationURL];
+    browserViewController.delegate = self;
 
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:browserViewController];
     [self presentViewController:navigationController animated:YES completion:nil];
@@ -318,6 +319,18 @@ static NSString * const kLinkCellReuseIdentifier = @"kLinkCellReuseIdentifier";
         self.currentCategory = ((RKSubredditCategory)buttonIndex + 1);
         [self resetLinks];
     }
+}
+
+#pragma mark - BrowserViewControllerDelegate
+
+- (void)browserViewControllerDidAuthenticate:(BrowserViewController *)viewController
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        self.navigationItem.leftBarButtonItem = nil;
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Authenticated!" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+    }];
 }
 
 @end

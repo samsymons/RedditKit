@@ -60,6 +60,11 @@ extern const NSInteger RKClientErrorTimedOut;
 + (NSError *)authenticationRequiredError;
 
 /**
+ Returns an error that occurs when retrieving the OAuth access token fails because of an invalid grant.
+ */
++ (NSError *)invalidOAuthGrantError;
+
+/**
  Returns an error that occurs when the current client does not have the appropriate OAuth privileges.
  */
 + (NSError *)invalidOAuthScopeError;

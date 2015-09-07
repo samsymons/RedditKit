@@ -203,4 +203,19 @@
     self.navigationItem.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 }
 
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    if ([[RKClient sharedClient] handleRedirectURI:request.URL]) {
+        [[RKClient sharedClient] retrieveAccessTokenWithCompletion:^(id object, NSError *error) {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(browserViewControllerDidAuthenticate:)]) {
+                [self.delegate browserViewControllerDidAuthenticate:self];
+            }
+        }];
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
 @end

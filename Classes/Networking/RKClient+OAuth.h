@@ -14,9 +14,9 @@
  Provides an authentication URL to present within a web view.
  This allows the user to authenticate and grant access to your application.
  */
-- (NSURL *)authenticationURLWithScope:(RKOAuthScope)scope redirectURI:(NSString *)redirectURI;
+- (NSURL *)authenticationURLWithScope:(RKOAuthScope)scope;
 
-- (NSURL *)authenticationURLWithScope:(RKOAuthScope)scope redirectURI:(NSString *)redirectURI state:(NSString *)state compact:(BOOL)compact;
+- (NSURL *)authenticationURLWithScope:(RKOAuthScope)scope state:(NSString *)state compact:(BOOL)compact;
 
 /**
  Parses a redirect URI from reddit and configures the current RKClient with
