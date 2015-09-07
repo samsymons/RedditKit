@@ -46,7 +46,12 @@
     // duration = For mobile apps, this is always set to `permanent`
     // scope = The authorization scope string passed into this method
 
-    NSString *URL = [[NSString alloc] initWithFormat:@"https://ssl.reddit.com/api/v1/authorize?client_id=%@&response_type=code&state=RedditKit&redirect_uri=%@&duration=permanent&scope=%@", self.authorizationCredential.clientIdentifier, redirectURI, scopeString];
+    NSString *authorizeString = @"authorize";
+    if (compact) {
+        authorizeString = @"authorize.compact";
+    }
+
+    NSString *URL = [[NSString alloc] initWithFormat:@"https://ssl.reddit.com/api/v1/%@?client_id=%@&response_type=code&state=RedditKit&redirect_uri=%@&duration=permanent&scope=%@", authorizeString, self.authorizationCredential.clientIdentifier, redirectURI, scopeString];
     
     return [NSURL URLWithString:URL];
 }
