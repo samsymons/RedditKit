@@ -442,7 +442,7 @@
     }
     
     NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if ([responseObject valueForKey:@"error"] && [[responseObject valueForKey:@"error"] integerValue] == 401) {
+        if ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject objectForKey:@"error"] integerValue] == 401) {
             NSLog(@"Access token expired. Fetching new token.");
             
             [self refreshAccessTokenWithCompletion:^(id object, NSError *error) {
