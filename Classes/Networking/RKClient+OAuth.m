@@ -58,7 +58,16 @@
     return [NSURL URLWithString:URL];
 }
 
-- (BOOL)handleRedirectURI:(NSURL *)redirectURI
+- (BOOL)isRedirectURI:(NSURL *)redirectURI
+{
+    if ([self.authorizationCredential.redirectURI.scheme isEqualToString:redirectURI.scheme] && [self.authorizationCredential.redirectURI.host isEqualToString:redirectURI.host]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (void)handleRedirectURI:(NSURL *)redirectURI completion:(RKObjectCompletionBlock)completion
 {
     NSArray *queryParams = [[redirectURI query] componentsSeparatedByString:@"&"];
     NSArray *codeParam = [queryParams filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF BEGINSWITH %@", @"code="]];
@@ -68,10 +77,15 @@
         NSString *code = [codeQuery stringByReplacingOccurrencesOfString:@"code=" withString:@""];
         self.authorizationCredential.authorizationCode = code;
         
-        return YES;
+        if (completion) {
+            completion(nil, nil);
+        }
     }
-    
-    return NO;
+    else {
+        if (completion) {
+            completion(nil, [[self class] invalidOAuthRequestError]);
+        }
+    }
 }
 
 - (NSURLSessionDataTask *)retrieveAccessTokenWithCompletion:(RKObjectCompletionBlock)completion
@@ -92,6 +106,7 @@
         else {
             RKAccessToken *token = [[RKAccessToken alloc] init];
             token.accessToken = responseObject[@"access_token"];
+            token.refreshToken = responseObject[@"refresh_token"];
             
             RKOAuthCredential *credential = self.authorizationCredential;
             credential.accessToken = token;
@@ -100,6 +115,43 @@
         }
         
 
+        if (completion) {
+            completion(nil, error);
+        }
+    }];
+}
+
+- (NSURLSessionDataTask *)refreshAccessTokenWithCompletion:(RKObjectCompletionBlock)completion
+{
+    return [self refreshAccessTokenWithCompletion:self.authorizationCredential.accessToken.refreshToken completion:completion];
+}
+
+- (NSURLSessionDataTask *)refreshAccessTokenWithCompletion:(NSString *)refreshToken completion:(RKObjectCompletionBlock)completion
+{
+    NSParameterAssert(refreshToken);
+    
+    RKOAuthCredential *credential = self.authorizationCredential;
+    credential.accessToken = nil;
+    
+    self.authorizationCredential = credential;
+    
+    NSDictionary *parameters = @{ @"grant_type": @"refresh_token", @"refresh_token": refreshToken };
+    
+    return [self postPath:@"api/v1/access_token" parameters:parameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+        if (responseObject[@"error"]) {
+            error = [RKClient invalidOAuthGrantError];
+        }
+        else {
+            RKAccessToken *token = [[RKAccessToken alloc] init];
+            token.accessToken = responseObject[@"access_token"];
+            token.refreshToken = refreshToken;
+            
+            RKOAuthCredential *credential = self.authorizationCredential;
+            credential.accessToken = token;
+            
+            self.authorizationCredential = credential;
+        }
+        
         if (completion) {
             completion(nil, error);
         }

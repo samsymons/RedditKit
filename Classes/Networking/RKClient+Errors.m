@@ -143,6 +143,12 @@ const NSInteger RKClientErrorTimedOut = 504;
     return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorAuthenticationFailed userInfo:userInfo];
 }
 
++ (NSError *)invalidOAuthRequestError
+{
+    NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Invalid OAuth request" failureReason:@"Ensure that you are not attempting to re-use old codes - they are one time use."];
+    return [NSError errorWithDomain:RKClientErrorDomain code:RKClientErrorAuthenticationFailed userInfo:userInfo];
+}
+
 + (NSError *)invalidOAuthGrantError
 {
     NSDictionary *userInfo = [RKClient userInfoWithDescription:@"Invalid OAuth grant" failureReason:@"Ensure that you are not attempting to re-use old codes - they are one time use."];
