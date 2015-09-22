@@ -452,6 +452,29 @@ NSString * RKStringFromDistinguishedStatus(RKDistinguishedStatus status)
     }];
 }
 
+- (NSURLSessionDataTask *)stylesheetURLForSubreddit:(RKSubreddit *)subreddit completion:(RKObjectCompletionBlock)completion
+{
+    return [self stylesheetURLForSubredditWithName:subreddit.name completion:completion];
+}
+
+- (NSURLSessionDataTask *)stylesheetURLForSubredditWithName:(NSString *)subredditName completion:(RKObjectCompletionBlock)completion
+{
+    NSParameterAssert(subredditName);
+
+    NSString *path = [NSString stringWithFormat:@"r/%@/stylesheet", subredditName];
+
+    return [self getPath:path parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+        if (response.URL)
+        {
+            completion(response.URL, nil);
+        }
+        else
+        {
+            completion(nil, error);
+        }
+    }];
+}
+
 - (NSURLSessionDataTask *)setStylesheet:(NSString *)stylesheet forSubreddit:(RKSubreddit *)subreddit completion:(RKCompletionBlock)completion
 {
     return [self setStylesheet:stylesheet forSubredditWithName:subreddit.name completion:completion];

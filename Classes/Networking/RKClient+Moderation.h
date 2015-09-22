@@ -506,6 +506,22 @@
 - (NSURLSessionDataTask *)stylesheetForSubredditWithName:(NSString *)subredditName completion:(RKObjectCompletionBlock)completion;
 
 /**
+ Gets the URL for the subreddit's stylesheet.
+
+ @param subreddit The subreddit for which to get the stylesheet URL.
+ @param completion The block to be executed upon completion of the request. Its object parameter is an NSURL with the subreddit's stylesheet address.
+ */
+- (NSURLSessionDataTask *)stylesheetURLForSubreddit:(RKSubreddit *)subreddit completion:(RKObjectCompletionBlock)completion;
+
+/**
+ Gets the URL for the subreddit's stylesheet.
+
+ @param subredditName The name of the subreddit for which to get the stylesheet URL.
+ @param completion The block to be executed upon completion of the request. Its object parameter is an NSURL with the subreddit's stylesheet address.
+ */
+- (NSURLSessionDataTask *)stylesheetURLForSubredditWithName:(NSString *)subredditName completion:(RKObjectCompletionBlock)completion;
+
+/**
  Sets the subreddit's stylesheet.
  
  @param stylesheet The subreddit's new stylesheet.
