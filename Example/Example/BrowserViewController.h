@@ -20,7 +20,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+@class BrowserViewController;
+
+@protocol BrowserViewControllerDelegate <NSObject>
+
+@optional
+- (void)browserViewControllerDidAuthenticate:(BrowserViewController *)viewController;
+
+@end
+
 @interface BrowserViewController : UIViewController <UIWebViewDelegate>
+
+@property (nonatomic, weak) id <BrowserViewControllerDelegate> delegate;
 
 - (instancetype)initWithLink:(RKLink *)link;
 - (instancetype)initWithURL:(NSURL *)URL;

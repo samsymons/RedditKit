@@ -20,6 +20,11 @@
 @property (nonatomic, strong) NSString *clientIdentifier;
 
 /**
+ The OAuth redirect URI from reddit's OAuth application page.
+ */
+@property (nonatomic, strong) NSURL *redirectURI;
+
+/**
  The OAuth authorization code returned by reddit's callback to the current app.
 
  @note This is used when retrieving an access token.

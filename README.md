@@ -75,7 +75,7 @@ RKLink *link = [[self links] firstObject];
 
 ## OAuth
 
-RedditKit 2.0 supports authentication via OAuth. To begin, call `authenticateWithClientIdentifier:` on an instance of `RKClient`. Once you have given RedditKit your client identifier,  you will need to obtain a URL to present to the user, allowing them to sign in their account and grant your app access.
+RedditKit 2.0 supports authentication via OAuth. To begin, call `authenticateWithClientIdentifier:redirectURI:` on an instance of `RKClient`. Once you have given RedditKit your client identifier and redirect URI,  you will need to obtain a URL to present to the user, allowing them to sign in their account and grant your app access.
 
 ```
 RKOAuthScope scope = RKOAuthScopeSubreddits|RKOAuthScopeRead;
@@ -88,6 +88,8 @@ This URL uses a redirect URI to pass data back to your app. Here, you have two o
 2. Present the URL inside `UIWebView` and capture the redirect via its delegate methods
 
 The second option provides a better user experience, and is how the RedditKit demo application does it.
+
+The next step is to retrieve the temporary OAuth code from Reddit, via the URL they have redirected. You can handle this step by calling `handleRedirectURI:` on an instance of `RKClient`. Finally, you can call `retrieveAccessTokenWithCompletion:` which will fetch the access token and save it for future requests. 
 
 ## More Examples
 

@@ -22,6 +22,7 @@
 
 #import "RKClient+Requests.h"
 #import "RKClient+Errors.h"
+#import "RKClient+OAuth.h"
 #import "RKPagination.h"
 #import "RKObjectBuilder.h"
 
@@ -441,6 +442,16 @@
     }
     
     NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject objectForKey:@"error"] integerValue] == 401) {
+            NSLog(@"Access token expired. Fetching new token.");
+            
+            [self refreshAccessTokenWithCompletion:^(id object, NSError *error) {
+                [self taskWithMethod:method path:path parameters:parameters completion:completion];
+            }];
+            
+            return;
+        }
+        
         NSDictionary *headers = [((NSHTTPURLResponse *)response) allHeaderFields];
         
         self.rateLimitedRequestsUsed = [[headers objectForKey:@"x-ratelimit-remaining"] intValue];

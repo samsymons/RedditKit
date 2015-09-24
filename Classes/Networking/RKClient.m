@@ -142,10 +142,11 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
     return authenticationTask;
 }
 
-- (void)authenticateWithClientIdentifier:(NSString *)clientIdentifier
+- (void)authenticateWithClientIdentifier:(NSString *)clientIdentifier redirectURI:(NSURL *)redirectURI
 {
     RKOAuthCredential *credential = [[RKOAuthCredential alloc] init];
     credential.clientIdentifier = clientIdentifier;
+    credential.redirectURI = redirectURI;
 
     self.authorizationCredential = credential;
 }
@@ -226,7 +227,7 @@ NSString * const RKClientErrorDomain = @"RKClientErrorDomain";
     [[self requestSerializer] setAuthorizationHeaderFieldWithUsername:authorizationCredential.clientIdentifier password:@""];
 
     if (authorizationCredential.accessToken.accessToken) {
-        NSLog(@"Setting authorization code: %@", authorizationCredential.accessToken.accessToken);
+        NSLog(@"Setting authorization code: %@ and refresh token: %@", authorizationCredential.accessToken.accessToken, authorizationCredential.accessToken.refreshToken);
 
         NSString *value = [[NSString alloc] initWithFormat:@"bearer %@", authorizationCredential.accessToken.accessToken];
         [[self requestSerializer] setValue:value forHTTPHeaderField:@"Authorization"];

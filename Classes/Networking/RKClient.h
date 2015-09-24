@@ -133,7 +133,13 @@ extern NSString * const RKClientErrorDomain;
  */
 - (NSURLSessionDataTask *)signInWithUsername:(NSString *)username password:(NSString *)password completion:(RKCompletionBlock)completion;
 
-- (void)authenticateWithClientIdentifier:(NSString *)clientIdentifier;
+/**
+ Specifies your OAuth client identifier and redirect URI when authenticating with OAuth.
+ 
+ @param clientIdentifier Your applications client identifier.
+ @param password Your applications redirect URI.
+ */
+- (void)authenticateWithClientIdentifier:(NSString *)clientIdentifier redirectURI:(NSURL *)redirectURI;
 
 /**
  Updates the current user. This is useful for getting updated karma totals, or checking whether they have unread private messages.

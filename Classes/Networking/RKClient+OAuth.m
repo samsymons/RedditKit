@@ -9,6 +9,7 @@
 #import "RKClient+OAuth.h"
 
 #import "RKClient+Requests.h"
+#import "RKClient+Errors.h"
 
 #import "RKAccessToken.h"
 
@@ -16,15 +17,16 @@
 
 #pragma mark - Authorization
 
-- (NSURL *)authenticationURLWithScope:(RKOAuthScope)scope redirectURI:(NSString *)redirectURI
+- (NSURL *)authenticationURLWithScope:(RKOAuthScope)scope
 {
-    return [self authenticationURLWithScope:scope redirectURI:redirectURI state:nil compact:YES];
+    return [self authenticationURLWithScope:scope state:nil compact:YES];
 }
 
-- (NSURL *)authenticationURLWithScope:(RKOAuthScope)scope redirectURI:(NSString *)redirectURI state:(NSString *)state compact:(BOOL)compact
+- (NSURL *)authenticationURLWithScope:(RKOAuthScope)scope state:(NSString *)state compact:(BOOL)compact
 {
     NSParameterAssert(scope);
-    NSParameterAssert(redirectURI);
+    NSParameterAssert(self.authorizationCredential.clientIdentifier);
+    NSParameterAssert(self.authorizationCredential.redirectURI);
 
     NSString *scopeString = [self scopeStringFromScope:scope];
 
@@ -46,12 +48,26 @@
     // duration = For mobile apps, this is always set to `permanent`
     // scope = The authorization scope string passed into this method
 
-    NSString *URL = [[NSString alloc] initWithFormat:@"https://ssl.reddit.com/api/v1/authorize?client_id=%@&response_type=code&state=RedditKit&redirect_uri=%@&duration=permanent&scope=%@", self.authorizationCredential.clientIdentifier, redirectURI, scopeString];
+    NSString *authorizeString = @"authorize";
+    if (compact) {
+        authorizeString = @"authorize.compact";
+    }
+
+    NSString *URL = [[NSString alloc] initWithFormat:@"https://ssl.reddit.com/api/v1/%@?client_id=%@&response_type=code&state=RedditKit&redirect_uri=%@&duration=permanent&scope=%@", authorizeString, self.authorizationCredential.clientIdentifier, self.authorizationCredential.redirectURI, scopeString];
     
     return [NSURL URLWithString:URL];
 }
 
-- (BOOL)handleRedirectURI:(NSURL *)redirectURI
+- (BOOL)isRedirectURI:(NSURL *)redirectURI
+{
+    if ([self.authorizationCredential.redirectURI.scheme isEqualToString:redirectURI.scheme] && [self.authorizationCredential.redirectURI.host isEqualToString:redirectURI.host]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (void)handleRedirectURI:(NSURL *)redirectURI completion:(RKObjectCompletionBlock)completion
 {
     NSArray *queryParams = [[redirectURI query] componentsSeparatedByString:@"&"];
     NSArray *codeParam = [queryParams filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF BEGINSWITH %@", @"code="]];
@@ -61,10 +77,15 @@
         NSString *code = [codeQuery stringByReplacingOccurrencesOfString:@"code=" withString:@""];
         self.authorizationCredential.authorizationCode = code;
         
-        return YES;
+        if (completion) {
+            completion(nil, nil);
+        }
     }
-    
-    return NO;
+    else {
+        if (completion) {
+            completion(nil, [[self class] invalidOAuthRequestError]);
+        }
+    }
 }
 
 - (NSURLSessionDataTask *)retrieveAccessTokenWithCompletion:(RKObjectCompletionBlock)completion
@@ -76,17 +97,61 @@
 {
     NSParameterAssert(authorizationCode);
     
-    NSDictionary *parameters = @{ @"grant_type": @"authorization_code", @"code": authorizationCode, @"redirect_uri": @"redditkit://oauth" };
+    NSDictionary *parameters = @{ @"grant_type": @"authorization_code", @"code": authorizationCode, @"redirect_uri": self.authorizationCredential.redirectURI };
     
     return [self postPath:@"api/v1/access_token" parameters:parameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
-        RKAccessToken *token = [[RKAccessToken alloc] init];
-        token.accessToken = responseObject[@"access_token"];
+        if (responseObject[@"error"]) {
+            error = [RKClient invalidOAuthGrantError];
+        }
+        else {
+            RKAccessToken *token = [[RKAccessToken alloc] init];
+            token.accessToken = responseObject[@"access_token"];
+            token.refreshToken = responseObject[@"refresh_token"];
+            
+            RKOAuthCredential *credential = self.authorizationCredential;
+            credential.accessToken = token;
+            
+            self.authorizationCredential = credential;
+        }
+        
 
-        RKOAuthCredential *credential = self.authorizationCredential;
-        credential.accessToken = token;
+        if (completion) {
+            completion(nil, error);
+        }
+    }];
+}
 
-        self.authorizationCredential = credential;
+- (NSURLSessionDataTask *)refreshAccessTokenWithCompletion:(RKObjectCompletionBlock)completion
+{
+    return [self refreshAccessTokenWithCompletion:self.authorizationCredential.accessToken.refreshToken completion:completion];
+}
 
+- (NSURLSessionDataTask *)refreshAccessTokenWithCompletion:(NSString *)refreshToken completion:(RKObjectCompletionBlock)completion
+{
+    NSParameterAssert(refreshToken);
+    
+    RKOAuthCredential *credential = self.authorizationCredential;
+    credential.accessToken = nil;
+    
+    self.authorizationCredential = credential;
+    
+    NSDictionary *parameters = @{ @"grant_type": @"refresh_token", @"refresh_token": refreshToken };
+    
+    return [self postPath:@"api/v1/access_token" parameters:parameters completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+        if (responseObject[@"error"]) {
+            error = [RKClient invalidOAuthGrantError];
+        }
+        else {
+            RKAccessToken *token = [[RKAccessToken alloc] init];
+            token.accessToken = responseObject[@"access_token"];
+            token.refreshToken = refreshToken;
+            
+            RKOAuthCredential *credential = self.authorizationCredential;
+            credential.accessToken = token;
+            
+            self.authorizationCredential = credential;
+        }
+        
         if (completion) {
             completion(nil, error);
         }
