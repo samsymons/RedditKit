@@ -1,4 +1,4 @@
-// RedditKit.h
+// RKImage.h
 //
 // Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
@@ -20,34 +20,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
+#import "Mantle.h"
 
-#import "RKClient+Apps.h"
-#import "RKClient+Captcha.h"
-#import "RKClient+Comments.h"
-#import "RKClient+Errors.h"
-#import "RKClient+Flair.h"
-#import "RKClient+Links.h"
-#import "RKClient+Messages.h"
-#import "RKClient+Miscellaneous.h"
-#import "RKClient+Moderation.h"
-#import "RKClient+Multireddits.h"
-#import "RKClient+Search.h"
-#import "RKClient+Subreddits.h"
-#import "RKClient+Users.h"
-#import "RKClient+Voting.h"
-#import "RKClient+Wiki.h"
+@interface RKImage : MTLModel <MTLJSONSerializing>
 
-#import "RKMoreComments.h"
-#import "RKComment.h"
-#import "RKFullName.h"
-#import "RKImage.h"
-#import "RKLink.h"
-#import "RKLinkEmbeddedMedia.h"
-#import "RKLinkPreviewImage.h"
-#import "RKMessage.h"
-#import "RKMultireddit.h"
-#import "RKMultiredditDescription.h"
-#import "RKModeratorAction.h"
-#import "RKSubreddit.h"
-#import "RKUser.h"
+/**
+ The URL for the image.
+
+ @example "https://i.redditmedia.com"
+ */
+@property (nonatomic, strong) NSURL *URL;
+
+/**
+ The scaled-down width of the thumbnail.
+ */
+@property (nonatomic, assign) CGFloat width;
+
+/**
+ The scaled-down height of the thumbnail.
+ */
+@property (nonatomic, assign) CGFloat height;
+
+@end

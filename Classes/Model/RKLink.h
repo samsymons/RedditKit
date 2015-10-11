@@ -23,12 +23,13 @@
 #import "RKVotable.h"
 
 @class RKLinkEmbeddedMedia;
+@class RKLinkPreviewImage;
 
 @interface RKLink : RKVotable
 
 /**
  The title of the link.
- 
+
  @note RKLink automatically unescapes HTML entities.
  */
 @property (nonatomic, copy, readonly) NSString *title;
@@ -59,10 +60,10 @@
 /**
  The ratio of upvotes to downvotes.
  This is the percentage of how many users like this link.
- 
+
  @note The upvoteRatio is only available to links which have had their information
  expanded via `linkByExpandingInformationForLink:completion:`.
- 
+
  The upvote ratio is not explicitly rounded to any specific precision. When displaying
  the ratio to the screen, you will want to specify this yourself.
  */
@@ -127,7 +128,7 @@
 
 /**
  Whether the link has been visited by the current user.
- 
+
  @note This property will only be true if the current user has reddit gold.
  */
 @property (nonatomic, assign, readonly) BOOL visited;
@@ -162,6 +163,11 @@
  This property will be nil if the post is a self post.
  */
 @property (nonatomic, copy, readonly) NSURL *thumbnailURL;
+
+/**
+ The array of preview images. Each object will be an RKLinkPreviewImage
+ */
+@property (nonatomic, strong, readonly) NSArray *previewImages;
 
 /**
  The number of comments on the link.
@@ -200,7 +206,7 @@
 
 /**
  Returns the URL in a shortened format. This uses reddit's URL shortener.
- 
+
  @example http://redd.it/92dd8
  */
 - (NSURL *)shortURL;
