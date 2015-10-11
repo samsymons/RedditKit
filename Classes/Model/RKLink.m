@@ -23,6 +23,7 @@
 #import "RKLink.h"
 #import "NSString+RKHTML.h"
 #import "RKLinkEmbeddedMedia.h"
+#import "RKLinkPreviewImage.h"
 
 @implementation RKLink
 
@@ -59,8 +60,9 @@
         @"authorFlairText": @"data.author_flair_text",
         @"linkFlairClass": @"data.link_flair_css_class",
         @"linkFlairText": @"data.link_flair_text",
+        @"previewImages": @"data.preview.images"
     };
-    
+
     return [[super JSONKeyPathsByPropertyKey] mtl_dictionaryByAddingEntriesFromDictionary:keyPaths];
 }
 
@@ -73,7 +75,7 @@
 {
     NSSet *supportedFileTypeSuffixes = [NSSet setWithObjects:@"tiff", @"tif", @"jpg", @"jpeg", @"gif", @"png", nil];
     NSString *extension = [[self URL] pathExtension];
-    
+
     return [supportedFileTypeSuffixes containsObject:extension];
 }
 
@@ -120,7 +122,7 @@
     return [MTLValueTransformer transformerWithBlock:^(NSString *permalink) {
         NSString *unescapedPermalink = [[permalink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByUnescapingHTMLEntities];
         NSString *fullPermalink = [NSString stringWithFormat:@"http://reddit.com%@", unescapedPermalink];
-        
+
         return [NSURL URLWithString:fullPermalink];
     }];
 }
@@ -159,13 +161,37 @@
     return [MTLValueTransformer transformerWithBlock:^id(NSDictionary *media) {
         NSError *error = nil;
         RKLinkEmbeddedMedia *mediaObject = [MTLJSONAdapter modelOfClass:[RKLinkEmbeddedMedia class] fromJSONDictionary:media error:&error];
-        
+
         if (error) {
             return nil;
         }
         else {
             return mediaObject;
         }
+    }];
+}
+
++ (NSValueTransformer *)previewImagesJSONTransformer
+{
+    return [MTLValueTransformer transformerWithBlock:^id(id previewImages) {
+        NSMutableArray *images = [[NSMutableArray alloc] init];
+
+        for (NSDictionary *imageJSON in previewImages)
+        {
+            NSError *error = nil;
+            id model = [MTLJSONAdapter modelOfClass:[RKLinkPreviewImage class] fromJSONDictionary:imageJSON error:&error];
+
+            if (!error)
+            {
+                [images addObject:model];
+            }
+            else
+            {
+                NSLog(@"Failed to build preview image: %@", error);
+            }
+        }
+
+        return [images copy];
     }];
 }
 
