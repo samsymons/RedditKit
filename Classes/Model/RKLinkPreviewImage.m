@@ -32,6 +32,8 @@
     return @{
         @"source": @"source",
         @"resolutions": @"resolutions",
+        @"nsfwSource": @"variants.nsfw.source",
+        @"nsfwResolutions": @"variants.nsfw.resolutions",
         @"identifier": @"id"
     };
 }
@@ -59,6 +61,45 @@
 }
 
 + (NSValueTransformer *)resolutionsJSONTransformer
+{
+    return [MTLValueTransformer transformerWithBlock:^id(id resolutions) {
+        NSMutableArray *images = [[NSMutableArray alloc] init];
+
+        for (NSDictionary *imageJSON in resolutions)
+        {
+            NSError *error = nil;
+            id model = [MTLJSONAdapter modelOfClass:[RKImage class] fromJSONDictionary:imageJSON error:&error];
+
+            if (!error)
+            {
+                [images addObject:model];
+            }
+            else
+            {
+                NSLog(@"Failed to build image: %@", error);
+            }
+        }
+
+        return [images copy];
+    }];
+}
+
++ (NSValueTransformer *)nsfwSourceJSONTransformer
+{
+    return [MTLValueTransformer transformerWithBlock:^id(NSDictionary *source) {
+        NSError *error = nil;
+        RKImage *imageObject = [MTLJSONAdapter modelOfClass:[RKImage class] fromJSONDictionary:source error:&error];
+
+        if (error) {
+            return nil;
+        }
+        else {
+            return imageObject;
+        }
+    }];
+}
+
++ (NSValueTransformer *)nsfwResolutionsJSONTransformer
 {
     return [MTLValueTransformer transformerWithBlock:^id(id resolutions) {
         NSMutableArray *images = [[NSMutableArray alloc] init];
