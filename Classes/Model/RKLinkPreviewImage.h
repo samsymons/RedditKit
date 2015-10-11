@@ -37,6 +37,16 @@
 @property (nonatomic, strong) NSArray *resolutions;
 
 /**
+ The source of the nsfw variant
+ */
+@property (nonatomic, strong) RKImage *nsfwSource;
+
+/**
+ An array of resolutions for the nsfw variant. This array contains RKImage objects.
+ */
+@property (nonatomic, strong) NSArray *nsfwResolutions;
+
+/**
  The identifier of the preview image.
  */
 @property (nonatomic, strong) NSString *identifier;
