@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 
 #import "RKImage.h"
-#import "NSString+HTML.h"
+#import "NSString+RKHTML.h"
 
 @implementation RKImage
 
