@@ -81,39 +81,58 @@ NSString * RKStringFromUserContentSortingMethod(RKUserContentSortingMethod sorti
     }
 }
 
+NSString * RKStringFromSearchSortingMethod(RKSearchSortingMethod sortingMethod)
+{
+    switch (sortingMethod)
+    {
+        case RKSearchSortingMethodRelevance:
+            return @"relevance";
+        case RKSearchSortingMethodHot:
+            return @"hot";
+        case RKSearchSortingMethodTop:
+            return @"top";
+        case RKSearchSortingMethodNew:
+            return @"new";
+        case RKSearchSortingMethodComments:
+            return @"comments";
+        default:
+            return nil;
+    }
+}
+
 @implementation RKPagination
 
 + (RKPagination *)paginationFromListingResponse:(NSDictionary *)listingResponse
 {
     RKPagination *pagination = [[RKPagination alloc] init];
-    
+
     id before = [listingResponse valueForKeyPath:@"data.before"];
     id after = [listingResponse valueForKeyPath:@"data.after"];
-    
+
     if (before == [NSNull null] && after == [NSNull null])
     {
         return nil;
     }
-    
+
     if (before != [NSNull null])
     {
         pagination.before = before;
     }
-    
+
     if (after != [NSNull null])
     {
         pagination.after = after;
     }
-    
+
     return pagination;
 }
 
 + (RKPagination *)paginationWithLimit:(NSUInteger)limit
 {
     RKPagination *pagination = [[RKPagination alloc] init];
-    
+
     pagination.limit = limit;
-    
+
     return pagination;
 }
 
@@ -123,7 +142,7 @@ NSString * RKStringFromUserContentSortingMethod(RKUserContentSortingMethod sorti
     {
         _limit = 25;
     }
-    
+
     return self;
 }
 
@@ -141,37 +160,42 @@ NSString * RKStringFromUserContentSortingMethod(RKUserContentSortingMethod sorti
 - (NSDictionary *)dictionaryValue
 {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithCapacity:4];
-    
+
     if (self.limit)
     {
         [parameters setObject:[NSString stringWithFormat:@"%lu", (unsigned long)self.limit] forKey:@"limit"];
     }
-    
+
     if (self.before)
     {
         [parameters setObject:self.before forKey:@"before"];
     }
-    
+
     if (self.after)
     {
         [parameters setObject:self.after forKey:@"after"];
     }
-    
+
     if (self.timeMethod)
     {
         [parameters setObject:RKStringFromTimeSortingMethod(self.timeMethod) forKey:@"t"];
     }
-    
+
     if (self.userContentSortingMethod)
     {
         [parameters setObject:RKStringFromUserContentSortingMethod(self.userContentSortingMethod) forKey:@"sort"];
     }
-    
+
+    if(self.searchSortingMethod)
+    {
+        [parameters setObject:RKStringFromSearchSortingMethod(self.searchSortingMethod) forKey:@"sort"];
+    }
+
     if ([parameters count] == 0)
     {
         return nil;
     }
-    
+
     return [parameters copy];
 }
 
@@ -192,7 +216,7 @@ NSString * RKStringFromUserContentSortingMethod(RKUserContentSortingMethod sorti
         _userContentSortingMethod = [[decoder decodeObjectOfClass:[NSNumber class] forKey:@"userContentSortingMethod"] unsignedIntegerValue];
         _timeMethod = [[decoder decodeObjectOfClass:[NSNumber class] forKey:@"timeMethod"] unsignedIntegerValue];
     }
-    
+
     return self;
 }
 

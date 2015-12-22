@@ -45,6 +45,14 @@ typedef NS_ENUM(NSUInteger, RKTimeSortingMethod) {
     RKTimeSortingMethodAllTime
 };
 
+typedef NS_ENUM(NSUInteger, RKSearchSortingMethod) {
+    RKSearchSortingMethodRelevance = 101,
+    RKSearchSortingMethodHot,
+    RKSearchSortingMethodTop,
+    RKSearchSortingMethodNew,
+    RKSearchSortingMethodComments
+};
+
 extern NSString * RKStringFromCommentSortingMethod(RKCommentSortingMethod sortingMethod);
 extern NSString * RKStringFromTimeSortingMethod(RKTimeSortingMethod sortingMethod);
 extern NSString * RKStringFromUserContentSortingMethod(RKUserContentSortingMethod sortingMethod);
@@ -58,7 +66,7 @@ extern NSString * RKStringFromUserContentSortingMethod(RKUserContentSortingMetho
 
 /**
  The full name of the thing for which other objects will be returned before.
- 
+
  This property takes precedence over the `after` property.
  */
 @property (nonatomic, copy) NSString *before;
@@ -75,7 +83,7 @@ extern NSString * RKStringFromUserContentSortingMethod(RKUserContentSortingMetho
 
 /**
  The sorting method for user content. This affects the order in which user content is returned.
- 
+
  @note Only the RKUserContentSortingMethodTop and RKUserContentSortingMethodControversial sorting methods are affected by the timeMethod property.
  */
 @property (nonatomic, assign) RKUserContentSortingMethod userContentSortingMethod;
@@ -84,6 +92,11 @@ extern NSString * RKStringFromUserContentSortingMethod(RKUserContentSortingMetho
  The timeframe to sort by. Only used if the subredditCategory is set to RKSubredditSortingMethodControversial or RKSubredditSortingMethodTop.
  */
 @property (nonatomic, assign) RKTimeSortingMethod timeMethod;
+
+/**
+ The sorting method for search queries. This affects the order in which search results are returned.
+ */
+@property (nonatomic, assign) RKSearchSortingMethod searchSortingMethod;
 
 /**
  Extracts a pagination object from a listing response.
