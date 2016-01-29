@@ -90,6 +90,12 @@ NSString * RKStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
     return [self getPath:@"api/me.json" parameters:nil completion:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         if (responseObject)
         {
+            NSString *modhash = [[responseObject objectForKey:@"data"] objectForKey:@"modhash"];
+
+            if (modhash) {
+                self.modhash = modhash;
+            }
+            
             RKUser *account = [RKObjectBuilder objectFromJSON:responseObject];
             
             if (completion)
