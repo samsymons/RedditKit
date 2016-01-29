@@ -1,4 +1,4 @@
-// RedditKit.h
+// RKLinkPreviewImage.h
 //
 // Copyright (c) 2014 Sam Symons (http://samsymons.com/)
 //
@@ -20,34 +20,35 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RKClient.h"
+#import "Mantle.h"
 
-#import "RKClient+Apps.h"
-#import "RKClient+Captcha.h"
-#import "RKClient+Comments.h"
-#import "RKClient+Errors.h"
-#import "RKClient+Flair.h"
-#import "RKClient+Links.h"
-#import "RKClient+Messages.h"
-#import "RKClient+Miscellaneous.h"
-#import "RKClient+Moderation.h"
-#import "RKClient+Multireddits.h"
-#import "RKClient+Search.h"
-#import "RKClient+Subreddits.h"
-#import "RKClient+Users.h"
-#import "RKClient+Voting.h"
-#import "RKClient+Wiki.h"
+@class RKImage;
 
-#import "RKMoreComments.h"
-#import "RKComment.h"
-#import "RKFullName.h"
-#import "RKImage.h"
-#import "RKLink.h"
-#import "RKLinkEmbeddedMedia.h"
-#import "RKLinkPreviewImage.h"
-#import "RKMessage.h"
-#import "RKMultireddit.h"
-#import "RKMultiredditDescription.h"
-#import "RKModeratorAction.h"
-#import "RKSubreddit.h"
-#import "RKUser.h"
+@interface RKLinkPreviewImage : MTLModel <MTLJSONSerializing>
+
+/**
+ The source of the image.
+ */
+@property (nonatomic, strong) RKImage *source;
+
+/**
+ An array of resolutions for the preview image. This array contains RKImage objects.
+ */
+@property (nonatomic, strong) NSArray *resolutions;
+
+/**
+ The source of the nsfw variant
+ */
+@property (nonatomic, strong) RKImage *nsfwSource;
+
+/**
+ An array of resolutions for the nsfw variant. This array contains RKImage objects.
+ */
+@property (nonatomic, strong) NSArray *nsfwResolutions;
+
+/**
+ The identifier of the preview image.
+ */
+@property (nonatomic, strong) NSString *identifier;
+
+@end
