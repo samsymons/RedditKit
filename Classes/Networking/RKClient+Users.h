@@ -204,6 +204,14 @@ typedef NS_ENUM(NSUInteger, RKSubscribedSubredditCategory)
 - (NSURLSessionDataTask *)submissionsByFriendsWithCompletion:(RKListingCompletionBlock)completion;
 
 /**
+ Gets all links submitted by friends of the current user.
+ 
+ @param pagination The pagination object
+ @param completion The block to be executed upon completion of the request.
+ */
+- (NSURLSessionDataTask *)submissionsByFriendsWithPagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion;
+
+/**
  Adds a user to the current user's friend list.
  
  @param account The user to add as a friend.

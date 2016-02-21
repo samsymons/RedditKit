@@ -303,7 +303,12 @@ NSString * RKStringFromSubscribedSubredditCategory(RKSubscribedSubredditCategory
 
 - (NSURLSessionDataTask *)submissionsByFriendsWithCompletion:(RKListingCompletionBlock)completion
 {
-    return [self listingTaskWithPath:@"r/friends.json" parameters:nil pagination:nil completion:completion];
+    return [self submissionsByFriendsWithPagination:nil completion:completion];
+}
+
+- (NSURLSessionDataTask *)submissionsByFriendsWithPagination:(RKPagination *)pagination completion:(RKListingCompletionBlock)completion
+{
+    return [self listingTaskWithPath:@"r/friends.json" parameters:nil pagination:pagination completion:completion];
 }
 
 - (NSURLSessionDataTask *)addFriend:(RKUser *)user completion:(RKCompletionBlock)completion
