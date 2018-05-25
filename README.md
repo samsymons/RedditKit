@@ -1,6 +1,14 @@
-# RedditKit [![Build Status](https://travis-ci.org/samsymons/RedditKit.svg?branch=master)](https://travis-ci.org/samsymons/RedditKit)
+<div align="center">
+
+<img alt=“RedditKit” src="./Assets/logo.png" width="256px" />
+
+# RedditKit
 
 RedditKit is a [reddit API](http://www.reddit.com/dev/api) wrapper, written in Objective-C.
+
+[![Build Status](https://travis-ci.org/samsymons/RedditKit.svg?branch=master)](https://travis-ci.org/samsymons/RedditKit)
+
+</div>
 
 ## Documention
 
