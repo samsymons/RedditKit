@@ -1,6 +1,6 @@
 <div align="center">
 
-<img alt=“RedditKit” src="./logo.png" width="256px" />
+<img alt=“RedditKit” src="./Assets/logo.png" width="256px" />
 
 # RedditKit
 
